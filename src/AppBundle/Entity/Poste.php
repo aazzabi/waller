@@ -51,4 +51,110 @@ class Poste
      * })
      */
     private $group;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set libelle
+     *
+     * @param string $libelle
+     *
+     * @return Poste
+     */
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * Get libelle
+     *
+     * @return string
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Poste
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set profileDemande
+     *
+     * @param string $profileDemande
+     *
+     * @return Poste
+     */
+    public function setProfileDemande($profileDemande)
+    {
+        $this->profileDemande = $profileDemande;
+
+        return $this;
+    }
+
+    /**
+     * Get profileDemande
+     *
+     * @return string
+     */
+    public function getProfileDemande()
+    {
+        return $this->profileDemande;
+    }
+
+    /**
+     * Set group
+     *
+     * @param \AppBundle\Entity\Group $group
+     *
+     * @return Poste
+     */
+    public function setGroup(\AppBundle\Entity\Group $group = null)
+    {
+        $this->group = $group;
+
+        return $this;
+    }
+
+    /**
+     * Get group
+     *
+     * @return \AppBundle\Entity\Group
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
 }

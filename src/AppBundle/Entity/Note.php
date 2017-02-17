@@ -54,4 +54,110 @@ class Note
      * })
      */
     private $etape;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set commentaire
+     *
+     * @param string $commentaire
+     *
+     * @return Note
+     */
+    public function setCommentaire($commentaire)
+    {
+        $this->commentaire = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * Get commentaire
+     *
+     * @return string
+     */
+    public function getCommentaire()
+    {
+        return $this->commentaire;
+    }
+
+    /**
+     * Set evaluation
+     *
+     * @param integer $evaluation
+     *
+     * @return Note
+     */
+    public function setEvaluation($evaluation)
+    {
+        $this->evaluation = $evaluation;
+
+        return $this;
+    }
+
+    /**
+     * Get evaluation
+     *
+     * @return integer
+     */
+    public function getEvaluation()
+    {
+        return $this->evaluation;
+    }
+
+    /**
+     * Set candidature
+     *
+     * @param \AppBundle\Entity\Candidature $candidature
+     *
+     * @return Note
+     */
+    public function setCandidature(\AppBundle\Entity\Candidature $candidature = null)
+    {
+        $this->candidature = $candidature;
+
+        return $this;
+    }
+
+    /**
+     * Get candidature
+     *
+     * @return \AppBundle\Entity\Candidature
+     */
+    public function getCandidature()
+    {
+        return $this->candidature;
+    }
+
+    /**
+     * Set etape
+     *
+     * @param \AppBundle\Entity\Etape $etape
+     *
+     * @return Note
+     */
+    public function setEtape(\AppBundle\Entity\Etape $etape = null)
+    {
+        $this->etape = $etape;
+
+        return $this;
+    }
+
+    /**
+     * Get etape
+     *
+     * @return \AppBundle\Entity\Etape
+     */
+    public function getEtape()
+    {
+        return $this->etape;
+    }
 }

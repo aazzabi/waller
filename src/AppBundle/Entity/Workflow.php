@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 // TODO: bidirectional relation with etapes in workflow
@@ -37,6 +38,16 @@ class Workflow
      * @ORM\Column(name="description", type="text", length=65535, nullable=true)
      */
     private $description;
+
+    /**
+     * @var Workflow
+     *
+     * @ORM\OneToMany(targetEntity="Etape", mappedBy="workflow")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="etape_id", referencedColumnName="id")
+     * })
+     */
+    private $etapes;
 
     /**
      * Get id
@@ -94,5 +105,47 @@ class Workflow
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->etapes = new ArrayCollection();
+    }
+
+    /**
+     * Add etape
+     *
+     * @param \AppBundle\Entity\Etape $etape
+     *
+     * @return Workflow
+     */
+    public function addEtape(Etape $etape)
+    {
+        $this->etapes[] = $etape;
+
+        return $this;
+    }
+
+    /**
+     * Remove etape
+     *
+     * @param \AppBundle\Entity\Etape $etape
+     */
+    public function removeEtape(\AppBundle\Entity\Etape $etape)
+    {
+        $this->etapes->removeElement($etape);
+    }
+
+    /**
+     * Get etapes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEtapes()
+    {
+        return $this->etapes;
     }
 }

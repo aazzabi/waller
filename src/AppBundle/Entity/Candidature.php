@@ -70,4 +70,134 @@ class Candidature
      * })
      */
     private $workflow;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set currentEtape
+     *
+     * @param \AppBundle\Entity\Etape $currentEtape
+     *
+     * @return Candidature
+     */
+    public function setCurrentEtape(Etape $currentEtape = null)
+    {
+        $this->currentEtape = $currentEtape;
+
+        return $this;
+    }
+
+    /**
+     * Get currentEtape
+     *
+     * @return \AppBundle\Entity\Etape
+     */
+    public function getCurrentEtape()
+    {
+        return $this->currentEtape;
+    }
+
+    /**
+     * Set group
+     *
+     * @param \AppBundle\Entity\Group $group
+     *
+     * @return Candidature
+     */
+    public function setGroup(\AppBundle\Entity\Group $group = null)
+    {
+        $this->group = $group;
+
+        return $this;
+    }
+
+    /**
+     * Get group
+     *
+     * @return \AppBundle\Entity\Group
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
+     * Set poste
+     *
+     * @param \AppBundle\Entity\Poste $poste
+     *
+     * @return Candidature
+     */
+    public function setPoste(\AppBundle\Entity\Poste $poste = null)
+    {
+        $this->poste = $poste;
+
+        return $this;
+    }
+
+    /**
+     * Get poste
+     *
+     * @return \AppBundle\Entity\Poste
+     */
+    public function getPoste()
+    {
+        return $this->poste;
+    }
+
+    /**
+     * Set profile
+     *
+     * @param \AppBundle\Entity\Profile $profile
+     *
+     * @return Candidature
+     */
+    public function setProfile(\AppBundle\Entity\Profile $profile = null)
+    {
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+    /**
+     * Get profile
+     *
+     * @return \AppBundle\Entity\Profile
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * Set workflow
+     *
+     * @param \AppBundle\Entity\Workflow $workflow
+     *
+     * @return Candidature
+     */
+    public function setWorkflow(\AppBundle\Entity\Workflow $workflow = null)
+    {
+        $this->workflow = $workflow;
+
+        return $this;
+    }
+
+    /**
+     * Get workflow
+     *
+     * @return \AppBundle\Entity\Workflow
+     */
+    public function getWorkflow()
+    {
+        return $this->workflow;
+    }
 }

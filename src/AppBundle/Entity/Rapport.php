@@ -47,4 +47,86 @@ class Rapport
      * })
      */
     private $candidature;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set libelle
+     *
+     * @param string $libelle
+     *
+     * @return Rapport
+     */
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * Get libelle
+     *
+     * @return string
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
+
+    /**
+     * Set action
+     *
+     * @param \AppBundle\Entity\Action $action
+     *
+     * @return Rapport
+     */
+    public function setAction(\AppBundle\Entity\Action $action)
+    {
+        $this->action = $action;
+
+        return $this;
+    }
+
+    /**
+     * Get action
+     *
+     * @return \AppBundle\Entity\Action
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+
+    /**
+     * Set candidature
+     *
+     * @param \AppBundle\Entity\Candidature $candidature
+     *
+     * @return Rapport
+     */
+    public function setCandidature(\AppBundle\Entity\Candidature $candidature)
+    {
+        $this->candidature = $candidature;
+
+        return $this;
+    }
+
+    /**
+     * Get candidature
+     *
+     * @return \AppBundle\Entity\Candidature
+     */
+    public function getCandidature()
+    {
+        return $this->candidature;
+    }
 }

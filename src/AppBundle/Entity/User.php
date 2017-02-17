@@ -30,4 +30,14 @@ class User extends BaseUser
     {
         parent::__construct();
     }
+
+    /**
+     * Get group
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
 }

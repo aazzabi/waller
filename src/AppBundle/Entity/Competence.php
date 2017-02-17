@@ -28,6 +28,15 @@ class Competence
      */
     private $libelle;
 
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Profile", mappedBy="competences")
+     */
+    private $profiles;
+
+
     /**
      * Get id
      *
@@ -60,5 +69,46 @@ class Competence
     public function getLibelle()
     {
         return $this->libelle;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->profiles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add profile
+     *
+     * @param \AppBundle\Entity\Profile $profile
+     *
+     * @return Competence
+     */
+    public function addProfile(\AppBundle\Entity\Profile $profile)
+    {
+        $this->profiles[] = $profile;
+
+        return $this;
+    }
+
+    /**
+     * Remove profile
+     *
+     * @param \AppBundle\Entity\Profile $profile
+     */
+    public function removeProfile(\AppBundle\Entity\Profile $profile)
+    {
+        $this->profiles->removeElement($profile);
+    }
+
+    /**
+     * Get profiles
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProfiles()
+    {
+        return $this->profiles;
     }
 }
