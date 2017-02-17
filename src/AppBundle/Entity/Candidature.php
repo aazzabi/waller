@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Candidature
  *
- * @ORM\Table(name="candidature", indexes={@ORM\Index(name="fk_candidature_workflow1_idx", columns={"workflow_id"}), @ORM\Index(name="fk_candidature_etape1_idx", columns={"current_etape_id"}), @ORM\Index(name="fk_candidature_poste1_idx", columns={"poste_id"}), @ORM\Index(name="fk_candidature_profile1_idx", columns={"profile_id"}), @ORM\Index(name="fk_candidature_group1_idx", columns={"group_id"})})
+ * @ORM\Table(name="candidature")
  * @ORM\Entity
  */
 class Candidature
@@ -22,7 +22,7 @@ class Candidature
     private $id;
 
     /**
-     * @var \Etape
+     * @var Etape
      *
      * @ORM\ManyToOne(targetEntity="Etape")
      * @ORM\JoinColumns({
@@ -32,7 +32,7 @@ class Candidature
     private $currentEtape;
 
     /**
-     * @var \Group
+     * @var Group
      *
      * @ORM\ManyToOne(targetEntity="Group")
      * @ORM\JoinColumns({
@@ -42,7 +42,7 @@ class Candidature
     private $group;
 
     /**
-     * @var \Poste
+     * @var Poste
      *
      * @ORM\ManyToOne(targetEntity="Poste")
      * @ORM\JoinColumns({
@@ -52,7 +52,7 @@ class Candidature
     private $poste;
 
     /**
-     * @var \Profile
+     * @var Profile
      *
      * @ORM\ManyToOne(targetEntity="Profile")
      * @ORM\JoinColumns({
@@ -62,7 +62,7 @@ class Candidature
     private $profile;
 
     /**
-     * @var \Workflow
+     * @var Workflow
      *
      * @ORM\ManyToOne(targetEntity="Workflow")
      * @ORM\JoinColumns({
@@ -70,136 +70,4 @@ class Candidature
      * })
      */
     private $workflow;
-
-
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set currentEtape
-     *
-     * @param \AppBundle\Entity\Etape $currentEtape
-     *
-     * @return Candidature
-     */
-    public function setCurrentEtape(\AppBundle\Entity\Etape $currentEtape = null)
-    {
-        $this->currentEtape = $currentEtape;
-
-        return $this;
-    }
-
-    /**
-     * Get currentEtape
-     *
-     * @return \AppBundle\Entity\Etape
-     */
-    public function getCurrentEtape()
-    {
-        return $this->currentEtape;
-    }
-
-    /**
-     * Set group
-     *
-     * @param \AppBundle\Entity\Group $group
-     *
-     * @return Candidature
-     */
-    public function setGroup(\AppBundle\Entity\Group $group = null)
-    {
-        $this->group = $group;
-
-        return $this;
-    }
-
-    /**
-     * Get group
-     *
-     * @return \AppBundle\Entity\Group
-     */
-    public function getGroup()
-    {
-        return $this->group;
-    }
-
-    /**
-     * Set poste
-     *
-     * @param \AppBundle\Entity\Poste $poste
-     *
-     * @return Candidature
-     */
-    public function setPoste(\AppBundle\Entity\Poste $poste = null)
-    {
-        $this->poste = $poste;
-
-        return $this;
-    }
-
-    /**
-     * Get poste
-     *
-     * @return \AppBundle\Entity\Poste
-     */
-    public function getPoste()
-    {
-        return $this->poste;
-    }
-
-    /**
-     * Set profile
-     *
-     * @param \AppBundle\Entity\Profile $profile
-     *
-     * @return Candidature
-     */
-    public function setProfile(\AppBundle\Entity\Profile $profile = null)
-    {
-        $this->profile = $profile;
-
-        return $this;
-    }
-
-    /**
-     * Get profile
-     *
-     * @return \AppBundle\Entity\Profile
-     */
-    public function getProfile()
-    {
-        return $this->profile;
-    }
-
-    /**
-     * Set workflow
-     *
-     * @param \AppBundle\Entity\Workflow $workflow
-     *
-     * @return Candidature
-     */
-    public function setWorkflow(\AppBundle\Entity\Workflow $workflow = null)
-    {
-        $this->workflow = $workflow;
-
-        return $this;
-    }
-
-    /**
-     * Get workflow
-     *
-     * @return \AppBundle\Entity\Workflow
-     */
-    public function getWorkflow()
-    {
-        return $this->workflow;
-    }
 }

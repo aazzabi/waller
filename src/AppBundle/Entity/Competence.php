@@ -28,8 +28,6 @@ class Competence
      */
     private $libelle;
 
-
-
     /**
      * Get id
      *

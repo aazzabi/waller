@@ -4,6 +4,9 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+// TODO: bidirectional relation with etapes in workflow
+// TODO: remove ProfileCompetence and replace it with many to many in profile and competence
+
 /**
  * Workflow
  *
@@ -34,8 +37,6 @@ class Workflow
      * @ORM\Column(name="description", type="text", length=65535, nullable=true)
      */
     private $description;
-
-
 
     /**
      * Get id
