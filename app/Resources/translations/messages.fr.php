@@ -1,7 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: arafet
- * Date: 21/02/17
- * Time: 13:24
- */
+return [
+    'entity' => [
+        'profile' => [
+            'nom' => 'Nom',
+            'prestation'=> 'Prestation salariale',
+            'cv'=>'Curriculum vitae'
+        ]
+    ]
+];

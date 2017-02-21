@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Profiles list</h1>
+
+    <table style="background-color: #e0f0e4" id="example" border="2">
+        <thead>
+            <tr style="background-color: #d4f1d4">
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Telephone</th>
+                <th>Email</th>
+                <th>Cv</th>
+                <th>Experience</th>
+                <th>Niveau</th>
+                <th>Skype</th>
+                <th>Linkedin</th>
+                <th>Facebook</th>
+                <th>Github</th>
+                <th>Sivp</th>
+                <th>Prestation Salariale</th>
+                <th>Photo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for profile in profiles %}
+            <tr>
+                <td><a href="{{ path('profile_show', { 'id': profile.id }) }}">{{ profile.id }}</a></td>
+                <td>{{ profile.nom }}</td>
+                <td>{{ profile.prenom }}</td>
+                <td>{{ profile.telephone }}</td>
+                <td>{{ profile.email }}</td>
+                <td>{{ profile.cv }}</td>
+                <td>{{ profile.experience }}</td>
+                <td>{{ profile.niveau }}</td>
+                <td>{{ profile.skype }}</td>
+                <td>{{ profile.linkedin }}</td>
+                <td>{{ profile.facebook }}</td>
+                <td>{{ profile.github }}</td>
+                <td>{% if profile.sivp %}Yes{% else %}No{% endif %}</td>
+                <td>{{ profile.prestationsalariale }}</td>
+                <td>{{ profile.photo }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('profile_show', { 'id': profile.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('profile_edit', { 'id': profile.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('profile_new') }}">Create a new profile</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            var table = $('#example').DataTable( {
+                "scrollY": "200px",
+                "paging": false
+            } );
+
+            $('a.toggle-vis').on( 'click', function (e) {
+                e.preventDefault();
+
+                // Get the column API object
+                var column = table.column( $(this).attr('data-column') );
+
+                // Toggle the visibility
+                column.visible( ! column.visible() );
+            } );
+        } );
+    </script>
+{% endblock %}

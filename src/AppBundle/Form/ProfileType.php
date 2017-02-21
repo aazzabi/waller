@@ -1,0 +1,61 @@
+<?php
+
+namespace AppBundle\Form;
+
+use AppBundle\Entity\Profile;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+
+class ProfileType extends AbstractType
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('nom', TextType::class, ['label' => 'entity.profile.nom'])
+            ->add('prenom')
+            ->add('telephone')
+            ->add('email')
+            ->add('cv',FileType::class)
+            //->add('cv', FileType::class, array('label' => 'CV (DOC file)'))
+            ->add('experience')
+            ->add('niveau')
+            ->add('skype')
+            ->add('linkedin')
+            ->add('facebook')
+            ->add('github')
+            ->add('sivp')
+            ->add('prestationsalariale', TextType::class, ['label' => 'entity.profile.prestation'])
+            ->add('photo',FileType::class)
+            ->add('disponibilite')
+            ->add('competences');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'AppBundle\Entity\Profile'
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'appbundle_profile';
+    }
+
+
+
+}

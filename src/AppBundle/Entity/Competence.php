@@ -112,4 +112,9 @@ class Competence
     {
         return $this->profiles;
     }
+
+    function __toString()
+    {
+        return $this->getLibelle();
+    }
 }

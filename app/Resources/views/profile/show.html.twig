@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+    <style>
+        div{
+            float:left ;
+        }
+        #gauche{
+
+        }
+    </style>
+  {% endblock %}
+{% block body %}
+    <h1>Profile</h1>
+<div id="droite">
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ profile.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ profile.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ profile.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ profile.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ profile.email }}</td>
+            </tr>
+            <tr>
+                <th>Cv</th>
+                <td> <a href="{{ asset('uploads/cv/' ~ profile.cv) }}">View cv (PDF)</a></td>
+            </tr>
+            <tr>
+                <th>Experience</th>
+                <td>{{ profile.experience }}</td>
+            </tr>
+            <tr>
+                <th>Niveau</th>
+                <td>{{ profile.niveau }}</td>
+            </tr>
+            <tr>
+                <th>Skype</th>
+                <td>{{ profile.skype }}</td>
+            </tr>
+            <tr>
+                <th>Linkedin</th>
+                <td>{{ profile.linkedin }}</td>
+            </tr>
+            <tr>
+                <th>Facebook</th>
+                <td>{{ profile.facebook }}</td>
+            </tr>
+            <tr>
+                <th>Github</th>
+                <td>{{ profile.github }}</td>
+            </tr>
+            <tr>
+                <th>Sivp</th>
+                <td>{% if profile.sivp %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Prestationsalariale</th>
+                <td>{{ profile.prestationsalariale }}</td>
+            </tr>
+            <tr>
+
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <ul>
+        <li>
+            <a href="{{ path('profile_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('profile_edit', { 'id': profile.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+            <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+</div>
+<div id="gauche">
+    <img src="{{ asset('uploads/photo/' ~ profile.photo) }}" alt="My Logo" />
+</div>
+
+{% endblock %}
+{% block javascripts %}
+
+{% endblock %}
