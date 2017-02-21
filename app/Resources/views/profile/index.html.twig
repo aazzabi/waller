@@ -1,28 +1,63 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var table = $('#example').DataTable({
+                "paging": true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/French.json"
+                }
+            });
+
+            $('a.toggle-vis').on('click', function (e) {
+                e.preventDefault();
+                // Get the column API object
+                var column = table.column($(this).attr('data-column'));
+                // Toggle the visibility
+                column.visible(!column.visible());
+            });
+        });
+    </script>
+{% endblock %}
+
 {% block body %}
     <h1>Profiles list</h1>
-
-    <table style="background-color: #e0f0e4" id="example" border="2">
+    <div>
+        Toggle column:
+        <a class="toggle-vis" data-column="0">Id</a> -
+        <a class="toggle-vis" data-column="1">Nom</a> -
+        <a class="toggle-vis" data-column="2">Prenom</a> -
+        <a class="toggle-vis" data-column="3">Telephone</a> -
+        <a class="toggle-vis" data-column="4">Email</a> -
+        <a class="toggle-vis" data-column="5">Cv</a>
+    </div>
+    <table id="example">
         <thead>
-            <tr style="background-color: #d4f1d4">
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Telephone</th>
-                <th>Email</th>
-                <th>Cv</th>
-                <th>Experience</th>
-                <th>Niveau</th>
-                <th>Skype</th>
-                <th>Linkedin</th>
-                <th>Facebook</th>
-                <th>Github</th>
-                <th>Sivp</th>
-                <th>Prestation Salariale</th>
-                <th>Photo</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Telephone</th>
+            <th>Email</th>
+            <th>Cv</th>
+            <th>Experience</th>
+            <th>Niveau</th>
+            <th>Skype</th>
+            <th>Linkedin</th>
+            <th>Facebook</th>
+            <th>Github</th>
+            <th>Sivp</th>
+            <th>Prestation Salariale</th>
+            <th>Photo</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for profile in profiles %}
@@ -62,25 +97,4 @@
             <a href="{{ path('profile_new') }}">Create a new profile</a>
         </li>
     </ul>
-{% endblock %}
-
-{% block javascripts %}
-    <script>
-        $(document).ready(function() {
-            var table = $('#example').DataTable( {
-                "scrollY": "200px",
-                "paging": false
-            } );
-
-            $('a.toggle-vis').on( 'click', function (e) {
-                e.preventDefault();
-
-                // Get the column API object
-                var column = table.column( $(this).attr('data-column') );
-
-                // Toggle the visibility
-                column.visible( ! column.visible() );
-            } );
-        } );
-    </script>
 {% endblock %}
