@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -55,7 +56,7 @@ class Etape
      */
     public function __construct()
     {
-        $this->actions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->actions = new ArrayCollection();
     }
 
     /**
@@ -123,7 +124,7 @@ class Etape
      *
      * @return Etape
      */
-    public function setWorkflow(\AppBundle\Entity\Workflow $workflow = null)
+    public function setWorkflow(Workflow $workflow = null)
     {
         $this->workflow = $workflow;
 
@@ -147,7 +148,7 @@ class Etape
      *
      * @return Etape
      */
-    public function addAction(\AppBundle\Entity\Action $action)
+    public function addAction(Action $action)
     {
         $this->actions[] = $action;
 
@@ -159,7 +160,7 @@ class Etape
      *
      * @param \AppBundle\Entity\Action $action
      */
-    public function removeAction(\AppBundle\Entity\Action $action)
+    public function removeAction(Action $action)
     {
         $this->actions->removeElement($action);
     }

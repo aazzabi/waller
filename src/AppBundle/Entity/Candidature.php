@@ -112,7 +112,7 @@ class Candidature
      *
      * @return Candidature
      */
-    public function setGroup(\AppBundle\Entity\Group $group = null)
+    public function setGroup(Group $group = null)
     {
         $this->group = $group;
 
@@ -136,7 +136,7 @@ class Candidature
      *
      * @return Candidature
      */
-    public function setPoste(\AppBundle\Entity\Poste $poste = null)
+    public function setPoste(Poste $poste = null)
     {
         $this->poste = $poste;
 
@@ -160,7 +160,7 @@ class Candidature
      *
      * @return Candidature
      */
-    public function setProfile(\AppBundle\Entity\Profile $profile = null)
+    public function setProfile(Profile $profile = null)
     {
         $this->profile = $profile;
 
@@ -184,7 +184,7 @@ class Candidature
      *
      * @return Candidature
      */
-    public function setWorkflow(\AppBundle\Entity\Workflow $workflow = null)
+    public function setWorkflow(Workflow $workflow = null)
     {
         $this->workflow = $workflow;
 

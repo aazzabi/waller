@@ -29,6 +29,17 @@ class Disponibilite
     private $libelle;
 
     /**
+     * Disponibilite constructor.
+     * @param int $id
+     * @param string $libelle
+     */
+    public function __construct($id, $libelle)
+    {
+        $this->id = $id;
+        $this->libelle = $libelle;
+    }
+
+    /**
      * Get id
      *
      * @return integer

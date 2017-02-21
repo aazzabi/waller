@@ -89,7 +89,7 @@ class Rapport
      *
      * @return Rapport
      */
-    public function setAction(\AppBundle\Entity\Action $action)
+    public function setAction(Action $action)
     {
         $this->action = $action;
 
@@ -113,7 +113,7 @@ class Rapport
      *
      * @return Rapport
      */
-    public function setCandidature(\AppBundle\Entity\Candidature $candidature)
+    public function setCandidature(Candidature $candidature)
     {
         $this->candidature = $candidature;
 

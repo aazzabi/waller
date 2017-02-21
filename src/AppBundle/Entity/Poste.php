@@ -53,6 +53,23 @@ class Poste
     private $group;
 
     /**
+     * Poste constructor.
+     * @param int $id
+     * @param string $libelle
+     * @param string $description
+     * @param string $profileDemande
+     * @param Group $group
+     */
+    public function __construct($id, $libelle, $description, $profileDemande, Group $group)
+    {
+        $this->id = $id;
+        $this->libelle = $libelle;
+        $this->description = $description;
+        $this->profileDemande = $profileDemande;
+        $this->group = $group;
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -141,7 +158,7 @@ class Poste
      *
      * @return Poste
      */
-    public function setGroup(\AppBundle\Entity\Group $group = null)
+    public function setGroup(Group $group = null)
     {
         $this->group = $group;
 

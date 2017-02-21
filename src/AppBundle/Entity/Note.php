@@ -56,6 +56,23 @@ class Note
     private $etape;
 
     /**
+     * Note constructor.
+     * @param int $id
+     * @param string $commentaire
+     * @param int $evaluation
+     * @param Candidature $candidature
+     * @param Etape $etape
+     */
+    public function __construct($id, $commentaire, $evaluation, Candidature $candidature, Etape $etape)
+    {
+        $this->id = $id;
+        $this->commentaire = $commentaire;
+        $this->evaluation = $evaluation;
+        $this->candidature = $candidature;
+        $this->etape = $etape;
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -120,7 +137,7 @@ class Note
      *
      * @return Note
      */
-    public function setCandidature(\AppBundle\Entity\Candidature $candidature = null)
+    public function setCandidature(Candidature $candidature = null)
     {
         $this->candidature = $candidature;
 
@@ -144,7 +161,7 @@ class Note
      *
      * @return Note
      */
-    public function setEtape(\AppBundle\Entity\Etape $etape = null)
+    public function setEtape(Etape $etape = null)
     {
         $this->etape = $etape;
 

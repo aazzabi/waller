@@ -50,7 +50,7 @@ class Group extends BaseGroup
      *
      * @return Group
      */
-    public function addUser(\AppBundle\Entity\User $user)
+    public function addUser(User $user)
     {
         $this->users[] = $user;
 
@@ -62,7 +62,7 @@ class Group extends BaseGroup
      *
      * @param \AppBundle\Entity\User $user
      */
-    public function removeUser(\AppBundle\Entity\User $user)
+    public function removeUser(User $user)
     {
         $this->users->removeElement($user);
     }

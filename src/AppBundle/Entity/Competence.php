@@ -36,6 +36,11 @@ class Competence
      */
     private $profiles;
 
+    public function __construct()
+    {
+        $this->profiles = new ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -73,10 +78,6 @@ class Competence
     /**
      * Constructor
      */
-    public function __construct()
-    {
-        $this->profiles = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add profile
@@ -85,7 +86,7 @@ class Competence
      *
      * @return Competence
      */
-    public function addProfile(\AppBundle\Entity\Profile $profile)
+    public function addProfile(Profile $profile)
     {
         $this->profiles[] = $profile;
 
@@ -97,7 +98,7 @@ class Competence
      *
      * @param \AppBundle\Entity\Profile $profile
      */
-    public function removeProfile(\AppBundle\Entity\Profile $profile)
+    public function removeProfile(Profile $profile)
     {
         $this->profiles->removeElement($profile);
     }

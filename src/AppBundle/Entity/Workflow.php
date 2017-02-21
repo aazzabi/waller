@@ -134,7 +134,7 @@ class Workflow
      *
      * @param \AppBundle\Entity\Etape $etape
      */
-    public function removeEtape(\AppBundle\Entity\Etape $etape)
+    public function removeEtape(Etape $etape)
     {
         $this->etapes->removeElement($etape);
     }
