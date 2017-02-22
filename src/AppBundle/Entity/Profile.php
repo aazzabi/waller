@@ -55,7 +55,7 @@ class Profile
     /**
      * @var string
      *
-     * @ORM\Column(name="cv", type="string", length=255, nullable=false)
+     * @ORM\Column(name="cv", type="string", length=255, nullable=true)
      */
     private $cv;
 

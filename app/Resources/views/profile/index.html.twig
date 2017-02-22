@@ -11,8 +11,10 @@
         $(document).ready(function () {
             var table = $('#example').DataTable({
                 "paging": true,
+                "stateSave": true,
                 "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/French.json"
+                    "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/French.json",
+
                 }
             });
 
@@ -36,7 +38,16 @@
         <a class="toggle-vis" data-column="2">Prenom</a> -
         <a class="toggle-vis" data-column="3">Telephone</a> -
         <a class="toggle-vis" data-column="4">Email</a> -
-        <a class="toggle-vis" data-column="5">Cv</a>
+        <a class="toggle-vis" data-column="5">Cv</a>-
+        <a class="toggle-vis" data-column="6">Experience</a> -
+        <a class="toggle-vis" data-column="7">Niveau</a> -
+        <a class="toggle-vis" data-column="8">Skype</a> -
+        <a class="toggle-vis" data-column="9">Linked in</a> -
+        <a class="toggle-vis" data-column="10">Facebook</a>-
+        <a class="toggle-vis" data-column="11">Github</a> -
+        <a class="toggle-vis" data-column="12">Sivp</a> -
+        <a class="toggle-vis" data-column="13">Prestation salaraiale</a> -
+        <a class="toggle-vis" data-column="14">Photo</a>
     </div>
     <table id="example">
         <thead>

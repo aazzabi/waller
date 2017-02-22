@@ -14,10 +14,7 @@
 <div id="droite">
     <table>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ profile.id }}</td>
-            </tr>
+
             <tr>
                 <th>Nom</th>
                 <td>{{ profile.nom }}</td>
@@ -36,7 +33,7 @@
             </tr>
             <tr>
                 <th>Cv</th>
-                <td> <a href="{{ asset('uploads/cv/' ~ profile.cv) }}">View cv (PDF)</a></td>
+                <td> <a href="{{ asset('uploads/cv/' ~ profile.cv) }}">View cv (DOC)</a></td>
             </tr>
             <tr>
                 <th>Experience</th>
@@ -47,6 +44,7 @@
                 <td>{{ profile.niveau }}</td>
             </tr>
             <tr>
+
                 <th>Skype</th>
                 <td>{{ profile.skype }}</td>
             </tr>

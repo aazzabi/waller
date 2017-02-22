@@ -7,7 +7,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
@@ -23,7 +22,7 @@ class ProfileType extends AbstractType
             ->add('prenom')
             ->add('telephone')
             ->add('email')
-            ->add('cv',FileType::class)
+            ->add('cv',FileType::class, ['required' => false])
             //->add('cv', FileType::class, array('label' => 'CV (DOC file)'))
             ->add('experience')
             ->add('niveau')
@@ -33,7 +32,7 @@ class ProfileType extends AbstractType
             ->add('github')
             ->add('sivp')
             ->add('prestationsalariale', TextType::class, ['label' => 'entity.profile.prestation'])
-            ->add('photo',FileType::class)
+            ->add('photo',FileType::class, ['required' => false] )
             ->add('disponibilite')
             ->add('competences');
     }
