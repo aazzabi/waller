@@ -45,28 +45,27 @@ class ProfileController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $photo = $profile->getPhoto();
-            $cv=$profile->getCv();
+            $cv = $profile->getCv();
 
-            // Generate a unique name for the file before saving it
-            $photoName = md5(uniqid()).'.'.$photo->guessExtension();
-            $cvName = md5(uniqid()).'.'.$cv->guessExtension();
-
-            // Move the file to the directory where brochures are stored
-            $photo->move(
-                $this->getParameter('photo_directory'),
-                $photoName
-            );
-            $cv->move(
-                $this->getParameter('cv_directory'),
-                $cvName
-            );
-
-            // Update the 'photo' property to store the PDF file name
-            // instead of its contents
-            $profile->setPhoto($photoName);
-            $profile->setCv($cvName);
+            if ($profile->getCv() !== null AND $profile->getPhoto() !== null) {
+                // Generate a unique name for the file before saving it
+                $photoName = md5(uniqid()) . '.' . $photo->guessExtension();
+                $cvName = md5(uniqid()) . '.' . $cv->guessExtension();
+                // Move the file to the directory where brochures are stored
+                $photo->move(
+                    $this->getParameter('photo_directory'),
+                    $photoName
+                );
+                $cv->move(
+                    $this->getParameter('cv_directory'),
+                    $cvName
+                );
+                // Update the 'photo' property to store the PDF file name
+                // instead of its contents
+                $profile->setPhoto($photoName);
+                $profile->setCv($cvName);
+            }
 
 
             $em = $this->getDoctrine()->getManager();
@@ -155,7 +154,6 @@ class ProfileController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('profile_delete', array('id' => $profile->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

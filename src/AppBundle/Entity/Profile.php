@@ -121,8 +121,8 @@ class Profile
      * @ORM\Column(name="photo", type="string", length=255, nullable=true)
      *
      * @Assert\Image(
-     *     minWidth="256",
-     *     minHeight="256",
+     *     minWidth="156",
+     *     minHeight="156",
      *     mimeTypes={"image/jpeg","image/gif","image/png","image/jpg"},
      *     mimeTypesMessage ="Le fichier choisi ne corespond pas à un image")
      */
