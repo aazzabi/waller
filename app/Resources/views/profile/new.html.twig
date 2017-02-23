@@ -1,15 +1,36 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+
+    <style>
+        body {
+            margin-left: 20px;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+{% endblock %}
+
 
 {% block body %}
-    <h1>Profile creation</h1>
+    <br>
+    <div class="container">
+        <h1>Créer un nouveau profile</h1>
+    </div>
+    </div>
+    <hr>
+
+    {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <input type="submit" value="Create"/>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Create"/>
+        <a href="{{ path('profile_index') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+
     {{ form_end(form) }}
-    <ul>
-        <li>
-            <a href="{{ path('profile_index') }}">Back to the list</a>
-        </li>
-    </ul>
+
 {% endblock %}

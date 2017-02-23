@@ -48,25 +48,31 @@ class ProfileController extends Controller
             $photo = $profile->getPhoto();
             $cv = $profile->getCv();
 
-            if ($profile->getCv() !== null AND $profile->getPhoto() !== null) {
+            if ($profile->getPhoto() !== null) {
                 // Generate a unique name for the file before saving it
                 $photoName = md5(uniqid()) . '.' . $photo->guessExtension();
-                $cvName = md5(uniqid()) . '.' . $cv->guessExtension();
                 // Move the file to the directory where brochures are stored
                 $photo->move(
                     $this->getParameter('photo_directory'),
                     $photoName
                 );
+                // Update the 'photo' property to store the PDF file name
+                // instead of its contents
+                $profile->setPhoto($photoName);
+            }
+
+            if ($profile->getCv() !== null) {
+                // Generate a unique name for the file before saving it
+                $cvName = md5(uniqid()) . '.' . $cv->guessExtension();
+                // Move the file to the directory where brochures are stored
                 $cv->move(
                     $this->getParameter('cv_directory'),
                     $cvName
                 );
                 // Update the 'photo' property to store the PDF file name
                 // instead of its contents
-                $profile->setPhoto($photoName);
                 $profile->setCv($cvName);
             }
-
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($profile);

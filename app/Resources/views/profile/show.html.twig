@@ -228,19 +228,15 @@
                 </div>
 
                 <br>
-                <ul style="font-size: 120%;margin-top: -29px;" class="list-inline">
-                    <li class="list-group-item">
-                        <a href="{{ path('profile_index') }}">Back to the list</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="{{ path('profile_edit', { 'id': profile.id }) }}">Edit</a>
-                    </li>
-                    <li class="list-group-item">
-                        {{ form_start(delete_form) }}
-                        <input type="submit" value="Delete">
-                        {{ form_end(delete_form) }}
-                    </li>
-                </ul>
+                <div style="margin-top: -20px;">
+                    <a href="{{ path('profile_index') }}" class="btn btn-secondary btn-lg">Back to the list</a>
+
+                    <a href="{{ path('profile_edit', { 'id': profile.id }) }}" class="btn btn-secondary btn-lg">Edit</a>
+
+                    {{ form_start(delete_form) }}
+                    <input type="submit" class="btn btn-danger btn_lg" style="margin-top: -50px;margin-left: 180px; padding: 0.65rem 1.5rem;font-size: 1.3rem;border-radius: 0.3rem;" value="Delete">
+                    {{ form_end(delete_form) }}
+                </div>
             </div>
 
 
