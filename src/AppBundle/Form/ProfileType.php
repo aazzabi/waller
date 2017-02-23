@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 
 class ProfileType extends AbstractType
@@ -22,8 +23,12 @@ class ProfileType extends AbstractType
             ->add('prenom')
             ->add('telephone')
             ->add('email')
-            ->add('cvFile', FileType::class, ['required' => false, 'label' => 'entity.profile.cv'])
-            //->add('cv', FileType::class, array('label' => 'CV (DOC file)'))
+            ->add('cvFile', VichFileType::class, [
+                'required' => false,
+                'label' => 'entity.profile.cv',
+                'allow_delete' => true,
+                'download_link' => true
+            ])
             ->add('experience')
             ->add('niveau')
             ->add('skype')
