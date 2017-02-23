@@ -171,16 +171,27 @@
                                             <div class="col-sm-5 col-xs-6 tital ">Linkedin:</div>
                                         </td>
                                         <td>
-                                            <div class="col-sm-7">{{ profile.linkedin }}</div>
+                                            <div class="col-sm-7">
+                                            {% if profile.linkedin %}
+                                                <div class="col-sm-7">{{ profile.linkedin }}</div>
+                                            {% else %}
+                                                <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
+                                            {% endif %}
+                                            </div>
                                         </td>
                                     </tr>
-
                                     <tr>
                                         <td>
                                             <div class="col-sm-5 col-xs-6 tital ">Facebook:</div>
                                         </td>
                                         <td>
-                                            <div class="col-sm-7">{{ profile.facebook }}</div>
+                                            <div class="col-sm-7">
+                                            {% if profile.facebook %}
+                                                <div class="col-sm-7">{{ profile.facebook }}</div>
+                                            {% else %}
+                                                <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
+                                            {% endif %}
+                                            </div>
                                         </td>
                                     </tr>
 
@@ -189,7 +200,13 @@
                                             <div class="col-sm-5 col-xs-6 tital ">Github:</div>
                                         </td>
                                         <td>
-                                            <div class="col-sm-7">{{ profile.github }}</div>
+                                            <div class="col-sm-7">
+                                            {% if profile.github %}
+                                                <div class="col-sm-7">{{ profile.github }}</div>
+                                            {% else %}
+                                                <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
+                                            {% endif %}
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -200,7 +217,13 @@
                                             <div class="col-sm-5 col-xs-6 tital ">SIVP:</div>
                                         </td>
                                         <td>
-                                            <div class="col-sm-7">{{ profile.sivp }}</div>
+                                            <div class="col-sm-7">
+                                            {% if profile.sivp %}
+                                                <i class="fa fa-check text-success fa-2x" aria-hidden="true"></i>
+                                            {% else %}
+                                                <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
+                                            {% endif %}
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -234,7 +257,9 @@
                     <a href="{{ path('profile_edit', { 'id': profile.id }) }}" class="btn btn-secondary btn-lg">Edit</a>
 
                     {{ form_start(delete_form) }}
-                    <input type="submit" class="btn btn-danger btn_lg" style="margin-top: -50px;margin-left: 180px; padding: 0.65rem 1.5rem;font-size: 1.3rem;border-radius: 0.3rem;" value="Delete">
+                    <input type="submit" class="btn btn-danger btn_lg"
+                           style="margin-top: -50px;margin-left: 180px; padding: 0.65rem 1.5rem;font-size: 1.3rem;border-radius: 0.3rem;"
+                           value="Delete">
                     {{ form_end(delete_form) }}
                 </div>
             </div>
