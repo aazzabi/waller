@@ -70,22 +70,24 @@
 {% block body %}
     <div class="row">
     <div class="col-md-12">
-        <h1>Profiles list</h1>
+
+        <h1><b>Profiles list</b></h1>
 
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
             Appliquer un filtre
         </button>
-
-
+        <ul>
+            <a href="{{ path('profile_new') }}" class="btn btn-md btn-success" >
+                <i class="iicon-plus"> Ajouter un profile</i></a>
+        </ul>
         <br>
 
-        <br>
         <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content" style="margin-top: 150px;">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
+                                    aria-hidden="true"></span></button>
                         <h4 class="modal-title" id="myModalLabel">Columns</h4>
                     </div>
 
@@ -298,12 +300,6 @@
             {% endfor %}
             </tbody>
         </table>
-
-        <ul>
-            <li>
-                <a href="{{ path('profile_new') }}"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></a>
-            </li>
-        </ul>
     </div>
 
 {% endblock %}

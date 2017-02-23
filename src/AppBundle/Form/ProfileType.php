@@ -37,7 +37,11 @@ class ProfileType extends AbstractType
             ->add('github')
             ->add('sivp')
             ->add('prestationsalariale', TextType::class, ['label' => 'entity.profile.prestation'])
-            ->add('photo', FileType::class, ['required' => false, 'data_class' => null])
+            ->add('photoFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'download_link' => true
+            ])
             ->add('disponibilite')
             ->add('competences');
     }

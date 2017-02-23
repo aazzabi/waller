@@ -2,37 +2,18 @@
 
 {% block body %}
     <h1>Profile edit</h1>
-    {% form_theme edit_form 'bootstrap_3_horizontal_layout.html.twig' %}
+    {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
 
-    {{ form_start(edit_form) }}
-    {{ form_row(edit_form.nom) }}
-    {{ form_row(edit_form.prenom) }}
-    {{ form_row(edit_form.telephone) }}
-    {{ form_row(edit_form.email) }}
+    {{ form_start(form) }}
+    {% include 'profile/forms/form.html.twig' %}
+    {{ form_end(form) }}
 
-    {{ form_widget(edit_form.cvFile) }}
 
-    {{ form_row(edit_form.experience) }}
-    {{ form_row(edit_form.niveau) }}
-    {{ form_row(edit_form.skype) }}
-    {{ form_row(edit_form.linkedin) }}
-    {{ form_row(edit_form.facebook) }}
-    {{ form_row(edit_form.github) }}
-    {{ form_row(edit_form.sivp) }}
-    {{ form_row(edit_form.prestationsalariale) }}
-    {{ form_row(edit_form.disponibilite) }}
-    {{ form_row(edit_form.competences) }}
-
-    <input type="submit" class="btn btn-secondary btn-lg" value="Edit"/>
-    {{ form_end(edit_form) }}
-
-    <a href="{{ path('profile_index') }}" class="btn btn-secondary btn-lg">Back to the list</a>
-    <ul>
-        <li>
-
-            {{ form_start(delete_form) }}
-            <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+<div class="col-lg-3">
+    {{ form_start(delete_form) }}
+    <input type="submit" class="btn btn-secondary" value="Edit"/>
+    <a href="{{ path('profile_index') }}" class="btn btn-secondary">Back to the list</a>
+    <input class="btn btn-danger btn_lg" type="submit" value="Delete">
+    {{ form_end(delete_form) }}
+</div>
 {% endblock %}

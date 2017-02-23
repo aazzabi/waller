@@ -133,17 +133,26 @@ class Profile
     private $prestationsalariale;
 
     /**
-     * @var string
+     * @Vich\UploadableField(mapping="photo_file", fileNameProperty="photo")
      *
+     * @var File
+     */
+    private $photoFile;
+
+    /**
      * @ORM\Column(name="photo", type="string", length=255, nullable=true)
      *
-     * @Assert\Image(
-     *     minWidth="156",
-     *     minHeight="156",
-     *     mimeTypes={"image/jpeg","image/gif","image/png","image/jpg"},
-     *     mimeTypesMessage ="Le fichier choisi ne corespond pas à un image")
+     * @var string
      */
     private $photo;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $photoUpdatedAt;
+
 
     /**
      * @var Disponibilite
@@ -169,7 +178,6 @@ class Profile
      * )
      */
     private $competences;
-
 
     /**
      * Constructor
@@ -312,10 +320,8 @@ class Profile
     /**
      * @param string $cv
      *
-     * @return Profile
+     * @return Product
      */
-
-
     public function setCv($cv)
     {
         $this->cv = $cv;
@@ -524,8 +530,30 @@ class Profile
     }
 
     /**
-     * Set photo
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      *
+     * @return Profile
+     */
+    public function setPhotoFile(File $photoFile = null)
+    {
+        $this->photoFile = $photoFile;
+
+        if ($photoFile) {
+            $this->photoUpdatedAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getPhotoFile()
+    {
+        return $this->photoFile;
+    }
+
+    /**
      * @param string $photo
      *
      * @return Profile
@@ -538,9 +566,7 @@ class Profile
     }
 
     /**
-     * Get photo
-     *
-     * @return string
+     * @return string|null
      */
     public function getPhoto()
     {
