@@ -22,7 +22,7 @@ class ProfileType extends AbstractType
             ->add('prenom')
             ->add('telephone')
             ->add('email')
-            ->add('cv',FileType::class, ['required' => false, 'data_class'=> null])
+            ->add('cvFile', FileType::class, ['required' => false, 'label' => 'entity.profile.cv'])
             //->add('cv', FileType::class, array('label' => 'CV (DOC file)'))
             ->add('experience')
             ->add('niveau')
@@ -32,7 +32,7 @@ class ProfileType extends AbstractType
             ->add('github')
             ->add('sivp')
             ->add('prestationsalariale', TextType::class, ['label' => 'entity.profile.prestation'])
-            ->add('photo',FileType::class, ['required' => false, 'data_class'=> null] )
+            ->add('photo', FileType::class, ['required' => false, 'data_class' => null])
             ->add('disponibilite')
             ->add('competences');
     }
@@ -54,7 +54,6 @@ class ProfileType extends AbstractType
     {
         return 'appbundle_profile';
     }
-
 
 
 }

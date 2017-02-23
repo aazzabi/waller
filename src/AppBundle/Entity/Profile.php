@@ -4,13 +4,16 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Profile
  *
  * @ORM\Table(name="profile")
  * @ORM\Entity
+ * @Vich\Uploadable
  */
 class Profile
 {
@@ -26,7 +29,7 @@ class Profile
     /**
      * @var string
      *
-     *@Assert\NotBlank()
+     * @Assert\NotBlank()
      * @ORM\Column(name="nom", type="string", length=150, nullable=false)
      */
     private $nom;
@@ -53,11 +56,25 @@ class Profile
     private $email;
 
     /**
-     * @var string
+     * @Vich\UploadableField(mapping="cv_file", fileNameProperty="cv")
      *
+     * @var File
+     */
+    private $cvFile;
+
+    /**
      * @ORM\Column(name="cv", type="string", length=255, nullable=true)
+     *
+     * @var string
      */
     private $cv;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $cvUpdatedAt;
 
     /**
      * @var integer
@@ -152,7 +169,6 @@ class Profile
      * )
      */
     private $competences;
-
 
 
     /**
@@ -270,8 +286,30 @@ class Profile
     }
 
     /**
-     * Set cv
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      *
+     * @return Profile
+     */
+    public function setCvFile(File $cvFile = null)
+    {
+        $this->cvFile = $cvFile;
+
+        if ($cvFile) {
+            $this->cvUpdatedAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getCvFile()
+    {
+        return $this->cvFile;
+    }
+
+    /**
      * @param string $cv
      *
      * @return Profile
@@ -284,9 +322,7 @@ class Profile
     }
 
     /**
-     * Get cv
-     *
-     * @return string
+     * @return string|null
      */
     public function getCv()
     {
