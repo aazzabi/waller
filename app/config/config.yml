@@ -83,3 +83,5 @@ fos_user:
     group:
         group_class: AppBundle\Entity\Group
 
+vich_uploader:
+    db_driver: orm
