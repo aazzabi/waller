@@ -252,15 +252,16 @@
 
                 <br>
                 <div style="margin-top: -20px;">
-                    <a href="{{ path('profile_index') }}" class="btn btn-secondary btn-lg">Back to the list</a>
+                    <a href="{{ path('profile_index') }}" class="btn btn-secondary btn-lg"><i class="fa fa-undo " aria-hidden="true"></i> Retour au liste</a>
 
-                    <a href="{{ path('profile_edit', { 'id': profile.id }) }}" class="btn btn-secondary btn-lg">Edit</a>
+                    <a href="{{ path('profile_edit', { 'id': profile.id }) }}" class="btn btn-secondary btn-lg"> <i class="fa fa-pencil-square-o"></i> Edit</a>
 
                     {{ form_start(delete_form) }}
-                    <input type="submit" class="btn btn-danger btn_lg"
-                           style="margin-top: -50px;margin-left: 180px; padding: 0.65rem 1.5rem;font-size: 1.3rem;border-radius: 0.3rem;"
-                           value="Delete">
-                    {{ form_end(delete_form) }}
+                    <button type="submit" class="btn btn-danger btn_lg"
+                           style="margin-top: -50px;margin-left: 210px; padding: 0.65rem 1.5rem;font-size: 1.3rem;border-radius: 0.3rem;">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                         Delete</button>
+                        {{ form_end(delete_form) }}
                 </div>
             </div>
 

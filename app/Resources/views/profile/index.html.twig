@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block head %}
+    <title>Liste des profiles </title>
+{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -68,9 +72,10 @@
 {% endblock %}
 
 {% block body %}
+
     <div class="row">
     <div class="col-md-12">
-        <h1><b>Profiles list</b></h1>
+        <h1><b>Profiles list</b></h1><hr>
         <div class="col-md-6 col-md-offset-6 text-right">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                 Appliquer un filtre
@@ -269,7 +274,7 @@
                             {% if profile.github %}
                                 <li>
                                     <a href="{{ profile.github }}">
-                                        <i class="fa fa-github fa-2x" aria-hidden="true"></i>
+                                        <i class="fa fa-github fa-2x" style="color: black;" aria-hidden="true"></i>
                                 </li>
                             {% endif %}
                         </ul>

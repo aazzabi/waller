@@ -40,6 +40,7 @@ class ProfileType extends AbstractType
             ->add('photoFile', VichFileType::class, [
                 'required' => false,
                 'allow_delete' => true,
+                'label' => 'entity.profile.photo',
                 'download_link' => true
             ])
             ->add('disponibilite')

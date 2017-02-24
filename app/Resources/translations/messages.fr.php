@@ -4,7 +4,8 @@ return [
         'profile' => [
             'nom' => 'Nom',
             'prestation'=> 'Prestation salariale',
-            'cv'=>'Curriculum vitae'
+            'cv'=>'Curriculum vitae',
+            'photo'=>'Photo de profile'
         ]
     ]
 ];
