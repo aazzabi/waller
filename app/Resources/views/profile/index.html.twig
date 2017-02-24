@@ -70,18 +70,18 @@
 {% block body %}
     <div class="row">
     <div class="col-md-12">
-
         <h1><b>Profiles list</b></h1>
+        <div class="col-md-6 col-md-offset-6 text-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                Appliquer un filtre
+            </button>
+            <a href="{{ path('profile_new') }}" class="btn btn-success">
+                <i class="icon-plus"> Ajouter un profile</i></a>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-            Appliquer un filtre
-        </button>
-        <ul>
-            <a href="{{ path('profile_new') }}" class="btn btn-md btn-success" >
-                <i class="iicon-plus"> Ajouter un profile</i></a>
-        </ul>
-        <br>
-
+            <br>
+        </div>
+        <div class="clearfix"></div>
+        <br/>
         <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content" style="margin-top: 150px;">
