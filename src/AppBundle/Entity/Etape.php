@@ -83,6 +83,10 @@ class Etape
         return $this;
     }
 
+    function __toString()
+    {
+        return $this->getLibelle();
+    }
     /**
      * Get libelle
      *

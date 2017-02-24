@@ -148,4 +148,9 @@ class Workflow
     {
         return $this->etapes;
     }
+
+    function __toString()
+    {
+        return $this->getLibelle();
+    }
 }

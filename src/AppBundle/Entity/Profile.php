@@ -630,4 +630,9 @@ class Profile
     {
         return $this->competences;
     }
+
+    function __toString()
+    {
+        return $this->getPrenom() . " " . $this->getNom() . " (" . $this->getEmail() . ")";
+    }
 }
