@@ -24,7 +24,7 @@ class User extends BaseUser
      *
      * @ORM\ManyToMany(targetEntity="Group", mappedBy="users")
      */
-    protected $groups;
+    private $group;
 
     public function __construct()
     {
@@ -38,6 +38,6 @@ class User extends BaseUser
      */
     public function getGroup()
     {
-        return $this->groups;
+        return $this->group;
     }
 }

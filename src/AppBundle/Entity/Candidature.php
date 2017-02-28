@@ -1,6 +1,4 @@
-<?php
-
-namespace AppBundle\Entity;
+<?php  namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,7 +24,7 @@ class Candidature
      *
      * @ORM\ManyToOne(targetEntity="Etape")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="current_etape_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="current_etape_id", referencedColumnName="id", nullable=false)
      * })
      */
     private $currentEtape;

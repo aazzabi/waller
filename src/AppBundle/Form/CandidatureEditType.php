@@ -2,7 +2,8 @@
 
 namespace AppBundle\Form;
 
-use Proxies\__CG__\AppBundle\Entity\Etape;
+use AppBundle\Entity\Candidature;
+use AppBundle\Entity\Etape;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,13 +18,11 @@ class CandidatureEditType extends AbstractType
     {
         $builder
             ->add('currentEtape', EntityType::class,[
-                'label' => 'entity.profile.currentetape',
-                'class' => Etape::class
+                'label' => 'entity.candidat.etapecourante',
+                'class' => Etape::class,
+                'required' => true,
             ]);
-        /*  ->add('group')
-            ->add('poste')
-            ->add('profile')
-            ->add('workflow') ;*/
+
     }
 
     /**
@@ -32,7 +31,7 @@ class CandidatureEditType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Candidature'
+            'data_class' => Candidature::class,
         ));
     }
 

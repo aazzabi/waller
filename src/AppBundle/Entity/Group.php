@@ -1,7 +1,4 @@
-<?php
-// src/AppBundle/Entity/Group.php
-
-namespace AppBundle\Entity;
+<?php namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\Group as BaseGroup;

@@ -21,10 +21,9 @@ return [
             'sivp' => 'SIVP',
             'reseauxsociaux' => 'Reseaux sociaux',
             'prestationsalariale' => 'Prestation salariale',
-            'cv' => 'Curriculum vitae',
-            'photo' => 'Photo de profile',
-            'disponibilite' => 'Disponibilité',
-            'currentetape' => 'Etape courante'
+            'cv' => 'Curriculum vitae  : ',
+            'photo' => 'Photo de profile : ',
+            'disponibilite' => 'Disponibilité'
         ],
         'candidat' => [
             'photo' => 'Photo du candidat',
@@ -37,6 +36,7 @@ return [
             'poste' => 'Poste',
             'etapecourante' => 'Etape courante',
             'actions' => 'Actions'
+
         ]
     ]
 ];

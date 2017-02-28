@@ -1,6 +1,4 @@
-<?php
-
-namespace AppBundle\Entity;
+<?php namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -84,6 +82,7 @@ class Poste
     {
         return $this->getLibelle();
     }
+
     /**
      * Set libelle
      *

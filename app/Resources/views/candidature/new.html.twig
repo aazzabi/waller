@@ -1,22 +1,23 @@
 {% extends 'base.html.twig' %}
-{% block head %}
-    <title>Ajout d'une nouvelle candidature</title>
-{% endblock %}
+{% block title %}
+    Ajout d'une nouvelle candidature{% endblock %}
 {% block body %}
-<div class="container">
-<br>
-<h1>Créer une nouvelle candidature</h1>
-    <hr>
+    <div class="container">
+        <br>
+        <h1>Créer une nouvelle candidature</h1>
+        <hr>
 
-    {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
-    {{ form_start(form) }}
+        {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+        {{ form_start(form) }}
         {{ form_widget(form) }}
-    <br>
-        <Button type="submit" class="btn btn-primary" value="Create" ><i class="fa fa-check" aria-hidden="true"></i>
-            Créer</Button>
-    <a href="{{ path('candidature_index') }}" class="btn btn-secondary"><i class="fa fa-times" aria-hidden="true"></i>
-        Annuler </a>
+        <br>
+        <Button type="submit" class="btn btn-primary" value="Create"><i class="fa fa-check" aria-hidden="true"></i>
+            Créer
+        </Button>
+        <a href="{{ path('candidature_index') }}" class="btn btn-secondary"><i class="fa fa-times"
+                                                                               aria-hidden="true"></i>
+            Annuler </a>
 
-    {{ form_end(form) }}
-</div>
-    {% endblock %}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

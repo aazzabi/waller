@@ -1,6 +1,4 @@
-<?php
-
-namespace AppBundle\Controller;
+<?php namespace AppBundle\Controller;
 
 use AppBundle\Entity\Profile;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

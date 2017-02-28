@@ -1,6 +1,4 @@
-<?php
-
-namespace AppBundle\Entity;
+<?php  namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -40,7 +38,7 @@ class Etape
      * @var Workflow
      *
      * @ORM\ManyToOne(targetEntity="Workflow", inversedBy="etapes")
-     *   @ORM\JoinColumn(name="workflow_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="workflow_id", referencedColumnName="id")
      * })
      */
     private $workflow;
@@ -50,6 +48,7 @@ class Etape
      * @ORM\OneToMany(targetEntity="Action", mappedBy="etapeSource")
      */
     private $actions;
+
     /**
      * Constructor
      */
@@ -86,6 +85,7 @@ class Etape
     {
         return $this->getLibelle();
     }
+
     /**
      * Get libelle
      *

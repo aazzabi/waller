@@ -46,16 +46,24 @@ class ProfileType extends AbstractType
                 'label' => 'entity.profile.niveau'
             ])
             ->add('skype', TextType::class,[
-                'label' => 'entity.profile.skype'
+                'label' => 'entity.profile.skype',
+                'required' => false,
+
             ])
             ->add('linkedin', TextType::class,[
-                'label' => 'entity.profile.linkedin'
+                'label' => 'entity.profile.linkedin',
+                'required' => false,
+
             ])
             ->add('facebook', TextType::class, [
-                'label' => 'entity.profile.facebook'
+                'label' => 'entity.profile.facebook',
+                'required' => false,
+
             ])
             ->add('github',TextType::class, [
-                'label' => 'entity.profile.github'
+                'label' => 'entity.profile.github',
+                'required' => false,
+
             ])
             ->add('sivp', CheckboxType::class, [
                 'label' => 'entity.profile.sivp'
@@ -70,7 +78,6 @@ class ProfileType extends AbstractType
                 'download_link' => true
             ])
             ->add('disponibilite', EntityType::class, [
-                //'class' => 'AppBundle:Disponibilite',
                 'label' => 'entity.profile.disponibilite',
                 'class' => Disponibilite::class
             ])
@@ -87,7 +94,7 @@ class ProfileType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Profile'
+            'data_class' => Profile::class,
         ));
     }
 
