@@ -117,14 +117,14 @@
             <br/>
                <table id="example" class="display" cellspacing="0" width="100%">
                 <thead>
-                <th>Photo</th>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th><i class="fa fa-envelope-o" aria-hidden="true"></i> E-mail</th>
-                <th>Poste</th>
-                <th>Etape courrante</th>
-                <th>Actions</th>
+                <th>{{ 'entity.candidat.photo' | trans }}</th>
+                <th>{{ 'entity.candidat.id' | trans }}</th>
+                <th>{{ 'entity.candidat.nom' | trans }}</th>
+                <th>{{ 'entity.candidat.prenom' | trans }}</th>
+                <th><i class="fa fa-envelope-o" aria-hidden="true"></i>{{ 'entity.candidat.email' | trans }}</th>
+                <th>{{ 'entity.candidat.poste' | trans }}</th>
+                <th>{{ 'entity.candidat.etapecourante' | trans }}</th>
+                <th>{{ 'entity.candidat.actions' | trans }}</th>
 
                 </tr>
                 </thead>
@@ -135,8 +135,8 @@
                        <th></th>
                        <th></th>
                        <th></th>
-                       <th>Poste</th>
-                       <th>Etape courrante</th>
+                       <th>{{ 'entity.candidat.poste' | trans }}</th>
+                       <th>{{ 'entity.candidat.etapecourante' | trans }}</th>
                    </tr>
                    </tfoot>
                 <tbody>
