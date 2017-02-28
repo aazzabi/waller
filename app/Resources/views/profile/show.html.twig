@@ -1,267 +1,282 @@
 {% extends 'base.html.twig' %}
-{% block head %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <title>Profile de {{ profile.nom }}</title>
+
+{#{% block stylesheets %}#}
+    {#<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>#}
+    {#<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">#}
+{#{% endblock %}#}
+
+{% block title %}
+    Profile de {{ profile }}
 {% endblock %}
 
+{% block javascripts %}
+
+{% endblock %}
 
 {% block body %}
-    <div style="margin-left: 200px; margin-top: 5px;" class="container">
-        <div class="row">
-            <div class="col-md-7 ">
-                <div align="center" class="panel panel-default">
-                    <div style="height: 35px;margin-top: -2px;" class="panel-heading"><h4>Profile</h4></div>
-                    <div class="panel-body">
-
-                        <div class="box box-info">
-
-                            <div class="box-body">
-                                <div class="col-sm-6">
-                                    <div align="center">
-                                        {% if profile.photo != '' %}
-                                            <img alt="User Pic" src="{{ asset('uploads/photo/' ~ profile.photo) }}"
-                                                 id="profile-image1" class="img-circle img-responsive">
-                                        {% else %}
-                                            <img alt="User Pic" src="{{ asset('assets/image/profile.png') }}"
-                                                 id="profile-image1" class="img-circle img-responsive">
-                                        {% endif %}
-                                    </div>
-
-                                    <br>
-
-                                    <!-- /input-group -->
-                                </div>
-                                <div class="col-sm-6">
-                                    <h4 style="margin-top:20px;font-size: 30px;color:#00b1b1;">{{ profile.nom }} {{ profile.prenom }}</h4></span>
-                                </div>
-                                <div class="clearfix"></div>
-                                <hr style="margin:5px 0 5px 0;">
-
-                                <table style="width: 100%;" align="center">
-                                    <tr>
-                                        <td>
-                                            <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.telephone' | trans }}:</div>
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-7">{{ profile.telephone }}</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <div class="clearfix"></div>
-                                        </td>
-                                        <td>
-                                            <div class="bot-border"></div>
-                                        </td>
-                                    </tr>
-
-
-                                    <tr>
-                                        <td>
-                                            <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.email' | trans }} :</div>
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-7">{{ profile.email }}</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <div class="clearfix"></div>
-                                        </td>
-                                        <td>
-                                            <div class="bot-border"></div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.cv' | trans }}:</div>
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-7"><a href="{{ asset('uploads/cv/' ~ profile.cv) }}">View
-                                                    CV (DOC)</a></div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <div class="clearfix"></div>
-                                        </td>
-                                        <td>
-                                            <div class="bot-border"></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.experience' | trans }}:</div>
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-7">{{ profile.experience }}</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="clearfix"></div>
-                                        </td>
-                                        <td>
-                                            <div class="bot-border"></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.niveau' | trans }}:</div>
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-7">{{ profile.niveau }}</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="clearfix"></div>
-                                        </td>
-                                        <td>
-                                            <div class="bot-border"></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.skype' | trans }}:</div>
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-7">{{ profile.skype }}</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.linkedin' | trans }}:</div>
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-7">
-                                            {% if profile.linkedin %}
-                                                <a href="{{ profile.linkedin }}">
-                                                    <i class="fa fa-linkedin fa-2x" style="color:#4875B4;" aria-hidden="true"></i>
-                                                </a>
-                                            {% else %}
-                                                <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
-                                            {% endif %}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.facebook' | trans }}:</div>
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-7">
-                                            {% if profile.facebook %}
-                                                        <a href="{{ profile.facebook }}">
-                                                            <i class="fa fa-facebook-square fa-2x"
-                                                               style="color:#3b5998;"></i>
-                                                        </a>
-                                            {% else %}
-                                                <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
-                                            {% endif %}
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.github' | trans }}:</div>
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-7">
-                                            {% if profile.github %}
-                                                <a href="{{ profile.github }}">
-                                                    <i class="fa fa-github fa-2x" style="color: black;" aria-hidden="true"></i>
-                                                </a>                                            {% else %}
-                                                <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
-                                            {% endif %}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.sivp' | trans }}:</div>
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-7">
-                                            {% if profile.sivp %}
-                                                <i class="fa fa-check text-success fa-2x" aria-hidden="true"></i>
-                                            {% else %}
-                                                <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
-                                            {% endif %}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="clearfix"></div>
-                                        </td>
-                                        <td>
-                                            <div class="bot-border"></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.prestationsalariale' | trans }}:</div>
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-7">{{ profile.prestationsalariale }}</div>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <!-- /.box-body -->
-                            </div>
-                            <!-- /.box -->
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h1>
+                        <center>Profile</center>
+                    </h1>
                 </div>
+                <div class="card-block">
+                    <h4 class="card-title">
 
-                <br>
-                <div style="margin-top: -20px;">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a>
+                                    {% if profile.photo != '' %}
+                                        <img alt="User Pic"
+                                             src="{{ asset('uploads/photo/' ~ profile.photo) }}"
+                                             class="img-circle img-responsive">
+                                    {% else %}
+                                        <img alt="User Pic" src="{{ asset('assets/image/profile.png') }}"
+                                             id="profile-image1" class="img-circle img-responsive">
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <div class="col-md-9">
+                                <h2>{{ profile.prenom }} {{ profile.nom }}</h2>
+                            </div>
+                        </div>
+                    </h4>
+                    <hr>
+                    <table style="width: 100%;" align="center">
+                        <tr>
+                            <td>
+                                <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.telephone' | trans }}
+                                    :
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-7">{{ profile.telephone }}</div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="clearfix"></div>
+                            </td>
+                            <td>
+                                <div class="bot-border"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.email' | trans }}:</div>
+                            </td>
+                            <td>
+                                <div class="col-sm-7">{{ profile.email }}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="clearfix"></div>
+                            </td>
+                            <td>
+                                <div class="bot-border"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.cv' | trans }}:
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-7"><a href="{{ asset('uploads/cv/' ~ profile.cv) }}">View
+                                        CV (DOC)</a></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="clearfix"></div>
+                            </td>
+                            <td>
+                                <div class="bot-border"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.experience' | trans }}
+                                    :
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-7">{{ profile.experience }}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="clearfix"></div>
+                            </td>
+                            <td>
+                                <div class="bot-border"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.niveau' | trans }}
+                                    :
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-7">{{ profile.niveau }}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="clearfix"></div>
+                            </td>
+                            <td>
+                                <div class="bot-border"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.skype' | trans }}
+                                    :
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-7">{{ profile.skype }}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.linkedin' | trans }}
+                                    :
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-7">
+                                    {% if profile.linkedin %}
+                                        <a href="{{ profile.linkedin }}">
+                                            <i class="fa fa-linkedin fa-2x" style="color:#4875B4;"
+                                               aria-hidden="true"></i>
+                                        </a>
+                                    {% else %}
+                                        <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.facebook' | trans }}
+                                    :
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-7">
+                                    {% if profile.facebook %}
+                                        <a href="{{ profile.facebook }}">
+                                            <i class="fa fa-facebook-square fa-2x"
+                                               style="color:#3b5998;"></i>
+                                        </a>
+                                    {% else %}
+                                        <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.github' | trans }}
+                                    :
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-7">
+                                    {% if profile.github %}
+                                        <a href="{{ profile.github }}">
+                                            <i class="fa fa-github fa-2x" style="color: black;"
+                                               aria-hidden="true"></i>
+                                        </a>                                            {% else %}
+                                        <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.sivp' | trans }}:
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-7">
+                                    {% if profile.sivp %}
+                                        <i class="fa fa-check text-success fa-2x" aria-hidden="true"></i>
+                                    {% else %}
+                                        <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="clearfix"></div>
+                            </td>
+                            <td>
+                                <div class="bot-border"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.prestationsalariale' | trans }}
+                                    :
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-7">{{ profile.prestationsalariale }}</div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
                     <a href="{{ path('profile_index') }}"
-                       class="btn btn-secondary btn-lg">
+                       class="btn btn-secondary ">
                         <i class="fa fa-undo " aria-hidden="true"></i>
                         Retour au liste
                     </a>
-
+                </div>
+                <div class="col-md-4">
                     <a href="{{ path('profile_edit', { 'id': profile.id }) }}"
-                       class="btn btn-secondary btn-lg">
+                       class="btn btn-secondary ">
                         <i class="fa fa-pencil-square-o"></i>
                         Edit
                     </a>
-
-                    {{ form_start(delete_form) }}
-                    <button type="submit" class="btn btn-danger btn_lg"
-                           style="margin-top: -50px;margin-left: 210px; padding: 0.65rem 1.5rem;font-size: 1.3rem;border-radius: 0.3rem;">
-                        <i class="fa fa-trash-o" aria-hidden="true"></i>
-                         Delete</button>
-                        {{ form_end(delete_form) }}
                 </div>
+
+                {{ form_start(delete_form) }}
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-danger btn_lg">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        Delete
+                    </button>
+                </div>
+                {{ form_end(delete_form) }}
             </div>
-
-
-            <script>
-                $(function () {
-                    $('#profile-image1').on('click', function () {
-                        $('#profile-image-upload').click();
-                    });
-                });
-            </script>
-
-
+            <br>
         </div>
     </div>
 
-{% endblock %}
-{% block javascripts %}
+
+    <script>
+        $(function () {
+            $('#profile-image1').on('click', function () {
+                $('#profile-image-upload').click();
+            });
+        });
+    </script>
+
 
 {% endblock %}
