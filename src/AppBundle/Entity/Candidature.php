@@ -54,7 +54,7 @@ class Candidature
      *
      * @ORM\ManyToOne(targetEntity="Profile")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="profile_id", referencedColumnName="id", onDelete="CASCADE")
      * })
      */
     private $profile;

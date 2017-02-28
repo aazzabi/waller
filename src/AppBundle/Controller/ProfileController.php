@@ -112,7 +112,6 @@ class ProfileController extends Controller
             $em->remove($profile);
             $em->flush($profile);
         }
-
         return $this->redirectToRoute('profile_index');
     }
 
