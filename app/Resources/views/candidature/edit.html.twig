@@ -1,60 +1,58 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <style>
-        #profile-image1 {
-            cursor: pointer;
-            width: 100px;
-            height: 100px;
-            border: 2px solid #03b1ce;
-        }
-    </style>
+
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1>Candidature edit</h1>
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+    {% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
 
-        <!--Tableau de l'entete contenant l image , le poste et le nom du candidat -->
-        <TABLE BORDER="0">
-            <TR>
-                <TD ROWSPAN=2>
-                    <a href="{{ path('candidature_show', { 'id': candidature.id }) }}">
-                        <div id="profile-image1" class="img-circle img-responsive">
-                            {% if candidature.profile.photo != '' %}
-                                <img alt="User Pic"
-                                     src="{{ asset('uploads/photo/' ~ candidature.profile.photo) }}"
-                                     class="img-circle img-responsive">
-                            {% else %}
-                                <img alt="User Pic" src="{{ asset('assets/image/profile.png') }}"
-                                     id="profile-image1" class="img-circle img-responsive">
-                            {% endif %}
-
-                        </div>
-                    </a>
-                </TD>
-                <TD><h3><b>{{ candidature.poste }}</b></h3></TD>
-            </TR>
-            <tr>
-                <td><h3>{{ candidature.profile.prenom }} {{ candidature.profile.nom }}</h3></td>
-            </tr>
-        </TABLE>
-        <br>
-
-        <div class="col-md-3 ">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Candidature edit</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <a href="{{ path('candidature_show', { 'id': candidature.id }) }}">
+                {% if candidature.profile.photo != '' %}
+                    <img alt="User Pic"
+                         src="{{ asset('uploads/photo/' ~ candidature.profile.photo) }}"
+                         class="img-circle img-responsive">
+                {% else %}
+                    <img alt="User Pic" src="{{ asset('assets/image/profile.png') }}"
+                         id="profile-image1" class="img-circle img-responsive">
+                {% endif %}
+            </a>
+        </div>
+        <div class="col-md-11">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3><b>{{ candidature.poste }}</b></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>{{ candidature.profile.prenom }} {{ candidature.profile.nom }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!--FORMULAIRE DU PROFILE-->
+        <div class="col-md-6">
             <div class="form-group row">
-                {% form_theme form 'bootstrap_3_layout.html.twig' %}
                 {{ form_start(form) }}
-                {{ form_widget(form) }}
-                 <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Edit</button>
+                {% include 'profile/forms/form.html.twig' %}
+                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Edit</button>
                 {{ form_end(form) }}
                 <br>
             </div>
         </div>
 
-        <div class="col-md-3 ">
-            {% form_theme form 'bootstrap_3_layout.html.twig' %}
+        <!--FORMULAIRE DU CANDIDATURE-->
+        <div class="col-md-6">
             {{ form_start(edit_form) }}
             {{ form_row(edit_form.currentEtape) }}
             <br>
@@ -64,31 +62,32 @@
                 Retour</a>
             {{ form_end(edit_form) }}
         </div>
+    </div>
 
-        <!--contenu du Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Supprimer </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        Voulez-vous vraiement supprimer ce profile ?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-secondary" data-dismiss="modal"> Annuler
-                        </button>
-                        {{ form_start(delete_form) }}
-                        <input type="submit" value="Delete">
-                        {{ form_end(delete_form) }}
-                    </div>
+    <!--contenu du Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Supprimer </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Voulez-vous vraiement supprimer ce profile ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-secondary" data-dismiss="modal"> Annuler
+                    </button>
+                    {{ form_start(delete_form) }}
+                    <input type="submit" value="Delete">
+                    {{ form_end(delete_form) }}
                 </div>
             </div>
         </div>
-        <!--fin du modal-->
     </div>
+    <!--fin du modal-->
+
 {% endblock %}

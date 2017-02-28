@@ -92,10 +92,16 @@ class CandidatureController extends Controller
         $editForm = $this->createForm(CandidatureEditType::class, $candidature);
         $editForm->handleRequest($request);
 
-        $editProfileForm = $this->createForm(ProfileEditType::class, $profile);
+        $editProfileForm = $this->createForm(ProfileType::class, $profile);
         $editProfileForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('candidature_edit', array('id' => $candidature->getId()));
+        }
+
+        if ($editProfileForm->isSubmitted() && $editProfileForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('candidature_edit', array('id' => $candidature->getId()));
