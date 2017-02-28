@@ -2,8 +2,12 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Competence;
+use AppBundle\Entity\Disponibilite;
 use AppBundle\Entity\Profile;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,32 +23,62 @@ class ProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom', TextType::class, ['label' => 'entity.profile.nom'])
-            ->add('prenom')
-            ->add('telephone')
-            ->add('email')
+            ->add('nom', TextType::class, [
+                'label' => 'entity.profile.nom'
+            ])
+            ->add('prenom', TextType::class, [
+                'label' => 'entity.profile.prenom'
+            ])
+            ->add('telephone', TextType::class, [
+                'label' => 'entity.profile.telephone'])
+            ->add('email',  TextType::class,[
+                'label' => 'entity.profile.email'])
             ->add('cvFile', VichFileType::class, [
                 'required' => false,
                 'label' => 'entity.profile.cv',
                 'allow_delete' => true,
                 'download_link' => true
             ])
-            ->add('experience')
-            ->add('niveau')
-            ->add('skype')
-            ->add('linkedin')
-            ->add('facebook')
-            ->add('github')
-            ->add('sivp')
-            ->add('prestationsalariale', TextType::class, ['label' => 'entity.profile.prestation'])
+            ->add('experience', TextType::class,[
+                'label' => 'entity.profile.experience'
+            ])
+            ->add('niveau',TextType::class, [
+                'label' => 'entity.profile.niveau'
+            ])
+            ->add('skype', TextType::class,[
+                'label' => 'entity.profile.skype'
+            ])
+            ->add('linkedin', TextType::class,[
+                'label' => 'entity.profile.linkedin'
+            ])
+            ->add('facebook', TextType::class, [
+                'label' => 'entity.profile.facebook'
+            ])
+            ->add('github',TextType::class, [
+                'label' => 'entity.profile.github'
+            ])
+            ->add('sivp', CheckboxType::class, [
+                'label' => 'entity.profile.sivp'
+            ])
+            ->add('prestationsalariale', TextType::class, [
+                'label' => 'entity.profile.prestationsalariale'
+            ])
             ->add('photoFile', VichFileType::class, [
                 'required' => false,
                 'allow_delete' => true,
                 'label' => 'entity.profile.photo',
                 'download_link' => true
             ])
-            ->add('disponibilite')
-            ->add('competences');
+            ->add('disponibilite', EntityType::class, [
+                //'class' => 'AppBundle:Disponibilite',
+                'label' => 'entity.profile.disponibilite',
+                'class' => Disponibilite::class
+            ])
+            ->add('competences', EntityType::class, [
+                'label' => 'entity.profile.competences',
+                'class' => Competence::class,
+                'multiple' => true
+            ]);
     }
 
     /**

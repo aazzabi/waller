@@ -39,8 +39,7 @@ class Etape
     /**
      * @var Workflow
      *
-     * @ORM\ManyToOne(targetEntity="Workflow")
-     * @ORM\JoinColumns({
+     * @ORM\ManyToOne(targetEntity="Workflow", inversedBy="etapes")
      *   @ORM\JoinColumn(name="workflow_id", referencedColumnName="id")
      * })
      */

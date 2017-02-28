@@ -43,8 +43,7 @@ class Workflow
      * @var Workflow
      *
      * @ORM\OneToMany(targetEntity="Etape", mappedBy="workflow")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="etape_id", referencedColumnName="id")
+     *  @ORM\JoinColumn(name="etape_id", referencedColumnName="id")
      * })
      */
     private $etapes;

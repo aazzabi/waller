@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block head %}
-    <title>Liste des profiles </title>
+    <title>La liste des profiles </title>
 {% endblock %}
 
 {% block stylesheets %}
@@ -170,15 +170,15 @@
             <th>{{ 'entity.profile.nom' | trans }}</th>
             <th>{{ 'entity.profile.prenom' | trans }}</th>
             <th>{{ 'entity.profile.telephone' | trans }}</th>
-            <th><i class="fa fa-envelope-o" aria-hidden="true"></i>{{ 'entity.profile.email' | trans }}</th>
+            <th><i class="fa fa-envelope-o" aria-hidden="true"></i>  {{ 'entity.profile.email' | trans }}</th>
             <th>{{ 'entity.profile.cv' | trans }}</th>
             <th>{{ 'entity.profile.experience' | trans }}</th>
             <th>{{ 'entity.profile.niveau' | trans }}</th>
             <th>{{ 'entity.profile.skype' | trans }}</th>
 
-            <th>{{ 'entity.profile.reseausociaux' | trans }}</th>
+            <th>{{ 'entity.profile.reseauxsociaux' | trans }}</th>
             <th>{{ 'entity.profile.sivp' | trans }}</th>
-            <th>{{ 'entity.profile.presationsalariale' | trans }} </th>
+            <th>{{ 'entity.profile.prestationsalariale' | trans }} </th>
 
             <th>Actions</th>
             </tr>
@@ -221,7 +221,7 @@
                             {% if profile.linkedin %}
                                 <li>
                                     <a href="{{ profile.linkedin }}">
-                                        <i class="fa fa-linkedin fa-2x" style="color:#4875B4;" aria-hidden="true"></i>
+                                        <i class="fa fa-linkedin fa-2x" style="color:#4875B4;" aria-hidden="true"></i></a>
                                 </li>
                             {% endif %}
 
@@ -237,6 +237,7 @@
                                 <li>
                                     <a href="{{ profile.github }}">
                                         <i class="fa fa-github fa-2x" style="color: black;" aria-hidden="true"></i>
+                                    </a>
                                 </li>
                             {% endif %}
                         </ul>
