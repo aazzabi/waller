@@ -4,13 +4,13 @@
 
 {% block form_widget_simple -%}
     {% if type is not defined or type not in ['file', 'hidden'] %}
-        {%- set attr = attr|merge({class: (attr.class|default('') ~ ' form-control')|trim}) -%}
+        {%- set attr = attr|merge({class: (attr.class|default('') ~ ' form-control form-control-sm')|trim}) -%}
     {% endif %}
     {{- parent() -}}
 {%- endblock form_widget_simple %}
 
 {% block textarea_widget -%}
-    {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-control')|trim}) %}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-control form-control-sm')|trim}) %}
     {{- parent() -}}
 {%- endblock textarea_widget %}
 
@@ -126,7 +126,7 @@
 {%- endblock dateinterval_widget -%}
 
 {% block choice_widget_collapsed -%}
-    {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-control')|trim}) %}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-control form-control-sm')|trim}) %}
     {{- parent() -}}
 {%- endblock %}
 
