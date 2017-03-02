@@ -3,14 +3,14 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Candidature;
-use AppBundle\Entity\Profile;
+use AppBundle\Entity\Note;
 use AppBundle\Form\CandidatureEditType;
 use AppBundle\Form\ProfileEditType;
 use AppBundle\Form\ProfileType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Candidature controller.
@@ -53,7 +53,13 @@ class CandidatureController extends Controller
             $em->persist($candidature);
             $em->flush($candidature);
 
-            return $this->redirectToRoute('candidature_show', array('id' => $candidature->getId()));
+            $note = new Note();
+            $note->setCandidature($candidature);
+            $note->setEtape($candidature->getCurrentEtape());
+            $em->persist($note);
+            $em->flush($note);
+
+            return $this->redirectToRoute('candidature_edit', array('id' => $candidature->getId()));
         }
 
         return $this->render('candidature/new.html.twig', array(
@@ -72,7 +78,6 @@ class CandidatureController extends Controller
     public function showAction(Candidature $candidature)
     {
         $deleteForm = $this->createDeleteForm($candidature);
-
         return $this->render('candidature/show.html.twig', array(
             'candidature' => $candidature,
             'delete_form' => $deleteForm->createView(),

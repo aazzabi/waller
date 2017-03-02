@@ -74,7 +74,7 @@ class Candidature
      * @var string
      *
      *
-     * @ORM\Column(name="commentaire", type="string", length=65535, nullable=true)
+     * @ORM\Column(name="commentaire", type="text", length=65535, nullable=true)
      *
      */
     private $commentaire;
@@ -231,5 +231,10 @@ class Candidature
     public function getCommentaire()
     {
         return $this->commentaire;
+    }
+
+    function __toString()
+    {
+        return $this->getProfile() . " - qui est : " . $this->getCurrentEtape() . " pour (" . $this->getGroup() . ")";
     }
 }

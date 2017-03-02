@@ -1,6 +1,7 @@
 <?php namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Note
@@ -22,12 +23,15 @@ class Note
     /**
      * @var string
      *
-     * @ORM\Column(name="commentaire", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="commentaire", type="text", length=65535, nullable=true)
      */
     private $commentaire;
 
     /**
      * @var integer
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 10)
      *
      * @ORM\Column(name="evaluation", type="integer", nullable=true)
      */
@@ -61,13 +65,9 @@ class Note
      * @param Candidature $candidature
      * @param Etape $etape
      */
-    public function __construct($id, $commentaire, $evaluation, Candidature $candidature, Etape $etape)
+    public function __construct()
     {
-        $this->id = $id;
-        $this->commentaire = $commentaire;
-        $this->evaluation = $evaluation;
-        $this->candidature = $candidature;
-        $this->etape = $etape;
+
     }
 
     /**
