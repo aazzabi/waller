@@ -1,33 +1,66 @@
-<div class="row">
-    <div class="col-md-6">
+<!--Identité-->
+<div class="card">
+    <div class="card-block" data-toggle="collapse"
+         href="#identite">
+        <h5 class="card-title"><u><b>Identité</b></u></h5>
+    </div>
+    <div class=" card-block collapse show" id="identite">
         {{ form_row(form.prenom) }}
-    </div>
-    <div class="col-md-6">
         {{ form_row(form.nom) }}
+        {{ form_widget(form.photoFile) }}
+        {{ form_widget(form.cvFile) }}
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        {{ form_row(form.telephone) }}
+
+<!--contact-->
+<div class="card">
+    <div class="card-block" data-toggle="collapse"
+         href="#contact">
+        <h5 class="card-title"><u><b>Contact</b></u></h5>
     </div>
-    <div class="col-md-4">
+    <div class=" card-block collapse show" id="contact">
+        <div class="input-group input-group-sm">
+            {{ form_label(form.telephone) }}
+            <span class="input-group-addon" id="basic-addon1">+216</span>
+            {{ form_widget(form.telephone) }}
+        </div>
         {{ form_row(form.email) }}
-    </div>
-    <div class="col-md-4">
         {{ form_row(form.skype) }}
+        {{ form_row(form.linkedin) }}
+        {{ form_row(form.facebook) }}
+        {{ form_row(form.github) }}
     </div>
 </div>
 
+<div class="card">
+    <div class="card-block" data-toggle="collapse"
+         href="#competence">
+        <h5 class="card-title"><u><b>Compétences </b></u></h5>
+    </div>
+    <div class=" card-block collapse show" id="competence">
+        {{ form_row(form.competences) }}
+        {{ form_row(form.experience) }}
+        {{ form_row(form.niveau) }}
+    </div>
+</div>
 
-{{ form_widget(form.cvFile) }}
-{{ form_widget(form.photoFile) }}
-{{ form_row(form.experience) }}
-{{ form_row(form.niveau) }}
-{{ form_row(form.linkedin) }}
-{{ form_row(form.facebook) }}
-{{ form_row(form.github) }}
-{{ form_row(form.sivp) }}
-{{ form_row(form.prestationsalariale) }}
-{{ form_row(form.disponibilite) }}
-{{ form_row(form.competences) }}
+<!--situation-->
+<div class="card">
+    <div class="card-block" data-toggle="collapse"
+         href="#situation">
+        <h5 class="card-title"><u><b>Situation </b></u></h5>
+    </div>
+    <div class=" card-block collapse show" id="situation">
+        <div class="row">
+            <div class="col-md-4">
+                {{ form_label(form.sivp) }}
+            </div>
+            <div class="col-md-10">
+                {{ form_widget(form.sivp) }}
+            </div>
+        </div>
+        {{ form_row(form.prestationsalariale) }}
+        {{ form_row(form.disponibilite) }}
+    </div>
+</div>

@@ -26,8 +26,8 @@ th {
 }
 
 div .row {
-    margin-left: 10px;
-    margin-top: 10px;
+    margin-left: 5px;
+    margin-top: 5px;
 }
 
 .modal-content {
@@ -35,8 +35,8 @@ div .row {
 }
 
 img.img-circle {
-    width: 100px;
-    height: 100px;
+    width: 40px;
+    height: 40px;
     border: 2px solid #03b1ce;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;

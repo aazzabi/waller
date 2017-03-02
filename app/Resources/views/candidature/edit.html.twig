@@ -3,7 +3,21 @@
     <title> Modifi candidature de{{ candidature.profile.nom }}</title>
 {% endblock %}
 {% block stylesheets %}
+    <style>
+        .card-block {
+            padding: 10px;
 
+        }
+
+        .card-title {
+            margin-bottom: 0px;
+        }
+
+        form[name=appbundle_profile] {
+            width: 90%;
+        }
+
+    </style>
 {% endblock %}
 
 {% block body %}
@@ -12,9 +26,18 @@
 
     <div class="row">
         <div class="col-md-6">
-            <h1>Candidature edit</h1>
+            <h1><b>Edite candidature </b></h1>
+        </div>
+        <div class="col-md-6 col-md-offset-6 text-right">
+
+            <a href="{{ path('candidature_index') }}" class="btn btn-secondary"><i class="fa fa-undo" aria-hidden="true"></i>
+                Retour à la liste</a>
+
+            <br>
         </div>
     </div>
+    <hr>
+    <br>
     <div class="row">
         <div class="col-md-1">
             <a href="{{ path('candidature_show', { 'id': candidature.id }) }}">
@@ -28,10 +51,10 @@
                 {% endif %}
             </a>
         </div>
-        <div class="col-md-11">
+        <div class="col-md-11" style="margin-top: -20px;margin-left: -40px;">
             <div class="row">
                 <div class="col-md-12">
-                    <h3><b>{{ candidature.poste }}</b></h3>
+                    <h2><b>{{ candidature.poste }}</b></h2>
                 </div>
             </div>
             <div class="row">
@@ -44,7 +67,7 @@
     <div class="row">
         <!--FORMULAIRE DU PROFILE-->
         <div class="col-md-6">
-            <div class="form-group row">
+            <div class="form-group row ">
                 {{ form_start(form) }}
                 {% include 'profile/forms/form.html.twig' %}
                 <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Edit</button>
@@ -58,13 +81,11 @@
             {{ form_start(edit_form) }}
             {{ form_row(edit_form.currentEtape) }}
             {{ form_row(edit_form.commentaire) }}
-            {{ form_row(edit_form.noteCommentaire)}}
+            {{ form_row(edit_form.noteCommentaire) }}
             {{ form_row(edit_form.noteEvaluation) }}
             <br>
             <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Edit</button>
-            <a href="{{ path('candidature_index') }}" class="btn btn-warning">
-                <i class="fa fa-undo " aria-hidden="true"></i>
-                Retour</a>
+
             {{ form_end(edit_form) }}
         </div>
     </div>
