@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Liste des candidats
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.dataTables.min.css.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }} "></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#candidature').DataTable({
+                "paging": true,
+                "stateSave": true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/French.json",
+                },
+                initComplete: function () {
+                    this.api().columns(5).every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                    this.api().columns(6).every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                }
+            });
+        });
+    </script>
+
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+
+            <h1>Candidatures list</h1>
+            <hr>
+            <div class="col-md-6 text-left">
+
+                <a href="{{ path('candidature_new') }}" class="btn btn-success">
+                    <i class="icon-plus"> Ajouter une candidature </i></a>
+
+                <br>
+            </div>
+            <div class="clearfix"></div>
+            <br/>
+            <table id="candidature" class="display" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>{{ 'entity.candidat.photo' | trans }}</th>
+                    <th>{{ 'entity.candidat.id' | trans }}</th>
+                    <th>{{ 'entity.candidat.nom' | trans }}</th>
+                    <th>{{ 'entity.candidat.prenom' | trans }}</th>
+                    <th><i class="fa fa-envelope-o" aria-hidden="true"></i>{{ 'entity.candidat.email' | trans }}</th>
+                    <th>{{ 'entity.candidat.poste' | trans }}</th>
+                    <th>{{ 'entity.candidat.etapecourante' | trans }}</th>
+                    <th>{{ 'entity.candidat.actions' | trans }}</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>{{ 'entity.candidat.poste' | trans }}</th>
+                    <th>{{ 'entity.candidat.etapecourante' | trans }}</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                {% for candidature in candidatures %}
+                    <tr>
+                        <td><a>
+                                <div id="profile-image1" class="img-circle img-responsive">
+                                    {% if candidature.profile.photo != '' %}
+                                        <img alt="User Pic"
+                                             src="{{ asset('uploads/photo/' ~ candidature.profile.photo) }}"
+                                             class="img-circle img-responsive">
+                                    {% else %}
+                                        <img alt="User Pic" src="{{ asset('assets/image/profile.png') }}"
+                                             id="profile-image1" class="img-circle img-responsive">
+                                    {% endif %}
+
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            <a>{{ candidature.id }}</a>
+                        </td>
+                        <td>{{ candidature.profile.nom }}</td>
+                        <td>{{ candidature.profile.prenom }}</td>
+                        <td>{{ candidature.profile.email }}</td>
+                        <td>{{ candidature.poste }}</td>
+
+                        <td>{{ candidature.currentEtape }}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('candidature_edit', { 'id': candidature.id }) }}">
+                                        <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+                                        edit</a>
+                                </li>
+
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

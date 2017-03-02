@@ -1,7 +1,6 @@
-<?php
+<?php namespace AppBundle\Entity;
 
-namespace AppBundle\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -111,5 +110,10 @@ class Competence
     public function getProfiles()
     {
         return $this->profiles;
+    }
+
+    function __toString()
+    {
+        return $this->getLibelle();
     }
 }

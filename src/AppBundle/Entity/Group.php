@@ -1,7 +1,4 @@
-<?php
-// src/AppBundle/Entity/Group.php
-
-namespace AppBundle\Entity;
+<?php namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\Group as BaseGroup;
@@ -9,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="group")
+ * @ORM\Table(name="groupe")
  */
 class Group extends BaseGroup
 {
@@ -34,6 +31,7 @@ class Group extends BaseGroup
      * )
      */
     private $users;
+
 
     /**
      * Constructor
@@ -75,5 +73,10 @@ class Group extends BaseGroup
     public function getUsers()
     {
         return $this->users;
+    }
+
+    function __toString()
+    {
+        return $this->getName();
     }
 }

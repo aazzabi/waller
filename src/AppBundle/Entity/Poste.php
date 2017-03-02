@@ -1,6 +1,4 @@
-<?php
-
-namespace AppBundle\Entity;
+<?php namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -77,6 +75,12 @@ class Poste
     public function getId()
     {
         return $this->id;
+    }
+
+
+    function __toString()
+    {
+        return $this->getLibelle();
     }
 
     /**

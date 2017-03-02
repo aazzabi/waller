@@ -1,15 +1,17 @@
-<?php
-
-namespace AppBundle\Entity;
+<?php namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Profile
  *
  * @ORM\Table(name="profile")
  * @ORM\Entity
+ * @Vich\Uploadable
  */
 class Profile
 {
@@ -25,6 +27,7 @@ class Profile
     /**
      * @var string
      *
+     * @Assert\NotBlank()
      * @ORM\Column(name="nom", type="string", length=150, nullable=false)
      */
     private $nom;
@@ -51,11 +54,25 @@ class Profile
     private $email;
 
     /**
-     * @var string
+     * @Vich\UploadableField(mapping="cv_file", fileNameProperty="cv")
      *
-     * @ORM\Column(name="cv", type="string", length=255, nullable=false)
+     * @var File
+     */
+    private $cvFile;
+
+    /**
+     * @ORM\Column(name="cv", type="string", length=255, nullable=true)
+     *
+     * @var string
      */
     private $cv;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $cvUpdatedAt;
 
     /**
      * @var integer
@@ -114,11 +131,26 @@ class Profile
     private $prestationsalariale;
 
     /**
-     * @var string
+     * @Vich\UploadableField(mapping="photo_file", fileNameProperty="photo")
      *
+     * @var File
+     */
+    private $photoFile;
+
+    /**
      * @ORM\Column(name="photo", type="string", length=255, nullable=true)
+     *
+     * @var string
      */
     private $photo;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $photoUpdatedAt;
+
 
     /**
      * @var Disponibilite
@@ -144,8 +176,6 @@ class Profile
      * )
      */
     private $competences;
-
-
 
     /**
      * Constructor
@@ -262,11 +292,33 @@ class Profile
     }
 
     /**
-     * Set cv
-     *
-     * @param string $cv
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      *
      * @return Profile
+     */
+    public function setCvFile(File $cvFile = null)
+    {
+        $this->cvFile = $cvFile;
+
+        if ($cvFile) {
+            $this->cvUpdatedAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getCvFile()
+    {
+        return $this->cvFile;
+    }
+
+    /**
+     * @param string $cv
+     *
+     * @return Product
      */
     public function setCv($cv)
     {
@@ -276,9 +328,7 @@ class Profile
     }
 
     /**
-     * Get cv
-     *
-     * @return string
+     * @return string|null
      */
     public function getCv()
     {
@@ -478,8 +528,30 @@ class Profile
     }
 
     /**
-     * Set photo
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      *
+     * @return Profile
+     */
+    public function setPhotoFile(File $photoFile = null)
+    {
+        $this->photoFile = $photoFile;
+
+        if ($photoFile) {
+            $this->photoUpdatedAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getPhotoFile()
+    {
+        return $this->photoFile;
+    }
+
+    /**
      * @param string $photo
      *
      * @return Profile
@@ -492,9 +564,7 @@ class Profile
     }
 
     /**
-     * Get photo
-     *
-     * @return string
+     * @return string|null
      */
     public function getPhoto()
     {
@@ -557,5 +627,10 @@ class Profile
     public function getCompetences()
     {
         return $this->competences;
+    }
+
+    function __toString()
+    {
+        return $this->getPrenom() . " " . $this->getNom() . " (" . $this->getEmail() . ")";
     }
 }

@@ -1,6 +1,4 @@
-<?php
-
-namespace AppBundle\Entity;
+<?php  namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -71,5 +69,10 @@ class Disponibilite
     public function getLibelle()
     {
         return $this->libelle;
+    }
+
+    function __toString()
+    {
+        return $this->getLibelle();
     }
 }
