@@ -45,7 +45,7 @@ class CandidatureType extends AbstractType
             ])
             ->add('commentaire',TextareaType::class,[
                 'label' => 'entity.candidat.commentaire',
-                'required' => true
+                'required' => false
             ]);
     }
     

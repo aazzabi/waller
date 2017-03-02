@@ -74,7 +74,7 @@ class Candidature
      * @var string
      *
      *
-     * @ORM\Column(name="commentaire", type="string", length=250, nullable=false)
+     * @ORM\Column(name="commentaire", type="string", length=65535, nullable=true)
      *
      */
     private $commentaire;
