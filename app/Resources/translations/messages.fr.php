@@ -5,6 +5,10 @@ return [
             'supprimer' => 'Supprimer',
             'libelle' => 'Libellé'
         ],
+        'note' => [
+            'commentaire' => 'Note',
+            'evaluation' => 'Evaluation'
+        ],
         'profile' => [
             'id' => 'ID',
             'prenom' => 'Prenom',
@@ -26,12 +30,13 @@ return [
             'disponibilite' => 'Disponibilité'
         ],
         'candidat' => [
-            'photo' => 'Photo du candidat',
+            'photo' => 'Photo',
             'group' => 'Groupe',
             'workflow' => 'Workflow',
             'profile' => 'Profile',
             'commentaire' => 'Commentaire',
             'nom' => 'Nom',
+            'id' => 'ID',
             'prenom' => 'Prenom',
             'email' => 'E-mail',
             'poste' => 'Poste',

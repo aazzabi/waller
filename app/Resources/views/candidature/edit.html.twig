@@ -58,6 +58,8 @@
             {{ form_start(edit_form) }}
             {{ form_row(edit_form.currentEtape) }}
             {{ form_row(edit_form.commentaire) }}
+            {{ form_row(edit_form.noteCommentaire)}}
+            {{ form_row(edit_form.noteEvaluation) }}
             <br>
             <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Edit</button>
             <a href="{{ path('candidature_index') }}" class="btn btn-warning">
