@@ -10,6 +10,7 @@ use AppBundle\Entity\Profile;
 use AppBundle\Entity\Workflow;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -41,7 +42,11 @@ class CandidatureType extends AbstractType
             ->add('workflow',EntityType::class,[
                 'label' => 'entity.candidat.workflow',
                 'class' => Workflow::class
-            ]) ;
+            ])
+            ->add('commentaire',TextareaType::class,[
+                'label' => 'entity.candidat.commentaire',
+                'required' => true
+            ]);
     }
     
     /**

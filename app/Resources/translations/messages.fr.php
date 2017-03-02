@@ -30,6 +30,7 @@ return [
             'group' => 'Groupe',
             'workflow' => 'Workflow',
             'profile' => 'Profile',
+            'commentaire' => 'Commentaire',
             'nom' => 'Nom',
             'prenom' => 'Prenom',
             'email' => 'E-mail',
