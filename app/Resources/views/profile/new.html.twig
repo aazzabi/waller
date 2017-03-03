@@ -3,10 +3,11 @@
     Ajout d'un nouveau profile{% endblock %}
 {% block stylesheets %}
     <style>
-        .card-block{
+        .card-block {
             padding: 10px;
         }
-        .card-title{
+
+        .card-title {
             margin-bottom: 0px;
         }
     </style>
@@ -15,12 +16,14 @@
 {% block body %}
     <br>
     <div class="container">
+        {{ form_start(form) }}
         <div class="row">
             <div class="col-md-6">
                 <h1><b>Ajout d'un nouveau profile</b></h1>
             </div>
             <div class="col-md-6 col-md-offset-6 text-right">
-                <button type="submit" class="btn btn-success" value="Create"><i class="fa fa-check" aria-hidden="true"></i>
+                <button type="submit" class="btn btn-success" value="Create"><i class="fa fa-check"
+                                                                                aria-hidden="true"></i>
                     Confirmer
                 </button>
                 <a href="{{ path('profile_index') }}" class="btn btn-secondary"><i class="fa fa-undo" aria-hidden="true"></i>
@@ -30,13 +33,9 @@
             </div>
         </div>
         <hr>
-
         {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
-
-        {{ form_start(form) }}
-        {% include 'profile/forms/formNew.html.twig' %}
-<br>
-
+        {% include 'profile/forms/formNew.html.twig' %}<br>
+    </div>
     {{ form_end(form) }}
 
 {% endblock %}

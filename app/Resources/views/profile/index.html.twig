@@ -32,6 +32,10 @@
                 column.visible(!column.visible());
             });
         });
+
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
     </script>
 
 {% endblock %}
@@ -49,8 +53,14 @@
                     Appliquer un filtre
                 </button>
                 <a href="{{ path('profile_new') }}" class="btn btn-success">
-                    <i class="icon-plus"> Ajouter un profile</i></a>
-
+                    <i class="icon-plus"> Ajouter un profile</i>
+                </a>
+                <a href="{{ path('candidature_index') }}" data-toggle="tooltip">
+                    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom"
+                            title="Vers candidature">
+                        <i class="fa fa-share" aria-hidden="true"></i>
+                    </button>
+                </a>
                 <br>
             </div>
         </div>
@@ -65,7 +75,6 @@
                                     aria-hidden="true"></span></button>
                         <h4 class="modal-title" id="myModalLabel">Columns</h4>
                     </div>
-
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
@@ -224,23 +233,23 @@
                     <td>{{ profile.skype }}</td>
 
                     <td>
-                            {% if profile.linkedin %}
-                                    <a href="{{ profile.linkedin }}">
-                                        <i class="fa fa-linkedin" style="color:#4875B4;"
-                                           aria-hidden="true"></i></a>
-                            {% endif %}
+                        {% if profile.linkedin %}
+                            <a href="{{ profile.linkedin }}">
+                                <i class="fa fa-linkedin" style="color:#4875B4;"
+                                   aria-hidden="true"></i></a>
+                        {% endif %}
 
-                            {% if profile.facebook %}
-                                    <a href="{{ profile.facebook }}">
-                                        <i class="fa fa-facebook-square"
-                                           style="color:#3b5998;"></i>
-                                    </a>
-                            {% endif %}
-                            {% if profile.github %}
-                                    <a href="{{ profile.github }}">
-                                        <i class="fa fa-github" style="color: black;" aria-hidden="true"></i>
-                                    </a>
-                            {% endif %}
+                        {% if profile.facebook %}
+                            <a href="{{ profile.facebook }}">
+                                <i class="fa fa-facebook-square"
+                                   style="color:#3b5998;"></i>
+                            </a>
+                        {% endif %}
+                        {% if profile.github %}
+                            <a href="{{ profile.github }}">
+                                <i class="fa fa-github" style="color: black;" aria-hidden="true"></i>
+                            </a>
+                        {% endif %}
 
                     </td>
                     <td>{% if profile.sivp %}
@@ -252,15 +261,15 @@
                     <td>{{ profile.prestationsalariale }}</td>
                     <td>
                         <div class="row">
-                        <div class="col-md-6">
-                        <a href="{{ path('profile_show', { 'id': profile.id }) }}">
-                            <i class="fa fa-eye fa-2x " aria-hidden="true"></i>
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                        <a href="{{ path('profile_edit', { 'id': profile.id }) }}">
-                            <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
-                        </a></div>
+                            <div class="col-md-6">
+                                <a href="{{ path('profile_show', { 'id': profile.id }) }}">
+                                    <i class="fa fa-eye fa-2x " aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ path('profile_edit', { 'id': profile.id }) }}">
+                                    <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+                                </a></div>
                         </div>
                     </td>
                 </tr>
