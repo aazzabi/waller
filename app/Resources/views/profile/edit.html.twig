@@ -3,13 +3,27 @@
     <title>Modif. du profile de {{ profile.nom }}</title>
 {% endblock %}
 {% block body %}
+    <br>
+    {{ form_start(form) }}
     <div class="row">
-        <div class="col-md-4">
-            <h1><b>Edite du profile</b></h1>
+        <div class="col-md-5">
+            <div class="row">
+                {% if profile.photo != '' %}
+                    <img alt="User Pic"
+                         src="{{ asset('uploads/photo/' ~ profile.photo) }}"
+                         class="img-circle img-responsive">
+                {% else %}
+                    <img alt="User Pic" src="{{ asset('assets/image/profile.png') }}"
+                         id="profile-image1" class="img-circle img-responsive">
+                {% endif %} &nbsp;
+                <h1> Edite du profile</h1>
+            </div>
         </div>
-        <div class="col-md-8 text-right">
+
+        <div class="col-md-7 text-right">
             <button type="submit" class="btn btn-secondary"><i class="fa fa-check"></i> Confirmer</button>
-            <a href="{{ path('profile_index') }}" class="btn btn-secondary"><i class="fa fa-undo " aria-hidden="true"></i>
+            <a href="{{ path('profile_index') }}" class="btn btn-secondary"><i class="fa fa-undo "
+                                                                               aria-hidden="true"></i>
                 Retour à la liste</a>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-danger btn_lg" data-toggle="modal" data-target="#myModal">
@@ -21,10 +35,10 @@
         </div>
     </div>
     {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
-    {{ form_start(form) }}
     {% include 'profile/forms/form.html.twig' %}
     <br>
     {{ form_end(form) }}
+
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">

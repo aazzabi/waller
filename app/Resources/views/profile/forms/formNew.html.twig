@@ -8,15 +8,8 @@
         {{ form_row(form.prenom) }}
         {{ form_row(form.nom) }}
         {{ form_widget(form.photoFile) }}
-        {% if profile.cv != '' %}
-            {{ form_widget(form.cvFile) }}
-            <div class="text-center" style="margin-top: -25px;">
-                Cliquez
-                <a href="{{ asset('uploads/cv/' ~ profile.cv) }}">ici</a> pour voir le CV
-            </div>
-        {% else %}
-            <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
-        {% endif %}
+        {{ form_widget(form.cvFile) }}
+
     </div>
 </div>
 

@@ -26,7 +26,7 @@ return [
             'reseauxsociaux' => 'Reseaux sociaux',
             'prestationsalariale' => 'Prestation salariale',
             'cv' => 'Curriculum vitae  : ',
-            'photo' => 'Photo de profile : ',
+            'photo' => 'Photo',
             'disponibilite' => 'Disponibilité'
         ],
         'candidat' => [
