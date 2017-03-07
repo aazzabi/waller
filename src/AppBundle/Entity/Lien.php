@@ -43,7 +43,6 @@ class Lien
      *   @ORM\JoinColumn(name="poste_id", referencedColumnName="id")
      * })
      *
-     *
      */
     private $poste;
 

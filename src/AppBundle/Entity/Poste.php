@@ -1,5 +1,6 @@
 <?php namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,19 +62,12 @@ class Poste
 
     /**
      * Poste constructor.
-     * @param int $id
-     * @param string $libelle
-     * @param string $description
-     * @param string $profileDemande
-     * @param Group $group
+     *
      */
-    public function __construct($id, $libelle, $description, $profileDemande, Group $group)
+    public function __construct()
     {
-        $this->id = $id;
-        $this->libelle = $libelle;
-        $this->description = $description;
-        $this->profileDemande = $profileDemande;
-        $this->group = $group;
+        $this->liens = new ArrayCollection();
+
     }
 
     /**
@@ -186,5 +180,39 @@ class Poste
     public function getGroup()
     {
         return $this->group;
+    }
+
+    /**
+     * Add lien
+     *
+     * @param \AppBundle\Entity\Lien $lien
+     *
+     * @return Poste
+     */
+    public function addLien(\AppBundle\Entity\Lien $lien)
+    {
+        $this->liens[] = $lien;
+
+        return $this;
+    }
+
+    /**
+     * Remove lien
+     *
+     * @param \AppBundle\Entity\Lien $lien
+     */
+    public function removeLien(\AppBundle\Entity\Lien $lien)
+    {
+        $this->liens->removeElement($lien);
+    }
+
+    /**
+     * Get liens
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLiens()
+    {
+        return $this->liens;
     }
 }

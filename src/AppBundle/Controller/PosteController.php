@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Lien;
 use AppBundle\Entity\Poste;
+use AppBundle\Form\LienType;
 use AppBundle\Form\PosteType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -49,6 +51,7 @@ class PosteController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($poste);
             $em->flush($poste);
+
 
             return $this->redirectToRoute('poste_show', array('id' => $poste->getId()));
         }
