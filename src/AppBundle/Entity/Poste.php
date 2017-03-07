@@ -51,6 +51,15 @@ class Poste
     private $group;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Lien", mappedBy="poste")
+     * @ORM\JoinColumn(name="lien_id", referencedColumnName="id")
+     * })
+     */
+    private $liens;
+
+    /**
      * Poste constructor.
      * @param int $id
      * @param string $libelle
