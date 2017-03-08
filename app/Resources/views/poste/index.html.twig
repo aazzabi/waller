@@ -1,17 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Postes list</h1>
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.dataTables.min.css.css') }}">
+{% endblock %}
 
-    <table>
+{% block javascripts %}
+    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }} "></script>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6">
+            <h1><b>Liste des postes </b></h1>
+        </div>
+        <div class="col-md-6 col-md-offset-6 text-right">
+            <a href="{{ path('poste_new') }}" class="btn btn-success">
+                <i class="icon-plus"> Ajouter un poste</i>
+            </a>
+            <a href="{{ path('profile_index') }}" data-toggle="tooltip">
+                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom"
+                        title="Vers profile">
+                    <i class="fa fa-share" aria-hidden="true"></i>
+                </button>
+            </a>
+            <br>
+        </div>
+    </div>
+    <hr>
+    <table class="display" cellspacing="0" width="100%">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Libelle</th>
-                <th>Description</th>
-                <th>Profiledemande</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Libelle</th>
+            <th>Description</th>
+            <th>Profiledemande</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for poste in postes %}
@@ -21,23 +45,21 @@
                 <td>{{ poste.description }}</td>
                 <td>{{ poste.profileDemande }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('poste_show', { 'id': poste.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('poste_edit', { 'id': poste.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="{{ path('poste_show', { 'id': poste.id }) }}">
+                                <i class="fa fa-eye fa-2x " aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{{ path('poste_edit', { 'id': poste.id }) }}">
+                                <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+                            </a></div>
+                    </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('poste_new') }}">Create a new poste</a>
-        </li>
-    </ul>
 {% endblock %}

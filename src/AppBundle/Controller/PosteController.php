@@ -68,11 +68,18 @@ class PosteController extends Controller
      * @Route("/{id}", name="poste_show")
      * @Method("GET")
      */
-    public function showAction(poste $poste)
+    public function showAction(Poste $poste)
     {
         $deleteForm = $this->createDeleteForm($poste);
-
+        $em = $this->getDoctrine()->getManager();
+        $candidatures = $em->getRepository('AppBundle:Candidature')
+            ->createQueryBuilder('c')
+            ->where('c.poste = :poste')
+            ->setParameter('poste', $poste->getId())
+            ->getQuery()
+            ->getResult();
         return $this->render('poste/show.html.twig', array(
+            'candidatures'=>$candidatures,
             'poste' => $poste,
             'delete_form' => $deleteForm->createView(),
         ));

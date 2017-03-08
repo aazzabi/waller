@@ -61,6 +61,17 @@ class Poste
     private $liens;
 
     /**
+     *
+     * var Candidature
+     *
+     * @ORM\OneToMany(targetEntity="Candidature", mappedBy="poste")
+     * @ORM\JoinColumn(name="candidature_id", referencedColumnName="id")
+     * })
+     *
+     */
+    private $candidatures;
+
+    /**
      * Poste constructor.
      *
      */

@@ -241,31 +241,31 @@
                 </div>
             </div>
             <div class="row">
-                <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
+                        <button class="btn btn-primary pull-right"><i class="fa fa-download"></i> Generate PDF</button>
+                    </div>
+                    <div class="col-md-3">
                         <a href="{{ path('profile_index') }}"
                            class="btn btn-secondary ">
                             <i class="fa fa-undo " aria-hidden="true"></i>
                             Retour au liste
                         </a>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <a href="{{ path('profile_edit', { 'id': profile.id }) }}"
                            class="btn btn-secondary ">
                             <i class="fa fa-pencil-square-o"></i>
                             Editer
                         </a>
                     </div>
-
                     {{ form_start(delete_form) }}
-                    <div class="col-md-1">
+                    <div class="col-md-3">
                         <button type="submit" class="btn btn-danger btn_lg">
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                             Supprimer
                         </button>
                     </div>
                     {{ form_end(delete_form) }}
-                </div>
             </div>
             <br>
         </div>
