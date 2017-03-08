@@ -34,8 +34,11 @@ class PosteType extends AbstractType
             ))
             ->add('liens', CollectionType::class, array(
                 'label' => 'entity.poste.lien',
+                'by_reference' => false,
+                'allow_delete' => true,
                 'entry_type' => LienType::class
-            ));;
+            ));
+
     }
 
     /**

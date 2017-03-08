@@ -54,7 +54,7 @@ class Poste
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="Lien", mappedBy="poste")
+     * @ORM\OneToMany(targetEntity="Lien", mappedBy="poste", cascade={"persist"})
      * @ORM\JoinColumn(name="lien_id", referencedColumnName="id")
      * })
      */
@@ -200,8 +200,9 @@ class Poste
      *
      * @return Poste
      */
-    public function addLien(\AppBundle\Entity\Lien $lien)
+    public function addLien(Lien $lien)
     {
+
         $this->liens[] = $lien;
 
         return $this;
@@ -212,7 +213,7 @@ class Poste
      *
      * @param \AppBundle\Entity\Lien $lien
      */
-    public function removeLien(\AppBundle\Entity\Lien $lien)
+    public function removeLien(Lien $lien)
     {
         $this->liens->removeElement($lien);
     }
@@ -250,6 +251,8 @@ class Poste
     {
         $this->candidatures->removeElement($candidature);
     }
+
+
 
     /**
      * Get candidatures

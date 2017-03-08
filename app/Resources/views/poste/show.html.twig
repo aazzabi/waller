@@ -33,10 +33,10 @@
                                 <i class="fa fa-times" aria-hidden="true"></i>
                                 {{ 'entity.common.supprimer' | trans }}
                             </button>
-                            <a class="btn btn-secondary" href="{{ path('poste_index') }}"> <i class="fa fa-undo" aria-hidden="true"></i>Retour
+                            <a class="btn btn-secondary" href="{{ path('poste_index') }}"> <i class="fa fa-undo" aria-hidden="true"></i> Retour
                                 à la liste</a>
                             <a class="btn btn-secondary" href="{{ path('poste_edit', { 'id': poste.id }) }}"> <i
-                                        class="fa fa-pencil-square-o"></i>Edit</a>
+                                        class="fa fa-pencil-square-o"></i> Edit</a>
 
                             </a>
                             <br>
@@ -143,40 +143,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card-block" data-toggle="collapse"
-                     href="#liens">
-                    <div class="card-header"><h3 class="card-title">
-                            Les liens pour ce poste</h3>
-                    </div>
-                </div>
-                <div class=" card-block collapse show" id="liens">
-                    <div class="card-block">
-                        <div class="table-responsive">
-                            <table id="candidature" class="display" cellspacing="0" width="100%">
-                                <thead>
-                                <tr>
-                                    <th align="center">{{ 'entity.lien.libelle' | trans }}</th>
-                                    <th align="center">{{ 'entity.lien.url' | trans }}</th>
-
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for lien in poste.liens %}
-                                    <tr>
-                                        <td align="center">{{ lien.libelle }}</td>
-                                        <td align="center"><a href="{{ lien.url }}"> {{ lien.url }}</a></td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>

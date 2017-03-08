@@ -29,7 +29,6 @@ class CandidatureController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $candidatures = $em->getRepository('AppBundle:Candidature')->findAll();
 
         return $this->render('candidature/index.html.twig', array(
@@ -148,7 +147,6 @@ class CandidatureController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('AppBundle:Note');
-
         $note = $repository->createQueryBuilder('n')
             ->where('n.candidature = :candidature')
             ->setParameter('candidature', $candidature->getId())
