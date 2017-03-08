@@ -33,16 +33,11 @@
                                 <i class="fa fa-times" aria-hidden="true"></i>
                                 {{ 'entity.common.supprimer' | trans }}
                             </button>
-                            <a class="btn btn-secondary" href="{{ path('poste_index') }}"> <i class="fa fa-undo"
-                                                                                              aria-hidden="true"></i>Retour
+                            <a class="btn btn-secondary" href="{{ path('poste_index') }}"> <i class="fa fa-undo" aria-hidden="true"></i>Retour
                                 à la liste</a>
                             <a class="btn btn-secondary" href="{{ path('poste_edit', { 'id': poste.id }) }}"> <i
                                         class="fa fa-pencil-square-o"></i>Edit</a>
-                            {#<a href="{{ path('profile_index') }}" data-toggle="tooltip">#}
-                            {#<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom"#}
-                            {#title="Vers profile">#}
-                            {#<i class="fa fa-share" aria-hidden="true"></i>#}
-                            {#</button>#}
+
                             </a>
                             <br>
                         </div>
@@ -54,9 +49,12 @@
                         <address>
                             <strong>À propos ce poste :</strong><br>
                             Id<br>
-                            Libelle<br>
-                            Description<br>
-                            Profile demandé
+                            Libelle :<br>
+                            Description :<br>
+                            Profile demandé:<br>
+                            {% if (poste.liens | length) %}
+                                Liens des annonces :
+                            {% endif %}
                         </address>
                     </div>
                     <div class="col-md-4 ">
@@ -65,7 +63,16 @@
                             {{ poste.id }}<br>
                             {{ poste.libelle }}<br>
                             {{ poste.description }}<br>
-                            {{ poste.profileDemande }}
+                            {{ poste.profileDemande }}<br>
+                            <ul>
+                            {% for lien in poste.liens %}
+                                    <li>
+                                        <a href="{{ lien.url }}"
+                                           title="{{ lien.url }}"
+                                           target="_blank"
+                                        > {{ lien.libelle }}</a></li>
+                            {% endfor %}
+                            </ul>
                         </address>
                     </div>
                 </div>
@@ -75,65 +82,67 @@
 
         <div class="row">
             <div class="col-md-12">
-                <div class="card-block" data-toggle="collapse"
-                     href="#competence">
-                    <div class="card-header"><h3 class="card-title">
-                            Les candidats pour ce poste</h3>
+                <div class="card">
+                    <div class="card-block" data-toggle="collapse"
+                         href="#competence">
+                        <div>
+                            <h3>Les candidats pour ce poste</h3>
+                        </div>
                     </div>
-                </div>
-                <div class=" card-block collapse show" id="competence">
-                    <div class="card-block">
-                        <div class="table-responsive">
-                            <table id="candidature" class="display" cellspacing="0" width="100%">
-                                <thead>
-                                <tr>
-                                    <th>{{ 'entity.candidat.photo' | trans }}</th>
-                                    <th>{{ 'entity.candidat.id' | trans }}</th>
-                                    <th>{{ 'entity.candidat.nom' | trans }}</th>
-                                    <th>{{ 'entity.candidat.prenom' | trans }}</th>
-                                    <th><i class="fa fa-envelope-o"
-                                           aria-hidden="true"></i>{{ 'entity.candidat.email' | trans }}</th>
-                                    <th>{{ 'entity.candidat.poste' | trans }}</th>
-                                    <th>{{ 'entity.candidat.etapecourante' | trans }}</th>
-                                    <th>{{ 'entity.candidat.actions' | trans }}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for candidature in poste.candidatures %}
+                    <div class=" card-block collapse show" id="competence">
+                        <div class="card-block">
+                            <div class="table-responsive">
+                                <table id="candidature" class="display" cellspacing="0" width="100%">
+                                    <thead>
                                     <tr>
-                                        <td><a>
-                                                <div id="profile-image1" class="img-circle img-responsive">
-                                                    {% if candidature.profile.photo != '' %}
-                                                        <img alt="User Pic"
-                                                             src="{{ asset('uploads/photo/' ~ candidature.profile.photo) }}"
-                                                             class="img-circle img-responsive">
-                                                    {% else %}
-                                                        <img alt="User Pic"
-                                                             src="{{ asset('assets/image/profile.png') }}"
-                                                             id="profile-image1" class="img-circle img-responsive">
-                                                    {% endif %}
-
-                                                </div>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a>{{ candidature.id }}</a>
-                                        </td>
-                                        <td>{{ candidature.profile.nom }}</td>
-                                        <td>{{ candidature.profile.prenom }}</td>
-                                        <td>{{ candidature.profile.email }}</td>
-                                        <td>{{ candidature.poste }}</td>
-
-                                        <td>{{ candidature.currentEtape }}</td>
-                                        <td>
-                                            <a href="{{ path('candidature_edit', { 'id': candidature.id }) }}"><i
-                                                        class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
-                                        </td>
+                                        <th>{{ 'entity.candidat.photo' | trans }}</th>
+                                        <th>{{ 'entity.candidat.id' | trans }}</th>
+                                        <th>{{ 'entity.candidat.nom' | trans }}</th>
+                                        <th>{{ 'entity.candidat.prenom' | trans }}</th>
+                                        <th><i class="fa fa-envelope-o"
+                                               aria-hidden="true"></i>{{ 'entity.candidat.email' | trans }}</th>
+                                        <th>{{ 'entity.candidat.poste' | trans }}</th>
+                                        <th>{{ 'entity.candidat.etapecourante' | trans }}</th>
+                                        <th>{{ 'entity.candidat.actions' | trans }}</th>
                                     </tr>
-                                    {#{% endif %}#}
-                                {% endfor %}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    {% for candidature in poste.candidatures %}
+                                        <tr>
+                                            <td><a>
+                                                    <div id="profile-image1" class="img-circle img-responsive">
+                                                        {% if candidature.profile.photo != '' %}
+                                                            <img alt="User Pic"
+                                                                 src="{{ asset('uploads/photo/' ~ candidature.profile.photo) }}"
+                                                                 class="img-circle img-responsive">
+                                                        {% else %}
+                                                            <img alt="User Pic"
+                                                                 src="{{ asset('assets/image/profile.png') }}"
+                                                                 id="profile-image1" class="img-circle img-responsive">
+                                                        {% endif %}
+
+                                                    </div>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a>{{ candidature.id }}</a>
+                                            </td>
+                                            <td>{{ candidature.profile.nom }}</td>
+                                            <td>{{ candidature.profile.prenom }}</td>
+                                            <td>{{ candidature.profile.email }}</td>
+                                            <td>{{ candidature.poste }}</td>
+
+                                            <td>{{ candidature.currentEtape }}</td>
+                                            <td>
+                                                <a href="{{ path('candidature_edit', { 'id': candidature.id }) }}"><i
+                                                            class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
+                                            </td>
+                                        </tr>
+                                        {#{% endif %}#}
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
