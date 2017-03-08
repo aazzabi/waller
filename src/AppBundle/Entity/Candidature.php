@@ -42,7 +42,7 @@ class Candidature
     /**
      * @var Poste
      *
-     * @ORM\ManyToOne(targetEntity="Poste")
+     * @ORM\ManyToOne(targetEntity="Poste", inversedBy="candidatures")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="poste_id", referencedColumnName="id", onDelete="CASCADE")
      * })

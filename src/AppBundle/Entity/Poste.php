@@ -226,4 +226,38 @@ class Poste
     {
         return $this->liens;
     }
+
+    /**
+     * Add candidature
+     *
+     * @param \AppBundle\Entity\Candidature $candidature
+     *
+     * @return Poste
+     */
+    public function addCandidature(Candidature $candidature)
+    {
+        $this->candidatures[] = $candidature;
+
+        return $this;
+    }
+
+    /**
+     * Remove candidature
+     *
+     * @param \AppBundle\Entity\Candidature $candidature
+     */
+    public function removeCandidature(Candidature $candidature)
+    {
+        $this->candidatures->removeElement($candidature);
+    }
+
+    /**
+     * Get candidatures
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCandidatures()
+    {
+        return $this->candidatures;
+    }
 }
