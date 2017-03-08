@@ -1,11 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.dataTables.min.css.css') }}">
-{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.dataTables.min.css.css') }}">{% endblock %}
 
 {% block javascripts %}
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }} "></script>
+    <script>
+        $(document).ready(function () {
+            var table = $('#example').DataTable({
+                "paging": true,
+                "stateSave": true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/French.json",
+                }
+            });
+
+            $('.toggle-vis').on('change', function (e) {
+                e.preventDefault();
+                // Get the column API object
+                var column = table.column($(this).attr('data-column'));
+                // Toggle the visibility
+                column.visible(!column.visible());
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block body %}
@@ -27,7 +47,7 @@
         </div>
     </div>
     <hr>
-    <table class="display" cellspacing="0" width="100%">
+    <table id="example" style="" class="table display table-striped table-responsive">
         <thead>
         <tr>
             <th>Id</th>
@@ -61,5 +81,6 @@
         {% endfor %}
         </tbody>
     </table>
+
 
 {% endblock %}
