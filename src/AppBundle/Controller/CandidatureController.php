@@ -59,7 +59,7 @@ class CandidatureController extends Controller
             $em->persist($note);
             $em->flush($note);
 
-            return $this->redirectToRoute('candidature_edit', array('id' => $candidature->getId()));
+            return $this->redirectToRoute('candidature_index', array('id' => $candidature->getId()));
         }
 
         return $this->render('candidature/new.html.twig', array(

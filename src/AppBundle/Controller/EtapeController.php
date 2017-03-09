@@ -48,7 +48,7 @@ class EtapeController extends Controller
             $em->persist($etape);
             $em->flush($etape);
 
-            return $this->redirectToRoute('etape_show', array('id' => $etape->getId()));
+            return $this->redirectToRoute('etape_index', array('id' => $etape->getId()));
         }
 
         return $this->render('etape/new.html.twig', array(
