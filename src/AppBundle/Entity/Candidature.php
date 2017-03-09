@@ -70,6 +70,16 @@ class Candidature
     private $workflow;
 
     /**
+     *
+     * @var string
+     *
+     *
+     * @ORM\Column(name="commentaire", type="string", length=65535, nullable=true)
+     *
+     */
+    private $commentaire;
+
+    /**
      * Get id
      *
      * @return integer
@@ -197,5 +207,29 @@ class Candidature
     public function getWorkflow()
     {
         return $this->workflow;
+    }
+
+    /**
+     * Set commentaire
+     *
+     * @param string $commentaire
+     *
+     * @return Candidature
+     */
+    public function setCommentaire($commentaire)
+    {
+        $this->commentaire = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * Get commentaire
+     *
+     * @return string
+     */
+    public function getCommentaire()
+    {
+        return $this->commentaire;
     }
 }
