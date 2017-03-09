@@ -45,6 +45,8 @@ class PosteController extends Controller
     {
         $poste = new Poste();
         $form = $this->createForm(PosteType::class, $poste);
+        $lien=new Lien();
+        $formLien = $this->createForm(LienType::class, $lien);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,6 +61,7 @@ class PosteController extends Controller
         return $this->render('poste/new.html.twig', array(
             'poste' => $poste,
             'form' => $form->createView(),
+            'formLien'=>$formLien->createView(),
         ));
     }
 

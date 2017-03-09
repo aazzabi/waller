@@ -18,13 +18,13 @@ class PosteType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('libelle', TextType::class,array(
+        $builder->add('libelle', TextType::class, array(
             'label' => 'entity.poste.libelle'
         ))
-            ->add('description',TextType::class, array(
+            ->add('description', TextType::class, array(
                 'label' => 'entity.poste.description'
             ))
-            ->add('profileDemande',TextType::class, array(
+            ->add('profileDemande', TextType::class, array(
                 'label' => 'entity.poste.profiledemande'
             ))
             ->add('group', EntityType::class, array(
@@ -36,6 +36,7 @@ class PosteType extends AbstractType
                 'label' => 'entity.poste.lien',
                 'by_reference' => false,
                 'allow_delete' => true,
+                'allow_add' => true,
                 'entry_type' => LienType::class
             ));
 

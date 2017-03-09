@@ -202,8 +202,8 @@ class Poste
      */
     public function addLien(Lien $lien)
     {
-
-        $this->liens[] = $lien;
+        $lien->setPoste($this);
+        $this->liens->add($lien);
 
         return $this;
     }
@@ -251,7 +251,6 @@ class Poste
     {
         $this->candidatures->removeElement($candidature);
     }
-
 
 
     /**
