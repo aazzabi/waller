@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(edit_form) }}
+    <div class="row">
+        <div class="col-md-5">
+            <h1>Etape edit</h1>
+        </div>
+        <div class="col-md-7 text-right">
+            <button type="submit" class="btn btn-secondary"><i class="fa fa-check"></i> Confirmer</button>
+            <a href="{{ path('etape_index') }}" class="btn btn-secondary"><i class="fa fa-undo " aria-hidden="true"></i>
+                Retour à la liste</a>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger btn_lg" data-toggle="modal" data-target="#myModal">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                {{ 'entity.common.supprimer' | trans }}
+            </button>
+            <br>
+            <br>
+        </div>
+    </div>
+    {% form_theme edit_form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+
+    {{ form_widget(edit_form) }}
+    {{ form_end(edit_form) }}
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> {{ 'entity.common.supprimer' | trans }}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Voulez-vous vraiement supprimer ce profile ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-secondary" data-dismiss="modal"> Annuler
+                    </button>
+                    {{ form_start(delete_form) }}
+                    <input class="btn btn-danger btn_lg" type="submit" value="Delete">
+                    {{ form_end(delete_form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

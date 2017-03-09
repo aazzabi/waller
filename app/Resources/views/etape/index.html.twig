@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block stylesheet %}
+
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-6">
+        <h1><b>Liste des postes </b></h1>
+    </div>
+    <div class="col-md-6 col-md-offset-6 text-right">
+        <a href="{{ path('etape_new') }}" class="btn btn-success">
+            <i class="icon-plus"> Ajouter une etape</i>
+        </a>
+        <a href="{{ path('profile_index') }}" data-toggle="tooltip">
+            <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom"
+                    title="Vers profile">
+                <i class="fa fa-share" aria-hidden="true"></i>
+            </button>
+        </a>
+        <br>
+    </div>
+    <table class="table table-sm table-bordered table-hover">
+        <thead class="thead-default">
+        <tr>
+            <th scope="row">Id</th>
+            <th>Libelle</th>
+            <th>Ordre</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for etape in etapes %}
+            <tr>
+                <td>{{ etape.id }}</td>
+                <td>{{ etape.libelle }}</td>
+                <td>{{ etape.ordre }}</td>
+                <td width="100px">
+                    <div class="row text-right">
+
+                            <div class="col-md-5">
+                                <a href="{{ path('etape_edit', { 'id': etape.id }) }}">
+                                    <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+                                </a></div>
+                        </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('etape_new') }}">Create a new etape</a>
+        </li>
+    </ul>
+{% endblock %}
