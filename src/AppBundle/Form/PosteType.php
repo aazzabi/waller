@@ -7,6 +7,7 @@ use AppBundle\Entity\Poste;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,10 +22,10 @@ class PosteType extends AbstractType
         $builder->add('libelle', TextType::class, array(
             'label' => 'entity.poste.libelle'
         ))
-            ->add('description', TextType::class, array(
+            ->add('description', TextareaType::class, array(
                 'label' => 'entity.poste.description'
             ))
-            ->add('profileDemande', TextType::class, array(
+            ->add('profileDemande', TextareaType::class, array(
                 'label' => 'entity.poste.profiledemande'
             ))
             ->add('group', EntityType::class, array(

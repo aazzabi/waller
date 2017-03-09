@@ -6,6 +6,7 @@ use AppBundle\Entity\Lien;
 use AppBundle\Entity\Poste;
 use AppBundle\Form\LienType;
 use AppBundle\Form\PosteType;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -45,8 +46,6 @@ class PosteController extends Controller
     {
         $poste = new Poste();
         $form = $this->createForm(PosteType::class, $poste);
-        $lien=new Lien();
-        $formLien = $this->createForm(LienType::class, $lien);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -61,7 +60,6 @@ class PosteController extends Controller
         return $this->render('poste/new.html.twig', array(
             'poste' => $poste,
             'form' => $form->createView(),
-            'formLien'=>$formLien->createView(),
         ));
     }
 
@@ -87,14 +85,50 @@ class PosteController extends Controller
      * @Route("/{id}/edit", name="poste_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Poste $poste)
+    public function editAction($id, Request $request, Poste $poste)
     {
+        $em = $this->getDoctrine()->getManager();
+        $poste = $em->getRepository('AppBundle:Poste')->find($id);
         $deleteForm = $this->createDeleteForm($poste);
         $editForm = $this->createForm(PosteType::class, $poste);
         $editForm->handleRequest($request);
 
+        if (!$poste) {
+            throw $this->createNotFoundException('No poste found for id ' . $id);
+        }
+
+        $originalLiens = new ArrayCollection();
+
+        foreach ($poste->getLiens() as $lien) {
+            $originalLiens->add($lien);
+        }
+
+        $editForm = $this->createForm(PosteType::class, $poste);
+
+        $editForm->handleRequest($request);
+
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            // remove the relationship between the lien and the Poste
+            foreach ($originalLiens as $lien) {
+                if (false === $poste->getLiens()->contains($lien)) {
+                    // remove the Poste from the Lien
+                    $lien->getPostes()->removeElement($poste);
+
+                    // if it was a many-to-one relationship, remove the relationship like this
+                    // $lien->setPoste(null);
+
+                    $em->persist($lien);
+
+                    // if you wanted to delete the Lien entirely, you can also do that
+                    // $em->remove($lien);
+                }
+            }
+
+            $em->persist($poste);
+            $em->flush();
 
             return $this->redirectToRoute('poste_edit', array('id' => $poste->getId()));
         }

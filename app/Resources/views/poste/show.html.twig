@@ -33,7 +33,8 @@
                                 <i class="fa fa-times" aria-hidden="true"></i>
                                 {{ 'entity.common.supprimer' | trans }}
                             </button>
-                            <a class="btn btn-secondary" href="{{ path('poste_index') }}"> <i class="fa fa-undo" aria-hidden="true"></i>
+                            <a class="btn btn-secondary" href="{{ path('poste_index') }}"> <i class="fa fa-undo"
+                                                                                              aria-hidden="true"></i>
                                 Retour
                                 à la liste</a>
                             <a class="btn btn-secondary" href="{{ path('poste_edit', { 'id': poste.id }) }}"> <i
@@ -141,9 +142,10 @@
                                         <td><a>
                                                 <div id="profile-image1" class="img-circle img-responsive">
                                                     {% if candidature.profile.photo != '' %}
-                                                        <img alt="User Pic"
-                                                             src="{{ asset('uploads/photo/' ~ candidature.profile.photo) }}"
-                                                             class="img-circle img-responsive">
+                                                        <a href="{{ path('profile_show', { 'id': candidature.profile.id }) }}"> <img
+                                                                    alt="User Pic"
+                                                                    src="{{ asset('uploads/photo/' ~ candidature.profile.photo) }}"
+                                                                    class="img-circle img-responsive"></a>
                                                     {% else %}
                                                         <img alt="User Pic"
                                                              src="{{ asset('assets/image/profile.png') }}"

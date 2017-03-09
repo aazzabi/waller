@@ -16,22 +16,20 @@
             }
 
             $('#appbundle_submit').on('click', function (e) {
-//                e.preventDefault();
                 var candidatureForm = $('form[name=appbundle_candidature]');
-                copyForms();
                 candidatureForm.submit();
             });
 
             $('form[name=appbundle_candidature]').on('submit', function (e) {
                 e.preventDefault();
                 copyForms();
+                $(this).attr('enctype','multipart/form-data');
                 $(this).unbind().submit();
             });
 
             $('form[name=appbundle_profile]').on('submit', function (e) {
                 e.preventDefault();
                 var candidatureForm = $('form[name=appbundle_candidature]');
-                copyForms();
                 candidatureForm.submit();
             });
         });
@@ -76,7 +74,7 @@
             <h2>Candidature : {{ candidature.profile.prenom }} {{ candidature.profile.nom }}</h2>
         </div>
         <div class="col-md-6 col-md-offset-6 text-right">
-            <button type="button" class="btn btn-success" >
+            <button type="button" class="btn btn-success" id="appbundle_submit">
                 <i class="fa fa-check"></i>
                 Enregistrer
             </button>

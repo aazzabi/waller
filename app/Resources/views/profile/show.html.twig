@@ -8,9 +8,20 @@
 {% block title %}
     Profile de {{ profile }}
 {% endblock %}
-
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+<style>
+    @media print {
+        .but { display: none; }
+    }
+</style>
+ {% endblock %}
 {% block javascripts %}
-
+    <script type="text/javascript">
+        function imprimer_page(){
+            window.print();
+        }
+    </script>
 {% endblock %}
 
 {% block body %}
@@ -240,32 +251,33 @@
 
                 </div>
             </div>
-            <div class="row">
-                    <div class="col-md-3">
-                        <button class="btn btn-primary pull-right"><i class="fa fa-download"></i> Generate PDF</button>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="{{ path('profile_index') }}"
-                           class="btn btn-secondary ">
-                            <i class="fa fa-undo " aria-hidden="true"></i>
-                            Retour au liste
-                        </a>
-                    </div>
-                    <div class="col-md-2">
-                        <a href="{{ path('profile_edit', { 'id': profile.id }) }}"
-                           class="btn btn-secondary ">
-                            <i class="fa fa-pencil-square-o"></i>
-                            Editer
-                        </a>
-                    </div>
-                    {{ form_start(delete_form) }}
-                    <div class="col-md-3">
-                        <button type="submit" class="btn btn-danger btn_lg">
-                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-                            Supprimer
-                        </button>
-                    </div>
-                    {{ form_end(delete_form) }}
+            <div class="row but">
+                <div class="col-md-3">
+                    <button id="impression" value="Imprimer la page" name="impression" type="submit" id="impression" name="impression"
+                           onclick="imprimer_page()" class="btn btn-primary pull-right"><i class="fa fa-download"> Download</i></button>
+                </div>
+                <div class="col-md-3">
+                    <a href="{{ path('profile_index') }}"
+                       class="btn btn-secondary ">
+                        <i class="fa fa-undo " aria-hidden="true"></i>
+                        Retour au liste
+                    </a>
+                </div>
+                <div class="col-md-2">
+                    <a href="{{ path('profile_edit', { 'id': profile.id }) }}"
+                       class="btn btn-secondary ">
+                        <i class="fa fa-pencil-square-o"></i>
+                        Editer
+                    </a>
+                </div>
+                {{ form_start(delete_form) }}
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-danger btn_lg">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        Supprimer
+                    </button>
+                </div>
+                {{ form_end(delete_form) }}
             </div>
             <br>
         </div>

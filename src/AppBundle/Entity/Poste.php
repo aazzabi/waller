@@ -262,4 +262,6 @@ class Poste
     {
         return $this->candidatures;
     }
+
+
 }

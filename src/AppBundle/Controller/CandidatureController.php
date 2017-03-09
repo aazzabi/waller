@@ -94,17 +94,17 @@ class CandidatureController extends Controller
     {
         $profile = $candidature->getProfile();
         $deleteForm = $this->createDeleteForm($candidature);
-        $editForm = $this->createForm(CandidatureEditType::class, $candidature);
-        $editForm->handleRequest($request);
+        $candidatureForm = $this->createForm(CandidatureEditType::class, $candidature);
+        $candidatureForm->handleRequest($request);
 
         if ($request->isMethod('GET')) {
-            $this->setData($editForm, $candidature);
+            $this->setData($candidatureForm, $candidature);
         }
 
-        $editProfileForm = $this->createForm(ProfileType::class, $profile);
-        $editProfileForm->handleRequest($request);
+        $profileForm = $this->createForm(ProfileType::class, $profile);
+        $profileForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($candidatureForm->isSubmitted() && $candidatureForm->isValid()) {
             $noteId = $request->request
                 ->get('appbundle_candidature')['noteId'];
             $noteCommentaire = $request->request
@@ -118,16 +118,11 @@ class CandidatureController extends Controller
             return $this->redirectToRoute('candidature_edit', array('id' => $candidature->getId()));
         }
 
-        if ($editProfileForm->isSubmitted() && $editProfileForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('candidature_edit', array('id' => $candidature->getId()));
-        }
-
         return $this->render('candidature/edit.html.twig', array(
             'candidature' => $candidature,
             'profile' => $profile,
-            'form' => $editProfileForm->createView(),
-            'edit_form' => $editForm->createView(),
+            'form' => $profileForm->createView(),
+            'edit_form' => $candidatureForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
