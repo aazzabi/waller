@@ -80,6 +80,15 @@ class Candidature
     private $commentaire;
 
     /**
+     * @var Rapport
+     *
+     * @ORM\OneToMany(targetEntity="Rapport", mappedBy="candidature")
+     * @ORM\JoinColumn(name="rapport_id", referencedColumnName="id")
+     * })
+     */
+    private $rapport;
+
+    /**
      * Get id
      *
      * @return integer
@@ -236,5 +245,46 @@ class Candidature
     function __toString()
     {
         return $this->getProfile() . " - qui est : " . $this->getCurrentEtape() . " pour (" . $this->getGroup() . ")";
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->rapport = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add rapport
+     *
+     * @param \AppBundle\Entity\Rapport $rapport
+     *
+     * @return Candidature
+     */
+    public function addRapport(\AppBundle\Entity\Rapport $rapport)
+    {
+        $this->rapport[] = $rapport;
+
+        return $this;
+    }
+
+    /**
+     * Remove rapport
+     *
+     * @param \AppBundle\Entity\Rapport $rapport
+     */
+    public function removeRapport(Rapport $rapport)
+    {
+        $this->rapport->removeElement($rapport);
+    }
+
+    /**
+     * Get rapport
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRapport()
+    {
+        return $this->rapport;
     }
 }

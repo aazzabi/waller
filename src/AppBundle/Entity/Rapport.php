@@ -41,7 +41,7 @@ class Rapport
      *
      * @ORM\ManyToOne(targetEntity="Candidature")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="candidature_id", referencedColumnName="id", nullable=false)
+     *   @ORM\JoinColumn(name="candidature_id", referencedColumnName="id", nullable=false,onDelete="CASCADE")
      * })
      */
     private $candidature;

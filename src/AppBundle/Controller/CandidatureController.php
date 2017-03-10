@@ -2,8 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Action;
 use AppBundle\Entity\Candidature;
 use AppBundle\Entity\Note;
+use AppBundle\Entity\Rapport;
 use AppBundle\Form\CandidatureEditType;
 use AppBundle\Form\ProfileEditType;
 use AppBundle\Form\ProfileType;
@@ -92,15 +94,21 @@ class CandidatureController extends Controller
      */
     public function editAction(Request $request, Candidature $candidature)
     {
+        $etapeCourante = $candidature->getCurrentEtape();
+        $idSource = $etapeCourante->getId();
+
         $profile = $candidature->getProfile();
         $deleteForm = $this->createDeleteForm($candidature);
         $candidatureForm = $this->createForm(CandidatureEditType::class, $candidature);
         $candidatureForm->handleRequest($request);
 
+        $etapeDestination = $candidature->getCurrentEtape();
+        $idDestination = $etapeDestination->getId();
+        //  $idCandidature = $candidature->getId();
+
         if ($request->isMethod('GET')) {
             $this->setData($candidatureForm, $candidature);
         }
-
         $profileForm = $this->createForm(ProfileType::class, $profile);
         $profileForm->handleRequest($request);
 
@@ -111,8 +119,10 @@ class CandidatureController extends Controller
                 ->get('appbundle_candidature')['noteCommentaire'];
             $noteEvaluation = $request->request
                 ->get('appbundle_candidature')['noteEvaluation'];
+            $rapportCommentaire = $request->request
+                ->get('appbundle_candidature')['rapportCommentaire'];
 
-            $this->bindData($noteId, $noteCommentaire, $noteEvaluation);
+            $this->bindData($noteId, $noteCommentaire, $noteEvaluation, $idSource, $idDestination, $rapportCommentaire, $candidature);
 
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('candidature_edit', array('id' => $candidature->getId()));
@@ -127,11 +137,28 @@ class CandidatureController extends Controller
         ));
     }
 
-    private function bindData($noteId, $noteCommentaire, $noteEvaluation)
+    private function bindData($noteId, $noteCommentaire, $noteEvaluation, $idSource, $idDestination, $rapportCommentaire, $candidature)
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('AppBundle:Note');
 
+        $actionRepo = $em->getRepository('AppBundle:Action');
+
+        if ($rapportCommentaire && $idSource !== $idDestination) {
+            $action = $actionRepo->createQueryBuilder('a')
+                ->where('a.etapeSource = :source and a.etapeDestination = :destination')
+                ->setParameter('source', $idSource)
+                ->setParameter('destination', $idDestination)
+                ->getQuery()
+                ->getOneOrNullResult();
+            $rapport = new Rapport();
+
+            $rapport->setCandidature($candidature);
+            $rapport->setAction($action);
+            $rapport->setLibelle($rapportCommentaire);
+
+            $em->persist($rapport);
+        }
         $note = $repository->find($noteId);
         $note->setCommentaire($noteCommentaire)
             ->setEvaluation($noteEvaluation);
@@ -163,6 +190,8 @@ class CandidatureController extends Controller
         $form->get('noteId')->setData($note->getId());
         $form->get('noteCommentaire')->setData($note->getCommentaire());
         $form->get('noteEvaluation')->setData($note->getEvaluation());
+
+
     }
 
     /**

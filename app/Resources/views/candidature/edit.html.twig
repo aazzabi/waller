@@ -8,6 +8,22 @@
     <script language="javascript">
         $(function () {
 
+            var idSource = {{ candidature.currentEtape.id }};
+            $('#appbundle_candidature_rapportCommentaire').parent().hide();
+
+            $('#appbundle_candidature_currentEtape').on('change', function (e) {
+                if ($(this).val() != idSource) {
+                    $('#appbundle_candidature_rapportCommentaire').parent().show();
+                    $('#appbundle_candidature_rapportCommentaire').css({
+                        'box-shadow': '0 0 3px #7887AB ',
+                        'margin': '10px',
+                        ' transition':'0.3s',
+                    });
+                } else {
+                    $('#appbundle_candidature_rapportCommentaire').parent().hide();
+                }
+            });
+
             function copyForms() {
                 var profileForm = $('form[name=appbundle_profile] :input');
                 profileForm.not(':submit')
@@ -23,7 +39,7 @@
             $('form[name=appbundle_candidature]').on('submit', function (e) {
                 e.preventDefault();
                 copyForms();
-                $(this).attr('enctype','multipart/form-data');
+                $(this).attr('enctype', 'multipart/form-data');
                 $(this).unbind().submit();
             });
 
@@ -69,6 +85,7 @@
     {% form_theme form 'bootstrap_3_layout.html.twig' %}
     {% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
 
+    <!-- ENTETE DE LA PAGE , + Boutton -->
     <div class="row">
         <div class="col-md-6">
             <h2>Candidature : {{ candidature.profile.prenom }} {{ candidature.profile.nom }}</h2>
@@ -90,6 +107,7 @@
     </div>
     <hr>
     <br/>
+
     <div class="row">
         <div class="col-md-1">
             <a href="{{ path('candidature_show', { 'id': candidature.id }) }}">
@@ -131,6 +149,8 @@
                     {{ form_row(edit_form.commentaire) }}
                     {{ form_row(edit_form.noteCommentaire) }}
                     {{ form_row(edit_form.noteEvaluation) }}
+                    <br>
+                    {{ form_row(edit_form.rapportCommentaire) }}
                     <br>
                     {{ form_end(edit_form) }}
                 </div>
