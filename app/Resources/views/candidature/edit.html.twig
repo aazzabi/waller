@@ -138,7 +138,6 @@
             {{ form_start(form) }}
             {% include 'profile/forms/form.html.twig' %}
             {{ form_end(form) }}
-            <br>
         </div>
 
         <!--FORMULAIRE DU CANDIDATURE-->
@@ -147,7 +146,7 @@
             <div class="card">
                 <div class="card-block" data-toggle="collapse"
                      href="#candidature">
-                    <h5 class="card-title"><u>Candidature</u></h5>
+                    <h5 class="card-title"> Candidature </h5>
                 </div>
                 <div class=" card-block collapse show" id="candidature">
                     {{ form_start(edit_form) }}
@@ -157,58 +156,50 @@
                     {{ form_row(edit_form.noteEvaluation) }}
                     <br>
                     {{ form_row(edit_form.rapportCommentaire) }}
-                    <br>
                     {{ form_end(edit_form) }}
                 </div>
             </div>
-            <br>
             <!--Historique des notes-->
             <div class="card">
                 <div class="card-block" data-toggle="collapse"
                      href="#notes">
-                    <h5 class="card-title"><u>Notes</u></h5>
+                    <h5 class="card-title"> Notes </h5>
                 </div>
                 <div class=" card-block collapse show" id="notes">
-                    {% for note in notes %}
-                        <table class="historique" height="5px" width="200px">
+                    <table width="200px">
+                        {% for note in notes %}
                             <tr>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <td>{{ note.etape }}</td>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <td>{{ note.evaluation }}</td>
-                                    </div>
+                                <div class="col-lg-6">
+                                    <td>{{ note.etape }}</td>
+                                </div>
+                                <div class="col-lg-6">
+                                    <td>{{ note.evaluation }}</td>
                                 </div>
                             </tr>
-                            <hr>
-                        </table>
-                    {% endfor %}
+                        {% endfor %}
+
+                    </table>
                 </div>
             </div>
-            <br>
             <div class="card">
-                <div class="card-block" data-toggle="collapse"
-                     href="#rapports">
-                    <h5 class="card-title"><u>Rapports</u></h5>
+                <div class="card-block" data-toggle="collapse" href="#rapports">
+                    <h5 class="card-title"> Rapports </h5>
                 </div>
                 <div class=" card-block collapse show" id="rapports">
-                    {% for rapport in rapports %}
-                        <table>
+                    <table>
+                        {% for rapport in rapports %}
                             <tr>
-                                <div class="row" style="justify-content: center;">
+                                <div class="col-lg-6">
                                     <td>{{ rapport.action.libelle }}</td>
                                 </div>
                             </tr>
                             <tr>
-                                <div class="row">
+                                <div class="col-lg-6">
                                     <td>{{ rapport.libelle }}</td>
                                 </div>
                             </tr>
-
-                            <hr>
-                        </table>
-                    {% endfor %}
+                        {% endfor %}
+                    </table>
                 </div>
             </div>
 
