@@ -19,193 +19,200 @@
     </style>
 {% endblock %}
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="invoice-title">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h1><b>Poste </b></h1>
-                        </div>
-                        <div class="col-md-6 col-md-offset-6 text-right">
-                            <button type="button" class="btn btn-danger btn_lg" data-toggle="modal"
-                                    data-target="#myModal">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                                {{ 'entity.common.supprimer' | trans }}
-                            </button>
-                            <a class="btn btn-secondary" href="{{ path('poste_index') }}"> <i class="fa fa-undo"
-                                                                                              aria-hidden="true"></i>
-                                Retour
-                                à la liste</a>
-                            <a class="btn btn-secondary" href="{{ path('poste_edit', { 'id': poste.id }) }}"> <i
-                                        class="fa fa-pencil-square-o"></i> Edit</a>
-
-                            </a>
-                            <br>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-xmd-12">
-                                <strong><h3>À propos ce poste :</h3></strong>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                Id
-                            </div>
-                            <div class="col-md-10">
-                                {{ poste.id }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                Libelle :
-                            </div>
-                            <div class="col-md-10">
-                                {{ poste.libelle }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                Description :
-                            </div>
-                            <div class="col-md-10">
-                                {{ poste.description }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                Profile demandé:
-                            </div>
-                            <div class="col-md-10">
-                                {{ poste.profileDemande }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                {% if (poste.liens | length) %}
-                                    Liens des annonces:
-                                {% endif %}
-                            </div>
-                            <div class="col-md-10">
-                                <ul>
-                                    {% for lien in poste.liens %}
-                                        <li>
-                                            <a href="{{ lien.url }}"
-                                               title="{{ lien.url }}"
-                                               target="_blank"
-                                            > {{ lien.libelle }}</a></li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
+<div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-block" data-toggle="collapse"
-                     href="#competence">
-                    <div>
-                        <h3>Les candidats pour ce poste</h3>
+            <div class="invoice-title">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1><b>Poste </b></h1>
+                    </div>
+                    <div class="col-md-6 col-md-offset-6 text-right">
+                        <button type="button" class="btn btn-danger btn_lg" data-toggle="modal"
+                                data-target="#myModal">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                            {{ 'entity.common.supprimer' | trans }}
+                        </button>
+                        <a class="btn btn-secondary" href="{{ path('poste_index') }}"> <i class="fa fa-undo"
+                                                                                          aria-hidden="true"></i>
+                            Retour
+                            à la liste</a>
+                        <a class="btn btn-secondary" href="{{ path('poste_edit', { 'id': poste.id }) }}"> <i
+                                    class="fa fa-pencil-square-o"></i> Edit</a>
+
+                        </a>
+                        <br>
                     </div>
                 </div>
-                <div class=" card-block collapse show" id="competence">
-                    <div class="card-block">
-                        <div class="table-responsive">
-                            <table id="candidature" class="display" cellspacing="0" width="100%">
-                                <thead>
-                                <tr>
-                                    <th>{{ 'entity.candidat.photo' | trans }}</th>
-                                    <th>{{ 'entity.candidat.id' | trans }}</th>
-                                    <th>{{ 'entity.candidat.nom' | trans }}</th>
-                                    <th>{{ 'entity.candidat.prenom' | trans }}</th>
-                                    <th><i class="fa fa-envelope-o"
-                                           aria-hidden="true"></i>{{ 'entity.candidat.email' | trans }}</th>
-                                    <th>{{ 'entity.candidat.poste' | trans }}</th>
-                                    <th>{{ 'entity.candidat.etapecourante' | trans }}</th>
-                                    <th>{{ 'entity.candidat.actions' | trans }}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for candidature in poste.candidatures %}
+                <hr>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-block" data-toggle="collapse" href="#tete">
+                                <strong><h3>À propos ce poste :</h3></strong>
+                        </div>
+
+                        <div class=" card-block collapse show" id="tete">
+                            <div class="card-block">
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        Id
+                                    </div>
+                                    <div class="col-md-10">
+                                        {{ poste.id }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        Libelle :
+                                    </div>
+                                    <div class="col-md-10">
+                                        {{ poste.libelle }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        Description :
+                                    </div>
+                                    <div class="col-md-10">
+                                        {{ poste.description }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        Profile demandé:
+                                    </div>
+                                    <div class="col-md-10">
+                                        {{ poste.profileDemande }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        {% if (poste.liens | length) %}
+                                            Liens des annonces:
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-10">
+                                        <ul>
+                                            {% for lien in poste.liens %}
+                                                <li>
+                                                    <a href="{{ lien.url }}"
+                                                       title="{{ lien.url }}"
+                                                       target="_blank"
+                                                    > {{ lien.libelle }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-block" data-toggle="collapse"
+                         href="#competence">
+                        <div>
+                            <h3>Les candidats pour ce poste</h3>
+                        </div>
+                    </div>
+                    <div class=" card-block collapse show" id="competence">
+                        <div class="card-block">
+                            <div class="table-responsive">
+                                <table id="candidature" class="display" cellspacing="0" width="100%">
+                                    <thead>
                                     <tr>
-                                        <td><a>
-                                                <div id="profile-image1" class="img-circle img-responsive">
-                                                    {% if candidature.profile.photo != '' %}
-                                                        <a href="{{ path('profile_show', { 'id': candidature.profile.id }) }}"> <img
-                                                                    alt="User Pic"
-                                                                    src="{{ asset('uploads/photo/' ~ candidature.profile.photo) }}"
-                                                                    class="img-circle img-responsive"></a>
-                                                    {% else %}
-                                                        <img alt="User Pic"
-                                                             src="{{ asset('assets/image/profile.png') }}"
-                                                             id="profile-image1" class="img-circle img-responsive">
-                                                    {% endif %}
-
-                                                </div>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a>{{ candidature.id }}</a>
-                                        </td>
-                                        <td>{{ candidature.profile.nom }}</td>
-                                        <td>{{ candidature.profile.prenom }}</td>
-                                        <td>{{ candidature.profile.email }}</td>
-                                        <td>{{ candidature.poste }}</td>
-
-                                        <td>{{ candidature.currentEtape }}</td>
-                                        <td>
-                                            <a href="{{ path('candidature_edit', { 'id': candidature.id }) }}"><i
-                                                        class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
-                                        </td>
+                                        <th>{{ 'entity.candidat.photo' | trans }}</th>
+                                        <th>{{ 'entity.candidat.id' | trans }}</th>
+                                        <th>{{ 'entity.candidat.nom' | trans }}</th>
+                                        <th>{{ 'entity.candidat.prenom' | trans }}</th>
+                                        <th><i class="fa fa-envelope-o"
+                                               aria-hidden="true"></i>{{ 'entity.candidat.email' | trans }}</th>
+                                        <th>{{ 'entity.candidat.poste' | trans }}</th>
+                                        <th>{{ 'entity.candidat.etapecourante' | trans }}</th>
+                                        <th>{{ 'entity.candidat.actions' | trans }}</th>
                                     </tr>
-                                    {#{% endif %}#}
-                                {% endfor %}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    {% for candidature in poste.candidatures %}
+                                        <tr>
+                                            <td><a>
+                                                    <div id="profile-image1" class="img-circle img-responsive">
+                                                        {% if candidature.profile.photo != '' %}
+                                                            <a href="{{ path('profile_show', { 'id': candidature.profile.id }) }}">
+                                                                <img
+                                                                        alt="User Pic"
+                                                                        src="{{ asset('uploads/photo/' ~ candidature.profile.photo) }}"
+                                                                        class="img-circle img-responsive"></a>
+                                                        {% else %}
+                                                            <img alt="User Pic"
+                                                                 src="{{ asset('assets/image/profile.png') }}"
+                                                                 id="profile-image1"
+                                                                 class="img-circle img-responsive">
+                                                        {% endif %}
+
+                                                    </div>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a>{{ candidature.id }}</a>
+                                            </td>
+                                            <td>{{ candidature.profile.nom }}</td>
+                                            <td>{{ candidature.profile.prenom }}</td>
+                                            <td>{{ candidature.profile.email }}</td>
+                                            <td>{{ candidature.poste }}</td>
+
+                                            <td>{{ candidature.currentEtape }}</td>
+                                            <td>
+                                                <a href="{{ path('candidature_edit', { 'id': candidature.id }) }}"><i
+                                                            class="fa fa-pencil-square-o fa-2x"
+                                                            aria-hidden="true"></i></a>
+                                            </td>
+                                        </tr>
+                                        {#{% endif %}#}
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> {{ 'entity.common.supprimer' | trans }}
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Voulez-vous vraiement supprimer ce profile ?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-secondary" data-dismiss="modal"> Annuler
-                    </button>
-                    {{ form_start(delete_form) }}
-                    <input type="submit" class="btn btn-danger btn_lg" value="Delete">
-                    {{ form_end(delete_form) }}
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"> {{ 'entity.common.supprimer' | trans }}
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Voulez-vous vraiement supprimer ce profile ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-secondary" data-dismiss="modal"> Annuler
+                        </button>
+                        {{ form_start(delete_form) }}
+                        <input type="submit" class="btn btn-danger btn_lg" value="Delete">
+                        {{ form_end(delete_form) }}
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--fin du modal-->
+        <!--fin du modal-->
     </div>
 
-{% endblock %}
+    {% endblock %}
