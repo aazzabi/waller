@@ -252,7 +252,6 @@ class Poste
         $this->candidatures->removeElement($candidature);
     }
 
-
     /**
      * Get candidatures
      *

@@ -52,13 +52,13 @@
             $newLinkLi.before($newFormLi);
 
 
-//            // add a delete link to the new form
-//            addLienFormDeleteLink($newFormLi);
+            // add a delete link to the new form
+            addLienFormDeleteLink($newFormLi);
         }
 
 
         function addLienFormDeleteLink($lienFormLi) {
-            var $removeFormA = $('<a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> </a>');
+            var $removeFormA = $('<a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i> </a>');
             $lienFormLi.append($removeFormA);
 
             $removeFormA.on('click', function (e) {

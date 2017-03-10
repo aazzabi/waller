@@ -85,45 +85,24 @@ class PosteController extends Controller
      * @Route("/{id}/edit", name="poste_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction($id, Request $request, Poste $poste)
+    public function editAction(Request $request, Poste $poste)
     {
         $em = $this->getDoctrine()->getManager();
-        $poste = $em->getRepository('AppBundle:Poste')->find($id);
-        $deleteForm = $this->createDeleteForm($poste);
-        $editForm = $this->createForm(PosteType::class, $poste);
-        $editForm->handleRequest($request);
-
-        if (!$poste) {
-            throw $this->createNotFoundException('No poste found for id ' . $id);
-        }
 
         $originalLiens = new ArrayCollection();
-
         foreach ($poste->getLiens() as $lien) {
             $originalLiens->add($lien);
         }
 
+        $deleteForm = $this->createDeleteForm($poste);
         $editForm = $this->createForm(PosteType::class, $poste);
-
         $editForm->handleRequest($request);
 
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            // remove the relationship between the lien and the Poste
             foreach ($originalLiens as $lien) {
-                if (false === $poste->getLiens()->contains($lien)) {
-                    // remove the Poste from the Lien
-                    $lien->getPostes()->removeElement($poste);
-
-                    // if it was a many-to-one relationship, remove the relationship like this
-                    // $lien->setPoste(null);
-
-                    $em->persist($lien);
-
-                    // if you wanted to delete the Lien entirely, you can also do that
-                    // $em->remove($lien);
+                if ($poste->getLiens()->contains($lien) === false) {
+                    $poste->removeLien($lien);
+                    $em->remove($lien);
                 }
             }
 
