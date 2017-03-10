@@ -74,6 +74,16 @@
 {% endblock %}
 
 
+{% block stylesheets %}
+
+    <style>
+        #appbundle_poste_liens .col-sm-2.control-label:not([for]) {
+            display: none;
+        }
+    </style>
+
+{% endblock %}
+
 {% block body %}
     {{ form_start(edit_form) }}
     <div class="row">
