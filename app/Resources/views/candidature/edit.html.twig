@@ -17,7 +17,7 @@
                     $('#appbundle_candidature_rapportCommentaire').css({
                         'box-shadow': '0 0 3px #7887AB ',
                         'margin': '10px',
-                        ' transition':'0.3s',
+                        ' transition': '0.3s',
                     });
                 } else {
                     $('#appbundle_candidature_rapportCommentaire').parent().hide();
@@ -57,6 +57,12 @@
         .card-block {
             padding: 10px;
 
+        }
+
+        .historique {
+            height: 5px;
+            align-content: center;
+            align-self: center;
         }
 
         img.img-circle {
@@ -156,6 +162,55 @@
                 </div>
             </div>
             <br>
+            <!--Historique des notes-->
+            <div class="card">
+                <div class="card-block" data-toggle="collapse"
+                     href="#notes">
+                    <h5 class="card-title"><u>Notes</u></h5>
+                </div>
+                <div class=" card-block collapse show" id="notes">
+                    {% for note in notes %}
+                        <table class="historique" height="5px" width="200px">
+                            <tr>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <td>{{ note.etape }}</td>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <td>{{ note.evaluation }}</td>
+                                    </div>
+                                </div>
+                            </tr>
+                            <hr>
+                        </table>
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
+            <div class="card">
+                <div class="card-block" data-toggle="collapse"
+                     href="#rapports">
+                    <h5 class="card-title"><u>Rapports</u></h5>
+                </div>
+                <div class=" card-block collapse show" id="rapports">
+                    {% for rapport in rapports %}
+                        <table>
+                            <tr>
+                                <div class="row" style="justify-content: center;">
+                                    <td>{{ rapport.action.libelle }}</td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="row">
+                                    <td>{{ rapport.libelle }}</td>
+                                </div>
+                            </tr>
+
+                            <hr>
+                        </table>
+                    {% endfor %}
+                </div>
+            </div>
 
         </div>
     </div>

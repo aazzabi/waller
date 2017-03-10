@@ -97,6 +97,10 @@ class CandidatureController extends Controller
         $etapeCourante = $candidature->getCurrentEtape();
         $idSource = $etapeCourante->getId();
 
+        $em = $this->getDoctrine()->getManager();
+        $notes = $em->getRepository('AppBundle:Note')->findAll();
+        $rapports = $em->getRepository('AppBundle:Rapport')->findAll();
+
         $profile = $candidature->getProfile();
         $deleteForm = $this->createDeleteForm($candidature);
         $candidatureForm = $this->createForm(CandidatureEditType::class, $candidature);
@@ -131,6 +135,8 @@ class CandidatureController extends Controller
         return $this->render('candidature/edit.html.twig', array(
             'candidature' => $candidature,
             'profile' => $profile,
+            'notes'=>$notes,
+            'rapports'=>$rapports,
             'form' => $profileForm->createView(),
             'edit_form' => $candidatureForm->createView(),
             'delete_form' => $deleteForm->createView(),
