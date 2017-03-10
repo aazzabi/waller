@@ -96,10 +96,11 @@ class CandidatureController extends Controller
     {
         $etapeCourante = $candidature->getCurrentEtape();
         $idSource = $etapeCourante->getId();
+        $idCandidature= $candidature->getId();
 
         $em = $this->getDoctrine()->getManager();
-        $notes = $em->getRepository('AppBundle:Note')->findAll();
-        $rapports = $em->getRepository('AppBundle:Rapport')->findAll();
+        $notes = $candidature->getNote();
+        $rapports = $candidature->getRapport();
 
         $profile = $candidature->getProfile();
         $deleteForm = $this->createDeleteForm($candidature);
