@@ -166,15 +166,19 @@
                     <h5 class="card-title"> Notes </h5>
                 </div>
                 <div class=" card-block collapse show" id="notes">
-                    <table width="200px">
+                    <table>
                         {% for note in notes %}
                             <tr>
-                                <div class="col-lg-6">
+                                <div class="row">
+                                <div class="col-md-4">
                                     <td>{{ note.etape }}</td>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-md-2">
                                     <td>{{ note.evaluation }}</td>
                                 </div>
+                                    <div class="col-md-6">
+                                    <td>{{ note.commentaire }}</td>
+                                </div></div>
                             </tr>
                         {% endfor %}
 
@@ -190,7 +194,7 @@
                         {% for rapport in rapports %}
                             <tr>
                                 <div class="col-lg-6">
-                                    <td>{{ rapport.action.libelle }}</td>
+                                    <td style="color: #5193f0;font-family: Arial;font: 25px;">{{ rapport.action.libelle }} : </td>
                                 </div>
                             </tr>
                             <tr>
