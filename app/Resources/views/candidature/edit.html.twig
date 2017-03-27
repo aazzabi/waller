@@ -8,6 +8,22 @@
     <script language="javascript">
         $(function () {
 
+            var idSource = {{ candidature.currentEtape.id }};
+            $('#appbundle_candidature_rapportCommentaire').parent().hide();
+
+            $('#appbundle_candidature_currentEtape').on('change', function (e) {
+                if ($(this).val() != idSource) {
+                    $('#appbundle_candidature_rapportCommentaire').parent().show();
+                    $('#appbundle_candidature_rapportCommentaire').css({
+                        'box-shadow': '0 0 3px #7887AB ',
+                        'margin': '10px',
+                        ' transition': '0.3s',
+                    });
+                } else {
+                    $('#appbundle_candidature_rapportCommentaire').parent().hide();
+                }
+            });
+
             function copyForms() {
                 var profileForm = $('form[name=appbundle_profile] :input');
                 profileForm.not(':submit')
@@ -16,22 +32,20 @@
             }
 
             $('#appbundle_submit').on('click', function (e) {
-//                e.preventDefault();
                 var candidatureForm = $('form[name=appbundle_candidature]');
-                copyForms();
                 candidatureForm.submit();
             });
 
             $('form[name=appbundle_candidature]').on('submit', function (e) {
                 e.preventDefault();
                 copyForms();
+                $(this).attr('enctype', 'multipart/form-data');
                 $(this).unbind().submit();
             });
 
             $('form[name=appbundle_profile]').on('submit', function (e) {
                 e.preventDefault();
                 var candidatureForm = $('form[name=appbundle_candidature]');
-                copyForms();
                 candidatureForm.submit();
             });
         });
@@ -43,6 +57,12 @@
         .card-block {
             padding: 10px;
 
+        }
+
+        .historique {
+            height: 5px;
+            align-content: center;
+            align-self: center;
         }
 
         img.img-circle {
@@ -71,6 +91,7 @@
     {% form_theme form 'bootstrap_3_layout.html.twig' %}
     {% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
 
+    <!-- ENTETE DE LA PAGE , + Boutton -->
     <div class="row">
         <div class="col-md-6">
             <h2>Candidature : {{ candidature.profile.prenom }} {{ candidature.profile.nom }}</h2>
@@ -92,6 +113,7 @@
     </div>
     <hr>
     <br/>
+
     <div class="row">
         <div class="col-md-1">
             <a href="{{ path('candidature_show', { 'id': candidature.id }) }}">
@@ -109,13 +131,13 @@
             <h3>{{ candidature.poste }}</h3>
         </div>
     </div>
+
     <div class="row">
         <!--FORMULAIRE DU PROFILE-->
         <div class="col-md-6">
             {{ form_start(form) }}
             {% include 'profile/forms/form.html.twig' %}
             {{ form_end(form) }}
-            <br>
         </div>
 
         <!--FORMULAIRE DU CANDIDATURE-->
@@ -124,7 +146,7 @@
             <div class="card">
                 <div class="card-block" data-toggle="collapse"
                      href="#candidature">
-                    <h5 class="card-title"><u>Candidature</u></h5>
+                    <h5 class="card-title"> Candidature </h5>
                 </div>
                 <div class=" card-block collapse show" id="candidature">
                     {{ form_start(edit_form) }}
@@ -133,13 +155,58 @@
                     {{ form_row(edit_form.noteCommentaire) }}
                     {{ form_row(edit_form.noteEvaluation) }}
                     <br>
-                    {#<button type="submit" class="btn btn-success">#}
-                    {#<i class="fa fa-check"></i>#}
-                    {#Edit#}
-                    {#</button>#}
+                    {{ form_row(edit_form.rapportCommentaire) }}
                     {{ form_end(edit_form) }}
                 </div>
             </div>
+            <!--Historique des notes-->
+            <div class="card">
+                <div class="card-block" data-toggle="collapse"
+                     href="#notes">
+                    <h5 class="card-title"> Notes </h5>
+                </div>
+                <div class=" card-block collapse show" id="notes">
+                    <table>
+                        {% for note in notes %}
+                            <tr>
+                                <div class="row">
+                                <div class="col-md-4">
+                                    <td>{{ note.etape }}</td>
+                                </div>
+                                <div class="col-md-2">
+                                    <td>{{ note.evaluation }}</td>
+                                </div>
+                                    <div class="col-md-6">
+                                    <td>{{ note.commentaire }}</td>
+                                </div></div>
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-block" data-toggle="collapse" href="#rapports">
+                    <h5 class="card-title"> Rapports </h5>
+                </div>
+                <div class=" card-block collapse show" id="rapports">
+                    <table>
+                        {% for rapport in rapports %}
+                            <tr>
+                                <div class="col-lg-6">
+                                    <td style="color: #5193f0;font-family: Arial;font: 25px;">{{ rapport.action.libelle }} : </td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="col-lg-6">
+                                    <td>{{ rapport.libelle }}</td>
+                                </div>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+
         </div>
     </div>
 

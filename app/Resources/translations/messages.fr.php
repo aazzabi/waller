@@ -5,6 +5,17 @@ return [
             'supprimer' => 'Supprimer',
             'libelle' => 'Libellé'
         ],
+        'lien' => [
+            'libelle' => 'Libellé lien',
+            'url' => 'Lien du poste',
+            ],
+        'poste' => [
+            'libelle' => 'Libellé poste',
+            'description' => 'Description',
+            'profiledemande' => 'Profile demandé :',
+            'group' => 'Proposé par :',
+            'lien' => 'Liens de recrutement'
+        ],
         'note' => [
             'commentaire' => 'Note',
             'evaluation' => 'Evaluation'
@@ -42,7 +53,9 @@ return [
             'poste' => 'Poste',
             'etapecourante' => 'Etape courante',
             'actions' => 'Actions'
-
-        ]
+        ],
+        'rapport' => [
+            'libelle' => 'Libellé rapport',
+            ]
     ]
 ];

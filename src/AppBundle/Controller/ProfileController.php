@@ -1,6 +1,7 @@
 <?php namespace AppBundle\Controller;
 
 use AppBundle\Entity\Profile;
+use AppBundle\Form\ProfileType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -80,7 +81,7 @@ class ProfileController extends Controller
     public function editAction(Request $request, Profile $profile)
     {
         $deleteForm = $this->createDeleteForm($profile);
-        $editForm = $this->createForm('AppBundle\Form\ProfileType', $profile);
+        $editForm = $this->createForm(ProfileType::class, $profile);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

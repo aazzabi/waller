@@ -2,8 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Action;
 use AppBundle\Entity\Candidature;
 use AppBundle\Entity\Note;
+use AppBundle\Entity\Rapport;
 use AppBundle\Form\CandidatureEditType;
 use AppBundle\Form\ProfileEditType;
 use AppBundle\Form\ProfileType;
@@ -29,7 +31,6 @@ class CandidatureController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $candidatures = $em->getRepository('AppBundle:Candidature')->findAll();
 
         return $this->render('candidature/index.html.twig', array(
@@ -93,33 +94,41 @@ class CandidatureController extends Controller
      */
     public function editAction(Request $request, Candidature $candidature)
     {
+        $etapeCourante = $candidature->getCurrentEtape();
+        $idSource = $etapeCourante->getId();
+        $idCandidature= $candidature->getId();
+
+        $em = $this->getDoctrine()->getManager();
+        $notes = $candidature->getNote();
+        $rapports = $candidature->getRapport();
+
         $profile = $candidature->getProfile();
         $deleteForm = $this->createDeleteForm($candidature);
-        $editForm = $this->createForm(CandidatureEditType::class, $candidature);
-        $editForm->handleRequest($request);
+        $candidatureForm = $this->createForm(CandidatureEditType::class, $candidature);
+        $candidatureForm->handleRequest($request);
+
+        $etapeDestination = $candidature->getCurrentEtape();
+        $idDestination = $etapeDestination->getId();
+        //  $idCandidature = $candidature->getId();
 
         if ($request->isMethod('GET')) {
-            $this->setData($editForm, $candidature);
+            $this->setData($candidatureForm, $candidature);
         }
+        $profileForm = $this->createForm(ProfileType::class, $profile);
+        $profileForm->handleRequest($request);
 
-        $editProfileForm = $this->createForm(ProfileType::class, $profile);
-        $editProfileForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($candidatureForm->isSubmitted() && $candidatureForm->isValid()) {
             $noteId = $request->request
                 ->get('appbundle_candidature')['noteId'];
             $noteCommentaire = $request->request
                 ->get('appbundle_candidature')['noteCommentaire'];
             $noteEvaluation = $request->request
                 ->get('appbundle_candidature')['noteEvaluation'];
+            $rapportCommentaire = $request->request
+                ->get('appbundle_candidature')['rapportCommentaire'];
 
-            $this->bindData($noteId, $noteCommentaire, $noteEvaluation);
+            $this->bindData($noteId, $noteCommentaire, $noteEvaluation, $idSource, $idDestination, $rapportCommentaire, $candidature);
 
-            $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('candidature_edit', array('id' => $candidature->getId()));
-        }
-
-        if ($editProfileForm->isSubmitted() && $editProfileForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('candidature_edit', array('id' => $candidature->getId()));
         }
@@ -127,17 +136,36 @@ class CandidatureController extends Controller
         return $this->render('candidature/edit.html.twig', array(
             'candidature' => $candidature,
             'profile' => $profile,
-            'form' => $editProfileForm->createView(),
-            'edit_form' => $editForm->createView(),
+            'notes'=>$notes,
+            'rapports'=>$rapports,
+            'form' => $profileForm->createView(),
+            'edit_form' => $candidatureForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
-    private function bindData($noteId, $noteCommentaire, $noteEvaluation)
+    private function bindData($noteId, $noteCommentaire, $noteEvaluation, $idSource, $idDestination, $rapportCommentaire, $candidature)
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('AppBundle:Note');
 
+        $actionRepo = $em->getRepository('AppBundle:Action');
+
+        if ($rapportCommentaire && $idSource !== $idDestination) {
+            $action = $actionRepo->createQueryBuilder('a')
+                ->where('a.etapeSource = :source and a.etapeDestination = :destination')
+                ->setParameter('source', $idSource)
+                ->setParameter('destination', $idDestination)
+                ->getQuery()
+                ->getOneOrNullResult();
+            $rapport = new Rapport();
+
+            $rapport->setCandidature($candidature);
+            $rapport->setAction($action);
+            $rapport->setLibelle($rapportCommentaire);
+
+            $em->persist($rapport);
+        }
         $note = $repository->find($noteId);
         $note->setCommentaire($noteCommentaire)
             ->setEvaluation($noteEvaluation);
@@ -148,7 +176,6 @@ class CandidatureController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('AppBundle:Note');
-
         $note = $repository->createQueryBuilder('n')
             ->where('n.candidature = :candidature')
             ->setParameter('candidature', $candidature->getId())
@@ -170,6 +197,8 @@ class CandidatureController extends Controller
         $form->get('noteId')->setData($note->getId());
         $form->get('noteCommentaire')->setData($note->getCommentaire());
         $form->get('noteEvaluation')->setData($note->getEvaluation());
+
+
     }
 
     /**

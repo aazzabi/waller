@@ -1,5 +1,6 @@
 <?php namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -51,20 +52,33 @@ class Poste
     private $group;
 
     /**
-     * Poste constructor.
-     * @param int $id
-     * @param string $libelle
-     * @param string $description
-     * @param string $profileDemande
-     * @param Group $group
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Lien", mappedBy="poste", cascade={"persist"})
+     * @ORM\JoinColumn(name="lien_id", referencedColumnName="id")
+     * })
      */
-    public function __construct($id, $libelle, $description, $profileDemande, Group $group)
+    private $liens;
+
+    /**
+     *
+     * var Candidature
+     *
+     * @ORM\OneToMany(targetEntity="Candidature", mappedBy="poste")
+     * @ORM\JoinColumn(name="candidature_id", referencedColumnName="id")
+     * })
+     *
+     */
+    private $candidatures;
+
+    /**
+     * Poste constructor.
+     *
+     */
+    public function __construct()
     {
-        $this->id = $id;
-        $this->libelle = $libelle;
-        $this->description = $description;
-        $this->profileDemande = $profileDemande;
-        $this->group = $group;
+        $this->liens = new ArrayCollection();
+
     }
 
     /**
@@ -178,4 +192,75 @@ class Poste
     {
         return $this->group;
     }
+
+    /**
+     * Add lien
+     *
+     * @param \AppBundle\Entity\Lien $lien
+     *
+     * @return Poste
+     */
+    public function addLien(Lien $lien)
+    {
+        $lien->setPoste($this);
+        $this->liens->add($lien);
+
+        return $this;
+    }
+
+    /**
+     * Remove lien
+     *
+     * @param \AppBundle\Entity\Lien $lien
+     */
+    public function removeLien(Lien $lien)
+    {
+        $this->liens->removeElement($lien);
+    }
+
+    /**
+     * Get liens
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLiens()
+    {
+        return $this->liens;
+    }
+
+    /**
+     * Add candidature
+     *
+     * @param \AppBundle\Entity\Candidature $candidature
+     *
+     * @return Poste
+     */
+    public function addCandidature(Candidature $candidature)
+    {
+        $this->candidatures[] = $candidature;
+
+        return $this;
+    }
+
+    /**
+     * Remove candidature
+     *
+     * @param \AppBundle\Entity\Candidature $candidature
+     */
+    public function removeCandidature(Candidature $candidature)
+    {
+        $this->candidatures->removeElement($candidature);
+    }
+
+    /**
+     * Get candidatures
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCandidatures()
+    {
+        return $this->candidatures;
+    }
+
+
 }
