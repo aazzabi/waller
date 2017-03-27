@@ -59,23 +59,33 @@
                 }
             });
         });
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
     </script>
-
 {% endblock %}
 
 {% block body %}
     <div class="row">
         <div class="col-md-12">
-
-            <h1>Candidatures list</h1>
-            <hr>
-            <div class="col-md-6 text-left">
-
-                <a href="{{ path('candidature_new') }}" class="btn btn-success">
-                    <i class="icon-plus"> Ajouter une candidature </i></a>
-
-                <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <h1><b>Liste des candidatures </b></h1>
+                </div>
+                <div class="col-md-6 col-md-offset-6 text-right">
+                    <a href="{{ path('candidature_new') }}" class="btn btn-success">
+                        <i class="icon-plus"> Ajouter une candidature </i>
+                    </a>
+                    <a href="{{ path('profile_index') }}" data-toggle="tooltip">
+                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom"
+                                title="Vers profile">
+                            <i class="fa fa-share" aria-hidden="true"></i>
+                        </button>
+                    </a>
+                    <br>
+                </div>
             </div>
+            <hr>
             <div class="clearfix"></div>
             <br/>
             <table id="candidature" class="display" cellspacing="0" width="100%">
@@ -133,7 +143,7 @@
                                 <li>
                                     <a href="{{ path('candidature_edit', { 'id': candidature.id }) }}">
                                         <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
-                                        edit</a>
+                                        </a>
                                 </li>
 
                             </ul>

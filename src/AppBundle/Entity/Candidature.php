@@ -42,9 +42,9 @@ class Candidature
     /**
      * @var Poste
      *
-     * @ORM\ManyToOne(targetEntity="Poste")
+     * @ORM\ManyToOne(targetEntity="Poste", inversedBy="candidatures")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="poste_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="poste_id", referencedColumnName="id", onDelete="CASCADE")
      * })
      */
     private $poste;
@@ -78,6 +78,24 @@ class Candidature
      *
      */
     private $commentaire;
+
+    /**
+     * @var Rapport
+     *
+     * @ORM\OneToMany(targetEntity="Rapport", mappedBy="candidature")
+     * @ORM\JoinColumn(name="rapport_id", referencedColumnName="id")
+     * })
+     */
+    private $rapport;
+
+    /**
+     * @var Note
+     *
+     * @ORM\OneToMany(targetEntity="Note", mappedBy="candidature")
+     * @ORM\JoinColumn(name="note_id", referencedColumnName="id")
+     * })
+     */
+    private $note;
 
     /**
      * Get id
@@ -236,5 +254,80 @@ class Candidature
     function __toString()
     {
         return $this->getProfile() . " - qui est : " . $this->getCurrentEtape() . " pour (" . $this->getGroup() . ")";
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->rapport = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add rapport
+     *
+     * @param \AppBundle\Entity\Rapport $rapport
+     *
+     * @return Candidature
+     */
+    public function addRapport(\AppBundle\Entity\Rapport $rapport)
+    {
+        $this->rapport[] = $rapport;
+
+        return $this;
+    }
+
+    /**
+     * Remove rapport
+     *
+     * @param \AppBundle\Entity\Rapport $rapport
+     */
+    public function removeRapport(Rapport $rapport)
+    {
+        $this->rapport->removeElement($rapport);
+    }
+
+    /**
+     * Get rapport
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRapport()
+    {
+        return $this->rapport;
+    }
+
+    /**
+     * Add note
+     *
+     * @param \AppBundle\Entity\Note $note
+     *
+     * @return Candidature
+     */
+    public function addNote(\AppBundle\Entity\Note $note)
+    {
+        $this->note[] = $note;
+
+        return $this;
+    }
+
+    /**
+     * Remove note
+     *
+     * @param \AppBundle\Entity\Note $note
+     */
+    public function removeNote(\AppBundle\Entity\Note $note)
+    {
+        $this->note->removeElement($note);
+    }
+
+    /**
+     * Get note
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNote()
+    {
+        return $this->note;
     }
 }

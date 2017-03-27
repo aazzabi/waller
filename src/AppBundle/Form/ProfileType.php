@@ -8,7 +8,6 @@ use AppBundle\Entity\Profile;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -66,7 +65,8 @@ class ProfileType extends AbstractType
 
             ])
             ->add('sivp', CheckboxType::class, [
-                'label' => 'entity.profile.sivp'
+                'label' => 'entity.profile.sivp',
+                'required' => false,
             ])
             ->add('prestationsalariale', TextType::class, [
                 'label' => 'entity.profile.prestationsalariale'

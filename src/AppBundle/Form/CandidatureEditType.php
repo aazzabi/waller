@@ -41,6 +41,14 @@ class CandidatureEditType extends AbstractType
                 'label' => 'entity.note.evaluation',
                 'required' => false,
                 'mapped' => false,
+            ])
+            ->add('rapportId', HiddenType::class, [
+                'mapped' => false,
+            ])
+            ->add('rapportCommentaire', TextareaType::class, [
+                'label' => 'entity.rapport.libelle',
+                'required' => true,
+                'mapped' => false,
             ]);
 
     }

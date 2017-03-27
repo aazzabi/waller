@@ -2,7 +2,13 @@
 {% block title %}
     Liste des profile{% endblock %}
 {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.dataTables.min.css.css') }}">
+    <style>
+        tr {
+            height: 0px;
+        }
+    </style>
 {% endblock %}
 
 {% block javascripts %}
@@ -26,6 +32,8 @@
                 column.visible(!column.visible());
             });
         });
+
+     
     </script>
 
 {% endblock %}
@@ -34,19 +42,29 @@
 
     <div class="row">
     <div class="col-md-12">
-        <h1><b>Profiles list</b></h1>
-        <hr>
-        <div class="col-md-6 col-md-offset-6 text-right">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                Appliquer un filtre
-            </button>
-            <a href="{{ path('profile_new') }}" class="btn btn-success">
-                <i class="icon-plus"> Ajouter un profile</i></a>
-
-            <br>
+        <div class="row">
+            <div class="col-md-6">
+                <h1><b>Profiles list</b></h1>
+            </div>
+            <div class="col-md-6 col-md-offset-6 text-right">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                    Appliquer un filtre
+                </button>
+                <a href="{{ path('profile_new') }}" class="btn btn-success">
+                    <i class="icon-plus"> Ajouter un profile</i>
+                </a>
+                <a href="{{ path('candidature_index') }}" data-toggle="tooltip">
+                    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom"
+                            title="Vers candidature">
+                        <i class="fa fa-share" aria-hidden="true"></i>
+                    </button>
+                </a>
+                <br>
+            </div>
         </div>
+        <hr>
+
         <div class="clearfix"></div>
-        <br/>
         <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content" style="margin-top: 150px;">
@@ -55,49 +73,48 @@
                                     aria-hidden="true"></span></button>
                         <h4 class="modal-title" id="myModalLabel">Columns</h4>
                     </div>
-
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="0">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="photos" data-column="0">
                                         Photos
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="1">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="id" data-column="1">
                                         Id
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="2">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="nom"  data-column="2">
                                         Nom
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="3">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="prenom"  data-column="3">
                                         Prenom
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="4">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="telephone"  data-column="4">
                                         Télephone
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="5">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="email"  data-column="5">
                                         E-mail
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="6">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="cv"  data-column="6">
                                         Curriculum vitae
                                     </label>
                                 </div>
@@ -108,37 +125,37 @@
                             <div class="col-md-6">
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="7">
+                                        <input type="checkbox" class="toggle-vis form-check-input"  id="experience" data-column="7">
                                         Experience
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="8">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="niveau"  data-column="8">
                                         Niveau
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="9">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="skype"  data-column="9">
                                         Skype
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="10">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="reseau"  data-column="10">
                                         Reseaux sociaux
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="11">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="sivp"  data-column="11">
                                         SIVP
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="12">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="pres"  data-column="12">
                                         Prestation salariale
                                     </label>
                                 </div>
@@ -196,7 +213,7 @@
                             </div>
                         </a>
                     </td>
-                    <td><a href="{{ path('profile_show', { 'id': profile.id }) }}">{{ profile.id }}</a></td>
+                    <td>{{ profile.id }}</td>
                     <td>{{ profile.nom }}</td>
                     <td>{{ profile.prenom }}</td>
                     <td>{{ profile.telephone }}</td>
@@ -214,31 +231,23 @@
                     <td>{{ profile.skype }}</td>
 
                     <td>
-                        <ul>
-                            {% if profile.linkedin %}
-                                <li>
-                                    <a href="{{ profile.linkedin }}">
-                                        <i class="fa fa-linkedin" style="color:#4875B4;"
-                                           aria-hidden="true"></i></a>
-                                </li>
-                            {% endif %}
+                        {% if profile.linkedin %}
+                            <a href="{{ profile.linkedin }}">
+                                <i class="fa fa-linkedin" style="color:#4875B4;"
+                                   aria-hidden="true"></i></a>
+                        {% endif %}
 
-                            {% if profile.facebook %}
-                                <li>
-                                    <a href="{{ profile.facebook }}">
-                                        <i class="fa fa-facebook-square"
-                                           style="color:#3b5998;"></i>
-                                    </a>
-                                </li>
-                            {% endif %}
-                            {% if profile.github %}
-                                <li>
-                                    <a href="{{ profile.github }}">
-                                        <i class="fa fa-github" style="color: black;" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                            {% endif %}
-                        </ul>
+                        {% if profile.facebook %}
+                            <a href="{{ profile.facebook }}">
+                                <i class="fa fa-facebook-square"
+                                   style="color:#3b5998;"></i>
+                            </a>
+                        {% endif %}
+                        {% if profile.github %}
+                            <a href="{{ profile.github }}">
+                                <i class="fa fa-github" style="color: black;" aria-hidden="true"></i>
+                            </a>
+                        {% endif %}
 
                     </td>
                     <td>{% if profile.sivp %}
@@ -249,18 +258,17 @@
                     </td>
                     <td>{{ profile.prestationsalariale }}</td>
                     <td>
-                        <ul>
-                            <li>
+                        <div class="row">
+                            <div class="col-md-6">
                                 <a href="{{ path('profile_show', { 'id': profile.id }) }}">
-                                    <i class="fa fa-eye " aria-hidden="true"></i>
-                                    show</a>
-                            </li>
-                            <li>
+                                    <i class="fa fa-eye fa-2x " aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
                                 <a href="{{ path('profile_edit', { 'id': profile.id }) }}">
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    edit</a>
-                            </li>
-                        </ul>
+                                    <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+                                </a></div>
+                        </div>
                     </td>
                 </tr>
             {% endfor %}

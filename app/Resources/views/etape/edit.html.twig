@@ -1,28 +1,14 @@
 {% extends 'base.html.twig' %}
-{% block head %}
-    <title>Modif. du profile de {{ profile.nom }}</title>
-{% endblock %}
+
 {% block body %}
-    <br>
-        {{ form_start(form) }}
+    {{ form_start(edit_form) }}
     <div class="row">
         <div class="col-md-5">
-            <div class="row">
-                {% if profile.photo != '' %}
-                    <img alt="User Pic"
-                         src="{{ asset('uploads/photo/' ~ profile.photo) }}"
-                         class="img-circle img-responsive">
-                {% else %}
-                    <img alt="User Pic" src="{{ asset('assets/image/profile.png') }}"
-                         id="profile-image1" class="img-circle img-responsive">
-                {% endif %} &nbsp;
-                <h1> Edite du profile</h1>
-            </div>
+            <h1>Etape edit</h1>
         </div>
-
         <div class="col-md-7 text-right">
             <button type="submit" class="btn btn-secondary"><i class="fa fa-check"></i> Confirmer</button>
-            <a href="{{ path('profile_index') }}" class="btn btn-secondary"><i class="fa fa-undo " aria-hidden="true"></i>
+            <a href="{{ path('etape_index') }}" class="btn btn-secondary"><i class="fa fa-undo " aria-hidden="true"></i>
                 Retour à la liste</a>
 
             <!-- Button trigger modal -->
@@ -34,10 +20,13 @@
             <br>
         </div>
     </div>
-    {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
-    {% include 'profile/forms/form.html.twig' %}
-    <br>
-    {{ form_end(form) }}
+    {% form_theme edit_form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+
+    {{ form_widget(edit_form) }}
+    {{ form_end(edit_form) }}
+
+
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -64,6 +53,4 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="bower_components/dirrty/dist/jquery.dirrty.js"></script>
 {% endblock %}
-

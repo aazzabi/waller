@@ -2,28 +2,40 @@
 {% block title %}
     Ajout d'un nouveau profile{% endblock %}
 {% block stylesheets %}
+    <style>
+        .card-block {
+            padding: 10px;
+        }
+
+        .card-title {
+            margin-bottom: 0px;
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
     <br>
     <div class="container">
-        <h1>Créer un nouveau profile</h1>
-        <hr>
-
-        {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
-
         {{ form_start(form) }}
-        {% include 'profile/forms/form.html.twig' %}
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary" value="Create"><i class="fa fa-check" aria-hidden="true"></i>
-                Confirmer
-            </button>
-            <a href="{{ path('profile_index') }}" class="btn btn-secondary"><i class="fa fa-times"
-                                                                               aria-hidden="true"></i>
-                Annuler</a>
-        </div>
-    </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h1><b>Ajout d'un nouveau profile</b></h1>
+            </div>
+            <div class="col-md-6 col-md-offset-6 text-right">
+                <button type="submit" class="btn btn-success" value="Create"><i class="fa fa-check"
+                                                                                aria-hidden="true"></i>
+                    Confirmer
+                </button>
+                <a href="{{ path('profile_index') }}" class="btn btn-secondary"><i class="fa fa-undo" aria-hidden="true"></i>
+                    Retour à la liste</a>
 
+                <br>
+            </div>
+        </div>
+        <hr>
+        {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+        {% include 'profile/forms/formNew.html.twig' %}<br>
+    </div>
     {{ form_end(form) }}
 
 {% endblock %}
