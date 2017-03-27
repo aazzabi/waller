@@ -53,7 +53,9 @@ return [
             'poste' => 'Poste',
             'etapecourante' => 'Etape courante',
             'actions' => 'Actions'
-
-        ]
+        ],
+        'rapport' => [
+            'libelle' => 'Libellé rapport',
+            ]
     ]
 ];
