@@ -6,6 +6,8 @@ use AppBundle\Entity\Candidature;
 use AppBundle\Entity\Etape;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,11 +23,32 @@ class CandidatureEditType extends AbstractType
             ->add('currentEtape', EntityType::class, [
                 'label' => 'entity.candidat.etapecourante',
                 'class' => Etape::class,
-                'required' => true,
+                'required' => true
             ])
             ->add('commentaire', TextareaType::class, [
                 'label' => 'entity.candidat.commentaire',
                 'required' => false
+            ])
+            ->add('noteId', HiddenType::class, [
+                'mapped' => false,
+            ])
+            ->add('noteCommentaire', TextareaType::class, [
+                'label' => 'entity.note.commentaire',
+                'required' => false,
+                'mapped' => false,
+            ])
+            ->add('noteEvaluation', IntegerType::class, [
+                'label' => 'entity.note.evaluation',
+                'required' => false,
+                'mapped' => false,
+            ])
+            ->add('rapportId', HiddenType::class, [
+                'mapped' => false,
+            ])
+            ->add('rapportCommentaire', TextareaType::class, [
+                'label' => 'entity.rapport.libelle',
+                'required' => true,
+                'mapped' => false,
             ]);
 
     }
