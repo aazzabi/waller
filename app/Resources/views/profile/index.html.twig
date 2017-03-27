@@ -32,6 +32,8 @@
                 column.visible(!column.visible());
             });
         });
+
+     
     </script>
 
 {% endblock %}
@@ -49,8 +51,14 @@
                     Appliquer un filtre
                 </button>
                 <a href="{{ path('profile_new') }}" class="btn btn-success">
-                    <i class="icon-plus"> Ajouter un profile</i></a>
-
+                    <i class="icon-plus"> Ajouter un profile</i>
+                </a>
+                <a href="{{ path('candidature_index') }}" data-toggle="tooltip">
+                    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom"
+                            title="Vers candidature">
+                        <i class="fa fa-share" aria-hidden="true"></i>
+                    </button>
+                </a>
                 <br>
             </div>
         </div>
@@ -65,49 +73,48 @@
                                     aria-hidden="true"></span></button>
                         <h4 class="modal-title" id="myModalLabel">Columns</h4>
                     </div>
-
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="0">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="photos" data-column="0">
                                         Photos
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="1">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="id" data-column="1">
                                         Id
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="2">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="nom"  data-column="2">
                                         Nom
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="3">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="prenom"  data-column="3">
                                         Prenom
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="4">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="telephone"  data-column="4">
                                         Télephone
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="5">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="email"  data-column="5">
                                         E-mail
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="6">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="cv"  data-column="6">
                                         Curriculum vitae
                                     </label>
                                 </div>
@@ -118,37 +125,37 @@
                             <div class="col-md-6">
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="7">
+                                        <input type="checkbox" class="toggle-vis form-check-input"  id="experience" data-column="7">
                                         Experience
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="8">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="niveau"  data-column="8">
                                         Niveau
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="9">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="skype"  data-column="9">
                                         Skype
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="10">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="reseau"  data-column="10">
                                         Reseaux sociaux
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="11">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="sivp"  data-column="11">
                                         SIVP
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" data-column="12">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="pres"  data-column="12">
                                         Prestation salariale
                                     </label>
                                 </div>
@@ -224,23 +231,23 @@
                     <td>{{ profile.skype }}</td>
 
                     <td>
-                            {% if profile.linkedin %}
-                                    <a href="{{ profile.linkedin }}">
-                                        <i class="fa fa-linkedin" style="color:#4875B4;"
-                                           aria-hidden="true"></i></a>
-                            {% endif %}
+                        {% if profile.linkedin %}
+                            <a href="{{ profile.linkedin }}">
+                                <i class="fa fa-linkedin" style="color:#4875B4;"
+                                   aria-hidden="true"></i></a>
+                        {% endif %}
 
-                            {% if profile.facebook %}
-                                    <a href="{{ profile.facebook }}">
-                                        <i class="fa fa-facebook-square"
-                                           style="color:#3b5998;"></i>
-                                    </a>
-                            {% endif %}
-                            {% if profile.github %}
-                                    <a href="{{ profile.github }}">
-                                        <i class="fa fa-github" style="color: black;" aria-hidden="true"></i>
-                                    </a>
-                            {% endif %}
+                        {% if profile.facebook %}
+                            <a href="{{ profile.facebook }}">
+                                <i class="fa fa-facebook-square"
+                                   style="color:#3b5998;"></i>
+                            </a>
+                        {% endif %}
+                        {% if profile.github %}
+                            <a href="{{ profile.github }}">
+                                <i class="fa fa-github" style="color: black;" aria-hidden="true"></i>
+                            </a>
+                        {% endif %}
 
                     </td>
                     <td>{% if profile.sivp %}
@@ -252,15 +259,15 @@
                     <td>{{ profile.prestationsalariale }}</td>
                     <td>
                         <div class="row">
-                        <div class="col-md-6">
-                        <a href="{{ path('profile_show', { 'id': profile.id }) }}">
-                            <i class="fa fa-eye fa-2x " aria-hidden="true"></i>
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                        <a href="{{ path('profile_edit', { 'id': profile.id }) }}">
-                            <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
-                        </a></div>
+                            <div class="col-md-6">
+                                <a href="{{ path('profile_show', { 'id': profile.id }) }}">
+                                    <i class="fa fa-eye fa-2x " aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ path('profile_edit', { 'id': profile.id }) }}">
+                                    <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+                                </a></div>
                         </div>
                     </td>
                 </tr>

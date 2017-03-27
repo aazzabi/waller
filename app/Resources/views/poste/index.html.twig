@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.dataTables.min.css.css') }}">{% endblock %}
+
+{% block javascripts %}
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }} "></script>
+    <script>
+        $(document).ready(function () {
+            var table = $('#example').DataTable({
+                "paging": true,
+                "stateSave": true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/French.json",
+                }
+            });
+
+            $('.toggle-vis').on('change', function (e) {
+                e.preventDefault();
+                // Get the column API object
+                var column = table.column($(this).attr('data-column'));
+                // Toggle the visibility
+                column.visible(!column.visible());
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6">
+            <h1><b>Liste des postes </b></h1>
+        </div>
+        <div class="col-md-6 col-md-offset-6 text-right">
+            <a href="{{ path('poste_new') }}" class="btn btn-success">
+                <i class="icon-plus"> Ajouter un poste</i>
+            </a>
+            <a href="{{ path('profile_index') }}" data-toggle="tooltip">
+                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom"
+                        title="Vers profile">
+                    <i class="fa fa-share" aria-hidden="true"></i>
+                </button>
+            </a>
+            <br>
+        </div>
+    </div>
+    <hr>
+    <table id="example" style="" class="table display table-striped table-responsive">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Libelle</th>
+            <th>Description</th>
+            <th>Profiledemande</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for poste in postes %}
+            <tr>
+                <td><a href="{{ path('poste_show', { 'id': poste.id }) }}">{{ poste.id }}</a></td>
+                <td>{{ poste.libelle }}</td>
+                <td>{{ poste.description }}</td>
+                <td>{{ poste.profileDemande }}</td>
+                <td>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="{{ path('poste_show', { 'id': poste.id }) }}">
+                                <i class="fa fa-eye fa-2x " aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{{ path('poste_edit', { 'id': poste.id }) }}">
+                                <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+                            </a></div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

@@ -42,7 +42,7 @@ class Note
      *
      * @ORM\ManyToOne(targetEntity="Candidature")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="candidature_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="candidature_id", referencedColumnName="id", onDelete="CASCADE")
      * })
      */
     private $candidature;

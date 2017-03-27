@@ -1,5 +1,6 @@
 <?php namespace AppBundle\Controller;
 
+use AppBundle\Entity\Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,5 +50,27 @@ class FixturesController extends Controller
 
 
         return new Response("5 users added!");
+    }
+
+    /**
+     * @Route("/actions", name="fixtures_actions")
+     */
+    public function actionsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('AppBundle:Etape');
+        $etapes = $repository->findAll();
+        foreach ($etapes as $etape) {
+            foreach ($etapes as $destination) {
+                if ($destination->getId() != $etape->getId()) {
+                    $action = new Action();
+                    $action->setEtapeSource($etape)
+                        ->setEtapeDestination($destination)
+                        ->setLibelle($etape->getLibelle() . " to " . $destination->getLibelle());
+                    $em->persist($action);
+                }
+            }
+        }
+        $em->flush();
     }
 }

@@ -158,4 +158,10 @@ class Action
     {
         return $this->etapeSource;
     }
+
+
+    function __toString()
+    {
+        return $this->getLibelle();
+    }
 }
