@@ -89,6 +89,15 @@ class Candidature
     private $rapport;
 
     /**
+     * @var Note
+     *
+     * @ORM\OneToMany(targetEntity="Note", mappedBy="candidature")
+     * @ORM\JoinColumn(name="note_id", referencedColumnName="id")
+     * })
+     */
+    private $note;
+
+    /**
      * Get id
      *
      * @return integer
@@ -286,5 +295,39 @@ class Candidature
     public function getRapport()
     {
         return $this->rapport;
+    }
+
+    /**
+     * Add note
+     *
+     * @param \AppBundle\Entity\Note $note
+     *
+     * @return Candidature
+     */
+    public function addNote(\AppBundle\Entity\Note $note)
+    {
+        $this->note[] = $note;
+
+        return $this;
+    }
+
+    /**
+     * Remove note
+     *
+     * @param \AppBundle\Entity\Note $note
+     */
+    public function removeNote(\AppBundle\Entity\Note $note)
+    {
+        $this->note->removeElement($note);
+    }
+
+    /**
+     * Get note
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNote()
+    {
+        return $this->note;
     }
 }

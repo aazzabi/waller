@@ -17,7 +17,7 @@
                     $('#appbundle_candidature_rapportCommentaire').css({
                         'box-shadow': '0 0 3px #7887AB ',
                         'margin': '10px',
-                        ' transition':'0.3s',
+                        ' transition': '0.3s',
                     });
                 } else {
                     $('#appbundle_candidature_rapportCommentaire').parent().hide();
@@ -57,6 +57,12 @@
         .card-block {
             padding: 10px;
 
+        }
+
+        .historique {
+            height: 5px;
+            align-content: center;
+            align-self: center;
         }
 
         img.img-circle {
@@ -132,7 +138,6 @@
             {{ form_start(form) }}
             {% include 'profile/forms/form.html.twig' %}
             {{ form_end(form) }}
-            <br>
         </div>
 
         <!--FORMULAIRE DU CANDIDATURE-->
@@ -141,7 +146,7 @@
             <div class="card">
                 <div class="card-block" data-toggle="collapse"
                      href="#candidature">
-                    <h5 class="card-title"><u>Candidature</u></h5>
+                    <h5 class="card-title"> Candidature </h5>
                 </div>
                 <div class=" card-block collapse show" id="candidature">
                     {{ form_start(edit_form) }}
@@ -151,11 +156,56 @@
                     {{ form_row(edit_form.noteEvaluation) }}
                     <br>
                     {{ form_row(edit_form.rapportCommentaire) }}
-                    <br>
                     {{ form_end(edit_form) }}
                 </div>
             </div>
-            <br>
+            <!--Historique des notes-->
+            <div class="card">
+                <div class="card-block" data-toggle="collapse"
+                     href="#notes">
+                    <h5 class="card-title"> Notes </h5>
+                </div>
+                <div class=" card-block collapse show" id="notes">
+                    <table>
+                        {% for note in notes %}
+                            <tr>
+                                <div class="row">
+                                <div class="col-md-4">
+                                    <td>{{ note.etape }}</td>
+                                </div>
+                                <div class="col-md-2">
+                                    <td>{{ note.evaluation }}</td>
+                                </div>
+                                    <div class="col-md-6">
+                                    <td>{{ note.commentaire }}</td>
+                                </div></div>
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-block" data-toggle="collapse" href="#rapports">
+                    <h5 class="card-title"> Rapports </h5>
+                </div>
+                <div class=" card-block collapse show" id="rapports">
+                    <table>
+                        {% for rapport in rapports %}
+                            <tr>
+                                <div class="col-lg-6">
+                                    <td style="color: #5193f0;font-family: Arial;font: 25px;">{{ rapport.action.libelle }} : </td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="col-lg-6">
+                                    <td>{{ rapport.libelle }}</td>
+                                </div>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
 
         </div>
     </div>

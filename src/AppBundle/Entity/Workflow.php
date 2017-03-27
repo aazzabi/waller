@@ -2,7 +2,6 @@
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Proxies\__CG__\AppBundle\Entity\Etape;
 
 // TODO: bidirectional relation with etapes in workflow
 // TODO: remove ProfileCompetence and replace it with many to many in profile and competence

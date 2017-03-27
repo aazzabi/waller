@@ -61,7 +61,7 @@ class CandidatureController extends Controller
             $em->persist($note);
             $em->flush($note);
 
-            return $this->redirectToRoute('candidature_index', array('id' => $candidature->getId()));
+            return $this->redirectToRoute('candidature_edit', array('id' => $candidature->getId()));
         }
 
         return $this->render('candidature/new.html.twig', array(
@@ -96,6 +96,11 @@ class CandidatureController extends Controller
     {
         $etapeCourante = $candidature->getCurrentEtape();
         $idSource = $etapeCourante->getId();
+        $idCandidature= $candidature->getId();
+
+        $em = $this->getDoctrine()->getManager();
+        $notes = $candidature->getNote();
+        $rapports = $candidature->getRapport();
 
         $profile = $candidature->getProfile();
         $deleteForm = $this->createDeleteForm($candidature);
@@ -131,6 +136,8 @@ class CandidatureController extends Controller
         return $this->render('candidature/edit.html.twig', array(
             'candidature' => $candidature,
             'profile' => $profile,
+            'notes'=>$notes,
+            'rapports'=>$rapports,
             'form' => $profileForm->createView(),
             'edit_form' => $candidatureForm->createView(),
             'delete_form' => $deleteForm->createView(),

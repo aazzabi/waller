@@ -7,3 +7,7 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app.rapport_listener:
+        class: AppBundle\Entity\Listeners\RapportListener
+        tag:
+            - { name: doctrine.orm.entity_listener }
