@@ -9,6 +9,7 @@ use AppBundle\Entity\Rapport;
 use AppBundle\Form\CandidatureEditType;
 use AppBundle\Form\ProfileEditType;
 use AppBundle\Form\ProfileType;
+use AppBundle\Controller\ProfileController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -96,7 +97,7 @@ class CandidatureController extends Controller
     {
         $etapeCourante = $candidature->getCurrentEtape();
         $idSource = $etapeCourante->getId();
-        $idCandidature= $candidature->getId();
+        $idCandidature = $candidature->getId();
 
         $em = $this->getDoctrine()->getManager();
         $notes = $candidature->getNote();
@@ -118,6 +119,9 @@ class CandidatureController extends Controller
         $profileForm->handleRequest($request);
 
         if ($candidatureForm->isSubmitted() && $candidatureForm->isValid()) {
+
+            $this->get('app.candidature_service')->bindCompetences($profile);
+
             $noteId = $request->request
                 ->get('appbundle_candidature')['noteId'];
             $noteCommentaire = $request->request
@@ -136,8 +140,8 @@ class CandidatureController extends Controller
         return $this->render('candidature/edit.html.twig', array(
             'candidature' => $candidature,
             'profile' => $profile,
-            'notes'=>$notes,
-            'rapports'=>$rapports,
+            'notes' => $notes,
+            'rapports' => $rapports,
             'form' => $profileForm->createView(),
             'edit_form' => $candidatureForm->createView(),
             'delete_form' => $deleteForm->createView(),

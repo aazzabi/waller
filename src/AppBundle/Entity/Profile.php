@@ -178,6 +178,11 @@ class Profile
     private $competences;
 
     /**
+     * @var string
+     */
+    private $competencesTags;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -628,6 +633,32 @@ class Profile
     {
         return $this->competences;
     }
+
+    /**
+     * @return string
+     */
+    public function getCompetencesTags()
+    {
+        if ($this->competencesTags == "") {
+            $array = [];
+            foreach ($this->getCompetences() as $competence) {
+                $array[] = $competence->getLibelle();
+            }
+            $this->competencesTags = implode(',', $array);
+        }
+        return $this->competencesTags;
+    }
+
+    /**
+     * @param string $competencesTags
+     */
+    public function setCompetencesTags($competencesTags)
+    {
+        $this->competencesTags = $competencesTags;
+
+        return $this;
+    }
+
 
     function __toString()
     {

@@ -8,14 +8,12 @@
         {{ form_row(form.prenom) }}
         {{ form_row(form.nom) }}
         {{ form_widget(form.photoFile) }}
+        {{ form_widget(form.cvFile) }}
         {% if profile.cv != '' %}
-            {{ form_widget(form.cvFile) }}
             <div class="text-center" style="margin-top: -25px;">
                 Cliquez
                 <a href="{{ asset('uploads/cv/' ~ profile.cv) }}">ici</a> pour voir le CV
             </div>
-        {% else %}
-            <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
         {% endif %}
     </div>
 </div>
@@ -46,7 +44,7 @@
         <h5 class="card-title"> Compétences </h5>
     </div>
     <div class=" card-block collapse show" id="competence">
-        {{ form_row(form.competences) }}
+        {{ form_row(form.competencesTags) }}
         {{ form_row(form.experience) }}
         {{ form_row(form.niveau) }}
     </div>

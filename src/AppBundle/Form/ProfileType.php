@@ -8,6 +8,7 @@ use AppBundle\Entity\Profile;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -30,7 +31,7 @@ class ProfileType extends AbstractType
             ])
             ->add('telephone', TextType::class, [
                 'label' => 'entity.profile.telephone'])
-            ->add('email',  TextType::class,[
+            ->add('email', TextType::class, [
                 'label' => 'entity.profile.email'])
             ->add('cvFile', VichFileType::class, [
                 'required' => false,
@@ -38,18 +39,18 @@ class ProfileType extends AbstractType
                 'allow_delete' => true,
                 'download_link' => true
             ])
-            ->add('experience', TextType::class,[
+            ->add('experience', TextType::class, [
                 'label' => 'entity.profile.experience'
             ])
-            ->add('niveau',TextType::class, [
+            ->add('niveau', TextType::class, [
                 'label' => 'entity.profile.niveau'
             ])
-            ->add('skype', TextType::class,[
+            ->add('skype', TextType::class, [
                 'label' => 'entity.profile.skype',
                 'required' => false,
 
             ])
-            ->add('linkedin', TextType::class,[
+            ->add('linkedin', TextType::class, [
                 'label' => 'entity.profile.linkedin',
                 'required' => false,
 
@@ -59,7 +60,7 @@ class ProfileType extends AbstractType
                 'required' => false,
 
             ])
-            ->add('github',TextType::class, [
+            ->add('github', TextType::class, [
                 'label' => 'entity.profile.github',
                 'required' => false,
 
@@ -81,10 +82,8 @@ class ProfileType extends AbstractType
                 'label' => 'entity.profile.disponibilite',
                 'class' => Disponibilite::class
             ])
-            ->add('competences', EntityType::class, [
+            ->add('competencesTags', TextType::class, [
                 'label' => 'entity.profile.competences',
-                'class' => Competence::class,
-                'multiple' => true
             ]);
     }
 

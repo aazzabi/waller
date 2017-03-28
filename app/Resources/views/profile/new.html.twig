@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}
-    Ajout d'un nouveau profile{% endblock %}
+    Ajout d'un nouveau profile
+{% endblock %}
+
 {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap-tagsinput.css') }}">
     <style>
         .card-block {
             padding: 10px;
@@ -11,6 +15,12 @@
             margin-bottom: 0px;
         }
     </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/bootstrap-tagsinput.js') }} "></script>
+    <script src="{{ asset('assets/js/typeahead.js') }} "></script>
+    <script src="{{ asset('assets/js/competences.js') }} "></script>
 {% endblock %}
 
 {% block body %}
@@ -26,7 +36,8 @@
                                                                                 aria-hidden="true"></i>
                     Confirmer
                 </button>
-                <a href="{{ path('profile_index') }}" class="btn btn-secondary"><i class="fa fa-undo" aria-hidden="true"></i>
+                <a href="{{ path('profile_index') }}" class="btn btn-secondary"><i class="fa fa-undo"
+                                                                                   aria-hidden="true"></i>
                     Retour à la liste</a>
 
                 <br>
@@ -34,7 +45,7 @@
         </div>
         <hr>
         {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
-        {% include 'profile/forms/formNew.html.twig' %}<br>
+        {% include 'profile/forms/form.html.twig' %}<br>
     </div>
     {{ form_end(form) }}
 

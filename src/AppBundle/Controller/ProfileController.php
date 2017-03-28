@@ -5,6 +5,7 @@ use AppBundle\Form\ProfileType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -44,6 +45,7 @@ class ProfileController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->get('app.candidature_service')->bindCompetences($profile);
             $em = $this->getDoctrine()->getManager();
             $em->persist($profile);
             $em->flush($profile);
@@ -59,7 +61,7 @@ class ProfileController extends Controller
     /**
      * Finds and displays a profile entity.
      *
-     * @Route("/{id}", name="profile_show")
+     * @Route("/{id}", name="profile_show", requirements={"id": "\d+"})
      * @Method("GET")
      */
     public function showAction(Profile $profile)
@@ -85,6 +87,7 @@ class ProfileController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->get('app.candidature_service')->bindCompetences($profile);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('profile_edit', array('id' => $profile->getId()));
@@ -95,6 +98,27 @@ class ProfileController extends Controller
             'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
+    }
+
+    /**
+     * Displays a form to edit an existing profile entity.
+     *
+     * @Route("/competences",
+     *     options = { "expose" = true },
+     *     name="profile_competences"
+     * )
+     * @Method({"GET"})
+     */
+    public function competencesAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('AppBundle:Competence');
+        $competences = $repository->findAll();
+        $json = [];
+        foreach ($competences as $competence) {
+            $json[] = $competence->getLibelle();
+        }
+        return new JsonResponse($json);
     }
 
     /**

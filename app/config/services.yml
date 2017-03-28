@@ -11,3 +11,6 @@ services:
         class: AppBundle\Entity\Listeners\RapportListener
         tag:
             - { name: doctrine.orm.entity_listener }
+    app.candidature_service:
+        class: AppBundle\Service\CompetenceService
+        arguments: [ "@doctrine.orm.entity_manager" ]
