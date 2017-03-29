@@ -662,6 +662,6 @@ class Profile
 
     function __toString()
     {
-        return $this->getPrenom() . " " . $this->getNom() . " (" . $this->getEmail() . ")";
+        return $this->getPrenom() . " " . $this->getNom() . " (" . $this->getEmail() . ") (". $this->getCompetencesTags(). ")";
     }
 }

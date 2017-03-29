@@ -1,23 +1,19 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}
-    Liste des profile{% endblock %}
+    Liste des profile
+{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.dataTables.min.css') }}">
-    <style>
-        tr {
-            height: 0px;
-        }
-    </style>
 {% endblock %}
 
 {% block javascripts %}
-    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }} "></script>
     <script>
         $(document).ready(function () {
-            var table = $('#example').DataTable({
+            var table = $('#profiles').DataTable({
                 "paging": true,
+                "scrollX": true,
                 "stateSave": true,
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/French.json",
@@ -45,252 +41,218 @@
 {% block body %}
 
     <div class="row">
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-6">
-                <h1><b>Profiles list</b></h1>
-            </div>
-            <div class="col-md-6 col-md-offset-6 text-right">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                    Appliquer un filtre
-                </button>
-                <a href="{{ path('profile_new') }}" class="btn btn-success">
-                    <i class="icon-plus"> Ajouter un profile</i>
-                </a>
-                <a href="{{ path('candidature_index') }}" data-toggle="tooltip">
-                    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom"
-                            title="Vers candidature">
-                        <i class="fa fa-share" aria-hidden="true"></i>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1><b>Profiles list</b></h1>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                        Appliquer un filtre
                     </button>
-                </a>
-                <br>
+                    <a href="{{ path('profile_new') }}" class="btn btn-success">
+                        <i class="icon-plus"> Ajouter un profile</i>
+                    </a>
+                    <a href="{{ path('candidature_index') }}" data-toggle="tooltip">
+                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom"
+                                title="Vers candidature">
+                            <i class="fa fa-share" aria-hidden="true"></i>
+                        </button>
+                    </a>
+                </div>
             </div>
+            <hr>
         </div>
-        <hr>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="profiles" class="table table-striped table-bordered" cellspacing="0"
+                   width="100%">
+                <thead>
+                <tr>
+                    <th>{{ 'entity.profile.photo' | trans }}</th>
+                    <th>{{ 'entity.profile.nom' | trans }}</th>
+                    <th>{{ 'entity.profile.coordonnees' | trans }}</th>
+                    <th>{{ 'entity.profile.cv' | trans }}</th>
+                    <th>{{ 'entity.profile.experience' | trans }}</th>
+                    <th>{{ 'entity.profile.niveau' | trans }}</th>
+                    <th>{{ 'entity.profile.reseauxsociaux' | trans }}</th>
+                    <th>{{ 'entity.profile.sivp' | trans }}</th>
+                    <th>{{ 'entity.profile.prestationsalariale' | trans }} </th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for profile in profiles %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('profile_show', { 'id': profile.id }) }}">
+                                <div id="profile-image1" class="img-circle img-responsive text-center">
+                                    {% if profile.photo != '' %}
+                                        <img alt="User Pic" src="{{ asset('uploads/photo/' ~ profile.photo) }}"
+                                             id="profile-image1" class="img-circle img-responsive">
+                                    {% else %}
+                                        <img alt="User Pic" src="{{ asset('assets/image/profile.png') }}"
+                                             id="profile-image1" class="img-circle img-responsive">
+                                    {% endif %}
 
-        <div class="clearfix"></div>
-        <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content" style="margin-top: 150px;">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true"></span></button>
-                        <h4 class="modal-title" id="myModalLabel">Columns</h4>
+                                </div>
+                            </a>
+                        </td>
+                        <td>{{ profile.nom }} {{ profile.prenom }}</td>
+                        <td>{{ profile.email }} <br>
+                            <i class="fa fa-phone" aria-hidden="true"></i> {{ profile.telephone }} <br>
+                            <i class="fa fa-skype" aria-hidden="true"></i> {{ profile.skype }} </td>
+
+                        <td>
+                            {% if profile.cv != null %}
+                                <a href="{{ asset('uploads/cv/' ~ profile.cv) }}" class="btn btn-secondary btn-sm">
+                                    <i class="fa fa-file-word-o"></i>
+                                    CV
+                                </a>
+                            {% endif %}
+                        </td>
+                        <td>{{ profile.experience }} ans</td>
+                        <td>{{ profile.niveau }}</td>
+
+                        <td>
+                            {% if profile.linkedin %}
+                                <a href="{{ profile.linkedin }}">
+                                    <i class="fa fa-linkedin" style="color:#4875B4;"
+                                       aria-hidden="true"></i></a>
+                            {% endif %}
+
+                            {% if profile.facebook %}
+                                <a href="{{ profile.facebook }}">
+                                    <i class="fa fa-facebook-square"
+                                       style="color:#3b5998;"></i>
+                                </a>
+                            {% endif %}
+                            {% if profile.github %}
+                                <a href="{{ profile.github }}">
+                                    <i class="fa fa-github" style="color: black;" aria-hidden="true"></i>
+                                </a>
+                            {% endif %}
+
+                        </td>
+                        <td>{% if profile.sivp %}
+                                <i class="fa fa-check text-success fa-2x" aria-hidden="true"></i>
+                            {% else %}
+                                <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
+                            {% endif %}
+                        </td>
+                        <td>{{ profile.prestationsalariale }}</td>
+
+                        <td>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a href="{{ path('profile_show', { 'id': profile.id }) }}">
+                                        <i class="fa fa-eye fa-2x " aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{{ path('profile_edit', { 'id': profile.id }) }}">
+                                        <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+                                    </a></div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="margin-top: 150px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true"></span></button>
+                    <h4 class="modal-title" id="myModalLabel">Columns</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="toggle-vis form-check-input" id="photos"
+                                           data-column="0">
+                                    Photos
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="toggle-vis form-check-input" id="nomprenom"
+                                           data-column="1">
+                                    Nom et prénom
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="toggle-vis form-check-input" id="coordonnees"
+                                           data-column="2">
+                                    Coordonnées
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="toggle-vis form-check-input" id="cv"
+                                           data-column="3">
+                                    Curriculum vitae
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="toggle-vis form-check-input" id="experience"
+                                           data-column="4">
+                                    Experience
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="toggle-vis form-check-input" id="niveau"
+                                           data-column="5">
+                                    Niveau
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="toggle-vis form-check-input" id="reseau"
+                                           data-column="6">
+                                    Reseaux sociaux
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="toggle-vis form-check-input" id="sivp"
+                                           data-column="7">
+                                    SIVP
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="toggle-vis form-check-input" id="pres"
+                                           data-column="8">
+                                    Prestation salariale
+                                </label>
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" id="photos"
-                                               data-column="0">
-                                        Photos
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" id="id"
-                                               data-column="1">
-                                        Id
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" id="nom"
-                                               data-column="2">
-                                        Nom
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" id="prenom"
-                                               data-column="3">
-                                        Prenom
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" id="telephone"
-                                               data-column="4">
-                                        Télephone
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" id="email"
-                                               data-column="5">
-                                        E-mail
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" id="cv"
-                                               data-column="6">
-                                        Curriculum vitae
-                                    </label>
-                                </div>
-
-                            </div>
-
-
-                            <div class="col-md-6">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" id="experience"
-                                               data-column="7">
-                                        Experience
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" id="niveau"
-                                               data-column="8">
-                                        Niveau
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" id="skype"
-                                               data-column="9">
-                                        Skype
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" id="reseau"
-                                               data-column="10">
-                                        Reseaux sociaux
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" id="sivp"
-                                               data-column="11">
-                                        SIVP
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="toggle-vis form-check-input" id="pres"
-                                               data-column="12">
-                                        Prestation salariale
-                                    </label>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default btn-primary" data-dismiss="modal">Save
-                                changes
-                            </button>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-primary" data-dismiss="modal">Save
+                            changes
+                        </button>
                     </div>
                 </div>
             </div>
-            <br>
-
-
         </div>
-        <table id="example" style="" class="table table-striped table-responsive">
-            <thead>
-            <th>{{ 'entity.profile.photo' | trans }}</th>
-            <th>{{ 'entity.profile.id' | trans }}</th>
-            <th>{{ 'entity.profile.nom' | trans }}</th>
-            <th>{{ 'entity.profile.prenom' | trans }}</th>
-            <th>{{ 'entity.profile.telephone' | trans }}</th>
-            <th><i class="fa fa-envelope-o" aria-hidden="true"></i> {{ 'entity.profile.email' | trans }}</th>
-            <th>{{ 'entity.profile.cv' | trans }}</th>
-            <th>{{ 'entity.profile.experience' | trans }}</th>
-            <th>{{ 'entity.profile.niveau' | trans }}</th>
-            <th>{{ 'entity.profile.skype' | trans }}</th>
-
-            <th>{{ 'entity.profile.reseauxsociaux' | trans }}</th>
-            <th>{{ 'entity.profile.sivp' | trans }}</th>
-            <th>{{ 'entity.profile.prestationsalariale' | trans }} </th>
-
-            <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for profile in profiles %}
-                <tr>
-                    <td><a href="{{ path('profile_show', { 'id': profile.id }) }}">
-                            <div id="profile-image1" class="img-circle img-responsive">
-                                {% if profile.photo != '' %}
-                                    <img alt="User Pic" src="{{ asset('uploads/photo/' ~ profile.photo) }}"
-                                         id="profile-image1" class="img-circle img-responsive">
-                                {% else %}
-                                    <img alt="User Pic" src="{{ asset('assets/image/profile.png') }}"
-                                         id="profile-image1" class="img-circle img-responsive">
-                                {% endif %}
-
-                            </div>
-                        </a>
-                    </td>
-                    <td>{{ profile.id }}</td>
-                    <td>{{ profile.nom }}</td>
-                    <td>{{ profile.prenom }}</td>
-                    <td>{{ profile.telephone }}</td>
-                    <td>{{ profile.email }}</td>
-                    <td>
-                        {% if profile.cv != null %}
-                            <a href="{{ asset('uploads/cv/' ~ profile.cv) }}" class="btn btn-secondary btn-sm">
-                                <i class="fa fa-file-word-o " aria-hidden="true"></i>
-                                CV
-                            </a>
-                        {% endif %}
-                    </td>
-                    <td>{{ profile.experience }} ans</td>
-                    <td>{{ profile.niveau }}</td>
-                    <td>{{ profile.skype }}</td>
-
-                    <td>
-                        {% if profile.linkedin %}
-                            <a href="{{ profile.linkedin }}">
-                                <i class="fa fa-linkedin" style="color:#4875B4;"
-                                   aria-hidden="true"></i></a>
-                        {% endif %}
-
-                        {% if profile.facebook %}
-                            <a href="{{ profile.facebook }}">
-                                <i class="fa fa-facebook-square"
-                                   style="color:#3b5998;"></i>
-                            </a>
-                        {% endif %}
-                        {% if profile.github %}
-                            <a href="{{ profile.github }}">
-                                <i class="fa fa-github" style="color: black;" aria-hidden="true"></i>
-                            </a>
-                        {% endif %}
-
-                    </td>
-                    <td>{% if profile.sivp %}
-                            <i class="fa fa-check text-success fa-2x" aria-hidden="true"></i>
-                        {% else %}
-                            <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
-                        {% endif %}
-                    </td>
-                    <td>{{ profile.prestationsalariale }}</td>
-                    <td>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <a href="{{ path('profile_show', { 'id': profile.id }) }}">
-                                    <i class="fa fa-eye fa-2x " aria-hidden="true"></i>
-                                </a>
-                            </div>
-                            <div class="col-md-6">
-                                <a href="{{ path('profile_edit', { 'id': profile.id }) }}">
-                                    <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
-                                </a></div>
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        <br>
     </div>
 
 {% endblock %}

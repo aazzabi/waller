@@ -2,7 +2,8 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.dataTables.min.css') }}">{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.dataTables.min.css') }}">
+{% endblock %}
 
 {% block javascripts %}
     <script src="//code.jquery.com/jquery-1.12.4.js"></script>
@@ -15,6 +16,10 @@
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/French.json",
                 }
+            });
+            table.columns().every(function (index) {
+                var visible = this.visible();
+                $('.toggle-vis').eq(index).prop('checked', visible);
             });
 
             $('.toggle-vis').on('change', function (e) {

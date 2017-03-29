@@ -4,12 +4,7 @@
     Liste des candidats
 {% endblock %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.dataTables.min.css') }}">
-{% endblock %}
-
 {% block javascripts %}
-    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }} "></script>
 
     <script>
         $(document).ready(function () {
@@ -87,71 +82,79 @@
             </div>
             <hr>
             <div class="clearfix"></div>
-            <br/>
-            <table id="candidature" class="display" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th>{{ 'entity.candidat.photo' | trans }}</th>
-                    <th>{{ 'entity.candidat.id' | trans }}</th>
-                    <th>{{ 'entity.candidat.nom' | trans }}</th>
-                    <th>{{ 'entity.candidat.prenom' | trans }}</th>
-                    <th><i class="fa fa-envelope-o" aria-hidden="true"></i>{{ 'entity.candidat.email' | trans }}</th>
-                    <th>{{ 'entity.candidat.poste' | trans }}</th>
-                    <th>{{ 'entity.candidat.etapecourante' | trans }}</th>
-                    <th>{{ 'entity.candidat.actions' | trans }}</th>
-                </tr>
-                </thead>
-                <tfoot>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>{{ 'entity.candidat.poste' | trans }}</th>
-                    <th>{{ 'entity.candidat.etapecourante' | trans }}</th>
-                </tr>
-                </tfoot>
-                <tbody>
-                {% for candidature in candidatures %}
-                    <tr>
-                        <td><a>
-                                <div id="profile-image1" class="img-circle img-responsive">
-                                    {% if candidature.profile.photo != '' %}
-                                        <img alt="User Pic"
-                                             src="{{ asset('uploads/photo/' ~ candidature.profile.photo) }}"
-                                             class="img-circle img-responsive">
-                                    {% else %}
-                                        <img alt="User Pic" src="{{ asset('assets/image/profile.png') }}"
-                                             id="profile-image1" class="img-circle img-responsive">
-                                    {% endif %}
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table id="candidature" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>{{ 'entity.candidat.photo' | trans }}</th>
+                            <th>{{ 'entity.candidat.id' | trans }}</th>
+                            <th>{{ 'entity.candidat.nom' | trans }}</th>
+                            <th>{{ 'entity.candidat.prenom' | trans }}</th>
+                            <th>{{ 'entity.candidat.email' | trans }}</th>
+                            <th>{{ 'entity.candidat.poste' | trans }}</th>
+                            <th>{{ 'entity.candidat.etapecourante' | trans }}</th>
+                            <th>{{ 'entity.candidat.actions' | trans }}</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>{{ 'entity.candidat.poste' | trans }}</th>
+                            <th>{{ 'entity.candidat.etapecourante' | trans }}</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        {% for candidature in candidatures %}
+                            <tr>
+                                <td><a>
+                                        <div id="profile-image1" class="img-circle img-responsive">
+                                            {% if candidature.profile.photo != '' %}
+                                                <img alt="User Pic"
+                                                     src="{{ asset('uploads/photo/' ~ candidature.profile.photo) }}"
+                                                     class="img-circle img-responsive">
+                                            {% else %}
+                                                <img alt="User Pic" src="{{ asset('assets/image/profile.png') }}"
+                                                     id="profile-image1" class="img-circle img-responsive">
+                                            {% endif %}
 
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <a>{{ candidature.id }}</a>
-                        </td>
-                        <td>{{ candidature.profile.nom }}</td>
-                        <td>{{ candidature.profile.prenom }}</td>
-                        <td>{{ candidature.profile.email }}</td>
-                        <td>{{ candidature.poste }}</td>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a>{{ candidature.id }}</a>
+                                </td>
+                                <td>{{ candidature.profile.nom }}</td>
+                                <td>{{ candidature.profile.prenom }}</td>
+                                <td>{{ candidature.profile.email }}</td>
+                                <td>{{ candidature.poste }}</td>
 
-                        <td>{{ candidature.currentEtape }}</td>
-                        <td>
-                            <ul>
-                                <li>
-                                    <a href="{{ path('candidature_edit', { 'id': candidature.id }) }}">
-                                        <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
-                                        </a>
-                                </li>
+                                <td>{{ candidature.currentEtape }}</td>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            <a href="{{ path('candidature_edit', { 'id': candidature.id }) }}">
+                                                <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
 
-                            </ul>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
