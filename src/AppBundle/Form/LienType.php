@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,7 +19,7 @@ class LienType extends AbstractType
             ->add('libelle',TextType::class,array(
                 'label'=>'entity.lien.libelle'
             ))
-            ->add('url',TextType::class,array(
+            ->add('url',UrlType::class,array(
                 'label'=>'entity.lien.url'
             ));
 //            ->add('poste');

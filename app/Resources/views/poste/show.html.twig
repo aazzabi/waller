@@ -16,6 +16,18 @@
         .table > tbody > tr > .thick-line {
             border-top: 10px solid;
         }
+        div #poste.card-block.collapse.show{
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        div #candidats.card-block.collapse.show{
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        div .card-block{
+            padding-bottom: 0px;
+            padding-top: 5px
+        }
     </style>
 {% endblock %}
 
@@ -81,21 +93,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-block" data-toggle="collapse" href="#tete">
+                        <div class="card-block" data-toggle="collapse" href="#poste">
                             <strong><h3>À propos ce poste :</h3></strong>
                         </div>
-
-                        <div class=" card-block collapse show" id="tete">
+                        <div class=" card-block collapse show" id="poste">
                             <div class="card-block">
-
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        Id
-                                    </div>
-                                    <div class="col-md-10">
-                                        {{ poste.id }}
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-md-2">
                                         Libelle :
@@ -148,13 +150,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-block" data-toggle="collapse"
-                             href="#competence">
+                        <div class="card-block" data-toggle="collapse" href="#candidats">
                             <div>
                                 <h3>Les candidats pour ce poste</h3>
                             </div>
                         </div>
-                        <div class=" card-block collapse show" id="competence">
+                        <div class=" card-block collapse show" id="candidats">
                             <div class="card-block">
                                 <div class="table-responsive">
                                     <table id="example" class="table table-striped table-bordered display">
