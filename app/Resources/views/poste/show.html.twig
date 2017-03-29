@@ -199,9 +199,11 @@
 
                                                 <td>{{ candidature.currentEtape }}</td>
                                                 <td>
-                                                    <a href="{{ path('candidature_edit', { 'id': candidature.id }) }}"><i
-                                                                class="fa fa-pencil-square-o fa-2x"
-                                                                aria-hidden="true"></i></a>
+                                                    <div class="btn-group btn-group-sm btn-group-vertical">
+                                                        <a class="btn btn-secondary" href="{{ path('candidature_edit', { 'id': candidature.id }) }} " data-toggle="tooltip"  title="Editer le profile">
+                                                            <i class="fa fa-pencil-square-o"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             {#{% endif %}#}

@@ -24,66 +24,66 @@ class ProfileType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'label' => 'entity.profile.nom'
+                'label' => 'entity.profileForm.nom'
             ])
             ->add('prenom', TextType::class, [
-                'label' => 'entity.profile.prenom'
+                'label' => 'entity.profileForm.prenom'
             ])
             ->add('telephone', TextType::class, [
-                'label' => 'entity.profile.telephone'])
+                'label' => 'entity.profileForm.telephone'])
             ->add('email', TextType::class, [
-                'label' => 'entity.profile.email'])
+                'label' => 'entity.profileForm.email'])
             ->add('cvFile', VichFileType::class, [
                 'required' => false,
-                'label' => 'entity.profile.cv',
+                'label' => 'entity.profileForm.cv',
                 'allow_delete' => true,
                 'download_link' => true
             ])
             ->add('experience', TextType::class, [
-                'label' => 'entity.profile.experience'
+                'label' => 'entity.profileForm.experience'
             ])
             ->add('niveau', TextType::class, [
-                'label' => 'entity.profile.niveau'
+                'label' => 'entity.profileForm.niveau'
             ])
             ->add('skype', TextType::class, [
-                'label' => 'entity.profile.skype',
+                'label' => 'entity.profileForm.skype',
                 'required' => false,
 
             ])
             ->add('linkedin', TextType::class, [
-                'label' => 'entity.profile.linkedin',
+                'label' => 'entity.profileForm.linkedin',
                 'required' => false,
 
             ])
             ->add('facebook', TextType::class, [
-                'label' => 'entity.profile.facebook',
+                'label' => 'entity.profileForm.facebook',
                 'required' => false,
 
             ])
             ->add('github', TextType::class, [
-                'label' => 'entity.profile.github',
+                'label' => 'entity.profileForm.github',
                 'required' => false,
 
             ])
             ->add('sivp', CheckboxType::class, [
-                'label' => 'entity.profile.sivp',
+                'label' => 'entity.profileForm.sivp',
                 'required' => false,
             ])
             ->add('prestationsalariale', TextType::class, [
-                'label' => 'entity.profile.prestationsalariale'
+                'label' => 'entity.profileForm.prestationsalariale'
             ])
             ->add('photoFile', VichFileType::class, [
                 'required' => false,
                 'allow_delete' => true,
-                'label' => 'entity.profile.photo',
+                'label' => 'entity.profileForm.photo',
                 'download_link' => true
             ])
             ->add('disponibilite', EntityType::class, [
-                'label' => 'entity.profile.disponibilite',
+                'label' => 'entity.profileForm.disponibilite',
                 'class' => Disponibilite::class
             ])
             ->add('competencesTags', TextType::class, [
-                'label' => 'entity.profile.competences',
+                'label' => 'entity.profileForm.competences',
             ]);
     }
 

@@ -37,6 +37,26 @@ return [
             'photo' => 'Photo',
             'disponibilite' => 'Disponibilité'
         ],
+        'profileForm' => [
+            'id' => 'ID',
+            'prenom' => 'Prenom',
+            'telephone' => 'Téléphone',
+            'email' => 'E-mail',
+            'nom' => 'Nom',
+            'experience' => 'Années d\'experience',
+            'niveau' => 'Niveau',
+            'skype' => 'Skype',
+            'linkedin' => 'Linkedin',
+            'competences' => 'Competence(s)',
+            'facebook' => 'Facebook',
+            'github' => 'Github',
+            'sivp' => 'SIVP',
+            'reseauxsociaux' => 'Reseaux sociaux',
+            'prestationsalariale' => 'Prestation salariale',
+            'cv' => 'Curriculum vitae  : ',
+            'photo' => 'Photo',
+            'disponibilite' => 'Disponibilité'
+        ],
         'candidat' => [
             'photo' => 'Photo',
             'group' => 'Groupe',
