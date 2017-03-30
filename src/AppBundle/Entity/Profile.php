@@ -42,14 +42,14 @@ class Profile
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=150, nullable=false)
+     * @ORM\Column(name="telephone", type="string", length=150, nullable=true)
      */
     private $telephone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
 
@@ -84,7 +84,7 @@ class Profile
     /**
      * @var string
      *
-     * @ORM\Column(name="niveau", type="string", length=150, nullable=true)
+     * @ORM\Column(name="niveau", type="string", length=150, nullable=false)
      */
     private $niveau;
 

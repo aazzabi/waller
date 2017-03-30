@@ -8,6 +8,7 @@ use AppBundle\Entity\Profile;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,8 +31,11 @@ class ProfileType extends AbstractType
                 'label' => 'entity.profileForm.prenom'
             ])
             ->add('telephone', TextType::class, [
-                'label' => 'entity.profileForm.telephone'])
-            ->add('email', TextType::class, [
+                'required' => false,
+                'label' => 'entity.profileForm.telephone'
+                ])
+            ->add('email', EmailType::class, [
+                'required' => false,
                 'label' => 'entity.profileForm.email'])
             ->add('cvFile', VichFileType::class, [
                 'required' => false,
@@ -40,9 +44,11 @@ class ProfileType extends AbstractType
                 'download_link' => true
             ])
             ->add('experience', TextType::class, [
+                'required' => true,
                 'label' => 'entity.profileForm.experience'
             ])
             ->add('niveau', TextType::class, [
+                'required' => true,
                 'label' => 'entity.profileForm.niveau'
             ])
             ->add('skype', TextType::class, [
@@ -70,6 +76,7 @@ class ProfileType extends AbstractType
                 'required' => false,
             ])
             ->add('prestationsalariale', TextType::class, [
+                'required' => false,
                 'label' => 'entity.profileForm.prestationsalariale'
             ])
             ->add('photoFile', VichFileType::class, [
@@ -83,6 +90,7 @@ class ProfileType extends AbstractType
                 'class' => Disponibilite::class
             ])
             ->add('competencesTags', TextType::class, [
+                'required' => true,
                 'label' => 'entity.profileForm.competences',
             ]);
     }

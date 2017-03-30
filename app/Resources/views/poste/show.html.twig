@@ -16,15 +16,18 @@
         .table > tbody > tr > .thick-line {
             border-top: 10px solid;
         }
-        div #poste.card-block.collapse.show{
+
+        div #poste.card-block.collapse.show {
             padding-top: 5px;
             padding-bottom: 5px;
         }
-        div #candidats.card-block.collapse.show{
+
+        div #candidats.card-block.collapse.show {
             padding-top: 5px;
             padding-bottom: 5px;
         }
-        div .card-block{
+
+        div .card-block {
             padding-bottom: 0px;
             padding-top: 5px
         }
@@ -84,8 +87,6 @@
                             à la liste</a>
                         <a class="btn btn-secondary" href="{{ path('poste_edit', { 'id': poste.id }) }}"> <i
                                     class="fa fa-pencil-square-o"></i> Edit</a>
-
-                        </a>
                     </div>
                 </div>
             </div>
@@ -99,36 +100,36 @@
                         <div class=" card-block collapse show" id="poste">
                             <div class="card-block">
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         Libelle :
                                     </div>
-                                    <div class="col-md-10">
+                                    <div class="col-md-9">
                                         {{ poste.libelle }}
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         Description :
                                     </div>
-                                    <div class="col-md-10">
+                                    <div class="col-md-9">
                                         {{ poste.description }}
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         Profile demandé:
                                     </div>
-                                    <div class="col-md-10">
+                                    <div class="col-md-9">
                                         {{ poste.profileDemande }}
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         {% if (poste.liens | length) %}
                                             Liens des annonces:
                                         {% endif %}
                                     </div>
-                                    <div class="col-md-10">
+                                    <div class="col-md-9">
                                         <ul>
                                             {% for lien in poste.liens %}
                                                 <li>
@@ -201,7 +202,9 @@
                                                 <td>{{ candidature.currentEtape }}</td>
                                                 <td>
                                                     <div class="btn-group btn-group-sm btn-group-vertical">
-                                                        <a class="btn btn-secondary" href="{{ path('candidature_edit', { 'id': candidature.id }) }} " data-toggle="tooltip"  title="Editer le profile">
+                                                        <a class="btn btn-secondary"
+                                                           href="{{ path('candidature_edit', { 'id': candidature.id }) }} "
+                                                           data-toggle="tooltip" title="Editer le profile">
                                                             <i class="fa fa-pencil-square-o"></i>
                                                         </a>
                                                     </div>

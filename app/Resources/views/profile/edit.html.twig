@@ -4,15 +4,21 @@
     Modif. du profile de {{ profile.nom }}
 {% endblock %}
 
+
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap-tagsinput.css') }}">
+    <style>
+
+    </style>
 {% endblock %}
+
 
 {% block javascripts %}
     <script src="{{ asset('assets/js/bootstrap-tagsinput.js') }} "></script>
     <script src="{{ asset('assets/js/typeahead.js') }} "></script>
     <script src="{{ asset('assets/js/competences.js') }} "></script>
 {% endblock %}
+
 
 {% block body %}
     <br>
@@ -28,12 +34,13 @@
                     <img alt="User Pic" src="{{ asset('assets/image/profile.png') }}"
                          id="profile-image1" class="img-circle img-responsive">
                 {% endif %} &nbsp;
-                <h1> Edite du profile</h1>
+                &nbsp <h1> Modification profile</h1>
             </div>
         </div>
-
         <div class="col-md-7 text-right">
-            <button type="submit" class="btn btn-secondary"><i class="fa fa-check"></i> Confirmer</button>
+            <button href="#success" data-toggle="modal" type="submit" class="btn btn-secondary">
+                <i class="fa fa-check"></i> Confirmer
+            </button>
             <a href="{{ path('profile_index') }}" class="btn btn-secondary"><i class="fa fa-undo "
                                                                                aria-hidden="true"></i>
                 Retour à la liste</a>
@@ -43,10 +50,9 @@
                 <i class="fa fa-times" aria-hidden="true"></i>
                 {{ 'entity.common.supprimer' | trans }}
             </button>
-            <br>
-            <br>
+
         </div>
-    </div>
+    </div><br>
     {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
     {% include 'profile/forms/form.html.twig' %}
     <br>
@@ -74,6 +80,18 @@
                     <input class="btn btn-danger btn_lg" type="submit" value="Delete">
                     {{ form_end(delete_form) }}
                 </div>
+            </div>
+        </div>
+    </div>
+
+    {#Modal confirmer#}
+    <div class="modal fade" id="success"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            {#<div class="modal-content">#}
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <strong>Confirmer !</strong> Modification réalisée avec succés.
+                {#</div>#}
             </div>
         </div>
     </div>

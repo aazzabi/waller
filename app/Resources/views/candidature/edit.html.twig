@@ -170,24 +170,28 @@
                     <h5 class="card-title"> Notes </h5>
                 </div>
                 <div class=" card-block collapse show" id="notes">
-                    <table>
-                        {% for note in notes %}
-                            <tr>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <td>{{ note.etape }}</td>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <td>{{ note.evaluation }}</td>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <td>{{ note.commentaire }}</td>
-                                    </div>
-                                </div>
-                            </tr>
-                        {% endfor %}
+                    {% for note in notes %}
+                        <hr>
 
-                    </table>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <strong>{{ note.etape }}</strong>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ note.commentaire }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <small>&Eacute;valuation : {{ note.evaluation }}</small>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <small>{{ note.dateCreated|date('m-d-Y H:i:s') }}</small>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
             <div class="card">
@@ -203,6 +207,7 @@
                                         :
                                     </td>
                                 </div>
+                                <td>{{ rapport.dateCreated|date('Y-m-d') }}</td>
                             </tr>
                             <tr>
                                 <div class="col-lg-6">

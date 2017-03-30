@@ -17,7 +17,7 @@ return [
             'lien' => 'Liens de recrutement'
         ],
         'note' => [
-            'commentaire' => 'Note',
+            'commentaire' => 'Note d\'etape',
             'evaluation' => 'Evaluation'
         ],
         'profile' => [
@@ -34,6 +34,9 @@ return [
             'reseauxsociaux' => 'Reseaux sociaux',
             'prestationsalariale' => 'Prestation salariale',
             'cv' => 'CV ',
+            'telephone' => 'Téléphone',
+            'email' => 'E-mail',
+            'skype' => 'Skype',
             'photo' => 'Photo',
             'disponibilite' => 'Disponibilité'
         ],
@@ -43,11 +46,11 @@ return [
             'telephone' => 'Téléphone',
             'email' => 'E-mail',
             'nom' => 'Nom',
-            'experience' => 'Années d\'experience',
-            'niveau' => 'Niveau',
+            'experience' => 'Années d\'experience*',
+            'niveau' => 'Niveau *',
             'skype' => 'Skype',
             'linkedin' => 'Linkedin',
-            'competences' => 'Competence(s)',
+            'competences' => 'Competence(s) *',
             'facebook' => 'Facebook',
             'github' => 'Github',
             'sivp' => 'SIVP',
@@ -62,7 +65,7 @@ return [
             'group' => 'Groupe',
             'workflow' => 'Workflow',
             'profile' => 'Profile',
-            'commentaire' => 'Commentaire',
+            'commentaire' => 'Commentaire globale',
             'nom' => 'Nom',
             'id' => 'ID',
             'prenom' => 'Prenom',
@@ -72,7 +75,7 @@ return [
             'actions' => 'Actions'
         ],
         'rapport' => [
-            'libelle' => 'Libellé rapport',
+            'libelle' => 'Libellé rapport de changement d\'etape *',
             ]
     ]
 ];

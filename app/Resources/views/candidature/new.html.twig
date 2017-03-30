@@ -2,6 +2,13 @@
 {% block title %}
     Ajout d'une nouvelle candidature
 {% endblock %}
+
+{% block javascripts %}
+    <script>
+
+    </script>
+{% endblock %}
+
 {% block body %}
     <div class="container-fluid ">
         <br>
@@ -11,10 +18,12 @@
                 <h1><b>Ajouter une nouvelle candidature</b></h1>
             </div>
             <div class="col-md-4 col-md-offset-6 text-right">
-                <Button type="submit" class="btn btn-primary" value="Create"><i class="fa fa-check" aria-hidden="true"></i>
+                <Button type="submit" class="btn btn-primary" value="Create"><i class="fa fa-check"
+                                                                                aria-hidden="true"></i>
                     Créer
                 </Button>
-                <a href="{{ path('candidature_index') }}" class="btn btn-secondary"><i class="fa fa-undo" aria-hidden="true"></i>
+                <a href="{{ path('candidature_index') }}" class="btn btn-secondary"><i class="fa fa-undo"
+                                                                                       aria-hidden="true"></i>
                     Retour à la liste</a>
                 <br>
 
@@ -23,9 +32,6 @@
         <hr>
         {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
         {{ form_widget(form) }}
-        <br>
-
-
         {{ form_end(form) }}
     </div>
 {% endblock %}
