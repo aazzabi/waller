@@ -644,7 +644,7 @@ class Profile
             foreach ($this->getCompetences() as $competence) {
                 $array[] = $competence->getLibelle();
             }
-            $this->competencesTags = implode(',', $array);
+            $this->competencesTags = implode(' | ', $array);
         }
         return $this->competencesTags;
     }
@@ -662,6 +662,6 @@ class Profile
 
     function __toString()
     {
-        return $this->getPrenom() . " " . $this->getNom() . " (" . $this->getEmail() . ") (". $this->getCompetencesTags(). ")";
+        return $this->getPrenom() . " " . $this->getNom() . " (" . $this->getExperience() . " d'an(s) expérience )" ;
     }
 }

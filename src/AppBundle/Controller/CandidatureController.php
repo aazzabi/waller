@@ -47,6 +47,9 @@ class CandidatureController extends Controller
      */
     public function newAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $profiles = $em->getRepository('AppBundle:Profile')->findAll();
         $candidature = new Candidature();
         $form = $this->createForm('AppBundle\Form\CandidatureType', $candidature);
         $form->handleRequest($request);
@@ -68,6 +71,8 @@ class CandidatureController extends Controller
         return $this->render('candidature/new.html.twig', array(
             'candidature' => $candidature,
             'form' => $form->createView(),
+            'profiles' => $profiles,
+
         ));
     }
 

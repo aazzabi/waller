@@ -5,8 +5,47 @@
 
 {% block javascripts %}
     <script>
+        $(document).ready(function () {
+//            $('#appbundle_candidature_profile').disabled();
+//            $('#appbundle_candidature_profile').css({
+//                'color': 'red',
+//            });
+
+            $('[id^=validate_]').on('click', function (e) {
+                var rowIndex = this.id.split("_").pop();
+                $('#appbundle_candidature_profile').val(rowIndex);
+                $('#myModal').modal('hide');
+            });
+
+            var table = $('#profiles').DataTable({
+                "paging": true,
+                "scrollX": true,
+                "stateSave": true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/French.json",
+                }
+            });
+
+            table.columns().every(function (index) {
+                var visible = this.visible();
+                $('.toggle-vis').eq(index).prop('checked', visible);
+            });
+
+            $('.toggle-vis').on('change', function (e) {
+                e.preventDefault();
+                // Get the column API object
+                var column = table.column($(this).attr('data-column'));
+                // Toggle the visibility
+                column.visible(!column.visible());
+            });
+        });
 
     </script>
+    <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }} "></script>
+{% endblock %}
+{% block stylesheets %}
+<style>
+</style>
 {% endblock %}
 
 {% block body %}
@@ -31,7 +70,8 @@
         </div>
         <hr>
         {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
-        {{ form_widget(form) }}
+        {% include 'candidature/forms/form.html.twig' %}<br>
+
         {{ form_end(form) }}
     </div>
 {% endblock %}
