@@ -104,7 +104,6 @@
                         <td>{{ profile.nom }} {{ profile.prenom }}</td>
 
                         <td>
-                            {% if profile.email and profile.telephone and profile.skype %}
                                 {% if profile.email %}
                                     {{ profile.email }} <br>
                                 {% endif %}
@@ -114,7 +113,6 @@
                                 {% if profile.skype %}
                                     <i class="fa fa-skype" aria-hidden="true"></i> {{ profile.skype }}
                                 {% endif %}
-                            {% endif %}
 
                         </td>
 
