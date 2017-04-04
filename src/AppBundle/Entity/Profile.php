@@ -644,7 +644,7 @@ class Profile
             foreach ($this->getCompetences() as $competence) {
                 $array[] = $competence->getLibelle();
             }
-            $this->competencesTags = implode(' | ', $array);
+            $this->competencesTags = implode(' , ', $array);
         }
         return $this->competencesTags;
     }
