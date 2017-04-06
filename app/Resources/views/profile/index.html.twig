@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block stylesheets %}
+    <style>
+
+    </style>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 {% endblock %}
 
@@ -32,6 +35,9 @@
                 // Toggle the visibility
                 column.visible(!column.visible());
             });
+            $('.dataTables_length').css({
+                'margin-top': '-105px'
+            });
         });
 
     </script>
@@ -47,18 +53,12 @@
                     <h1><b>Profiles list</b></h1>
                 </div>
                 <div class="col-md-6 text-right">
+                   <br>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                         Appliquer un filtre
                     </button>
                     <a href="{{ path('profile_new') }}" class="btn btn-success">
                         <i class="icon-plus"> Ajouter un profile</i>
-                    </a>
-                    <a href="{{ path('candidature_index') }}" data-toggle="tooltip">
-                        <button type="button" class="btn btn-secondary" data-toggle="tooltip"
-                                data-placement="bottom"
-                                title="Vers candidature">
-                            <i class="fa fa-share" aria-hidden="true"></i>
-                        </button>
                     </a>
                 </div>
             </div>

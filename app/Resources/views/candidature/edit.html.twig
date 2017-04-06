@@ -20,7 +20,7 @@
                     $('#appbundle_candidature_rapportCommentaire').css({
                         'box-shadow': '0 0 3px #7887AB ',
                         'margin': '10px',
-                        ' transition': '0.3s',
+                        ' transition': '0.3s'
                     });
                 } else {
                     $('#appbundle_candidature_rapportCommentaire').parent().hide();
@@ -61,7 +61,6 @@
         .card-block {
             padding: 10px;
         }
-
 
         .historique {
             height: 5px;
@@ -131,120 +130,121 @@
                 {% endif %}
             </a>
         </div>
-        <div class="col-md-11" style="margin-top: -20px;margin-left: -40px;">
-            <h3>{{ candidature.poste }}</h3>
+        <div class="col-md-11" style="margin-top: -35px;margin-left: -30px;">
+            <h2>{{ candidature.poste }}</h2>
         </div>
     </div>
 
     <div class="row">
-        <!--FORMULAIRE DU PROFILE-->
-        <div class="col-md-6">
-            {{ form_start(form) }}
-            {% include 'profile/forms/form.html.twig' %}
-            {{ form_end(form) }}
-        </div>
+    <!--FORMULAIRE DU PROFILE-->
+    <div class="col-md-6">
+        {{ form_start(form) }}
+        {% include 'profile/forms/form.html.twig' %}
+        {{ form_end(form) }}
+    </div>
 
-        <!--FORMULAIRE DU CANDIDATURE-->
+    <!--FORMULAIRE DU CANDIDATURE-->
 
-        <div class="col-md-6" >
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingOne">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true"
-                               aria-controls="collapseFive" class="">
-                                Candidature
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne"
-                         aria-expanded="true">
-                        <div class="panel-body">
-                            {{ form_start(edit_form) }}
-                            {{ form_row(edit_form.currentEtape) }}
-                            {{ form_row(edit_form.commentaire) }}
-                            {{ form_row(edit_form.noteCommentaire) }}
-                            {{ form_row(edit_form.noteEvaluation) }}
-                            <br>
-                            {{ form_row(edit_form.rapportCommentaire) }}
-                            {{ form_end(edit_form) }}
-                        </div>
+    <div class="col-md-6">
+
+        <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingFive">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion2" href="#collapseFive" aria-expanded="true"
+                           aria-controls="collapseFive" class="collapsed">
+                            Candidature
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse colapse in" role="tabpanel" aria-labelledby="headingSix"
+                     aria-expanded="true">
+                    <div class="panel-body">
+                        {{ form_start(edit_form) }}
+                        {{ form_row(edit_form.currentEtape) }}
+                        {{ form_row(edit_form.commentaire) }}
+                        {{ form_row(edit_form.noteCommentaire) }}
+                        {{ form_row(edit_form.noteEvaluation) }}
+                        <br>
+                        {{ form_row(edit_form.rapportCommentaire) }}
+                        {{ form_end(edit_form) }}
                     </div>
                 </div>
+            </div>
 
-                <!--Historique des notes-->
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingOne">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="true"
-                               aria-controls="collapseSix" class="">
-                                Notes
-                            </a>
-                        </h4>
+            <!--Historique des notes-->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingSix">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion2" href="#collapseSix" aria-expanded="true"
+                           aria-controls="collapseSix" class="collapsed">
+                            Notes
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseSix" class="panel-collapse colapse" role="tabpanel" aria-labelledby="headingSix"
+                     aria-expanded="true">
+                    <div class="panel-body">
+                        {% for note in notes %}
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <strong>{{ note.etape }}</strong>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ note.commentaire }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <small>&Eacute;valuation : {{ note.evaluation }}</small>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <small>{{ note.dateCreated|date('m-d-Y H:i:s') }}</small>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
-                    <div id="collapseSix" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne"
-                         aria-expanded="true">
-                        <div class="panel-body">
-                            {% for note in notes %}
-                                <hr>
+                </div>
+            </div>
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <strong>{{ note.etape }}</strong>
+            <!--Historique des rapports-->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingSeven">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion2" href="#collapseSeven" aria-expanded="true"
+                           aria-controls="collapseSeven" class="collapsed">
+                            Rapports
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseSeven" class="panel-collapse collapse in" role="tabpanel"
+                     aria-labelledby="headingSeven" aria-expanded="true">
+                    <div class="panel-body">
+                        <table>
+                            {% for rapport in rapports %}
+                                <tr>
+                                    <div class="col-lg-6">
+                                        <td style="color: #5193f0;font-family: Arial;font: 25px;">
+                                            {{ rapport.action.libelle }}
+                                        </td>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        {{ note.commentaire }}
+                                    <td>{{ rapport.dateCreated|date('Y-m-d') }}</td>
+                                </tr>
+                                <tr>
+                                    <div class="col-lg-6">
+                                        <td>{{ rapport.libelle }}</td>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <small>&Eacute;valuation : {{ note.evaluation }}</small>
-                                    </div>
-                                    <div class="col-md-6 text-right">
-                                        <small>{{ note.dateCreated|date('m-d-Y H:i:s') }}</small>
-                                    </div>
-                                </div>
+                                </tr>
                             {% endfor %}
-                        </div>
+                        </table>
                     </div>
                 </div>
-
-                <!--Historique des rapports-->
-
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingOne">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true"
-                               aria-controls="collapseSeven" class="">
-                                Rapports
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseSeven" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne"
-                         aria-expanded="true">
-                        <div class="panel-body">
-                            <table>
-                                {% for rapport in rapports %}
-                                    <tr>
-                                        <div class="col-lg-6">
-                                            <td style="color: #5193f0;font-family: Arial;font: 25px;">
-                                                {{ rapport.action.libelle }}
-                                            </td>
-                                        </div>
-                                        <td>{{ rapport.dateCreated|date('Y-m-d') }}</td>
-                                    </tr>
-                                    <tr>
-                                        <div class="col-lg-6">
-                                            <td>{{ rapport.libelle }}</td>
-                                        </div>
-                                    </tr>
-                                {% endfor %}
-                            </table>
-                        </div>
-                    </div>
-                </div>
+            </div>
 
         </div>
     </div>
