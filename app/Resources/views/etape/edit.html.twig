@@ -4,9 +4,10 @@
     {{ form_start(edit_form) }}
     <div class="row">
         <div class="col-md-5">
-            <h1>Etape edit</h1>
+            <h1>Editer l'etape</h1>
         </div>
         <div class="col-md-7 text-right">
+            <br>
             <button type="submit" class="btn btn-secondary"><i class="fa fa-check"></i> Confirmer</button>
             <a href="{{ path('etape_index') }}" class="btn btn-secondary"><i class="fa fa-undo " aria-hidden="true"></i>
                 Retour à la liste</a>
@@ -21,11 +22,13 @@
         </div>
     </div>
     {% form_theme edit_form 'bootstrap_3_horizontal_layout.html.twig' %}
-
-
+<br>
+<div class="panel panel-default">
+    <div class="panel-body">
     {{ form_widget(edit_form) }}
     {{ form_end(edit_form) }}
-
+    </div>
+</div>
 
 
     <!-- Modal -->

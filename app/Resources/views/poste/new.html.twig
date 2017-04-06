@@ -57,7 +57,7 @@
 
 
         function addLienFormDeleteLink($lienFormLi) {
-            var $removeFormA = $('<a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i> </a>');
+            var $removeFormA = $('<a href="#"><i style="margin-top: 20px;margin-left: 20px;" class="fa fa-trash-o fa-3x" aria-hidden="true"></i> </a>');
             $lienFormLi.append($removeFormA);
 
             $removeFormA.on('click', function (e) {
@@ -85,23 +85,22 @@
 {% block body %}
     {{ form_start(form) }}
     <div class="row">
-        <div class="col-md-5">
-            <h1>Poste creation</h1>
+        <div class="col-md-7">
+            <h1>Création d'un nouveau poste </h1>
         </div>
-        <div class="col-md-7 text-right">
+        <div class="col-md-5 text-right">
+            <br>
             <input id="appbundle_submit" class="btn btn-success" type="submit" value="Create"/>
             <a class="btn btn-secondary" href="{{ path('poste_index') }}"><i class="fa fa-undo " aria-hidden="true"></i>
-                Back to the list</a>
+                Retour à la liste</a>
         </div>
     </div>
     <hr>
     {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
-
-
-    <ul>
-        <li>
-        </li>
-    </ul>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}

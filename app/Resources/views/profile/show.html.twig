@@ -15,6 +15,13 @@
             .but {
                 display: none;
             }
+            .img-circle{
+                width: 45px;
+                height: 45px;
+            }
+        }
+        .card{
+            width: 1000px;;
         }
     </style>
 {% endblock %}
@@ -29,13 +36,13 @@
 {% block body %}
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <div class="card">
+            <div class="card" style="width: 700px;">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <a>
                                 {% if profile.photo != '' %}
-                                    <img alt="User Pic"
+                                    <img style="width: 60px;" alt="User Pic"
                                          src="{{ asset('uploads/photo/' ~ profile.photo) }}"
                                          class="img-circle img-responsive">
                                 {% else %}
@@ -44,7 +51,7 @@
                                 {% endif %}
                             </a>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             <h1>{{ profile.prenom }} {{ profile.nom }}</h1>
                         </div>
                     </div>

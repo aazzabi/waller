@@ -60,8 +60,8 @@
     <style>
         .card-block {
             padding: 10px;
-
         }
+
 
         .historique {
             height: 5px;
@@ -94,13 +94,13 @@
 {% block body %}
     {% form_theme form 'bootstrap_3_layout.html.twig' %}
     {% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
-
     <!-- ENTETE DE LA PAGE , + Boutton -->
     <div class="row">
         <div class="col-md-6">
-            <h2>Candidature : {{ candidature.profile.prenom }} {{ candidature.profile.nom }}</h2>
+            <h1>Candidature : {{ candidature.profile.prenom }} {{ candidature.profile.nom }}</h1>
         </div>
-        <div class="col-md-6 col-md-offset-6 text-right">
+        <div class="col-md-6 text-right">
+            <br>
             <button type="button" class="btn btn-success" id="appbundle_submit">
                 <i class="fa fa-check"></i>
                 Enregistrer
@@ -146,78 +146,105 @@
 
         <!--FORMULAIRE DU CANDIDATURE-->
 
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-block" data-toggle="collapse"
-                     href="#candidature">
-                    <h5 class="card-title"> Candidature </h5>
+        <div class="col-md-6" >
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true"
+                               aria-controls="collapseFive" class="">
+                                Candidature
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne"
+                         aria-expanded="true">
+                        <div class="panel-body">
+                            {{ form_start(edit_form) }}
+                            {{ form_row(edit_form.currentEtape) }}
+                            {{ form_row(edit_form.commentaire) }}
+                            {{ form_row(edit_form.noteCommentaire) }}
+                            {{ form_row(edit_form.noteEvaluation) }}
+                            <br>
+                            {{ form_row(edit_form.rapportCommentaire) }}
+                            {{ form_end(edit_form) }}
+                        </div>
+                    </div>
                 </div>
-                <div class=" card-block collapse show" id="candidature">
-                    {{ form_start(edit_form) }}
-                    {{ form_row(edit_form.currentEtape) }}
-                    {{ form_row(edit_form.commentaire) }}
-                    {{ form_row(edit_form.noteCommentaire) }}
-                    {{ form_row(edit_form.noteEvaluation) }}
-                    <br>
-                    {{ form_row(edit_form.rapportCommentaire) }}
-                    {{ form_end(edit_form) }}
-                </div>
-            </div>
-            <!--Historique des notes-->
-            <div class="card">
-                <div class="card-block" data-toggle="collapse"
-                     href="#notes">
-                    <h5 class="card-title"> Notes </h5>
-                </div>
-                <div class=" card-block collapse show" id="notes">
-                    {% for note in notes %}
-                        <hr>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <strong>{{ note.etape }}</strong>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                {{ note.commentaire }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <small>&Eacute;valuation : {{ note.evaluation }}</small>
-                            </div>
-                            <div class="col-md-6 text-right">
-                                <small>{{ note.dateCreated|date('m-d-Y H:i:s') }}</small>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-block" data-toggle="collapse" href="#rapports">
-                    <h5 class="card-title"> Rapports </h5>
-                </div>
-                <div class=" card-block collapse show" id="rapports">
-                    <table>
-                        {% for rapport in rapports %}
-                            <tr>
-                                <div class="col-lg-6">
-                                    <td style="color: #5193f0;font-family: Arial;font: 25px;">{{ rapport.action.libelle }}
-                                        :
-                                    </td>
+                <!--Historique des notes-->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="true"
+                               aria-controls="collapseSix" class="">
+                                Notes
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseSix" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne"
+                         aria-expanded="true">
+                        <div class="panel-body">
+                            {% for note in notes %}
+                                <hr>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <strong>{{ note.etape }}</strong>
+                                    </div>
                                 </div>
-                                <td>{{ rapport.dateCreated|date('Y-m-d') }}</td>
-                            </tr>
-                            <tr>
-                                <div class="col-lg-6">
-                                    <td>{{ rapport.libelle }}</td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {{ note.commentaire }}
+                                    </div>
                                 </div>
-                            </tr>
-                        {% endfor %}
-                    </table>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <small>&Eacute;valuation : {{ note.evaluation }}</small>
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                        <small>{{ note.dateCreated|date('m-d-Y H:i:s') }}</small>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+                <!--Historique des rapports-->
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true"
+                               aria-controls="collapseSeven" class="">
+                                Rapports
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseSeven" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne"
+                         aria-expanded="true">
+                        <div class="panel-body">
+                            <table>
+                                {% for rapport in rapports %}
+                                    <tr>
+                                        <div class="col-lg-6">
+                                            <td style="color: #5193f0;font-family: Arial;font: 25px;">
+                                                {{ rapport.action.libelle }}
+                                            </td>
+                                        </div>
+                                        <td>{{ rapport.dateCreated|date('Y-m-d') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <div class="col-lg-6">
+                                            <td>{{ rapport.libelle }}</td>
+                                        </div>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
         </div>
     </div>

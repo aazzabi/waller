@@ -58,7 +58,7 @@
 
 
         function addLienFormDeleteLink($lienFormLi) {
-            var $removeFormA = $('<a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i> </a>');
+            var $removeFormA = $('<a href="#"><i style="margin-top: 20px;margin-left: 20px;" class="fa fa-trash-o fa-3x" aria-hidden="true"></i> </a>');
             $lienFormLi.append($removeFormA);
 
             $removeFormA.on('click', function (e) {
@@ -105,10 +105,12 @@
         </div>
     </div>
     {% form_theme edit_form 'bootstrap_3_horizontal_layout.html.twig' %}
-
-    {{ form_widget(edit_form) }}
+<div class="panel panel-default">
+    <div class="panel-body">
+        {{ form_widget(edit_form) }}
     {{ form_end(edit_form) }}
-
+</div>
+</div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
@@ -128,7 +130,7 @@
                     <button type="button" class="btn btn-default btn-secondary" data-dismiss="modal"> Annuler
                     </button>
                     {{ form_start(delete_form) }}
-                    <input class="btn btn-danger btn_lg" type="submit" value="Delete">
+                    <input class="btn btn-danger btn_lg" type="submit" value="Supprimer">
                     {{ form_end(delete_form) }}
                 </div>
             </div>
