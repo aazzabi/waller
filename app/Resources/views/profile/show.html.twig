@@ -19,10 +19,11 @@
                 width: 45px;
                 height: 45px;
             }
+            .card{
+                 width: 10000px;;
+             }
         }
-        .card{
-            width: 1000px;;
-        }
+
     </style>
 {% endblock %}
 {% block javascripts %}
@@ -36,36 +37,37 @@
 {% block body %}
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <div class="card" style="width: 700px;">
+            <div class="card" align="center" style="width: 700px;">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-2" >
                             <a>
                                 {% if profile.photo != '' %}
                                     <img style="width: 60px;" alt="User Pic"
                                          src="{{ asset('uploads/photo/' ~ profile.photo) }}"
                                          class="img-circle img-responsive">
                                 {% else %}
-                                    <img alt="User Pic" src="{{ asset('assets/image/profile.png') }}"
+                                    <img style="width: 60px;" alt="User Pic" src="{{ asset('assets/image/profile.png') }}"
                                          id="profile-image1" class="img-circle img-responsive">
                                 {% endif %}
                             </a>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-10">
                             <h1>{{ profile.prenom }} {{ profile.nom }}</h1>
                         </div>
                     </div>
                 </div>
+                <hr>
                 <div class="card-block"><br>
                     <table style="width: 100%;" align="center">
                         {% if profile.telephone %}
                             <tr>
                                 <td>
-                                    <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.telephone' | trans }}:
+                                    <div class="col-md-5 col-xs-6 tital ">{{ 'entity.profile.telephone' | trans }}:
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="col-sm-7">{{ profile.telephone }}</div>
+                                    <div class="col-md-7">{{ profile.telephone }}</div>
                                 </td>
                             </tr>
 
@@ -123,7 +125,6 @@
                         <tr>
                             <td>
                                 <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.experience' | trans }}
-                                    :
                                 </div>
                             </td>
                             <td>
@@ -288,7 +289,7 @@
                         {% endif %}
 
                     </table>
-
+<br>
                 </div>
             </div>
             <br>

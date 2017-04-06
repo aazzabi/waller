@@ -24,7 +24,7 @@ return [
             'id' => 'ID',
             'coordonnees' => 'Coordonnées',
             'nom' => 'Nom Prénom',
-            'experience' => 'Éxperience',
+            'experience' => 'Éxperience ',
             'niveau' => 'Niveau',
             'linkedin' => 'Linkedin',
             'competences' => 'Competence(s)',
