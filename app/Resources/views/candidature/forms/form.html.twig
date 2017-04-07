@@ -3,10 +3,12 @@
 {% if not profileSelected  %}
 
 <div class="row">
-    <div class="col-md-1" >
+    <div class="col-md-1" style="font-size: 11px ! important;
+        text-transform: uppercase;font-weight:600;" >
     {{ form_label(form.profile) }}
 </div>
-    <div class="col-md-11 ">&nbsp;&nbsp;
+
+    <div style="padding-left: 70px;" class="col-md-11 ">&nbsp;&nbsp;
         <button type="button" class="btn btn-sm btn-secondary " data-toggle="modal" data-target="#myModal">Choisir un profile</button>
     </div>
 </div>
