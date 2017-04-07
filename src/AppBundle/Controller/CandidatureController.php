@@ -48,9 +48,17 @@ class CandidatureController extends Controller
     public function newAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $id = $request->query->get('id');
 
         $profiles = $em->getRepository('AppBundle:Profile')->findAll();
         $candidature = new Candidature();
+
+        if (isset($id) && $id) {
+            $profileSelected = $em->getRepository('AppBundle:Profile')->find($id);
+            $candidature->setProfile($profileSelected);
+
+        }
+
         $form = $this->createForm('AppBundle\Form\CandidatureType', $candidature);
         $form->handleRequest($request);
 
@@ -72,6 +80,7 @@ class CandidatureController extends Controller
             'candidature' => $candidature,
             'form' => $form->createView(),
             'profiles' => $profiles,
+            'profileSelected' => isset($profileSelected) ? $profileSelected : null,
 
         ));
     }

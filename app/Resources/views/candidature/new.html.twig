@@ -11,7 +11,9 @@
 //                'color': 'red',
 //            });
 
+
             $('#appbundle_candidature_profile').hide();
+
 
             $('[id^=validate_]').on('click', function (e) {
                 var rowIndex = this.id.split("_").pop();
@@ -47,13 +49,7 @@
 {% endblock %}
 {% block stylesheets %}
     <style>
-        #appbundle_candidature_profile .col-sm-2.control-label {
-        display: none;
-        font-family: Montserrat ;
-        font-size: 11px;
-        text-transform: uppercase;
-        font-weight: 600;
-        }
+
     </style>
 {% endblock %}
 

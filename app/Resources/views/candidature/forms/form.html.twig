@@ -1,15 +1,16 @@
 {{ form_row(form.currentEtape) }}
 {{ form_row(form.group) }}
+{% if not profileSelected  %}
 
-<!-- Trigger the modal with a button -->
 <div class="row">
-    <div class="col-md-2" >
+    <div class="col-md-1" >
     {{ form_label(form.profile) }}
 </div>
-    <div class="col-md-10 ">&nbsp;&nbsp;
+    <div class="col-md-11 ">&nbsp;&nbsp;
         <button type="button" class="btn btn-sm btn-secondary " data-toggle="modal" data-target="#myModal">Choisir un profile</button>
     </div>
 </div>
+{% endif %}
 {{ form_widget(form.profile) }}
 
 <!-- Modal -->

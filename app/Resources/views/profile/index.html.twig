@@ -53,7 +53,7 @@
                     <h1><b>Profiles list</b></h1>
                 </div>
                 <div class="col-md-6 text-right">
-                   <br>
+                    <br>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                         Appliquer un filtre
                     </button>
@@ -102,18 +102,18 @@
                             </a>
                         </td>
                         <td>{{ profile.nom }}<br>
-                                {{ profile.prenom }}</td>
+                            {{ profile.prenom }}</td>
 
                         <td>
-                                {% if profile.email %}
-                                    {{ profile.email }} <br>
-                                {% endif %}
-                                {% if profile.telephone %}
-                                    <i class="fa fa-phone" aria-hidden="true"></i> {{ profile.telephone }} <br>
-                                {% endif %}
-                                {% if profile.skype %}
-                                    <i class="fa fa-skype" aria-hidden="true"></i> {{ profile.skype }}
-                                {% endif %}
+                            {% if profile.email %}
+                                {{ profile.email }} <br>
+                            {% endif %}
+                            {% if profile.telephone %}
+                                <i class="fa fa-phone" aria-hidden="true"></i> {{ profile.telephone }} <br>
+                            {% endif %}
+                            {% if profile.skype %}
+                                <i class="fa fa-skype" aria-hidden="true"></i> {{ profile.skype }}
+                            {% endif %}
 
                         </td>
 
@@ -166,7 +166,7 @@
                                    data-toggle="tooltip" title="Editer le profile">
                                     <i class="fa fa-pencil-square-o"></i>
                                 </a>
-                                <a class="btn btn-secondary" href="{{ path('candidature_new', { 'id': profile.id }) }}"
+                                <a class="btn btn-secondary" href="{{ path('candidature_new', { 'id': profile.id } ) }}"
                                    data-toggle="tooltip" title="Convoquer">
                                     <i class="fa fa-check text-success"></i>
                                 </a>
@@ -185,7 +185,7 @@
     {#Modal de filtrage #}
     <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
-            <div class="modal-content" style="margin-top: 150px;">
+            <div class="modal-content" >
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true"></span></button>
@@ -264,9 +264,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-primary" data-dismiss="modal">Save
-                            changes
+                    <hr>
+                    <div class="modal-footer" style="padding-bottom:0px;">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">
+                            Enregister
                         </button>
                     </div>
                 </div>
