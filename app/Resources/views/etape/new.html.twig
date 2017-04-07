@@ -1,4 +1,7 @@
 {% extends 'base.html.twig' %}
+{% block title %}
+Ajout d'une etape
+{% endblock %}
 
 {% block body %}
 
@@ -9,9 +12,9 @@
         </div>
         <div class="col-md-7 text-right">
             <br>
-            <input class="btn btn-success" type="submit" value="Create"/>
+            <input class="btn btn-success" type="submit" value="Créer"/>
             <a class="btn btn-secondary" href="{{ path('etape_index') }}"><i class="fa fa-undo " aria-hidden="true"></i>
-                Back to the list</a>
+                Retour à la liste</a>
         </div>
     </div>
     <br>

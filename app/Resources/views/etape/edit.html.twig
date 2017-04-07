@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+Editer l'etape {{ etape.libelle }}
+{% endblock %}
 {% block body %}
     {{ form_start(edit_form) }}
     <div class="row">
@@ -30,6 +33,7 @@
     </div>
 </div>
 
+    {{ form_start(delete_form) }}
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -49,7 +53,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-secondary" data-dismiss="modal"> Annuler
                     </button>
-                    {{ form_start(delete_form) }}
                     <input class="btn btn-danger btn_lg" type="submit" value="Delete">
                     {{ form_end(delete_form) }}
                 </div>

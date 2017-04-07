@@ -40,7 +40,7 @@ class Lien
      *
      * @ORM\ManyToOne(targetEntity="Poste")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="poste_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="poste_id", referencedColumnName="id", onDelete="CASCADE")
      * })
      *
      */

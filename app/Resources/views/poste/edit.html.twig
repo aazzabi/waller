@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Editer le poste {{ poste.libelle }}
+{% endblock %}
+
+
 {% block javascripts %}
     <script>
         var $collectionHolder;
@@ -85,13 +90,14 @@
 {% endblock %}
 
 {% block body %}
+    {{ form_start(delete_form) }}
     {{ form_start(edit_form) }}
     <div class="row">
         <div class="col-md-5">
             <h1>Poste edit</h1>
         </div>
         <div class="col-md-7 text-right">
-            <button type="submit" class="btn btn-secondary"><i class="fa fa-check"></i> Confirmer</button>
+                <button type="submit" class="btn btn-secondary"><i class="fa fa-check"></i> Confirmer</button>
             <a href="{{ path('poste_index') }}" class="btn btn-secondary"><i class="fa fa-undo " aria-hidden="true"></i>
                 Retour à la liste</a>
 
@@ -105,13 +111,37 @@
         </div>
     </div>
     {% form_theme edit_form 'bootstrap_3_horizontal_layout.html.twig' %}
-<div class="panel panel-default">
-    <div class="panel-body">
-        {{ form_widget(edit_form) }}
-    {{ form_end(edit_form) }}
-</div>
-</div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {{ form_widget(edit_form) }}
+            {{ form_end(edit_form) }}
+        </div>
+    </div>
     <!-- Modal -->
+    {#<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"#}
+    {#aria-hidden="true">#}
+    {#<div class="modal-dialog" role="document">#}
+    {#<div class="modal-content">#}
+    {#<div class="modal-header">#}
+    {#<h5 class="modal-title" id="exampleModalLabel"> {{ 'entity.common.supprimer' | trans }}#}
+    {#</h5>#}
+    {#<button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+    {#<span aria-hidden="true">&times;</span>#}
+    {#</button>#}
+    {#</div>#}
+    {#<div class="modal-body">#}
+    {#Voulez-vous vraiement supprimer ce profile ?#}
+    {#</div>#}
+    {#<div class="modal-footer">#}
+    {#<button type="button" class="btn btn-default btn-secondary" data-dismiss="modal"> Annuler#}
+    {#</button>#}
+    {#{{ form_start(delete_form) }}#}
+    {#<input class="btn btn-danger btn_lg" type="submit" value="Supprimer">#}
+    {#{{ form_end(delete_form) }}#}
+    {#</div>#}
+    {#</div>#}
+    {#</div>#}
+    {#</div>#}
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -129,12 +159,10 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-secondary" data-dismiss="modal"> Annuler
                     </button>
-                    {{ form_start(delete_form) }}
                     <input class="btn btn-danger btn_lg" type="submit" value="Supprimer">
                     {{ form_end(delete_form) }}
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}
