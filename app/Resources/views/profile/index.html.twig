@@ -58,7 +58,7 @@
                         Appliquer un filtre
                     </button>
                     <a href="{{ path('profile_new') }}" class="btn btn-success">
-                        <i class="icon-plus"> Ajouter un profile</i>
+                        <i class="icon-plus"> Ajouter un profile </i>
                     </a>
                 </div>
             </div>
@@ -94,7 +94,7 @@
                                         <img alt="User Pic" src="{{ asset('uploads/photo/' ~ profile.photo) }}"
                                              id="profile-image1" class="img-circle img-responsive">
                                     {% else %}
-                                        <img alt="User Pic" src="{{ asset('assets/image/profile.png') }}"
+                                        <img alt="User Pic" src="{{ asset('assets/img/profile.png') }}"
                                              id="profile-image1" class="img-circle img-responsive">
                                     {% endif %}
 
@@ -166,6 +166,11 @@
                                    data-toggle="tooltip" title="Editer le profile">
                                     <i class="fa fa-pencil-square-o"></i>
                                 </a>
+                                <a class="btn btn-secondary" href="{{ path('candidature_new', { 'id': profile.id }) }}"
+                                   data-toggle="tooltip" title="Convoquer">
+                                    <i class="fa fa-check text-success"></i>
+                                </a>
+
                             </div>
                         </td>
                     </tr>
