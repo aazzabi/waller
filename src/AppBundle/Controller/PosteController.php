@@ -45,7 +45,6 @@ class PosteController extends Controller
     public function newAction(Request $request)
     {
         $poste = new Poste();
-        $poste->addLien(new Lien());
         $form = $this->createForm(PosteType::class, $poste);
         $form->handleRequest($request);
 

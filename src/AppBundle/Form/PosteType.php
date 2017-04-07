@@ -35,7 +35,7 @@ class PosteType extends AbstractType
             ))
             ->add('liens', CollectionType::class, array(
                 'label' => 'entity.poste.lien',
-                'required'=>true,
+                'required'=>false,
                 'by_reference' => false,
                 'allow_delete' => true,
                 'allow_add' => true,
