@@ -320,7 +320,6 @@
                         Editer
                     </a>
                 </div>
-                {{ form_start(delete_form) }}
                 <div class="col-md-3">
                     <button type="button" class="btn btn-danger btn_lg" data-toggle="modal" data-target="#myModal">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -331,6 +330,8 @@
             <br>
         </div>
     </div>
+    {{ form_start(delete_form) }}
+
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">

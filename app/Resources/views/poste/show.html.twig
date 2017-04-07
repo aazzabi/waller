@@ -73,7 +73,6 @@
 {% endblock %}
 {% block body %}
     <div class="container">
-        {{ form_start(delete_form) }}
         <div class="row">
             <div class="col-md-4">
                 <h1><b>Poste </b></h1>
@@ -235,7 +234,7 @@
         </div>
     </div>
 
-
+    {{ form_start(delete_form) }}
     <!--Début du modal-->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel"
