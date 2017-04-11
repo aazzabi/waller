@@ -26,9 +26,50 @@ class ProfileController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $profiles = $em->getRepository('AppBundle:Profile')->findAll();
+        $disponiblites = $em->getRepository('AppBundle:Disponibilite')->findAll();
+        $postes = $em->getRepository('AppBundle:Poste')->findAll();
+        $groupes = $em->getRepository('AppBundle:Group')->findAll();
+        $competences = $em->getRepository('AppBundle:Competence')->findAll();
 
         return $this->render('profile/index.html.twig', array(
             'profiles' => $profiles,
+            'disponibilites' => $disponiblites,
+            'postes' => $postes,
+            'groupes' => $groupes,
+            'competences' => $competences,
+        ));
+    }
+
+    /**
+     * Lists all profile entities.
+     *
+     * @Route("/", name="profile_search")
+     * @Method("POST")
+     */
+    public function searchAction()
+    {
+        /* validate search input */
+
+//       select(array('p'))// string 'u' is converted to array internally
+//        ->from('Profile', 'p')
+//
+//    ;
+//        ))
+        /*  return found profiles and search input*/
+        $em = $this->getDoctrine()->getManager();
+
+        $profiles = $em->getRepository('AppBundle:Profile')->findAll();
+        $disponiblites = $em->getRepository('AppBundle:Disponibilite')->findAll();
+        $postes = $em->getRepository('AppBundle:Poste')->findAll();
+        $groupes = $em->getRepository('AppBundle:Group')->findAll();
+        $competences = $em->getRepository('AppBundle:Competence')->findAll();
+ $this->findByAuthorAndDate();
+        return $this->render('profile/index.html.twig', array(
+            'profiles' => $profiles,
+            'disponibilites' => $disponiblites,
+            'postes' => $postes,
+            'groupes' => $groupes,
+            'competences' => $competences,
         ));
     }
 
@@ -156,4 +197,31 @@ class ProfileController extends Controller
     }
 
 
+    public function findByAuthorAndDate()
+    {
+        /* call search service */
+        $comp = ($_POST["competence"]);
+        $disp = ($_POST["disponibilite"]);
+        $exper = ($_POST["experience"]);
+        //$sivp = ($_POST["sivp"]);
+        $pos = ($_POST["poste"]);
+        $grp = ($_POST["groupe"]);
+
+        $qb = $this->createQueryBuilder('p');
+
+        $qb->where('p.competence= :competence')
+            ->setParameter('competence', $comp)
+            ->andWhere('p.dispoibilite =:disponibilite')
+            ->setParameter('disponibilite', $disp)
+            ->andWhere('p.experience =:experience')
+            ->setParameter('experience', $exper)
+            ->andWhere('p.sivp =:sivp')
+            ->setParameter('sivp', $sivp)
+            ->andWhere('p.dispoibilite =:disponibilite')
+            ->setParameter('disponibilite', $disp);
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
 }
