@@ -26,11 +26,11 @@
                 <h4 class="modal-title">Liste des profiles</h4>
             </div>
             <div class="modal-body">
-                <table id="profiles" class="table table-striped table-bordered" cellspacing="0">
+                <table id="profiles-2" class="table table-striped table-bordered" cellspacing="0">
                     <thead>
                     <tr>
                         <th>{{ 'entity.profile.photo' | trans }}</th>
-                        <th style="width: 150.556px;"> {{ 'entity.profile.nom' | trans }}</th>
+                        <th>{{ 'entity.profile.nom' | trans }}</th>
                         <th>{{ 'entity.profile.experience' | trans }}</th>
                         <th>{{ 'entity.profile.niveau' | trans }}</th>
                         <th>{{ 'entity.profile.competences' | trans }}</th>
@@ -42,20 +42,18 @@
                     {% for profile in profiles %}
                         <tr class="trChoisie" id="{{ profile.id }}">
                             <td>
-                                <a>
-                                    <div id="profile-image1" class="img-responsive text-center">
-                                        {% if profile.photo != '' %}
-                                            <img alt="User Pic" style="width: 30px;height: 30px;"
-                                                 src="{{ asset('uploads/photo/' ~ profile.photo) }}"
-                                                 id="profile-image1" class="img-circle img-responsive">
-                                        {% else %}
-                                            <img alt="User Pic" style="width: 30px;height: 30px;"
-                                                 src="{{ asset('assets/img/profile.png') }}"
-                                                 id="profile-image1" class="img-circle img-responsive">
-                                        {% endif %}
+                                <div id="profile-image1" class="img-responsive text-center">
+                                    {% if profile.photo != '' %}
+                                        <img alt="User Pic" style="width: 30px;height: 30px;"
+                                             src="{{ asset('uploads/photo/' ~ profile.photo) }}"
+                                             id="profile-image1" class="img-circle img-responsive"/>
+                                    {% else %}
+                                        <img alt="User Pic" style="width: 30px;height: 30px;"
+                                             src="{{ asset('assets/img/profile.png') }}"
+                                             id="profile-image1" class="img-circle img-responsive"/>
+                                    {% endif %}
 
-                                    </div>
-                                </a>
+                                </div>
                             </td>
                             <td>{{ profile.nom }} {{ profile.prenom }}</td>
                             <td>{{ profile.experience }} ans</td>

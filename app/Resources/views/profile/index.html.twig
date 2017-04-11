@@ -61,6 +61,97 @@
     </div>
 
     <hr>
+    <div class="panel panel-default" style="padding: 25px; ">
+        <div class="row">
+            <form id="form-project" action="{{ path('profile_search') }}"  method="POST" role="form" autocomplete="off" novalidate="novalidate">
+                <p class="m-t-10">Informations concernant le Profil</p>
+                <div class="form-group-attached">
+                    <div class="row clearfix">
+                        <div class="col-sm-3">
+                            <div class="form-group form-group-default required" aria-required="true">
+                                <label>Disponibilité</label>
+                                <select class="cs-select cs-skin-slide cs-transparent form-control"
+                                        name="disponibilite"
+                                        data-init-plugin="cs-select">
+                                    {% for disponibilte in disponibilites %}
+                                        <option value="{{ disponibilte.libelle }}"> {{ disponibilte.libelle }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group form-group-default">
+                                <label>Experiences</label>
+                                <input type="text" class="form-control" name="experience">
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <div class="form-group form-group-default input-group">
+                                <label class="inline">SIVP</label>
+                                <span name="sivp" class="input-group-addon bg-transparent">
+                                    <input type="checkbox" data-init-plugin="switchery" data-size="small"
+                                           data-color="primary" checked="checked" data-switchery="true"
+                                           style="display: none;">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group form-group-default">
+                                <label>Compétence
+                                </label>
+                                <select class="cs-select cs-skin-slide cs-transparent form-control"
+                                        name="competence"
+                                        data-init-plugin="cs-select">
+                                    {% for groupe in groupes %}
+                                        <option value="{{ groupe.name }}"> {{ groupe.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="m-t-10">Informations Concernant la Candidature</p>
+                <div class="form-group-attached">
+                    <div class="row clearfix">
+
+                        <div class="col-sm-4">
+                            <div class="form-group form-group-default">
+                                <label>Poste
+                                </label>
+                                <select name="poste"
+                                        class="cs-select cs-skin-slide cs-transparent form-control"
+                                        data-init-plugin="cs-select">
+                                    {% for poste in postes %}
+                                        <option value="{{ poste.libelle }}"> {{ poste.libelle }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group form-group-default">
+                                <label>Présenté par
+                                </label>
+                                <select name="groupe" class="cs-select cs-skin-slide cs-transparent form-control"
+                                        data-init-plugin="cs-select">
+                                    {% for groupe in groupes %}
+                                        <option value="{{ groupe.name }}"> {{ groupe.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+
+                <button class="btn btn-success" type="submit">Chercher</button>
+
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
 
     <div class="row">
         <div class="col-md-12">
@@ -71,7 +162,7 @@
                     <th>{{ 'entity.profile.nom' | trans }}</th>
                     <th>{{ 'entity.profile.coordonnees' | trans }}</th>
                     <th>{{ 'entity.profile.cv' | trans }}</th>
-                    <th>{{ 'entity.profile.experience' | trans }}</th>
+                    <th>{{ 'entity.profile.experience' | trans }}(ans)</th>
                     <th>{{ 'entity.profile.niveau' | trans }}</th>
                     <th>{{ 'entity.profile.reseauxsociaux' | trans }}</th>
                     <th>{{ 'entity.profile.sivp' | trans }}</th>
@@ -120,7 +211,7 @@
                                 </a>
                             {% endif %}
                         </td>
-                        <td>{{ profile.experience }} ans</td>
+                        <td>{{ profile.experience }}</td>
                         <td>{{ profile.niveau }}</td>
 
                         <td>
@@ -174,8 +265,6 @@
             </table>
         </div>
     </div>
-
-
 
     {#Modal de filtrage #}
     <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

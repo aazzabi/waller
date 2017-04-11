@@ -77,7 +77,7 @@ class Profile
     /**
      * @var integer
      *
-     * @ORM\Column(name="experience", type="string", length=150, nullable=false)
+     * @ORM\Column(name="experience", type="integer",  nullable=true)
      */
     private $experience;
 
