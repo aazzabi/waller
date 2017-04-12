@@ -63,7 +63,8 @@
     <hr>
     <div class="panel panel-default" style="padding: 25px; ">
         <div class="row">
-            <form id="form-project" action="{{ path('profile_search') }}"  method="POST" role="form" autocomplete="off" novalidate="novalidate">
+            <form id="form-project" action="{{ path('profile_search') }}" method="POST" role="form" autocomplete="off"
+                  novalidate="novalidate">
                 <p class="m-t-10">Informations concernant le Profil</p>
                 <div class="form-group-attached">
                     <div class="row clearfix">
@@ -76,6 +77,7 @@
                                     {% for disponibilite in disponibilites %}
                                         <option value="{{ disponibilite.libelle }}"> {{ disponibilite.libelle }}</option>
                                     {% endfor %}
+                                    <option></option>
                                 </select>
                             </div>
                         </div>
@@ -89,8 +91,8 @@
                             <div class="form-group form-group-default input-group">
                                 <label class="inline">SIVP</label>
                                 <span name="sivp" class="input-group-addon bg-transparent">
-                                    <input type="checkbox" data-init-plugin="switchery" data-size="small"
-                                           data-color="primary" checked="checked" data-switchery="true"
+                                    <input type="checkbox" data-init-plugin="switchery" name="sivp" data-size="small"
+                                           data-color="primary" data-switchery="true"
                                            style="display: none;">
                                 </span>
                             </div>
@@ -105,6 +107,8 @@
                                     {% for competence in competences %}
                                         <option value="{{ competence.libelle }}"> {{ competence.libelle }}</option>
                                     {% endfor %}
+                                    <option></option>
+
                                 </select>
                             </div>
                         </div>

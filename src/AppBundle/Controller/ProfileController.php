@@ -49,18 +49,8 @@ class ProfileController extends Controller
     public function searchAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $disp = $request->request
-            ->get('disponibilite');
-        $exper = $request->request
-            ->get('experience');
-        $sivp = $request->request
-            ->get('sivp');
-        $comp = $request->request
-            ->get('competences');
-        $results = $em->getRepository(Profile::class)->search($disp,$exper,$sivp,$comp);
-        print_r($results);
-        die;
+        $results = $em->getRepository(Profile::class)->search($request->request->all());
+        print_r($results);die;
         return new JsonResponse($results);
     }
 

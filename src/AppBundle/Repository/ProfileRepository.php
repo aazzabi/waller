@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Candidature;
+use AppBundle\Entity\Competence;
 use AppBundle\Entity\Poste;
 use AppBundle\Entity\Profile;
 
@@ -14,22 +15,63 @@ use AppBundle\Entity\Profile;
  */
 class ProfileRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function search($disp, $exper, $sivp, $comp)
+    public function search($input)
     {
-        return $this->_em->getRepository(Candidature::class)->createQueryBuilder('c')
-            ->select('c, p, post')
-            ->join('c.profile', 'p')
-            ->join('c.poste', 'post')
-            ->where('p.disponibilite =: disp')
-            ->andWhere('p.experience =:expr')
-            ->andWhere('p.sivp =:sivp')
-            ->andWhere('p.competence =:compt')
-            ->setParameter('disp', $disp)
-            ->setParameter('expr', $exper)
-            ->setParameter('sivp', $sivp)
-            ->setParameter('compt', $comp)
-//            ->andWhere('post. =:')
-//            ->getQuery('post.')
-            ->getFirstResult();
+        $input['sivp'] = isset($input['sivp']) ? 1 : 0;
+
+        if ($input['competence'] && $input['poste']) {
+            $ids = array_intersect($this->searchByCompetence($input), $this->searchByPoste($input));
+        } elseif (!$input['competence'] && $input['poste']) {
+            $ids = $this->searchByPoste($input);
+        } elseif ($input['competence'] && !$input['poste']) {
+            $ids = $this->searchByCompetence($input);
+        }
+
+        $select = $this->createQueryBuilder('p');
+        $select->select('p, d');
+        $select->leftJoin('p.disponibilite', 'd');
+        $select->where('p.sivp = :sivp');
+        $select->setParameter('sivp', (int)$input['sivp']);
+        if ($input['experience']) {
+            $select->andWhere('p.experience = :experience');
+            $select->setParameter('experience', (int)$input['experience']);
+        }
+        if ($input['disponibilite']) {
+            $select->andWhere('d.libelle = :dispo');
+            $select->setParameter('dispo', $input['disponibilite']);
+        }
+
+        if (isset($ids)) {
+            $select->andWhere('p.id IN (:ids)');
+            $select->setParameter('ids', $ids);
+        }
+
+        return $select->distinct()
+            ->getQuery()
+            ->getArrayResult();
+    }
+
+    public function searchByCompetence($input)
+    {
+        $result = [];
+        $competences = $this->_em->getRepository(Competence::class)->findBy(['libelle' => $input['competence']]);
+        $resultProfiles =  current($competences)->getProfiles();
+        foreach ($resultProfiles as $profile) {
+            $result[] = $profile->getId();
+        }
+
+        return $result;
+    }
+
+    public function searchByPoste($input)
+    {
+        $result = [];
+        $postes = $this->_em->getRepository(Poste::class)->findBy(['libelle' => $input['poste']]);
+        $resultCandidature =  current($postes)->getCandidatures();
+        foreach ($resultCandidature as $candidature) {
+            $result[] = $candidature->getProfile()->getId();
+        }
+
+        return $result;
     }
 }

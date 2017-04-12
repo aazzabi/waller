@@ -14,3 +14,6 @@ services:
     app.candidature_service:
         class: AppBundle\Service\CompetenceService
         arguments: [ "@doctrine.orm.entity_manager" ]
+    app.profile_service:
+            class: AppBundle\Service\SearchService
+            arguments: [ "@doctrine.orm.entity_manager" ]
