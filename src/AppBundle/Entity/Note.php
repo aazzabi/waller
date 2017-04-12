@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Note
  *
  * @ORM\Table(name="note")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\NoteRepository")
  */
 class Note
 {

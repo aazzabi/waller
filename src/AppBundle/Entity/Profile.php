@@ -10,7 +10,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * Profile
  *
  * @ORM\Table(name="profile")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProfileRepository")
  * @Vich\Uploadable
  */
 class Profile
@@ -663,5 +663,53 @@ class Profile
     function __toString()
     {
         return $this->getPrenom() . " " . $this->getNom() . " (" . $this->getExperience() . " d'an(s) expérience )" ;
+    }
+
+    /**
+     * Set cvUpdatedAt
+     *
+     * @param \DateTime $cvUpdatedAt
+     *
+     * @return Profile
+     */
+    public function setCvUpdatedAt($cvUpdatedAt)
+    {
+        $this->cvUpdatedAt = $cvUpdatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get cvUpdatedAt
+     *
+     * @return \DateTime
+     */
+    public function getCvUpdatedAt()
+    {
+        return $this->cvUpdatedAt;
+    }
+
+    /**
+     * Set photoUpdatedAt
+     *
+     * @param \DateTime $photoUpdatedAt
+     *
+     * @return Profile
+     */
+    public function setPhotoUpdatedAt($photoUpdatedAt)
+    {
+        $this->photoUpdatedAt = $photoUpdatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get photoUpdatedAt
+     *
+     * @return \DateTime
+     */
+    public function getPhotoUpdatedAt()
+    {
+        return $this->photoUpdatedAt;
     }
 }

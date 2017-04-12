@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Candidature
  *
  * @ORM\Table(name="candidature")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CandidatureRepository")
  */
 class Candidature
 {

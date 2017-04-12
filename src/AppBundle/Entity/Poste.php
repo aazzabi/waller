@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Poste
  *
  * @ORM\Table(name="poste")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PosteRepository")
  */
 class Poste
 {
