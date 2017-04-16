@@ -51,7 +51,6 @@ Liste des postes
     <table id="example" class="table table-striped table-bordered" >
         <thead>
         <tr>
-            <th>Id</th>
             <th>Libelle</th>
             <th>Description</th>
             <th>Profiledemande</th>
@@ -62,17 +61,16 @@ Liste des postes
         <tbody>
         {% for poste in postes %}
             <tr>
-                <td><a href="{{ path('poste_show', { 'id': poste.id }) }}">{{ poste.id }}</a></td>
-                <td>{{ poste.libelle }}</td>
+                <td><a href="{{ path('poste_show', { 'id': poste.id }) }}">{{ poste.libelle }}</a></td>
                 <td>{{ poste.description }}</td>
                 <td>{{ poste.profileDemande }}</td>
                 <td>{{ poste.candidatures | length  }}</td>
                 <td>
                     <div class="btn-group btn-group-sm btn-group-vertical">
-                        <a class="btn btn-secondary" href="{{ path('poste_show', { 'id': poste.id }) }}" data-toggle="tooltip" title="Afficher le profile">
+                        <a class="btn btn-secondary" href="{{ path('poste_show', { 'id': poste.id }) }}" data-toggle="tooltip" title="Afficher le poste">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a class="btn btn-secondary" href="{{ path('poste_edit', { 'id': poste.id }) }}" data-toggle="tooltip"  title="Editer le profile">
+                        <a class="btn btn-secondary" href="{{ path('poste_edit', { 'id': poste.id }) }}" data-toggle="tooltip"  title="Editer le poste">
                             <i class="fa fa-pencil-square-o"></i>
                         </a>
                     </div>

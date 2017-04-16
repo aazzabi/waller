@@ -62,4 +62,9 @@ class User extends BaseUser
 
         return array_unique($roles);
     }
+
+    public function getImageLink()
+    {
+        return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($this->getEmail())))."?s=32&d=identicon&f=y";
+    }
 }

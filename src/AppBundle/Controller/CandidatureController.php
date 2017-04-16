@@ -166,6 +166,10 @@ class CandidatureController extends Controller
             $candidatureRepository->updateNote($noteId, $noteCommentaire, $noteEvaluation);
 
             $this->getDoctrine()->getManager()->flush();
+
+            $request->getSession()
+                ->getFlashBag()
+                ->add('success', 'Candidature modifié avec succès!');
             return $this->redirectToRoute('candidature_edit', array('id' => $candidature->getId()));
         }
 

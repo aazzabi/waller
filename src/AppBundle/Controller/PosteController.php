@@ -129,7 +129,9 @@ class PosteController extends Controller
 
             $em->persist($poste);
             $em->flush();
-
+            $request->getSession()
+                ->getFlashBag()
+                ->add('success', 'Poste modifié avec succès!');
             return $this->redirectToRoute('poste_edit', array('id' => $poste->getId()));
         }
 
