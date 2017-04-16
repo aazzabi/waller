@@ -55,6 +55,7 @@ Liste des postes
             <th>Libelle</th>
             <th>Description</th>
             <th>Profiledemande</th>
+            <th>Candidats</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -65,6 +66,7 @@ Liste des postes
                 <td>{{ poste.libelle }}</td>
                 <td>{{ poste.description }}</td>
                 <td>{{ poste.profileDemande }}</td>
+                <td>{{ poste.candidatures | length  }}</td>
                 <td>
                     <div class="btn-group btn-group-sm btn-group-vertical">
                         <a class="btn btn-secondary" href="{{ path('poste_show', { 'id': poste.id }) }}" data-toggle="tooltip" title="Afficher le profile">
