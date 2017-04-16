@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Profile controller.
@@ -21,15 +22,21 @@ class ProfileController extends Controller
      * @Route("/", name="profile_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $search = [];
+        $search['disponibilite'] = $request->get('disponibilite', null);
+        $search['experience'] = (int)$request->get('experience', null);
+        $search['competences'] = $request->get('competences', null);
+
         $em = $this->getDoctrine()->getManager();
 
-        $profiles = $em->getRepository('AppBundle:Profile')->findAll();
         $disponiblites = $em->getRepository('AppBundle:Disponibilite')->findAll();
         $postes = $em->getRepository('AppBundle:Poste')->findAll();
         $groupes = $em->getRepository('AppBundle:Group')->findAll();
         $competences = $em->getRepository('AppBundle:Competence')->findAll();
+
+        $profiles =  $em->getRepository('AppBundle:Profile')->search($search);
 
         return $this->render('profile/index.html.twig', array(
             'profiles' => $profiles,

@@ -101,24 +101,29 @@
         <!-- START SIDEBAR MENU -->
         <div class="sidebar-menu">
             <!-- BEGIN SIDEBAR MENU ITEMS-->
+
+            {% set currentPath = path(app.request.attributes.get('_route'),
+            app.request.attributes.get('_route_params')) %}
+
+            {#{{ dump(currentPath) }}#}
             <ul class="menu-items">
                 <li class="m-t-30 ">
                     <a href="{{ path('poste_index') }}" class="detailed">
                         <span class="title">Postes</span>
                     </a>
-                    <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
+                    <span class="{% if path('poste_index') == currentPath %}bg-success{% endif %} icon-thumbnail"><i class="pg-home"></i></span>
                 </li>
                 <li class="">
                     <a href="{{ path('profile_index') }}" class="detailed">
                         <span class="title">Profils</span>
                     </a>
-                    <span class="icon-thumbnail">Pr</span>
+                    <span class="{% if path('profile_index') == currentPath %}bg-success{% endif %} icon-thumbnail">Pr</span>
                 </li>
                 <li class="">
                     <a href="{{ path('candidature_index') }}" class="detailed">
                         <span class="title">Candidatures</span>
                     </a>
-                    <span class="icon-thumbnail">C</span>
+                    <span class="{% if path('candidature_index') == currentPath %}bg-success{% endif %} icon-thumbnail">C</span>
                 </li>
 
                 {% if is_granted('ROLE_ADMIN') %}    
@@ -126,7 +131,7 @@
                         <a href="{{ path('etape_index') }}">
                             <span class="title">Etats</span>
                         </a>
-                        <span class="icon-thumbnail">E</span>
+                        <span class="{% if path('etape_index') == currentPath %}bg-success{% endif %} icon-thumbnail">E</span>
                     </li>
                 {% endif %}
             </ul>

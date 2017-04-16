@@ -63,7 +63,7 @@
     <hr>
     <div class="panel panel-default" style="padding: 25px; ">
         <div class="row">
-            <form id="form-project" action="{{ path('profile_search') }}" method="POST" role="form" autocomplete="off"
+            <form id="form-project" method="GET" role="form" autocomplete="off"
                   novalidate="novalidate">
                 <p class="m-t-10">Informations concernant le Profil</p>
                 <div class="form-group-attached">
@@ -74,17 +74,21 @@
                                 <select class="cs-select cs-skin-slide cs-transparent form-control"
                                         name="disponibilite"
                                         data-init-plugin="cs-select">
+                                    <option value="">Toutes</option>
                                     {% for disponibilite in disponibilites %}
-                                        <option value="{{ disponibilite.libelle }}"> {{ disponibilite.libelle }}</option>
+                                        <option value="{{ disponibilite.id }}"
+                                            {% if app.session.get('disponibilite') == disponibilite.id %} selected {% endif %} >
+                                            {{ disponibilite.libelle }}</option>
                                     {% endfor %}
-                                    <option></option>
+
                                 </select>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group form-group-default">
                                 <label>Experiences</label>
-                                <input type="text" class="form-control" name="experience">
+                                <input type="text" class="form-control" name="experience"
+                                       value="{{ app.session.get('experience') }}">
                             </div>
                         </div>
                         <div class="col-sm-1">
@@ -104,11 +108,10 @@
                                 <select class="cs-select cs-skin-slide cs-transparent form-control"
                                         name="competence"
                                         data-init-plugin="cs-select">
+                                    <option value="">Toutes</option>
                                     {% for competence in competences %}
-                                        <option value="{{ competence.libelle }}"> {{ competence.libelle }}</option>
+                                        <option value="{{ competence.id }}"> {{ competence.libelle }}</option>
                                     {% endfor %}
-                                    <option></option>
-
                                 </select>
                             </div>
                         </div>
@@ -127,7 +130,7 @@
                                         class="cs-select cs-skin-slide cs-transparent form-control"
                                         data-init-plugin="cs-select">
                                     {% for poste in postes %}
-                                        <option value="{{ poste.libelle }}"> {{ poste.libelle }}</option>
+                                        <option value="{{ poste.id }}"> {{ poste.libelle }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -139,7 +142,7 @@
                                 <select name="groupe" class="cs-select cs-skin-slide cs-transparent form-control"
                                         data-init-plugin="cs-select">
                                     {% for groupe in groupes %}
-                                        <option value="{{ groupe.name }}"> {{ groupe.name }}</option>
+                                        <option value="{{ groupe.id }}"> {{ groupe.name }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
