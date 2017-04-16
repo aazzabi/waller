@@ -50,7 +50,8 @@ class ProfileController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $results = $em->getRepository(Profile::class)->search($request->request->all());
-        print_r($results);die;
+        print_r($results);
+        die;
         return new JsonResponse($results);
     }
 
@@ -112,6 +113,9 @@ class ProfileController extends Controller
             $this->get('app.candidature_service')->bindCompetences($profile);
             $this->getDoctrine()->getManager()->flush();
 
+            $request->getSession()
+                ->getFlashBag()
+                ->add('success', 'Profile modifié avec succès!');
             return $this->redirectToRoute('profile_edit', array('id' => $profile->getId()));
         }
 

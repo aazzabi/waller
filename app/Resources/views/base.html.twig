@@ -279,6 +279,43 @@
 <script type="text/javascript"
         src="{{ asset('assets/plugins/datatables-responsive/js/datatables.responsive.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/datatables-responsive/js/lodash.min.js') }}"></script>
+<script>
+    $(function () {
+        var style = 'bar';
+        var position = "top";
+        var timeout = 5000;
+
+        {% for flashMessage in app.session.flashbag.get('success') %}
+        $('body').pgNotification({
+            style: style,
+            message: "{{ flashMessage }}",
+            position: position,
+            timeout: timeout,
+            type: "success"
+        }).show();
+        {% endfor %}
+
+        {% for flashMessage in app.session.flashbag.get('error') %}
+        $('body').pgNotification({
+            style: style,
+            message: "{{ flashMessage }}",
+            position: position,
+            timeout: timeout,
+            type: "danger"
+        }).show();
+        {% endfor %}
+
+        {% for flashMessage in app.session.flashbag.get('warning') %}
+        $('body').pgNotification({
+            style: style,
+            message: "{{ flashMessage }}",
+            position: position,
+            timeout: timeout,
+            type: "warning"
+        }).show();
+        {% endfor %}
+    });
+</script>
 {% block javascripts %}{% endblock %}
 
 </body>

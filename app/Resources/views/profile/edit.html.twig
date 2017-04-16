@@ -7,9 +7,6 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap-tagsinput.css') }}">
-    <style>
-
-    </style>
 {% endblock %}
 
 
@@ -43,7 +40,7 @@
         </div>
         <div class="col-md-6 text-right">
             <br>
-            <button href="#success" data-toggle="modal" type="submit" class="btn btn-secondary">
+            <button type="submit" class="btn btn-secondary">
                 <i class="fa fa-check"></i> Confirmer
             </button>
             <a href="{{ path('profile_index') }}" class="btn btn-secondary">
@@ -87,15 +84,6 @@
                     <input class="btn btn-danger btn_lg" type="submit" value="Supprimer">
                     {{ form_end(delete_form) }}
                 </div>
-            </div>
-        </div>
-    </div>
-    {#Modal confirmer#}
-    <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="alert alert-success" role="alert">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <strong>Confirmer !</strong> Modification réalisée avec succés.
             </div>
         </div>
     </div>
