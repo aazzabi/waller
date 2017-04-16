@@ -10,7 +10,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Poste controller.
@@ -27,9 +30,17 @@ class PosteController extends Controller
      */
     public function indexAction()
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $postes = $em->getRepository('AppBundle:Poste')->findAll();
+        $repository = $em->getRepository('AppBundle:Poste');
+
+        $postes = $repository->createQueryBuilder('p')
+            ->where('p.group = :group')
+            ->orWhere('p.createdByGroup = :group')
+            ->setParameter('group', $user->getGroup()->getId())
+            ->getQuery()
+            ->getResult();
 
         return $this->render('poste/index.html.twig', array(
             'postes' => $postes,
@@ -71,6 +82,12 @@ class PosteController extends Controller
      */
     public function showAction(Poste $poste)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if ($user->getGroup() != $poste->getGroup() &&
+            $user->getGroup() != $poste->getCreatedByGroup()
+        ) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
         $deleteForm = $this->createDeleteForm($poste);
 
         return $this->render('poste/show.html.twig', array(
@@ -87,6 +104,10 @@ class PosteController extends Controller
      */
     public function editAction(Request $request, Poste $poste)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if ($user->getGroup() != $poste->getGroup() && $user->getGroup() != $poste->getCreatedByGroup()) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
         $em = $this->getDoctrine()->getManager();
 
         $originalLiens = new ArrayCollection();
@@ -127,6 +148,10 @@ class PosteController extends Controller
      */
     public function deleteAction(Request $request, poste $poste)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if ($user->getGroup() != $poste->getGroup() && $user->getGroup() != $poste->getCreatedByGroup()) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
         $form = $this->createDeleteForm($poste);
         $form->handleRequest($request);
 

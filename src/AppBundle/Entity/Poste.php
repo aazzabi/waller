@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="poste")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PosteRepository")
+ * @ORM\EntityListeners({"AppBundle\Entity\Listeners\PosteListener"})
  */
 class Poste
 {
@@ -70,6 +71,16 @@ class Poste
      *
      */
     private $candidatures;
+
+    /**
+     * @var Group
+     *
+     * @ORM\ManyToOne(targetEntity="Group")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="created_by_group", referencedColumnName="id")
+     * })
+     */
+    private $createdByGroup;
 
     /**
      * Poste constructor.
@@ -260,6 +271,30 @@ class Poste
     public function getCandidatures()
     {
         return $this->candidatures;
+    }
+
+    /**
+     * Set group
+     *
+     * @param \AppBundle\Entity\Group $group
+     *
+     * @return Poste
+     */
+    public function setCreatedByGroup(Group $group = null)
+    {
+        $this->createdByGroup = $group;
+
+        return $this;
+    }
+
+    /**
+     * Get group
+     *
+     * @return \AppBundle\Entity\Group
+     */
+    public function getCreatedByGroup()
+    {
+        return $this->createdByGroup;
     }
 
 

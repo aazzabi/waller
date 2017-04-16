@@ -11,6 +11,7 @@ use Symfony\Component\Form\Form;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+
 /**
  * CandidatureRepository
  *
@@ -19,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CandidatureRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function bindData($idSource, $idDestination,$rapportCommentaire, $candidature)
+    public function bindData($idSource, $idDestination, $rapportCommentaire, $candidature)
     {
         $action = $this->_em->getRepository(Action::class)->createQueryBuilder('a')
             ->where('a.etapeSource = :source and a.etapeDestination = :destination')
@@ -68,8 +69,18 @@ class CandidatureRepository extends \Doctrine\ORM\EntityRepository
         $form->get('noteId')->setData($note->getId());
         $form->get('noteCommentaire')->setData($note->getCommentaire());
         $form->get('noteEvaluation')->setData($note->getEvaluation());
+    }
 
-
+    public function getCandidaturesByGroupId($groupId)
+    {
+        return $this->createQueryBuilder('c')
+            ->join('c.poste', 'p')
+            ->where('c.group = :group')
+            ->orWhere('p.group = :group')
+            ->orWhere('p.createdByGroup = :group')
+            ->setParameter('group', $groupId)
+            ->getQuery()
+            ->getResult();
     }
 
 }

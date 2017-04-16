@@ -2,19 +2,17 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Action;
 use AppBundle\Entity\Candidature;
 use AppBundle\Entity\Note;
-use AppBundle\Entity\Rapport;
 use AppBundle\Form\CandidatureEditType;
 use AppBundle\Form\ProfileEditType;
 use AppBundle\Form\ProfileType;
-use AppBundle\Controller\ProfileController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Form;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Candidature controller.
@@ -31,8 +29,11 @@ class CandidatureController extends Controller
      */
     public function indexAction()
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
-        $candidatures = $em->getRepository('AppBundle:Candidature')->findAll();
+        $repository = $em->getRepository('AppBundle:Candidature');
+
+        $candidatures = $repository->getCandidaturesByGroupId($user->getGroup()->getId());
 
         return $this->render('candidature/index.html.twig', array(
             'candidatures' => $candidatures,
@@ -92,6 +93,13 @@ class CandidatureController extends Controller
      */
     public function showAction(Candidature $candidature)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if ($user->getGroup() != $candidature->getGroup() &&
+            $user->getGroup() != $candidature->getPoste()->getGroup() &&
+            $user->getGroup() != $candidature->getPoste()->getCreatedByGroup()
+        ) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
         $deleteForm = $this->createDeleteForm($candidature);
         return $this->render('candidature/show.html.twig', array(
             'candidature' => $candidature,
@@ -107,6 +115,13 @@ class CandidatureController extends Controller
      */
     public function editAction(Request $request, Candidature $candidature)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if ($user->getGroup() != $candidature->getGroup() &&
+            $user->getGroup() != $candidature->getPoste()->getGroup() &&
+            $user->getGroup() != $candidature->getPoste()->getCreatedByGroup()
+        ) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
         $em = $this->getDoctrine()->getManager();
         $candidatureRepository = $em->getRepository(Candidature::class);
 
@@ -173,6 +188,13 @@ class CandidatureController extends Controller
      */
     public function deleteAction(Request $request, Candidature $candidature)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if ($user->getGroup() != $candidature->getGroup() &&
+            $user->getGroup() != $candidature->getPoste()->getGroup() &&
+            $user->getGroup() != $candidature->getPoste()->getCreatedByGroup()
+        ) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
         $form = $this->createDeleteForm($candidature);
         $form->handleRequest($request);
 

@@ -150,12 +150,23 @@
     {%- endif %}
 {%- endblock choice_widget_expanded %}
 
+{#<div class="checkbox ">#}
+    {#<input type="checkbox" value="1" id="checkbox1">#}
+    {#<label for="checkbox1">Keep Me Signed in</label>#}
+{#</div>#}
+
+{#<div class="checkbox">#}
+    {#<label>#}
+        {#<input type="checkbox" id="appbundle_profile_sivp" name="appbundle_profile[sivp]" value=""> SIVP#}
+    {#</label>#}
+{#</div>#}
+
 {% block checkbox_widget -%}
     {%- set parent_label_class = parent_label_class|default(label_attr.class|default('')) -%}
     {% if 'checkbox-inline' in parent_label_class %}
         {{- form_label(form, null, { widget: parent() }) -}}
     {% else -%}
-        <div class="checkbox">
+        <div class="checkbox check-success">
             {{- form_label(form, null, { widget: parent() }) -}}
         </div>
     {%- endif %}
@@ -212,8 +223,10 @@
                 {% set label = name|humanize %}
             {%- endif -%}
         {% endif %}
+        {% set label_attr = label_attr|merge({for: id}) %}
+        {{- widget|raw }}
         <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
-            {{- widget|raw }} {{ label is not same as(false) ? (translation_domain is same as(false) ? label : label|trans({}, translation_domain)) -}}
+            {{ label is not same as(false) ? (translation_domain is same as(false) ? label : label|trans({}, translation_domain)) -}}
         </label>
     {% endif %}
 {% endblock checkbox_radio_label %}

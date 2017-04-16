@@ -22,7 +22,8 @@ class User extends BaseUser
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Group", mappedBy="users")
+     * @ORM\ManyToOne(targetEntity="Group", inversedBy="users")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="id")
      */
     private $group;
 
@@ -34,10 +35,31 @@ class User extends BaseUser
     /**
      * Get group
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Group
      */
     public function getGroup()
     {
         return $this->group;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRoles()
+    {
+        $roles = $this->roles;
+
+        foreach ($this->getGroups() as $group) {
+            $roles = array_merge($roles, $group->getRoles());
+        }
+
+        if (count($this->getGroup()->getRoles()) > 0) {
+            $roles = array_merge($roles, $this->getGroup()->getRoles());
+        }
+
+        // we need to make sure to have at least one role
+        $roles[] = static::ROLE_DEFAULT;
+
+        return array_unique($roles);
     }
 }

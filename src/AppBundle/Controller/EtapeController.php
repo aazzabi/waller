@@ -4,9 +4,11 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Etape;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Etape controller.
@@ -23,6 +25,9 @@ class EtapeController extends Controller
      */
     public function indexAction()
     {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
         $em = $this->getDoctrine()->getManager();
 
         $etapes = $em->getRepository('AppBundle:Etape')->findAll();
@@ -40,6 +45,9 @@ class EtapeController extends Controller
      */
     public function newAction(Request $request)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
         $etape = new Etape();
         $form = $this->createForm('AppBundle\Form\EtapeType', $etape);
         $form->handleRequest($request);
@@ -66,6 +74,9 @@ class EtapeController extends Controller
      */
     public function showAction(Etape $etape)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
         $deleteForm = $this->createDeleteForm($etape);
 
         return $this->render('etape/show.html.twig', array(
@@ -82,6 +93,9 @@ class EtapeController extends Controller
      */
     public function editAction(Request $request, Etape $etape)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
         $deleteForm = $this->createDeleteForm($etape);
         $editForm = $this->createForm('AppBundle\Form\EtapeType', $etape);
         $editForm->handleRequest($request);
@@ -107,6 +121,9 @@ class EtapeController extends Controller
      */
     public function deleteAction(Request $request, Etape $etape)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
         $form = $this->createDeleteForm($etape);
         $form->handleRequest($request);
 
@@ -131,7 +148,6 @@ class EtapeController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('etape_delete', array('id' => $etape->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

@@ -20,15 +20,8 @@ class Group extends BaseGroup
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="groups")
-     * @ORM\JoinTable(name="user_group",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="group_id", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     *   }
-     * )
+     * @ORM\OneToMany(targetEntity="User", mappedBy="group")
+     *
      */
     private $users;
 

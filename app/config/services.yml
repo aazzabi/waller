@@ -11,9 +11,14 @@ services:
         class: AppBundle\Entity\Listeners\RapportListener
         tag:
             - { name: doctrine.orm.entity_listener }
+    app.poste_listener:
+        class: AppBundle\Entity\Listeners\PosteListener
+        arguments: ["@security.token_storage"]
+        tags:
+            - { name: doctrine.orm.entity_listener }
     app.candidature_service:
         class: AppBundle\Service\CompetenceService
         arguments: [ "@doctrine.orm.entity_manager" ]
     app.profile_service:
-            class: AppBundle\Service\SearchService
-            arguments: [ "@doctrine.orm.entity_manager" ]
+        class: AppBundle\Service\SearchService
+        arguments: [ "@doctrine.orm.entity_manager" ]
