@@ -77,7 +77,7 @@
                                     <option value="">Toutes</option>
                                     {% for disponibilite in disponibilites %}
                                         <option value="{{ disponibilite.id }}"
-                                            {% if app.session.get('disponibilite') == disponibilite.id %} selected {% endif %} >
+                                                {% if app.session.get('disponibilite') == disponibilite.id %} selected {% endif %} >
                                             {{ disponibilite.libelle }}</option>
                                     {% endfor %}
 
@@ -173,7 +173,10 @@
                     <th>{{ 'entity.profile.niveau' | trans }}</th>
                     <th>{{ 'entity.profile.reseauxsociaux' | trans }}</th>
                     <th>{{ 'entity.profile.sivp' | trans }}</th>
-                    <th>{{ 'entity.profile.prestationsalariale' | trans }} </th>
+
+                    {% if is_granted('ROLE_ADMIN') %}    
+                        <th>{{ 'entity.profile.prestationsalariale' | trans }} </th>
+                    {% endif %}
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -224,19 +227,19 @@
                         <td>
                             {% if profile.linkedin %}
                                 <a href="{{ profile.linkedin }}">
-                                    <i class="fa fa-linkedin" style="color:#4875B4;"
+                                    <i class="fa fa-linkedin fa-2x" style="color:#4875B4;"
                                        aria-hidden="true"></i></a>
                             {% endif %}
 
                             {% if profile.facebook %}
                                 <a href="{{ profile.facebook }}">
-                                    <i class="fa fa-facebook-square"
+                                    <i class="fa fa-facebook-square fa-2x"
                                        style="color:#3b5998;"></i>
                                 </a>
                             {% endif %}
                             {% if profile.github %}
                                 <a href="{{ profile.github }}">
-                                    <i class="fa fa-github" style="color: black;" aria-hidden="true"></i>
+                                    <i class="fa fa-github fa-2x" style="color: black;" aria-hidden="true"></i>
                                 </a>
                             {% endif %}
 
@@ -247,8 +250,9 @@
                                 <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
                             {% endif %}
                         </td>
-                        <td>{{ profile.prestationsalariale }}</td>
-
+                        {% if is_granted('ROLE_ADMIN') %}    
+                            <td>{{ profile.prestationsalariale }}</td>
+                        {% endif %}
                         <td>
                             <div class="btn-group btn-group-sm btn-group-vertical">
                                 <a class="btn btn-secondary" href="{{ path('profile_show', { 'id': profile.id }) }}"
@@ -346,13 +350,15 @@
                                     SIVP
                                 </label>
                             </div>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="toggle-vis form-check-input" id="pres"
-                                           data-column="8">
-                                    Prestation salariale
-                                </label>
-                            </div>
+                            {% if is_granted('ROLE_ADMIN') %}    
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="toggle-vis form-check-input" id="pres"
+                                               data-column="8">
+                                        Prestation salariale
+                                    </label>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                     <hr>
