@@ -22,3 +22,7 @@ services:
     app.profile_service:
         class: AppBundle\Service\SearchService
         arguments: [ "@doctrine.orm.entity_manager" ]
+    app.form.registration:
+        class: AppBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: app_user_registration }

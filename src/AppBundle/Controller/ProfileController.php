@@ -27,7 +27,7 @@ class ProfileController extends Controller
         $search = [];
         $search['disponibilite'] = $request->get('disponibilite', null);
         $search['experience'] = (int)$request->get('experience', null);
-        $search['competences'] = $request->get('competences', null);
+        $search['competences'] = $request->get('competence', null);
 
         $em = $this->getDoctrine()->getManager();
 
