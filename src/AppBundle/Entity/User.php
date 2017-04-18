@@ -18,6 +18,19 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+ /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=150, nullable=false)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prenom", type="string", length=150, nullable=false)
+     */
+    private $prenom;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
