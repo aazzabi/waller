@@ -78,24 +78,28 @@ class ProfileRepository extends \Doctrine\ORM\EntityRepository
             $builder->andWhere('p.experience >= :experience')
                 ->setParameter('experience', $search['experience']);
         }
-//
+
 //        // competence
 //        if ($search['competences'] !== null) {
+//
 //            $session->set('competences', $search['competences']);
 //        } else {
 //            $search['competences'] = $session->get('competences');
 //        }
 //
 //        if ($search['competences']) {
-//            $builder->andWhere('p.competences LIKE competences')
+//            $builder->join('p.competences', 'c')
+//                ->Where('p.competences := ')
+//                ->andWhere('p.competences LIKE competences')
 //                ->setParameter('competences', $search['competences']);
 //        }
-//        return $builder->getQuery()->getResult();
+        return $builder->getQuery()->getResult();
 
 
     }
 
-    public function searchByCompetence($input)
+    public
+    function searchByCompetence($input)
     {
         $result = [];
         $competences = $this->_em->getRepository(Competence::class)->findBy(['libelle' => $input['competence']]);
@@ -107,7 +111,8 @@ class ProfileRepository extends \Doctrine\ORM\EntityRepository
         return $result;
     }
 
-    public function searchByPoste($input)
+    public
+    function searchByPoste($input)
     {
         $result = [];
         $postes = $this->_em->getRepository(Poste::class)->findBy(['libelle' => $input['poste']]);
