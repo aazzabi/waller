@@ -83,7 +83,7 @@ fos_user:
         group_class: AppBundle\Entity\Group
     registration:
         form:
-           type: AppBundle\Form\RegistrationType
+            type: AppBundle\Form\RegistrationType
 
 vich_uploader:
     db_driver: orm

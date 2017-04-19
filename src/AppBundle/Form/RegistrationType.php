@@ -1,15 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: arafet
- * Date: 18/04/17
- * Time: 14:40
- */
-
 namespace AppBundle\Form;
 
-
+use AppBundle\Entity\Group;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class RegistrationType extends AbstractType
@@ -18,11 +13,16 @@ class RegistrationType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'label' => 'entity.profileForm.nom'
-            ])
+            'label' => 'entity.profileForm.nom',
+        ],'first')
             ->add('prenom', TextType::class, [
                 'label' => 'entity.profileForm.prenom'
-            ]);
+            ])
+            ->add('group', EntityType::class, array(
+                'label' => 'Travaillant chez',
+                'class' => Group::class
+            ));
+
     }
 
     public function getParent()

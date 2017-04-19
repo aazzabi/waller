@@ -1,13 +1,12 @@
 {% trans_default_domain 'FOSUserBundle' %}
 <head>
     <style>
-        body{
+        body {
             background-color: white;
         }
     </style>
     <script type="text/javascript">
-        window.onload = function()
-        {
+        window.onload = function () {
             // fix for windows 8
             if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
                 document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="pages/css/windows.chrome.fix.css" />'
@@ -19,10 +18,9 @@
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
+
 <div class="login-wrapper ">
-    <!-- START Login Background Pic Wrapper-->
     <div class="bg-pic">
-        <!-- START Background Pic-->
         <img src="{{ asset('assets/img/demo/smartteam.jpg') }}"
              data-src="{{ asset('assets/img/demo/smartteam.jpg') }}"
              data-src-retina="{{ asset('assets/img/demo/smartteam.jpg') }}'"
@@ -40,7 +38,7 @@
             <form action="{{ path("fos_user_security_check") }}" method="post" class="p-t-15">
 
                 {% if csrf_token %}
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
                 {% endif %}
 
                 <div class="form-group form-group-default">
@@ -50,7 +48,7 @@
                 </div>
                 <div class="form-group form-group-default">
                     <label for="password">{{ 'security.login.password'|trans }}</label>
-                        <input type="password"  class="form-control"  id="password" name="_password" required="required"/>
+                    <input type="password" class="form-control" id="password" name="_password" required="required"/>
                 </div>
                 <div class="row">
                     <div class="col-md-6 no-padding">
@@ -60,7 +58,8 @@
                         </div>
                     </div>
                 </div>
-                <input type="submit" class="btn btn-primary btn-cons m-t-10"  id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}"/>
+                <input type="submit" class="btn btn-primary btn-cons m-t-10" id="_submit" name="_submit"
+                       value="{{ 'security.login.submit'|trans }}"/>
             </form>
 
 

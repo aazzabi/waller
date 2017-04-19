@@ -343,7 +343,7 @@ class Profile
     /**
      * Set experience
      *
-     * @param string $experience
+     * @param integer $experience
      *
      * @return Profile
      */
@@ -357,7 +357,7 @@ class Profile
     /**
      * Get experience
      *
-     * @return string
+     * @return integer
      */
     public function getExperience()
     {

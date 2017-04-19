@@ -31,6 +31,10 @@
             <div class="col-sm-12 col-sm-height col-middle">
                 {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
                 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+                {{ form_row(form.nom) }}
+                {{ form_row(form.prenom) }}
+                {{ form_row(form.group) }}
+
                 {{ form_widget(form) }}
                 <div>
                     <input class="btn btn-primary btn-cons m-t-10"  type="submit" value="{{ 'registration.submit'|trans }}"/>
