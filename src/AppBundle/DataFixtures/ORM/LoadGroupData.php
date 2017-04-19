@@ -2,7 +2,7 @@
 namespace AppBundle\DataFixtures\ORM;
 
 
-use AppBundle\Entity\User;
+use AppBundle\Entity\Group;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Faker;
 
-class LoadUserData
+class LoadGroupData
     extends AbstractFixture
     implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -21,29 +21,21 @@ class LoadUserData
     private $container;
 
     /**
-     * @var groups
-     */
-    private $groups;
-
-    /**
      * Load data fixtures with the passed EntityManager
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
+        //*
         $faker= Faker\Factory::create();
-        $userManager = $this->container->get('fos_user.user_manager');
-        for ($i=0;$i<20;$i++){
-            $user = $userManager->createUser();
-            $user->setUserName($faker->userName);
-            $user->setNom($faker->firstName);
-            $user->setPrenom($faker->lastName);
-            $user->setEmail($faker->email);
-            $user->setPlainPassword('123456');
-            $user->setEnabled(true);
-            $user->setGroup($this->getRandomGoup($manager));
-            $userManager->updateUser($user);
+        for ($i=0;$i<5;$i++){
+            $group = new Group();
+            $group->setName($faker->company);
+            $group->setRoles(array($this->getRandomRole()));
+            $manager->persist($group);
         }
+        $manager->flush();
+        //*/
     }
 
     /**
@@ -55,11 +47,9 @@ class LoadUserData
         $this->container = $container;
     }
 
-    public function getRandomGoup(ObjectManager $manager){
-        if($this->groups == null) {
-            $this->groups = $manager->getRepository('AppBundle:Group')->findAll();
-        }
-        return $this->groups[array_rand($this->groups)];
+    public function getRandomRole(){
+        $roles  = array('ROLE_ADMIN', 'ROLE_USER', 'ROLE_SUPER_ADMIN' );
+        return $roles[array_rand($roles)];
     }
 
 
@@ -69,8 +59,7 @@ class LoadUserData
      */
     public function getOrder()
     {
-        return 2;
+        return 1;
     }
-
 
 }
