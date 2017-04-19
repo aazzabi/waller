@@ -91,26 +91,28 @@
                                        value="{{ app.session.get('experience') }}">
                             </div>
                         </div>
-                        <div class="col-sm-1">
+                        <div class="col-sm-2">
                             <div class="form-group form-group-default input-group">
-                                <label class="inline">SIVP</label>
-                                <span name="sivp" class="input-group-addon bg-transparent">
-                                    <input type="checkbox" data-init-plugin="switchery" name="sivp" data-size="small"
-                                           data-color="primary" data-switchery="true"
-                                           style="display: none;">
-                                </span>
+                                <label >SIVP</label>
+                                <select style="margin-left: 9px;" class="cs-select cs-skin-slide cs-transparent form-control"
+                                        name="sivp"
+                                        data-init-plugin="cs-select">
+                                    <option value="-1"> Les 2</option>
+                                    <option value="1"> OUI</option>
+                                    <option value="0"> NON</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-5">
                             <div class="form-group form-group-default">
-                                <label>Compétence
-                                </label>
+                                <label>Compétence</label>
                                 <select class="cs-select cs-skin-slide cs-transparent form-control"
                                         name="competence"
                                         data-init-plugin="cs-select">
                                     <option value="">Toutes</option>
                                     {% for competence in competences %}
-                                        <option value="{{ competence.id }}"> {{ competence.libelle }}</option>
+                                        <option {% if app.session.get('competences') == competence.id %} selected {% endif %}
+                                                value="{{ competence.id }}"> {{ competence.libelle }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -124,24 +126,27 @@
 
                         <div class="col-sm-4">
                             <div class="form-group form-group-default">
-                                <label>Poste
-                                </label>
+                                <label>Poste</label>
                                 <select name="poste"
                                         class="cs-select cs-skin-slide cs-transparent form-control"
                                         data-init-plugin="cs-select">
                                     {% for poste in postes %}
-                                        <option value="{{ poste.id }}"> {{ poste.libelle }}</option>
+                                        <option value="">Toutes</option>
+                                        <option {% if app.session.get('poste') == poste.id %} selected {% endif %}
+                                                value="{{ poste.id }}"> {{ poste.libelle }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group form-group-default">
-                                <label>Présenté par
-                                </label>
-                                <select name="groupe" class="cs-select cs-skin-slide cs-transparent form-control"
+                                <label>Présenté par</label>
+                                <select name="groupe"
+                                        name="groupe"
+                                        class="cs-select cs-skin-slide cs-transparent form-control"
                                         data-init-plugin="cs-select">
                                     {% for groupe in groupes %}
+                                        <option value="">Toutes</option>
                                         <option value="{{ groupe.id }}"> {{ groupe.name }}</option>
                                     {% endfor %}
                                 </select>
@@ -157,7 +162,6 @@
             </form>
         </div>
     </div>
-    <br>
     <br>
 
     <div class="row">

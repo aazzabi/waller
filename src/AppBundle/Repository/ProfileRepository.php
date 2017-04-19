@@ -79,27 +79,48 @@ class ProfileRepository extends \Doctrine\ORM\EntityRepository
                 ->setParameter('experience', $search['experience']);
         }
 
-//        // competence
-//        if ($search['competences'] !== null) {
-//            $session->set('competences', $search['competences']);
+        // sivp
+        $session->set('sivp', $search['sivp']);
+        $search['sivp'] = $session->get('sivp');
+        if ($search['sivp'] != -1) {
+            $builder->andWhere('p.sivp = :sivp')
+                ->setParameter('sivp', (int) $search['sivp']);
+        }
+
+        // competence
+        if ($search['competences'] !== null) {
+            $session->set('competences', $search['competences']);
+        } else {
+            $search['competences'] = $session->get('competences');
+        }
+        if ($search['competences']) {
+        $builder->innerJoin('p.competences', 'c', 'WITH', 'c.id = :competences')
+                ->setParameter('competences', $search['competences']);
+        }
+
+//        // Poste
+//        if ($search['poste'] !== null) {
+//            $session->set('poste', $search['poste']);
 //        } else {
-//            $search['competences'] = $session->get('competences');
+//            $search['poste'] = $session->get('poste');
 //        }
-//        if ($search['competences']) {
-//            $builder->join('p.competences', 'c')
-//                ->Where('c.id := competences ')
-//                ->setParameter('competences', $search['competences']);
+//        if ($search['poste']) {
+//            $builder
+//                ->innerJoin('p.candidature','c')
+//                ->innerJoin('c.poste', 'pos', 'WITH', 'p.id = :poste')
+//                ->setParameter('competences', $search['poste']);
 //        }
+
         return $builder->getQuery()->getResult();
-
-
     }
 
-    public
-    function searchByCompetence($input)
+    public function searchByCompetence($input)
     {
         $result = [];
-        $competences = $this->_em->getRepository(Competence::class)->findBy(['libelle' => $input['competence']]);
+        $competences = $this->_em
+            ->getRepository(Competence::class)
+            ->findBy(['libelle' => $input['competence']]);
+
         $resultProfiles = current($competences)->getProfiles();
         foreach ($resultProfiles as $profile) {
             $result[] = $profile->getId();
@@ -108,8 +129,7 @@ class ProfileRepository extends \Doctrine\ORM\EntityRepository
         return $result;
     }
 
-    public
-    function searchByPoste($input)
+    public function searchByPoste($input)
     {
         $result = [];
         $postes = $this->_em->getRepository(Poste::class)->findBy(['libelle' => $input['poste']]);

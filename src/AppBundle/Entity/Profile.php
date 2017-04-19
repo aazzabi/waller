@@ -162,6 +162,8 @@ class Profile
      */
     private $disponibilite;
 
+
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
@@ -712,4 +714,6 @@ class Profile
     {
         return $this->photoUpdatedAt;
     }
+
+
 }
