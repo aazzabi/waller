@@ -16,7 +16,9 @@ class PosteListener
 
     public function prePersist(Poste $poste, LifecycleEventArgs $event)
     {
-        $user = $this->tokenStorage->getToken()->getUser();
-        $poste->setCreatedByGroup($user->getGroup());
+        if(!$poste->getCreatedByGroup()){
+            $user = $this->tokenStorage->getToken()->getUser();
+            $poste->setCreatedByGroup($user->getGroup());
+        }
     }
 }
