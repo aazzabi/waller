@@ -79,18 +79,23 @@ class ProfileRepository extends \Doctrine\ORM\EntityRepository
                 ->setParameter('experience', $search['experience']);
         }
 
+        if ($search['experience']) {
+            $builder->join('p.')
+                ->andWhere('p.experience = :experience');
+            $builder->setParameter('experience', (int)$search['experience']);
+        }
         // competence
-        if ($search['competences'] !== null) {
-            $session->set('competences', $search['competences']);
-        } else {
-            $search['competences'] = $session->get('competences');
-        }
-        if ($search['competences']) {
-            $builder->join('p.competences', 'c')
-                ->Where('c.id := competences ')
-                ->setParameter('competences', $search['competences']);
-        }
-        return $builder->getQuery()->getResult();
+//        if ($search['competences'] !== null) {
+//            $session->set('competences', $search['competences']);
+//        } else {
+//            $search['competences'] = $session->get('competences');
+//        }
+//        if ($search['competences']) {
+//            $builder->join('p.competences', 'c')
+//                ->Where('c.id := competences ')
+//                ->setParameter('competences', $search['competences']);
+//        }
+//        return $builder->getQuery()->getResult();
 
 
     }
