@@ -47,6 +47,11 @@ class Lien
     private $poste;
 
     /**
+     * Lien constructor.
+     */
+    public function __construct() { }
+
+    /**
      * @return string
      */
     public function getLibelle()
