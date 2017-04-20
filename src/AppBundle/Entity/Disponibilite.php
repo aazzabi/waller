@@ -31,10 +31,10 @@ class Disponibilite
      * @param int $id
      * @param string $libelle
      */
-    public function __construct($id, $libelle)
+    public function __construct( )
     {
-        $this->id = $id;
-        $this->libelle = $libelle;
+//        $this->id = $id;
+//        $this->libelle = $libelle;
     }
 
     /**

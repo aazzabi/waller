@@ -41,6 +41,7 @@
 
 {% block body %}
 
+    {#Profiles liste et buttons#}
     <div class="row">
         <div class="col-md-12">
             <div class="row">
@@ -49,11 +50,19 @@
                 </div>
                 <div class="col-md-6 text-right">
                     <br>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                    <button class="btn btn-complete btn-cons " data-target="#modalFillIn" data-toggle="modal"
+                            id="btnFillSizeToggler"><i class="fa fa-filter" aria-hidden="true"></i>
                         Appliquer un filtre
                     </button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-columns" aria-hidden="true"></i>
+                        Choisir les colonnes.
+                    </button>
                     <a href="{{ path('profile_new') }}" class="btn btn-success">
-                        <i class="icon-plus"> Ajouter un profile </i>
+                        <i class="icon-plus">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            &nbsp;Ajouter un profile
+                        </i>
                     </a>
                 </div>
             </div>
@@ -61,106 +70,9 @@
     </div>
 
     <hr>
-    <div class="panel panel-default" style="padding: 25px; ">
-        <div class="row">
-            <form id="form-project" method="GET" role="form" autocomplete="off"
-                  novalidate="novalidate">
-                <p class="m-t-10">Informations concernant le Profil</p>
-                <div class="form-group-attached">
-                    <div class="row clearfix">
-                        <div class="col-sm-3">
-                            <div class="form-group form-group-default">
-                                <label>Disponibilité</label>
-                                <select class="cs-select cs-skin-slide cs-transparent form-control"
-                                        name="disponibilite"
-                                        data-init-plugin="cs-select">
-                                    <option value="">Toutes</option>
-                                    {% for disponibilite in disponibilites %}
-                                        <option value="{{ disponibilite.id }}"
-                                                {% if app.session.get('disponibilite') == disponibilite.id %} selected {% endif %} >
-                                            {{ disponibilite.libelle }}</option>
-                                    {% endfor %}
 
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="form-group form-group-default">
-                                <label>Experiences</label>
-                                <input type="text" class="form-control" name="experience"
-                                       value="{{ app.session.get('experience') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="form-group form-group-default input-group">
-                                <label >SIVP</label>
-                                <select style="margin-left: 9px;" class="cs-select cs-skin-slide cs-transparent form-control"
-                                        name="sivp"
-                                        data-init-plugin="cs-select">
-                                    <option value="-1"> Les 2</option>
-                                    <option value="1"> OUI</option>
-                                    <option value="0"> NON</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-5">
-                            <div class="form-group form-group-default">
-                                <label>Compétence</label>
-                                <select class="cs-select cs-skin-slide cs-transparent form-control"
-                                        name="competence"
-                                        data-init-plugin="cs-select">
-                                    <option value="">Toutes</option>
-                                    {% for competence in competences %}
-                                        <option {% if app.session.get('competences') == competence.id %} selected {% endif %}
-                                                value="{{ competence.id }}"> {{ competence.libelle }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <p class="m-t-10">Informations Concernant la Candidature</p>
-                <div class="form-group-attached">
-                    <div class="row clearfix">
-
-                        <div class="col-sm-4">
-                            <div class="form-group form-group-default">
-                                <label>Poste</label>
-                                <select name="poste"
-                                        class="cs-select cs-skin-slide cs-transparent form-control"
-                                        data-init-plugin="cs-select">
-                                    {% for poste in postes %}
-                                        <option value="">Toutes</option>
-                                        <option {% if app.session.get('poste') == poste.id %} selected {% endif %}
-                                                value="{{ poste.id }}"> {{ poste.libelle }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group form-group-default">
-                                <label>Présenté par</label>
-                                <select name="groupe"
-                                        name="groupe"
-                                        class="cs-select cs-skin-slide cs-transparent form-control"
-                                        data-init-plugin="cs-select">
-                                    {% for groupe in groupes %}
-                                        <option value="">Toutes</option>
-                                        <option value="{{ groupe.id }}"> {{ groupe.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <br>
-
-                <button class="btn btn-success" type="submit">Chercher</button>
-
-            </form>
-        </div>
+    </div>
+    </div>
     </div>
     <br>
 
@@ -280,6 +192,120 @@
             </table>
         </div>
     </div>
+
+    {#modal du recherche#}
+    <div class="modal fade fill-in" id="modalFillIn" tabindex="-1" role="dialog" aria-hidden="true">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <i class="pg-close"></i>
+        </button>
+        <div class="modal-dialog ">
+            <div class="modal-content" style="padding-left: -100px">
+                <form id="form-project" method="GET" role="form" autocomplete="off"
+                      novalidate="novalidate">
+                    <div class="modal-header"><h3 class="text-center p-b-5">Rechercher</h3></div>
+                    <div class="modal-body">
+                        <h5 class="m-t-10">Informations concernant le Profil</h5>
+                        <div class="form-group-attached">
+                            <div class="row clearfix">
+                                <div class="col-sm-3">
+                                    <div class="form-group form-group-default">
+                                        <label>Disponibilité</label>
+                                        <select class="cs-select cs-skin-slide cs-transparent form-control"
+                                                name="disponibilite"
+                                                data-init-plugin="cs-select">
+                                            <option value="">Toutes</option>
+                                            {% for disponibilite in disponibilites %}
+                                                <option value="{{ disponibilite.id }}"
+                                                        {% if app.session.get('disponibilite') == disponibilite.id %} selected {% endif %} >
+                                                    {{ disponibilite.libelle }}</option>
+                                            {% endfor %}
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group form-group-default">
+                                        <label>Experiences</label>
+                                        <input type="text" class="form-control" name="experience"
+                                               value="{{ app.session.get('experience') }}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group form-group-default input-group">
+                                        <label>SIVP</label>
+                                        <select style="margin-left: 9px;"
+                                                class="cs-select cs-skin-slide cs-transparent form-control"
+                                                name="sivp"
+                                                data-init-plugin="cs-select">
+                                            <option value="-1"> Les 2</option>
+                                            <option value="1"> OUI</option>
+                                            <option value="0"> NON</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-default">
+                                        <label>Compétence</label>
+                                        <select class="cs-select cs-skin-slide cs-transparent form-control"
+                                                name="competence"
+                                                data-init-plugin="cs-select">
+                                            <option value="">Toutes</option>
+                                            {% for competence in competences %}
+                                                <option {% if app.session.get('competences') == competence.id %} selected {% endif %}
+                                                        value="{{ competence.id }}"> {{ competence.libelle }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="m-t-10">Informations Concernant la Candidature</h5>
+                        <div class="form-group-attached">
+                            <div class="row clearfix">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group form-group-default">
+                                        <label>Poste</label>
+                                        <select name="poste"
+                                                class="cs-select cs-skin-slide cs-transparent form-control"
+                                                data-init-plugin="cs-select">
+                                            {% for poste in postes %}
+                                                <option value="">Toutes</option>
+                                                <option {% if app.session.get('poste') == poste.id %} selected {% endif %}
+                                                        value="{{ poste.id }}"> {{ poste.libelle }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group form-group-default">
+                                        <label>Présenté par</label>
+                                        <select name="groupe"
+                                                name="groupe"
+                                                class="cs-select cs-skin-slide cs-transparent form-control"
+                                                data-init-plugin="cs-select">
+                                            {% for groupe in groupes %}
+                                                <option value="">Toutes</option>
+                                                <option value="{{ groupe.id }}"> {{ groupe.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" type="submit">Chercher</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {#fin modal recherche#}
 
     {#Modal de filtrage #}
     <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

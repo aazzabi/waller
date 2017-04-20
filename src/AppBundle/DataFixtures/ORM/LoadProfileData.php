@@ -60,7 +60,7 @@ class LoadProfileData
 
     private function getRandomNiveau()
     {
-        $niveaux = array('SENIOR', 'JUNIOR', 'CONFIRMED', 'EXPERT');
+        $niveaux = array('SENIOR', 'JUNIOR', 'CONFIRMED', 'EXPERT', 'HERO');
         return $niveaux[array_rand($niveaux)];
     }
 
