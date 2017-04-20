@@ -233,8 +233,7 @@
                                 <div class="col-sm-2">
                                     <div class="form-group form-group-default input-group">
                                         <label>SIVP</label>
-                                        <select style="margin-left: 9px;"
-                                                class="cs-select cs-skin-slide cs-transparent form-control"
+                                        <select class="cs-select cs-skin-slide cs-transparent form-control"
                                                 name="sivp"
                                                 data-init-plugin="cs-select">
                                             <option value="-1"> Les 2</option>
@@ -270,8 +269,8 @@
                                         <select name="poste"
                                                 class="cs-select cs-skin-slide cs-transparent form-control"
                                                 data-init-plugin="cs-select">
+                                            <option value="">Toutes</option>
                                             {% for poste in postes %}
-                                                <option value="">Toutes</option>
                                                 <option {% if app.session.get('poste') == poste.id %} selected {% endif %}
                                                         value="{{ poste.id }}"> {{ poste.libelle }}</option>
                                             {% endfor %}
@@ -285,8 +284,8 @@
                                                 name="groupe"
                                                 class="cs-select cs-skin-slide cs-transparent form-control"
                                                 data-init-plugin="cs-select">
+                                            <option value="">Toutes</option>
                                             {% for groupe in groupes %}
-                                                <option value="">Toutes</option>
                                                 <option value="{{ groupe.id }}"> {{ groupe.name }}</option>
                                             {% endfor %}
                                         </select>

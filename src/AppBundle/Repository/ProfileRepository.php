@@ -84,7 +84,7 @@ class ProfileRepository extends \Doctrine\ORM\EntityRepository
         $search['sivp'] = $session->get('sivp');
         if ($search['sivp'] != -1) {
             $builder->andWhere('p.sivp = :sivp')
-                ->setParameter('sivp', (int) $search['sivp']);
+                ->setParameter('sivp', (int)$search['sivp']);
         }
 
         // competence
@@ -94,22 +94,36 @@ class ProfileRepository extends \Doctrine\ORM\EntityRepository
             $search['competences'] = $session->get('competences');
         }
         if ($search['competences']) {
-        $builder->innerJoin('p.competences', 'c', 'WITH', 'c.id = :competences')
+            $builder->innerJoin('p.competences', 'c', 'WITH', 'c.id = :competences')
                 ->setParameter('competences', $search['competences']);
         }
 
 //        // Poste
-//        if ($search['poste'] !== null) {
-//            $session->set('poste', $search['poste']);
-//        } else {
-//            $search['poste'] = $session->get('poste');
-//        }
-//        if ($search['poste']) {
-//            $builder
-//                ->innerJoin('p.candidature','c')
-//                ->innerJoin('c.poste', 'pos', 'WITH', 'p.id = :poste')
-//                ->setParameter('competences', $search['poste']);
-//        }
+        if ($search['poste'] !== null) {
+            $session->set('poste', $search['poste']);
+        } else {
+            $search['poste'] = $session->get('poste');
+        }
+        if ($search['poste']) {
+            $builder
+                ->innerJoin('p.candidature', 'candi')
+                ->innerJoin('candi.poste', 'pst', 'WITH', 'pst.id = :poste')
+                ->setParameter('poste', $search['poste']);
+        }
+
+//         Group
+        if ($search['groupe'] !== null) {
+            $session->set('groupe', $search['groupe']);
+        } else {
+            $search['groupe'] = $session->get('groupe');
+        }
+        if ($search['groupe']) {
+            $builder
+                ->innerJoin('p.candidature', 'cand')
+                ->innerJoin('cand.group', 'grp', 'WITH', 'grp.id = :groupe')
+                ->setParameter('groupe', $search['groupe']);
+        }
+
 
         return $builder->getQuery()->getResult();
     }

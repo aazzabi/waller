@@ -162,7 +162,14 @@ class Profile
      */
     private $disponibilite;
 
-
+    /**
+     * @var Candidature
+     *
+     * @ORM\OneToMany(targetEntity="Candidature", mappedBy="profile")
+     * @ORM\JoinColumn(name="candidature_id", referencedColumnName="id")
+     * })
+     */
+    private $candidature;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -716,4 +723,38 @@ class Profile
     }
 
 
+
+    /**
+     * Add candidature
+     *
+     * @param \AppBundle\Entity\Candidature $candidature
+     *
+     * @return Profile
+     */
+    public function addCandidature(\AppBundle\Entity\Candidature $candidature)
+    {
+        $this->candidature[] = $candidature;
+
+        return $this;
+    }
+
+    /**
+     * Remove candidature
+     *
+     * @param \AppBundle\Entity\Candidature $candidature
+     */
+    public function removeCandidature(\AppBundle\Entity\Candidature $candidature)
+    {
+        $this->candidature->removeElement($candidature);
+    }
+
+    /**
+     * Get candidatures
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCandidature()
+    {
+        return $this->candidature;
+    }
 }
