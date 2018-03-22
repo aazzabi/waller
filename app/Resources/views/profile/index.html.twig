@@ -85,7 +85,7 @@
                     <th>{{ 'entity.profile.nom' | trans }}</th>
                     <th>{{ 'entity.profile.coordonnees' | trans }}</th>
                     <th>{{ 'entity.profile.cv' | trans }}</th>
-                    <th>{{ 'entity.profile.experience' | trans }}(ans)</th>
+                    <th>{{ 'entity.profile.experience' | trans }}</th>
                     <th>{{ 'entity.profile.niveau' | trans }}</th>
                     <th>{{ 'entity.profile.reseauxsociaux' | trans }}</th>
                     <th>{{ 'entity.profile.sivp' | trans }}</th>
@@ -101,13 +101,13 @@
                     <tr>
                         <td>
                             <a href="{{ path('profile_show', { 'id': profile.id }) }}">
-                                <div id="profile-image1" class="img-circle img-responsive text-center">
+                                <div id="profile-image1">
                                     {% if profile.photo != '' %}
                                         <img alt="User Pic" src="{{ asset('uploads/photo/' ~ profile.photo) }}"
-                                             id="profile-image1" class="img-circle img-responsive">
+                                             id="profile-image1" class="img-avatar img-responsive">
                                     {% else %}
                                         <img alt="User Pic" src="{{ asset('assets/img/profile.png') }}"
-                                             id="profile-image1" class="img-circle img-responsive">
+                                             id="profile-image1" class="img-avatar img-responsive">
                                     {% endif %}
 
                                 </div>
@@ -121,7 +121,7 @@
                                 {{ profile.email }} <br>
                             {% endif %}
                             {% if profile.telephone %}
-                                <i class="fa fa-phone" aria-hidden="true"></i> {{ profile.telephone }} <br>
+                                <i class="fa fa-phone" aria-hidden="true"></i> {{ profile.telephone }} &nbsp
                             {% endif %}
                             {% if profile.skype %}
                                 <i class="fa fa-skype" aria-hidden="true"></i> {{ profile.skype }}

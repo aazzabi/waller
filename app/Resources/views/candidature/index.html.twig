@@ -111,14 +111,14 @@
                         {% for candidature in candidatures %}
                             <tr>
                                 <td><a>
-                                        <div id="profile-image1" class="img-circle img-responsive">
+                                        <div id="profile-image1">
                                             {% if candidature.profile.photo != '' %}
                                                 <img alt="User Pic"
                                                      src="{{ asset('uploads/photo/' ~ candidature.profile.photo) }}"
-                                                     class="img-circle img-responsive">
+                                                     class="img-avatar img-responsive">
                                             {% else %}
                                                 <img alt="User Pic" src="{{ asset('assets/img/profile.png') }}"
-                                                     id="profile-image1" class="img-circle img-responsive">
+                                                     id="profile-image1" class="img-avatar img-responsive">
                                             {% endif %}
 
                                         </div>

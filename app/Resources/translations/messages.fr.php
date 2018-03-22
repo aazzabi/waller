@@ -32,7 +32,7 @@ return [
             'github' => 'Github',
             'sivp' => 'SIVP',
             'reseauxsociaux' => 'Reseaux sociaux',
-            'prestationsalariale' => 'Prestation salariale',
+            'prestationsalariale' => 'Salaire',
             'cv' => 'CV ',
             'telephone' => 'Téléphone',
             'email' => 'E-mail',
