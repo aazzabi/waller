@@ -13,10 +13,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <style>
         @media print {
-            /*.but {*/
-                /*display: none;*/
-            /*}*/
-
             .img-circle {
                 width: 45px;
                 height: 45px;
@@ -45,19 +41,19 @@
             <div class="card" align="center" style="width: 700px;height: auto;">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-md-offset-1">
                             <a>
                                 {% if profile.photo != '' %}
-                                    <img style="width: 60px;" alt="User Pic"
+                                    <img alt="User Pic"
                                          src="{{ asset('uploads/photo/' ~ profile.photo) }}"
                                          class="img-circle img-responsive">
                                 {% else %}
-                                    <img style="width: 60px;" alt="User Pic" src="{{ asset('assets/img/profile.png') }}"
+                                    <img alt="User Pic" src="{{ asset('assets/img/profile.png') }}"
                                          id="profile-image1" class="img-circle img-responsive">
                                 {% endif %}
                             </a>
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-9">
                             <h1>{{ profile.prenom }} {{ profile.nom }}</h1>
                         </div>
                     </div>
