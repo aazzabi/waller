@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+        mysql:
+           image: smartteam1/mysql57:${MYSQL_VERSION}
+           container_name: waller_mysql
+           environment:
+                   MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+                   MYSQL_DATABASE: ${MYSQL_DATABASE}
+                   MYSQL_USER: ${MYSQL_USER}
+                   MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+           volumes:
+                - ./var/mysql/:/var/lib/mysql
+           ports:
+                - "3307:3306"
+        php:
+           image: smartteam1/php72-fpm${XDEBUG}:${PHP_VERSION}
+           container_name: waller_php
+           volumes:
+                - ./var/log/:/var/log/php/
+                - ${PROJECT_PATH}:${DOCKER_PROJECT_PATH}
+           working_dir: ${DOCKER_PROJECT_PATH}
+        nginx:
+           image: smartteam1/nginx:${NGINX_VERSION}
+           container_name: waller_nginx
+           ports:
+               - "81:80"
+           volumes:
+               - ./nginx/:/etc/nginx/sites-enabled/
+               - ./var/log/:/var/log/nginx
+           volumes_from:
+               - php                 
