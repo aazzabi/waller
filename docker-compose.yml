@@ -10,7 +10,7 @@ services:
                    MYSQL_USER: ${MYSQL_USER}
                    MYSQL_PASSWORD: ${MYSQL_PASSWORD}
            volumes:
-                - ./var/mysql/:/var/lib/mysql
+                   - ./var/mysql/:/var/lib/mysql
            ports:
                 - "3307:3306"
         php:
@@ -24,7 +24,7 @@ services:
            image: smartteam1/nginx:${NGINX_VERSION}
            container_name: waller_nginx
            ports:
-               - "81:80"
+               - "80:80"
            volumes:
                - ./nginx/:/etc/nginx/sites-enabled/
                - ./var/log/:/var/log/nginx
