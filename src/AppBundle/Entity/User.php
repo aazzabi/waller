@@ -66,7 +66,7 @@ class User extends BaseUser
             $roles = array_merge($roles, $group->getRoles());
         }
 
-        if (count($this->getGroup()->getRoles()) > 0) {
+        if (!empty($this->getGroup()->getRoles())) {
             $roles = array_merge($roles, $this->getGroup()->getRoles());
         }
 
