@@ -39,7 +39,7 @@ class ProfileType extends AbstractType
                 'label' => 'entity.profileForm.email'])
             ->add('cvFile', VichFileType::class, [
                 'required' => false,
-                'label' => 'entity.profileForm.cv',
+                'label' => 'cv',
                 'allow_delete' => true,
                 'download_link' => true
             ])
@@ -50,6 +50,18 @@ class ProfileType extends AbstractType
             ->add('niveau', TextType::class, [
                 'required' => true,
                 'label' => 'entity.profileForm.niveau'
+            ])
+            ->add('societeactuel', TextType::class, [
+                'required' => true,
+                'label' => 'entity.profileForm.societeactuel'
+            ])
+            ->add('ambition', TextType::class, [
+                'required' => true,
+                'label' => 'entity.profileForm.ambition'
+            ])
+            ->add('ville', TextType::class, [
+                'required' => true,
+                'label' => 'entity.profileForm.ville'
             ])
             ->add('skype', TextType::class, [
                 'label' => 'entity.profileForm.skype',
@@ -80,10 +92,26 @@ class ProfileType extends AbstractType
                 'required' => false,
                 'label' => 'entity.profileForm.prestationsalariale'
             ])
+            ->add('salaireactuel', TextType::class, [
+                'required' => false,
+                'label' => 'entity.profileForm.salaireactuel'
+            ])
+            ->add('institut', TextType::class, [
+                'required' => false,
+                'label' => 'entity.profileForm.institut'
+            ])
+            ->add('postBac', TextType::class, [
+                'required' => false,
+                'label' => 'entity.profileForm.postBac'
+            ])
+            ->add('diplome', TextType::class, [
+                'required' => false,
+                'label' => 'entity.profileForm.diplome'
+            ])
             ->add('photoFile', VichFileType::class, [
                 'required' => false,
                 'allow_delete' => true,
-                'label' => 'entity.profileForm.photo',
+                'label' => 'photo',
                 'download_link' => true
             ])
             ->add('disponibilite', EntityType::class, [

@@ -42,6 +42,20 @@ class Profile
     /**
      * @var string
      *
+     * @ORM\Column(name="ville", type="string", length=150, nullable=false)
+     */
+    private $ville;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="societeActuel", type="string", length=150, nullable=false)
+     */
+    private $societeActuel;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="telephone", type="string", length=150, nullable=true)
      */
     private $telephone;
@@ -129,6 +143,44 @@ class Profile
      * @ORM\Column(name="prestationSalariale", type="string", length=150, nullable=true)
      */
     private $prestationsalariale;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salaireActuel", type="string", length=150, nullable=true)
+     */
+    private $salaireActuel;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ambition", type="string", length=150, nullable=true)
+     */
+    private $ambition;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="diplome", type="string", length=150, nullable=true)
+     */
+    private $diplome;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="postBac", type="string", length=150, nullable=true)
+     */
+    private $postBac;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="institut", type="string", length=150, nullable=true)
+     */
+    private $institut;
 
     /**
      * @Vich\UploadableField(mapping="photo_file", fileNameProperty="photo")
@@ -515,6 +567,118 @@ class Profile
     public function getSivp()
     {
         return $this->sivp;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+
+    /**
+     * @param string $ville
+     */
+    public function setVille($ville)
+    {
+        $this->ville = $ville;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSocieteActuel()
+    {
+        return $this->societeActuel;
+    }
+
+    /**
+     * @param string $societeActuel
+     */
+    public function setSocieteActuel($societeActuel)
+    {
+        $this->societeActuel = $societeActuel;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSalaireActuel()
+    {
+        return $this->salaireActuel;
+    }
+
+    /**
+     * @param string $salaireActuel
+     */
+    public function setSalaireActuel($salaireActuel)
+    {
+        $this->salaireActuel = $salaireActuel;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAmbition()
+    {
+        return $this->ambition;
+    }
+
+    /**
+     * @param string $ambition
+     */
+    public function setAmbition($ambition)
+    {
+        $this->ambition = $ambition;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDiplome()
+    {
+        return $this->diplome;
+    }
+
+    /**
+     * @param string $diplome
+     */
+    public function setDiplome($diplome)
+    {
+        $this->diplome = $diplome;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPostBac()
+    {
+        return $this->postBac;
+    }
+
+    /**
+     * @param string $postBac
+     */
+    public function setPostBac($postBac)
+    {
+        $this->postBac = $postBac;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInstitut()
+    {
+        return $this->institut;
+    }
+
+    /**
+     * @param string $institut
+     */
+    public function setInstitut($institut)
+    {
+        $this->institut = $institut;
     }
 
     /**

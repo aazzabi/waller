@@ -14,8 +14,8 @@
             <div class="panel-body">
                 {{ form_row(form.prenom) }}
                 {{ form_row(form.nom) }}
-                {{ form_widget(form.photoFile) }}
-                {{ form_widget(form.cvFile) }}
+                {{ form_row(form.photoFile) }}
+                {{ form_row(form.cvFile) }}
                 {% if profile.cv != '' %}
                     <div class="text-center" style="margin-top: -25px;">
                         Cliquez
@@ -37,6 +37,7 @@
         <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo"
              aria-expanded="false" style="height: 0px;">
             <div class="panel-body">
+                {{ form_row(form.ville) }}
                 {{ form_row(form.telephone) }}
                 {{ form_row(form.email) }}
                 {{ form_row(form.skype) }}
@@ -78,11 +79,31 @@
              aria-expanded="false" style="height: 0px;">
             <div class="panel-body">
                 {{ form_row(form.sivp) }}
+                {{ form_row(form.salaireactuel) }}
+                {{ form_row(form.societeactuel) }}
                 {{ form_row(form.prestationsalariale) }}
                 {{ form_row(form.disponibilite) }}
+                {{ form_row(form.ambition) }}
             </div>
         </div>
     </div>
-
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingFive">
+            <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive"
+                   aria-expanded="false" aria-controls="collapseFive">
+                    Formation
+                </a>
+            </h4>
+        </div>
+        <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive"
+             aria-expanded="false" style="height: 0px;">
+            <div class="panel-body">
+                {{ form_row(form.postBac) }}
+                {{ form_row(form.institut) }}
+                {{ form_row(form.diplome) }}
+            </div>
+        </div>
+    </div>
 </div>
 
