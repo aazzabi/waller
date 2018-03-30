@@ -25,13 +25,15 @@ class ProfileType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
+                'required' => true,
                 'label' => 'entity.profileForm.nom'
             ])
             ->add('prenom', TextType::class, [
+                'required' => true,
                 'label' => 'entity.profileForm.prenom'
             ])
             ->add('telephone', TextType::class, [
-                'required' => false,
+                'required' => true,
                 'label' => 'entity.profileForm.telephone'
                 ])
             ->add('email', EmailType::class, [
@@ -44,23 +46,23 @@ class ProfileType extends AbstractType
                 'download_link' => true
             ])
             ->add('experience', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'entity.profileForm.experience'
             ])
             ->add('niveau', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'entity.profileForm.niveau'
             ])
             ->add('societeactuel', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'entity.profileForm.societeactuel'
             ])
             ->add('ambition', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'entity.profileForm.ambition'
             ])
             ->add('ville', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'entity.profileForm.ville'
             ])
             ->add('skype', TextType::class, [

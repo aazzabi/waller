@@ -32,7 +32,7 @@ return [
             'github' => 'Github',
             'sivp' => 'SIVP',
             'reseauxsociaux' => 'Reseaux sociaux',
-            'prestationsalariale' => 'Prestation salariale',
+            'prestationsalariale' => 'Salaire souhaité',
             'cv' => 'CV ',
             'telephone' => 'Téléphone',
             'email' => 'E-mail',
@@ -63,7 +63,7 @@ return [
             'diplome' => 'Dernier diplome',
             'ambition' => 'Ambitions',
             'reseauxsociaux' => 'Reseaux sociaux',
-            'prestationsalariale' => 'Prestation salariale',
+            'prestationsalariale' => 'Salaire souhaité',
             'cv' => 'Curriculum vitae  : ',
             'disponibilite' => 'Disponibilité'
         ],

@@ -42,21 +42,21 @@ class Profile
     /**
      * @var string
      *
-     * @ORM\Column(name="ville", type="string", length=150, nullable=false)
+     * @ORM\Column(name="ville", type="string", length=150, nullable=true)
      */
     private $ville;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="societeActuel", type="string", length=150, nullable=false)
+     * @ORM\Column(name="societeActuel", type="string", length=150, nullable=true)
      */
     private $societeActuel;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=150, nullable=true)
+     * @ORM\Column(name="telephone", type="string", length=150, nullable=false)
      */
     private $telephone;
 
@@ -98,7 +98,7 @@ class Profile
     /**
      * @var string
      *
-     * @ORM\Column(name="niveau", type="string", length=150, nullable=false)
+     * @ORM\Column(name="niveau", type="string", length=150, nullable=true)
      */
     private $niveau;
 
