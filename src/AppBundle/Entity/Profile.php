@@ -131,11 +131,11 @@ class Profile
     private $github;
 
     /**
-     * @var boolean
+     * @var string
      *
-     * @ORM\Column(name="sivp", type="boolean")
+     * @ORM\Column(name="contrat", type="string", length=150, nullable=true)
      */
-    private $sivp;
+    private $contrat;
 
     /**
      * @var string
@@ -546,27 +546,27 @@ class Profile
     }
 
     /**
-     * Set sivp
+     * Set contrat
      *
-     * @param boolean $sivp
+     * @param string $contrat
      *
      * @return Profile
      */
-    public function setSivp($sivp)
+    public function setContrat($contrat)
     {
-        $this->sivp = $sivp;
+        $this->contrat = $contrat;
 
         return $this;
     }
 
     /**
-     * Get sivp
+     * Get contrat
      *
-     * @return boolean
+     * @return string
      */
-    public function getSivp()
+    public function getContrat()
     {
-        return $this->sivp;
+        return $this->contrat;
     }
 
     /**

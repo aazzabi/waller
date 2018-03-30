@@ -79,14 +79,17 @@ class ProfileRepository extends \Doctrine\ORM\EntityRepository
                 ->setParameter('experience', $search['experience']);
         }
 
-        // sivp
-        $session->set('sivp', $search['sivp']);
-        $search['sivp'] = $session->get('sivp');
-        if ($search['sivp'] != -1) {
-            $builder->andWhere('p.sivp = :sivp')
-                ->setParameter('sivp', (int)$search['sivp']);
+        /// contrat
+        if ($search['contrat'] !== null) {
+            $session->set('contrat', $search['contrat']);
+        } else {
+            $search['contrat'] = $session->get('contrat');
         }
-
+        if ($search['contrat']) {
+            $builder->andWhere('p.contrat >= :contrat')
+                ->setParameter('contrat', $search['contrat']);
+        }
+        
         // competence
         if ($search['competences'] !== null) {
             $session->set('competences', $search['competences']);

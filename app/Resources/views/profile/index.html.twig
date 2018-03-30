@@ -88,7 +88,7 @@
                     <th>{{ 'entity.profile.experience' | trans }}</th>
                     <th>{{ 'entity.profile.niveau' | trans }}</th>
                     <th>{{ 'entity.profile.reseauxsociaux' | trans }}</th>
-                    <th>{{ 'entity.profile.sivp' | trans }}</th>
+                    <th>{{ 'entity.profile.contrat' | trans }}</th>
 
                     {% if is_granted('ROLE_ADMIN') %}    
                         <th>{{ 'entity.profile.prestationsalariale' | trans }} </th>
@@ -160,8 +160,8 @@
                             {% endif %}
 
                         </td>
-                        <td>{% if profile.sivp %}
-                                <i class="fa fa-check text-success fa-2x" aria-hidden="true"></i>
+                        <td>{% if profile.contrat %}
+                                {{ profile.contrat }}
                             {% else %}
                                 <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
                             {% endif %}
@@ -232,13 +232,15 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="form-group form-group-default input-group">
-                                        <label>SIVP</label>
+                                        <label>Type de contrat</label>
                                         <select class="cs-select cs-skin-slide cs-transparent form-control"
-                                                name="sivp"
+                                                name="contrat"
                                                 data-init-plugin="cs-select">
-                                            <option value="-1"> Les 2</option>
-                                            <option value="1"> OUI</option>
-                                            <option value="0"> NON</option>
+                                            <option value="-1"> All</option>
+                                            <option value="1"> SIVP</option>
+                                            <option value="2"> CDI</option>
+                                            <option value="3"> CDD</option>
+                                            <option value="4"> Freelance</option>
                                         </select>
                                     </div>
                                 </div>
@@ -374,9 +376,9 @@
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input type="checkbox" class="toggle-vis form-check-input" id="sivp"
+                                    <input type="checkbox" class="toggle-vis form-check-input" id="contrat"
                                            data-column="7">
-                                    SIVP
+                                    Contrat
                                 </label>
                             </div>
                             {% if is_granted('ROLE_ADMIN') %}    

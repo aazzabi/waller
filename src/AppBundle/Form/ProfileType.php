@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 
 class ProfileType extends AbstractType
@@ -57,7 +58,12 @@ class ProfileType extends AbstractType
                 'required' => false,
                 'label' => 'entity.profileForm.societeactuel'
             ])
-            ->add('ambition', TextType::class, [
+            ->add('ambition', ChoiceType::class, [
+                'choices'  => [
+                    'Cherche une mission en France / à l\'étranger' => 'mission en france',
+                    'Veut être embauché en France / à l\'étranger' => 'travailler en france',
+                    'Veut être embauché en Tunisie' => 'travailler en tunisie',
+                ],
                 'required' => false,
                 'label' => 'entity.profileForm.ambition'
             ])
@@ -85,10 +91,15 @@ class ProfileType extends AbstractType
                 'required' => false,
 
             ])
-            ->add('sivp', CheckboxType::class, [
-                'label' => 'entity.profileForm.sivp',
+            ->add('contrat', ChoiceType::class, [
+                'choices'  => [
+                    'SIVP' => 'SIVP',
+                    'CDI' => 'CDI',
+                    'CDD' => 'CDD',
+                    'Freeelance' => 'Freeelance',
+                ],
+                'label' => 'entity.profileForm.contrat',
                 'required' => false,
-                'value' => false
             ])
             ->add('prestationsalariale', TextType::class, [
                 'required' => false,
