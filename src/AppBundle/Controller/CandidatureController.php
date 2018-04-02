@@ -30,10 +30,8 @@ class CandidatureController extends Controller
     public function indexAction()
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('AppBundle:Candidature');
-
-        $candidatures = $repository->getCandidaturesByGroupId($user->getGroup()->getId());
+        $groupId = $user->getGroup()->getId();
+        $candidatures = $this->get('model_manager.candidature')->retrieveCandidaturesByGroupId($groupId);
 
         return $this->render('candidature/index.html.twig', array(
             'candidatures' => $candidatures,
