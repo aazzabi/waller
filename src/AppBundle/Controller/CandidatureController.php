@@ -46,14 +46,15 @@ class CandidatureController extends Controller
      */
     public function newAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
         $id = $request->query->get('id');
+        $profileService = $this->get('model_manager.profile');
 
-        $profiles = $em->getRepository('AppBundle:Profile')->findAll();
+        $profiles = $profileService->retreiveAllProfiles();
+
         $candidature = new Candidature();
 
         if (isset($id) && $id) {
-            $profileSelected = $em->getRepository('AppBundle:Profile')->find($id);
+            $profileSelected = $profileService->retreiveProfileById($id);
             $candidature->setProfile($profileSelected);
         }
 

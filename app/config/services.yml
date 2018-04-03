@@ -1,5 +1,8 @@
 parameters:
     database_manager.candidature.class: AppBundle\ModelManager\CandidatureManager
+    database_manager.etape.class: AppBundle\ModelManager\EtapeManager
+    database_manager.poste.class: AppBundle\ModelManager\PosteManager
+    database_manager.profile.class: AppBundle\ModelManager\ProfileManager
 
 services:
     app.rapport_listener:
@@ -24,3 +27,12 @@ services:
     model_manager.candidature:
         class: %database_manager.candidature.class%
         arguments: [ "@doctrine"]
+    model_manager.etape:
+            class: %database_manager.etape.class%ui
+            arguments: [ "@doctrine"]
+    model_manager.poste:
+            class: %database_manager.poste.class%
+            arguments: [ "@doctrine"]
+    model_manager.profile:
+            class: %database_manager.profile.class%
+            arguments: [ "@doctrine"]
