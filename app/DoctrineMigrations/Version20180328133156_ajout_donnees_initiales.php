@@ -15,14 +15,6 @@ class Version20180328133156_ajout_donnees_initiales extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-//        $this->addSql('INSERT INTO `user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`, `group_id`, `nom`, `prenom`) VALUES
-//              (\'1\', \'Gabriele\', \'gabriele\', \'gsantini@smart-team.tn\', \'gsantini@smart-team.tn\', \'1\', NULL, \'111\', NULL, NULL, NULL, \'a:1:{i:0;s:10:"ROLE_ADMIN";}\', \'1\', \'\', \'\'),
-//              (\'2\', \'Arafet\', \'arafet\', \'aazzabi@smart-team.tn\', \'aazzabi@smart-team.tn\', \'1\', NULL, \'222\', NULL, NULL, NULL, \'a:1:{i:0;s:10:"ROLE_ADMIN";}\', \'1\', \'\', \'\'),
-//              (\'3\', \'Amel\', \'amel\', \'abhar@smart-team.tn\', \'abhar@smart-team.tn\', \'1\', NULL, \'333\', NULL, NULL, NULL, \'\', \'2\', \'\', \'\'),
-//              (\'4\', \'Walid\', \'walid\', \'wmnasri@smart-team.tn\', \'wmnasri@@smart-team.tn\', \'1\', NULL, \'444\', NULL, NULL, NULL, \'a:1:{i:0;s:10:"ROLE_ADMIN";}\', \'\', \'\', \'\'),
-//              (\'5\', \'Cedric\', \'cedric\', \'cchalbi@smart-team.tn\', \'cchalbi@@smart-team.tn\', \'1\', NULL, \'555\', NULL, NULL, NULL, \'\', \'3\', \'\', \'\')'
-//        );
-
         //adding groupes
         $this->addSql('INSERT INTO `groupe` (`id`, `name`, `roles`) VALUES
             (1, \'Smart Team\', \'a:1:{i:0;s:10:"ROLE_ADMIN";}\'),
@@ -255,29 +247,4 @@ class Version20180328133156_ajout_donnees_initiales extends AbstractMigration
         $this->addSql('DELETE * FROM `disponibilite`');
         $this->addSql('DELETE * FROM `workflow`');
     }
-
-//    public function newUsers()
-//    {
-//        return array(
-//            'Gabriele' => array(
-//                'username' => 'Gabriele',
-//                'username_canonical' => 'gabriele',
-//                'email' => 'gsantini@smart-team.tn',
-//                'email_canonical' => 'gsantini@smart-team.tn',
-//                'enabled' => '1',
-//                'salt' => '',
-//                'password' => '111',
-//                'roles' => 'a:1:{i:0;s:10:"ROLE_ADMIN";}',
-//                'group_id' => '1'
-//            ),
-//            'admin'     => array('code' => 'admin',
-//                'email' => 'admin@amocer-idf.com',
-//                'firstname' => 'super',
-//                'lastname' => 'administrateur',
-//                'password' => '@mocer!df2012',
-//                'profile' => 'administrateur',
-//                'organization' => 'dtu13-3'
-//            ),
-//        );
-//    }
 }
