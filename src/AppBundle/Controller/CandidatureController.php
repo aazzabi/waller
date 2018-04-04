@@ -29,7 +29,7 @@ class CandidatureController extends Controller
      */
     public function indexAction()
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this-> get('security.token_storage')->getToken()->getUser();
         $groupId = $user->getGroup()->getId();
         $candidatures = $this->get('model_manager.candidature')->retrieveCandidaturesByGroupId($groupId);
 
@@ -57,6 +57,8 @@ class CandidatureController extends Controller
             $profileSelected = $profileService->retreiveProfileById($id);
             $candidature->setProfile($profileSelected);
         }
+
+        $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm('AppBundle\Form\CandidatureType', $candidature);
         $form->handleRequest($request);
