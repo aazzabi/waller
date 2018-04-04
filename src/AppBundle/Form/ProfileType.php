@@ -132,7 +132,7 @@ class ProfileType extends AbstractType
                 'class' => Disponibilite::class
             ])
             ->add('competencesTags', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'entity.profileForm.competences',
             ]);
     }
