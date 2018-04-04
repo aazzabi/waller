@@ -10,6 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -120,6 +121,10 @@ class ProfileType extends AbstractType
             ->add('diplome', TextType::class, [
                 'required' => false,
                 'label' => 'entity.profileForm.diplome'
+            ])
+            ->add('commentaireProfil', TextareaType::class, [
+                'required' => false,
+                'label' => 'entity.profileForm.commentaireProfil'
             ])
             ->add('photoFile', VichFileType::class, [
                 'required' => false,

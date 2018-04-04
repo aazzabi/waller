@@ -63,40 +63,22 @@
                     <table style="width: 100%;" align="center">
                         {% if profile.telephone %}
                             <tr>
-                                <td>
-                                    <div class="col-md-5 col-xs-6 tital ">{{ 'entity.profile.telephone' | trans }}:
-                                    </div>
+                                <td class="col-sm-4 tital ">
+                                    {{ 'entity.profile.telephone' | trans }}
                                 </td>
-                                <td>
-                                    <div class="col-md-7">{{ profile.telephone }}</div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div class="clearfix"></div>
-                                </td>
-                                <td>
-                                    <div class="bot-border"></div>
+                                <td class="col-sm-8">
+                                    {{ profile.telephone }}
                                 </td>
                             </tr>
                         {% endif %}
 
                         {% if profile.email %}
                             <tr>
-                                <td>
-                                    <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.email' | trans }}:</div>
+                                <td class="col-sm-4 tital ">
+                                   {{ 'entity.profile.email' | trans }}
                                 </td>
-                                <td>
-                                    <div class="col-sm-7">{{ profile.email }}</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="clearfix"></div>
-                                </td>
-                                <td>
-                                    <div class="bot-border"></div>
+                                <td class="col-sm-8">
+                                    {{ profile.email }}
                                 </td>
                             </tr>
                         {% endif %}
@@ -104,147 +86,101 @@
 
                         {% if profile.cv %}
                             <tr>
-                                <td>
-                                    <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.cv' | trans }}:
-                                    </div>
+                                <td class="col-sm-4 tital ">
+                                    {{ 'entity.profile.cv' | trans }}:
                                 </td>
-                                <td>
-                                    <div class="col-sm-7"><a href="{{ asset('uploads/cv/' ~ profile.cv) }}">View
-                                            CV (DOC)</a></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="clearfix"></div>
-                                </td>
-                                <td>
-                                    <div class="bot-border"></div>
+                                <td class="col-sm-8">
+                                    <a href="{{ asset('uploads/cv/' ~ profile.cv) }}">View CV (DOC)</a>
                                 </td>
                             </tr>
                         {% endif %}
 
                         <tr>
-                            <td>
-                                <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.experience' | trans }}
-                                </div>
+                            <td class="col-sm-4 tital ">
+                                {{ 'entity.profile.experience' | trans }}
                             </td>
-                            <td>
-                                <div class="col-sm-7">{{ profile.experience }}</div>
+                            <td class="col-sm-8">
+                                {{ profile.experience }}
+                            </td>
+                        </tr>
+                        {#<tr>#}
+                            {#<td class="col-sm-4 tital ">#}
+                                {#<div class="clearfix"></div>#}
+                            {#</td>#}
+                            {#<td class="col-sm-8">#}
+                                {#<div class="bot-border"></div>#}
+                            {#</td>#}
+                        {#</tr>#}
+                        <tr>
+                            <td class="col-sm-4 tital ">
+                                {{ 'entity.profile.niveau' | trans }}
+                            </td>
+                            <td class="col-sm-8">
+                                {{ profile.niveau }}
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <div class="clearfix"></div>
+                            <td class="col-sm-4 tital ">
+                                {{ 'entity.profile.competences' | trans }}
                             </td>
-                            <td>
-                                <div class="bot-border"></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.niveau' | trans }}
-                                    :
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-7">{{ profile.niveau }}</div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="clearfix"></div>
-                            </td>
-                            <td>
-                                <div class="bot-border"></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.competences' | trans }}:
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-7">{{ profile.competencesTags }}</div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="clearfix"></div>
-                            </td>
-                            <td>
-                                <div class="bot-border"></div>
+                            <td class="col-sm-8">
+                                {{ profile.competencesTags }}
                             </td>
                         </tr>
 
                         {% if profile.skype !="" %}
                             <tr>
-                                <td>
-                                    <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.skype' | trans }}
-                                        :
-                                    </div>
+                                <td class="col-sm-4 tital ">
+                                   {{ 'entity.profile.skype' | trans }}
                                 </td>
-                                <td>
-                                    <div class="col-sm-7">{{ profile.skype }}</div>
+                                <td class="col-sm-8">
+                                   {{ profile.skype }}
                                 </td>
                             </tr>
                         {% endif %}
 
                         {% if profile.linkedin %}
                             <tr>
-                                <td>
-                                    <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.linkedin' | trans }}
-                                        :
-                                    </div>
+                                <td class="col-sm-4 tital ">
+                                   {{ 'entity.profile.linkedin' | trans }}
                                 </td>
-                                <td>
-                                    <div class="col-sm-7">
-                                        {% if profile.linkedin %}
-                                            <a href="{{ profile.linkedin }}">
-                                                <i class="fa fa-linkedin fa-2x" style="color:#4875B4;"
-                                                   aria-hidden="true"></i>
-                                            </a>
-                                        {% else %}
-                                            <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
-                                        {% endif %}
-                                    </div>
+                                <td class="col-sm-8">
+                                    {% if profile.linkedin %}
+                                        <a href="{{ profile.linkedin }}">
+                                            <i class="fa fa-linkedin fa-2x" style="color:#4875B4;"
+                                               aria-hidden="true"></i>
+                                        </a>
+                                    {% else %}
+                                        <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endif %}
 
                         {% if profile.facebook %}
                             <tr>
-                                <td>
-                                    <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.facebook' | trans }}
-                                        :
-                                    </div>
+                                <td class="col-sm-4 tital ">
+                                    {{ 'entity.profile.facebook' | trans }}
                                 </td>
-                                <td>
-                                    <div class="col-sm-7">
-                                        <a href="{{ profile.facebook }}">
-                                            <i class="fa fa-facebook-square fa-2x"
-                                               style="color:#3b5998;"></i>
-                                        </a>
-                                    </div>
+                                <td class="col-sm-8">
+                                    <a href="{{ profile.facebook }}">
+                                        <i class="fa fa-facebook-square fa-2x"
+                                           style="color:#3b5998;"></i>
+                                    </a>
                                 </td>
                             </tr>
                         {% endif %}
 
                         {% if profile.github %}
                         <tr>
-                            <td>
-                                <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.github' | trans }}
-                                    :
-                                </div>
+                            <td class="col-sm-4 tital ">
+                                {{ 'entity.profile.github' | trans }}
                             </td>
-                            <td>
-                                <div class="col-sm-7">
-                                    <a href="{{ profile.github }}">
-                                        <i class="fa fa-github fa-2x" style="color: black;"
-                                           aria-hidden="true"></i>
-                                    </a>
-                                </div>
+                            <td class="col-sm-8">
+                                <a href="{{ profile.github }}">
+                                    <i class="fa fa-github fa-2x" style="color: black;"
+                                       aria-hidden="true"></i>
+                                </a>
                             </td>
                         </tr>
                         <tr>
@@ -252,39 +188,36 @@
 
                         </tr>
                         <tr>
-                            <td>
-                                <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.sivp' | trans }}:
-                                </div>
+                            <td class="col-sm-4 tital ">
+                                {{ 'entity.profile.contrat' | trans }}:
                             </td>
-                            <td>
-                                <div class="col-sm-7">
-                                    {% if profile.contrat %}
-                                        <i class="fa fa-check text-success fa-2x" aria-hidden="true"></i>
-                                    {% else %}
-                                        <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
-                                    {% endif %}
-                                </div>
+                            <td class="col-sm-8">
+                                {% if profile.contrat %}
+                                    <i class="fa fa-check text-success fa-2x" aria-hidden="true"></i>
+                                {% else %}
+                                    <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
+                                {% endif %}
                             </td>
                         </tr>
-
+                        {% if profile.commentaireProfil %}
                         <tr>
-                            <td>
-                                <div class="clearfix"></div>
+                            <td class="col-sm-4 tital ">
+                                {{ 'entity.profile.commentaireProfil' | trans }}:
                             </td>
-                            <td>
-                                <div class="bot-border"></div>
+                            <td class="col-sm-8">
+                                {{ profile.commentaireProfil }}
                             </td>
                         </tr>
+                        {% endif %}
+
 
                         {% if profile.prestationsalariale %}
                             <tr>
-                                <td>
-                                    <div class="col-sm-5 col-xs-6 tital ">{{ 'entity.profile.prestationsalariale' | trans }}
-                                        :
-                                    </div>
+                                <td class="col-sm-4 tital ">
+                                    {{ 'entity.profile.prestationsalariale' | trans }}
                                 </td>
-                                <td>
-                                    <div class="col-sm-7">{{ profile.prestationsalariale }}</div>
+                                <td class="col-sm-8">
+                                    {{ profile.prestationsalariale }}
                                 </td>
                             </tr>
                         {% endif %}

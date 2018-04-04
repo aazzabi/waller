@@ -183,6 +183,13 @@ class Profile
     private $institut;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="commentaireProfil", type="text", length=65535, nullable=true)
+     */
+    private $commentaireProfil;
+
+    /**
      * @Vich\UploadableField(mapping="photo_file", fileNameProperty="photo")
      *
      * @var File
@@ -331,6 +338,22 @@ class Profile
     public function getTelephone()
     {
         return $this->telephone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommentaireProfil()
+    {
+        return $this->commentaireProfil;
+    }
+
+    /**
+     * @param string $commentaireProfil
+     */
+    public function setCommentaireProfil($commentaireProfil)
+    {
+        $this->commentaireProfil = $commentaireProfil;
     }
 
     /**
