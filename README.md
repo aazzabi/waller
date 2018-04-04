@@ -28,29 +28,29 @@ cd /var/www/gestion-candidatures
 docker-compose up -d
 ```
 
-Vérifier que les conteneurs crossover_php, crossover_ngnix et crossover_mysql sont bien montés:
+Vérifier que les conteneurs waller_php, waller_ngnix et waller_mysql sont bien montés:
 
 ```shell
 docker ps
 ```
 
 ##Initialiser la base de données
-Création de la base de données
+#####Création de la base de données
 ```shell
 docker exec waller_php bin/console doctrine:database:create
 ```
 
-Création de la structure
+#####Création de la structure
 ```shell
 docker exec waller_php bin/console doctrine:schema:update --force
 ```
-Executer la migration des données initiales: 
+#####Executer la migration des données initiales: 
 ```shell
 docker exec waller_php bin/console doctrine:migration:migrate
 ```
 
 ##Rajouter des migrations :
-Création d'une nouvelle version de migration :
+#####Création d'une nouvelle version de migration :
 ```shell
 docker exec waller_php bin/console doctrine:migrations:generate
 ```
@@ -77,7 +77,7 @@ class Version2018XXXXXXXXXX extends AbstractMigration
 }
 ```
 
-
+#####Modification fichier de migration
 Maintenant on pourra rajouter les nouveaux données en appliquant des requests SQL avec `$this->addSql()` :
 
 ```php
@@ -91,8 +91,14 @@ Maintenant on pourra rajouter les nouveaux données en appliquant des requests S
         $this->addSql('DELETE * FROM `groupe` WHERE ...');
     } 
 ```
-
+#####Exécution de la derniére migration crée
 Une fois ceci est fait, on peut appliquer la nouvelle migration :
 ```bash
 docker exec waller_php bin/console doctrine:migrations:migrate
+```
+
+#####Execution up et down seulement
+Pour exécuter la methode **down** (respectivement **up**) d'une version donné (exemple : Version20180328133156 ), exécutez la commande suivante :
+```bash
+docker exec waller_php bin/console doctrine:migrations:execute Version20180328133156 --down
 ```
