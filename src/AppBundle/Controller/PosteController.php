@@ -31,16 +31,9 @@ class PosteController extends Controller
     public function indexAction()
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        $em = $this->getDoctrine()->getManager();
+        $groupId = $user->getGroup()->getId();
 
-        $repository = $em->getRepository('AppBundle:Poste');
-
-        $postes = $repository->createQueryBuilder('p')
-            ->where('p.group = :group')
-            ->orWhere('p.createdByGroup = :group')
-            ->setParameter('group', $user->getGroup()->getId())
-            ->getQuery()
-            ->getResult();
+        $postes = $this->get('model_manager.poste')->retrievePostesByGroupId($groupId);
 
         return $this->render('poste/index.html.twig', array(
             'postes' => $postes,

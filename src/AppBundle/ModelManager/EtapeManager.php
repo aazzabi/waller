@@ -32,9 +32,14 @@ class EtapeManager
      */
     public function __construct(RegistryInterface $doctrine)
     {
-        $this->doctrine             = $doctrine;
-        $this->entityManager        = $this->doctrine->getManager();
+        $this->doctrine        = $doctrine;
+        $this->entityManager   = $this->doctrine->getManager();
         $this->etapeRepository = $this->entityManager->getRepository("AppBundle:Etape");
+    }
+
+    public function retrieveAllEtapes()
+    {
+        return $this->etapeRepository->findAll();
     }
 
 }

@@ -32,9 +32,13 @@ class PosteManager
      */
     public function __construct(RegistryInterface $doctrine)
     {
-        $this->doctrine             = $doctrine;
-        $this->entityManager        = $this->doctrine->getManager();
+        $this->doctrine        = $doctrine;
+        $this->entityManager   = $this->doctrine->getManager();
         $this->posteRepository = $this->entityManager->getRepository("AppBundle:Poste");
     }
 
+    public function retrievePostesByGroupId($groupId)
+    {
+        return $this->posteRepository->getPostesByGroupId($groupId);
+    }
 }

@@ -28,7 +28,7 @@ services:
         class: %database_manager.candidature.class%
         arguments: [ "@doctrine"]
     model_manager.etape:
-            class: %database_manager.etape.class%ui
+            class: %database_manager.etape.class%
             arguments: [ "@doctrine"]
     model_manager.poste:
             class: %database_manager.poste.class%

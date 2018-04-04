@@ -10,4 +10,13 @@ namespace AppBundle\Repository;
  */
 class PosteRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getPostesByGroupId($groupId)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.group = :group')
+            ->orWhere('p.createdByGroup = :group')
+            ->setParameter('group', $groupId)
+            ->getQuery()
+            ->getResult();
+    }
 }

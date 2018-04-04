@@ -28,9 +28,8 @@ class EtapeController extends Controller
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
         }
-        $em = $this->getDoctrine()->getManager();
 
-        $etapes = $em->getRepository('AppBundle:Etape')->findAll();
+        $etapes = $this->get('model_manager.etape')->retrieveAllEtapes();
 
         return $this->render('etape/index.html.twig', array(
             'etapes' => $etapes,

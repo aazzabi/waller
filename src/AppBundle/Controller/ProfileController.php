@@ -41,6 +41,8 @@ class ProfileController extends Controller
 
         $profiles =  $em->getRepository('AppBundle:Profile')->search($search);
 
+
+
         return $this->render('profile/index.html.twig', array(
             'profiles' => $profiles,
             'disponibilites' => $disponiblites,
