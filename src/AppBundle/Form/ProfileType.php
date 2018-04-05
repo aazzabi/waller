@@ -94,13 +94,17 @@ class ProfileType extends AbstractType
             ])
             ->add('contrat', ChoiceType::class, [
                 'choices'  => [
-                    'SIVP' => 'SIVP',
+                    'SIVP 1' => 'SIVP1',
+                    'SIVP 2' => 'SIVP2',
                     'CDI' => 'CDI',
                     'CDD' => 'CDD',
                     'Freeelance' => 'Freeelance',
                 ],
                 'label' => 'entity.profileForm.contrat',
                 'required' => false,
+            ])
+            ->add('sivp', CheckboxType::class, [
+                'label' => 'éligible au SIVP'
             ])
             ->add('prestationsalariale', TextType::class, [
                 'required' => false,

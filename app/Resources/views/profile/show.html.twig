@@ -95,6 +95,7 @@
                             </tr>
                         {% endif %}
 
+                        {% if profile.experience %}
                         <tr>
                             <td class="col-sm-4 tital ">
                                 {{ 'entity.profile.experience' | trans }}
@@ -103,6 +104,8 @@
                                 {{ profile.experience }}
                             </td>
                         </tr>
+                        {% endif %}
+
                         {#<tr>#}
                             {#<td class="col-sm-4 tital ">#}
                                 {#<div class="clearfix"></div>#}
@@ -111,6 +114,7 @@
                                 {#<div class="bot-border"></div>#}
                             {#</td>#}
                         {#</tr>#}
+                        {% if profile.niveau %}
                         <tr>
                             <td class="col-sm-4 tital ">
                                 {{ 'entity.profile.niveau' | trans }}
@@ -119,6 +123,9 @@
                                 {{ profile.niveau }}
                             </td>
                         </tr>
+                        {% endif %}
+
+                        {% if profile.competencesTags %}
                         <tr>
                             <td class="col-sm-4 tital ">
                                 {{ 'entity.profile.competences' | trans }}
@@ -127,6 +134,7 @@
                                 {{ profile.competencesTags }}
                             </td>
                         </tr>
+                        {% endif %}
 
                         {% if profile.skype !="" %}
                             <tr>
@@ -193,9 +201,9 @@
                             </td>
                             <td class="col-sm-8">
                                 {% if profile.contrat %}
-                                    <i class="fa fa-check text-success fa-2x" aria-hidden="true"></i>
+                                    {{ profile.contrat }}
                                 {% else %}
-                                    <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-exclamation-triangle text-warning fa-2x" aria-hidden="true"></i>
                                 {% endif %}
                             </td>
                         </tr>

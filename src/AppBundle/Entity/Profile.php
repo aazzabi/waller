@@ -138,6 +138,13 @@ class Profile
     private $contrat;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="sivp", type="boolean")
+     */
+    private $sivp;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="prestationSalariale", type="string", length=150, nullable=true)
@@ -592,6 +599,7 @@ class Profile
         return $this->contrat;
     }
 
+
     /**
      * @return string
      */
@@ -606,6 +614,22 @@ class Profile
     public function setVille($ville)
     {
         $this->ville = $ville;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSivp()
+    {
+        return $this->sivp;
+    }
+
+    /**
+     * @param bool $sivp
+     */
+    public function setSivp($sivp)
+    {
+        $this->sivp = $sivp;
     }
 
     /**
