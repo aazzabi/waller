@@ -35,7 +35,7 @@ class ProfileType extends AbstractType
                 'label' => 'entity.profileForm.prenom'
             ])
             ->add('telephone', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'entity.profileForm.telephone'
                 ])
             ->add('email', EmailType::class, [

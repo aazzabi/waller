@@ -56,7 +56,7 @@ class Profile
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=150, nullable=false)
+     * @ORM\Column(name="telephone", type="string", length=150, nullable=true)
      */
     private $telephone;
 
