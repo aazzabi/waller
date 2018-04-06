@@ -104,6 +104,7 @@ class ProfileType extends AbstractType
                 'required' => false,
             ])
             ->add('sivp', CheckboxType::class, [
+                'required' => false,
                 'label' => 'éligible au SIVP'
             ])
             ->add('prestationsalariale', TextType::class, [
