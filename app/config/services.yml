@@ -25,14 +25,14 @@ services:
         tags:
             - { name: form.type, alias: app_user_registration }
     model_manager.candidature:
-        class: %database_manager.candidature.class%
-        arguments: [ "@doctrine"]
+        class: '%database_manager.candidature.class%'
+        arguments: [ "@doctrine", "@form.factory", "@router", "@request_stack"]
     model_manager.etape:
-            class: %database_manager.etape.class%
+            class: '%database_manager.etape.class%'
             arguments: [ "@doctrine"]
     model_manager.poste:
-            class: %database_manager.poste.class%
+            class: '%database_manager.poste.class%'
             arguments: [ "@doctrine"]
     model_manager.profile:
-            class: %database_manager.profile.class%
+            class: '%database_manager.profile.class%'
             arguments: [ "@doctrine"]

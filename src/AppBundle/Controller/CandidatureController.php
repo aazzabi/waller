@@ -7,6 +7,7 @@ use AppBundle\Entity\Note;
 use AppBundle\Form\CandidatureEditType;
 use AppBundle\Form\ProfileEditType;
 use AppBundle\Form\ProfileType;
+use Doctrine\DBAL\Schema\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,41 +44,24 @@ class CandidatureController extends Controller
      *
      * @Route("/new", name="candidature_new")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     *
+     * @return Response|RedirectResponse A Response instance
      */
     public function newAction(Request $request)
     {
         $id = $request->query->get('id');
         $profileService = $this->get('model_manager.profile');
-
+        $candidatureService = $this->get('model_manager.candidature');
         $profiles = $profileService->retreiveAllProfiles();
-
-        $candidature = new Candidature();
 
         if (isset($id) && $id) {
             $profileSelected = $profileService->retreiveProfileById($id);
-            $candidature->setProfile($profileSelected);
         }
 
-        $em = $this->getDoctrine()->getManager();
-
-        $form = $this->createForm('AppBundle\Form\CandidatureType', $candidature);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($candidature);
-            $em->flush($candidature);
-
-            $note = new Note();
-            $note->setCandidature($candidature);
-            $note->setEtape($candidature->getCurrentEtape());
-            $em->persist($note);
-            $em->flush($note);
-
-            return $this->redirectToRoute('candidature_edit', array('id' => $candidature->getId()));
-        }
+        $form = $candidatureService->createCandidature($profileSelected);
 
         return $this->render('candidature/new.html.twig', array(
-            'candidature' => $candidature,
             'form' => $form->createView(),
             'profiles' => $profiles,
             'profileSelected' => isset($profileSelected) ? $profileSelected : null,
