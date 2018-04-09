@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Lien
@@ -30,8 +31,10 @@ class Lien
 
     /**
      * @var string
+
+     * @Assert\Url()
      *
-     * @ORM\Column(name="url", type="string", length=50, nullable=false)
+     * @ORM\Column(name="url", type="text", length=2000, nullable=false)
      */
     private $url;
 
