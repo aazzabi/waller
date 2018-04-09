@@ -217,6 +217,14 @@ class Profile
      */
     private $photoUpdatedAt;
 
+    /**
+     * @ORM\Column(type="datetime",nullable=true)
+     *
+     * @Assert\DateTime()
+     *
+     * @var \DateTime
+     */
+    private $profileUpdatedAt;
 
     /**
      * @var Disponibilite
@@ -263,6 +271,7 @@ class Profile
     public function __construct()
     {
         $this->competences = new ArrayCollection();
+        $this->profileUpdatedAt = new \DateTime('now');
     }
 
     /**
@@ -361,6 +370,31 @@ class Profile
     public function setCommentaireProfil($commentaireProfil)
     {
         $this->commentaireProfil = $commentaireProfil;
+    }
+
+    /**
+     * Get profileUpdatedAt
+     *
+     * @return \DateTime
+     */
+    public function getProfileUpdatedAt()
+    {
+        return $this->profileUpdatedAt;
+    }
+
+    /**
+     *
+     * @param \DateTime $cvUpdatedAt
+
+     * @param \DateTime $profileUpdatedAt
+     *
+     * @return Profile
+     */
+    public function setProfileUpdatedAt($profileUpdatedAt)
+    {
+        $this->profileUpdatedAt = $profileUpdatedAt;
+        return $this;
+
     }
 
     /**

@@ -8,6 +8,7 @@ use AppBundle\Entity\Profile;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -141,6 +142,10 @@ class ProfileType extends AbstractType
                 'label' => 'entity.profileForm.disponibilite',
                 'class' => Disponibilite::class
             ])
+            ->add('profileUpdatedAt', DateType::class, array(
+                'widget' => 'choice',
+                'label' => 'entity.profileForm.profileUpdatedAt'
+            ))
             ->add('competencesTags', TextType::class, [
                 'required' => false,
                 'label' => 'entity.profileForm.competences',

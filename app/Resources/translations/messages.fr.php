@@ -50,6 +50,7 @@ return [
             'nom' => 'Nom *',
             'experience' => 'Années d\'expérience',
             'niveau' => 'Niveau ',
+            'profileUpdatedAt' => 'Derniére mise à jours ',
             'skype' => 'Skype',
             'linkedin' => 'Linkedin',
             'competences' => 'Competence(s)',
