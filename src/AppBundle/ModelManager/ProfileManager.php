@@ -37,12 +37,12 @@ class ProfileManager
         $this->profileRepository = $this->entityManager->getRepository("AppBundle:Profile");
     }
 
-    public function retreiveAllProfiles()
+    public function retrieveAllProfiles()
     {
         return $this->profileRepository->findAll();
     }
 
-    public function retreiveProfileById($id)
+    public function retrieveProfileById($id)
     {
         return $this->profileRepository->find($id);
     }
