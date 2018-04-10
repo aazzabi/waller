@@ -266,6 +266,12 @@ class Profile
     private $competencesTags;
 
     /**
+     * @ORM\OneToOne(targetEntity="User", cascade={"persist"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $profileCreatedBy;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -1001,5 +1007,20 @@ class Profile
     public function getCandidature()
     {
         return $this->candidature;
+    }
+    /**
+     * @return mixed
+     */
+    public function getProfileCreatedBy()
+    {
+        return $this->profileCreatedBy;
+    }
+
+    /**
+     * @param \AppBundle\Entity\User $profileCreatedBy
+     */
+    public function setProfileCreatedBy($profileCreatedBy)
+    {
+        $this->profileCreatedBy = $profileCreatedBy;
     }
 }

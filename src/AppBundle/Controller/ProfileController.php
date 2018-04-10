@@ -74,6 +74,8 @@ class ProfileController extends Controller
     public function newAction(Request $request)
     {
         $profile = new Profile();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $profile->setProfileCreatedBy($user);
         $form = $this->createForm('AppBundle\Form\ProfileType', $profile);
         $form->handleRequest($request);
 
