@@ -56,7 +56,7 @@ class Profile
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=150, nullable=false)
+     * @ORM\Column(name="telephone", type="string", length=150, nullable=true)
      */
     private $telephone;
 
@@ -138,6 +138,13 @@ class Profile
     private $contrat;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="sivp", type="boolean")
+     */
+    private $sivp;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="prestationSalariale", type="string", length=150, nullable=true)
@@ -183,6 +190,13 @@ class Profile
     private $institut;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="commentaireProfil", type="text", length=65535, nullable=true)
+     */
+    private $commentaireProfil;
+
+    /**
      * @Vich\UploadableField(mapping="photo_file", fileNameProperty="photo")
      *
      * @var File
@@ -203,6 +217,14 @@ class Profile
      */
     private $photoUpdatedAt;
 
+    /**
+     * @ORM\Column(type="datetime",nullable=true)
+     *
+     * @Assert\DateTime()
+     *
+     * @var \DateTime
+     */
+    private $profileUpdatedAt;
 
     /**
      * @var Disponibilite
@@ -249,6 +271,7 @@ class Profile
     public function __construct()
     {
         $this->competences = new ArrayCollection();
+        $this->profileUpdatedAt = new \DateTime('now');
     }
 
     /**
@@ -331,6 +354,47 @@ class Profile
     public function getTelephone()
     {
         return $this->telephone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommentaireProfil()
+    {
+        return $this->commentaireProfil;
+    }
+
+    /**
+     * @param string $commentaireProfil
+     */
+    public function setCommentaireProfil($commentaireProfil)
+    {
+        $this->commentaireProfil = $commentaireProfil;
+    }
+
+    /**
+     * Get profileUpdatedAt
+     *
+     * @return \DateTime
+     */
+    public function getProfileUpdatedAt()
+    {
+        return $this->profileUpdatedAt;
+    }
+
+    /**
+     *
+     * @param \DateTime $cvUpdatedAt
+
+     * @param \DateTime $profileUpdatedAt
+     *
+     * @return Profile
+     */
+    public function setProfileUpdatedAt($profileUpdatedAt)
+    {
+        $this->profileUpdatedAt = $profileUpdatedAt;
+        return $this;
+
     }
 
     /**
@@ -569,6 +633,7 @@ class Profile
         return $this->contrat;
     }
 
+
     /**
      * @return string
      */
@@ -583,6 +648,22 @@ class Profile
     public function setVille($ville)
     {
         $this->ville = $ville;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSivp()
+    {
+        return $this->sivp;
+    }
+
+    /**
+     * @param bool $sivp
+     */
+    public function setSivp($sivp)
+    {
+        $this->sivp = $sivp;
     }
 
     /**

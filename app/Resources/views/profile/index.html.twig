@@ -88,6 +88,7 @@
                     <th>{{ 'entity.profile.experience' | trans }}</th>
                     <th>{{ 'entity.profile.niveau' | trans }}</th>
                     <th>{{ 'entity.profile.reseauxsociaux' | trans }}</th>
+                    <th>{{ 'entity.profile.sivp' | trans }}</th>
                     <th>{{ 'entity.profile.contrat' | trans }}</th>
 
                     {% if is_granted('ROLE_ADMIN') %}    
@@ -142,28 +143,34 @@
 
                         <td>
                             {% if profile.linkedin %}
-                                <a href="{{ profile.linkedin }}">
+                                <a href="{{ profile.linkedin }}" target="_blank">
                                     <i class="fa fa-linkedin fa-2x" style="color:#4875B4;"
                                        aria-hidden="true"></i></a>
                             {% endif %}
 
                             {% if profile.facebook %}
-                                <a href="{{ profile.facebook }}">
+                                <a href="{{ profile.facebook }}" target="_blank">
                                     <i class="fa fa-facebook-square fa-2x"
                                        style="color:#3b5998;"></i>
                                 </a>
                             {% endif %}
                             {% if profile.github %}
-                                <a href="{{ profile.github }}">
+                                <a href="{{ profile.github }}" target="_blank">
                                     <i class="fa fa-github fa-2x" style="color: black;" aria-hidden="true"></i>
                                 </a>
                             {% endif %}
 
                         </td>
+                        <td>{% if profile.sivp %}
+                                <i class="fa fa-check text-success fa-2x" aria-hidden="true"></i>
+                            {% else %}
+                                <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
+                            {% endif %}
+                        </td>
                         <td>{% if profile.contrat %}
                                 {{ profile.contrat }}
                             {% else %}
-                                <i class="fa fa-times text-danger fa-2x" aria-hidden="true"></i>
+                                <i class="fa fa-exclamation-triangle text-warning fa-2x" aria-hidden="true"></i>
                             {% endif %}
                         </td>
                         {% if is_granted('ROLE_ADMIN') %}    
@@ -232,7 +239,7 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="form-group form-group-default input-group">
-                                        <label>Type de contrat</label>
+                                        <label>Contrat</label>
                                         <select class="cs-select cs-skin-slide cs-transparent form-control"
                                                 name="contrat"
                                                 data-init-plugin="cs-select">

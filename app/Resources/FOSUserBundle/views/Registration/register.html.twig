@@ -1,5 +1,8 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{% extends '@FOSUser/base.html.twig' %}
 
-{% block fos_user_content %}
+{% block title %}
+    Ajout d'un nouveau utilisateur
+{% endblock %}
+{% block body %}
 {% include "@FOSUser/Registration/register_content.html.twig" %}
-{% endblock fos_user_content %}
+{% endblock %}

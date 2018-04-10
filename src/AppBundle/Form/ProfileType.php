@@ -8,8 +8,10 @@ use AppBundle\Entity\Profile;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -34,7 +36,7 @@ class ProfileType extends AbstractType
                 'label' => 'entity.profileForm.prenom'
             ])
             ->add('telephone', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'entity.profileForm.telephone'
                 ])
             ->add('email', EmailType::class, [
@@ -93,13 +95,18 @@ class ProfileType extends AbstractType
             ])
             ->add('contrat', ChoiceType::class, [
                 'choices'  => [
-                    'SIVP' => 'SIVP',
+                    'SIVP 1' => 'SIVP1',
+                    'SIVP 2' => 'SIVP2',
                     'CDI' => 'CDI',
                     'CDD' => 'CDD',
                     'Freeelance' => 'Freeelance',
                 ],
                 'label' => 'entity.profileForm.contrat',
                 'required' => false,
+            ])
+            ->add('sivp', CheckboxType::class, [
+                'required' => false,
+                'label' => 'éligible au SIVP'
             ])
             ->add('prestationsalariale', TextType::class, [
                 'required' => false,
@@ -121,6 +128,10 @@ class ProfileType extends AbstractType
                 'required' => false,
                 'label' => 'entity.profileForm.diplome'
             ])
+            ->add('commentaireProfil', TextareaType::class, [
+                'required' => false,
+                'label' => 'entity.profileForm.commentaireProfil'
+            ])
             ->add('photoFile', VichFileType::class, [
                 'required' => false,
                 'allow_delete' => true,
@@ -131,8 +142,12 @@ class ProfileType extends AbstractType
                 'label' => 'entity.profileForm.disponibilite',
                 'class' => Disponibilite::class
             ])
+            ->add('profileUpdatedAt', DateType::class, array(
+                'widget' => 'choice',
+                'label' => 'entity.profileForm.profileUpdatedAt'
+            ))
             ->add('competencesTags', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'entity.profileForm.competences',
             ]);
     }

@@ -1,3 +1,39 @@
+<script>
+    $("#dialog").dialog({
+        width: 500,
+        autoOpen: true,
+        buttons: {
+            "Ok": function () {
+                $(this).dialog("close");
+            },
+            "Cancel": function () {
+                $(this).dialog("close");
+            }
+        },
+    });
+    // $('#accordion').accordion({
+    //     heightStyle: "content"
+    // });
+
+    $("input").on("keydown", function (e) {
+        var code = e.keyCode || e.which;
+        if (code == '9') {
+            var currentInput = $("input:focus");
+            var lastInput = $(".panel-collapse collapse in input").last();
+            if (currentInput[0] === lastInput[0]) {
+                var accordion = $("#accordion").accordion();
+                var current = accordion.accordion("option", "active");
+                var maximum = accordion.find("h3").length;
+                var next = current + 1 === maximum ? 0 : current + 1;
+                accordion.accordion("option", "active", next);
+                var active = $(".ui-accordion-content-active[aria-expanded=true] input")[0];
+                setTimeout(function(){
+                    active.focus()
+                }, 1);
+            }
+        }
+    });
+</script>
 <!--Identité-->
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
@@ -22,6 +58,7 @@
                         <a href="{{ asset('uploads/cv/' ~ profile.cv) }}">ici</a> pour voir le CV
                     </div>
                 {% endif %}
+                {{ form_row(form.profileUpdatedAt) }}
             </div>
         </div>
     </div>
@@ -78,12 +115,14 @@
         <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour"
              aria-expanded="false" style="height: 0px;">
             <div class="panel-body">
+                {{ form_row(form.sivp) }}
                 {{ form_row(form.contrat) }}
                 {{ form_row(form.salaireactuel) }}
                 {{ form_row(form.societeactuel) }}
                 {{ form_row(form.prestationsalariale) }}
                 {{ form_row(form.disponibilite) }}
                 {{ form_row(form.ambition) }}
+                {{ form_row(form.commentaireProfil) }}
             </div>
         </div>
     </div>

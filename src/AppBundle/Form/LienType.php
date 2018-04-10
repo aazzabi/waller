@@ -20,7 +20,8 @@ class LienType extends AbstractType
                 'label'=>'entity.lien.libelle'
             ))
             ->add('url',UrlType::class,array(
-                'label'=>'entity.lien.url'
+                'label'=>'entity.lien.url',
+                'default_protocol'=>'http',
             ));
 //            ->add('poste');
     }
