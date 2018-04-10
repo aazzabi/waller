@@ -10,6 +10,7 @@ use AppBundle\Form\ProfileType;
 use Doctrine\DBAL\Schema\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -53,13 +54,17 @@ class CandidatureController extends Controller
         $id = $request->query->get('id');
         $profileService = $this->get('model_manager.profile');
         $candidatureService = $this->get('model_manager.candidature');
-        $profiles = $profileService->retreiveAllProfiles();
+        $profiles = $profileService->retrieveAllProfiles();
 
         if (isset($id) && $id) {
             $profileSelected = $profileService->retreiveProfileById($id);
         }
 
         $form = $candidatureService->createCandidature($profileSelected);
+
+        if ($form instanceof RedirectResponse) {
+            return $form;
+        }
 
         return $this->render('candidature/new.html.twig', array(
             'form' => $form->createView(),

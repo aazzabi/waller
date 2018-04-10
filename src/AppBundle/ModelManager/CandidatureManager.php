@@ -57,7 +57,7 @@ class CandidatureManager
         $this->candidatureRepository = $this->entityManager->getRepository("AppBundle:Candidature");
         $this->formFactory           = $formFactory;
         $this->router                = $router;
-        $this->requestStack               = $requestStack;
+        $this->requestStack          = $requestStack;
     }
 
     public function retrieveCandidaturesByGroupId($groupId)
@@ -67,16 +67,15 @@ class CandidatureManager
 
     public function createCandidature($profileSelected)
     {
-        if ($this->requestStack->getParentRequest() === 'POST') {
-            $candidature = new Candidature();
+        $candidature = new Candidature();
+        $formBuilder = $this->formFactory->createBuilder('AppBundle\Form\CandidatureType', $candidature);
+        $form = $formBuilder->getForm();
 
+        if ($this->requestStack->getCurrentRequest()->isMethod('POST')) {
+            $form->handleRequest($this->requestStack->getCurrentRequest());
             if (isset($profileSelected) && $profileSelected) {
                 $candidature->setProfile($profileSelected);
             }
-
-            $form = $this->formFactory->createBuilder('AppBundle\Form\CandidatureType', $candidature);
-            $form->handleRequest($this->request);
-
             if ($form->isSubmitted() && $form->isValid()) {
                 $this->entityManager->persist($candidature);
                 $this->entityManager->flush($candidature);
