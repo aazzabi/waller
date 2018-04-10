@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Profile;
 
 /**
  * @ORM\Entity
@@ -40,9 +41,29 @@ class User extends BaseUser
      */
     private $group;
 
+    /**
+     *
+     * var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Profile", mappedBy="profileCreatedBy")
+     *
+     */
+    private $profiles;
+
     public function __construct()
     {
         parent::__construct();
+        $this->profiles = new ArrayCollection();
+    }
+
+    /**
+     * Get profiles
+     *
+     * @return Collection|Profile[]
+     */
+    public function getProfiles()
+    {
+        return $this->profiles;
     }
 
     /**

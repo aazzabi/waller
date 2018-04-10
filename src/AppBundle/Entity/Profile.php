@@ -266,8 +266,11 @@ class Profile
     private $competencesTags;
 
     /**
-     * @ORM\OneToOne(targetEntity="User", cascade={"persist"})
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="profiles")
+     * @ORM\JoinColumn(nullable=true)
+     *
      */
     private $profileCreatedBy;
 
