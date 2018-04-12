@@ -102,6 +102,13 @@ vich_uploader:
             inject_on_load:     false
             delete_on_update:   true
             delete_on_remove:   true
+        logo_file:
+            uri_prefix:         /uploads/logo
+            upload_destination: %kernel.root_dir%/../web/uploads/logo
+            namer:              vich_uploader.namer_uniqid
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
 
 doctrine_migrations:
     dir_name: "%kernel.root_dir%/DoctrineMigrations"

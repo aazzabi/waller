@@ -86,6 +86,11 @@ return [
             'etapecourante' => 'Etape courante',
             'actions' => 'Actions'
         ],
+        'groupe' => [
+            'logo' => 'Logo',
+            'nom' => 'Nom de la société',
+            'type' => 'Type de société'
+        ],
         'rapport' => [
             'libelle' => 'Libellé rapport de changement d\'etape *',
             ]
