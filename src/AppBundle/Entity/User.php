@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use AppBundle\Entity\Profile;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -59,7 +59,7 @@ class User extends BaseUser
     /**
      * Get profiles
      *
-     * @return Collection|Profile[]
+     * @return ArrayCollection|Profile[]
      */
     public function getProfiles()
     {
@@ -69,7 +69,7 @@ class User extends BaseUser
     /**
      * Get group
      *
-     * @return Group
+     * @return mixed
      */
     public function getGroup()
     {
