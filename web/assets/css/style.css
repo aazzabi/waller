@@ -49,6 +49,15 @@ img.img-avatar {
     width: 40px !important;
 }
 
+img.img-logo-societe {
+    margin: 0 auto;
+    width: 60px !important;
+}
+img.img-logo-societe-show {
+    margin: 0 auto;
+    width: 130px !important;
+}
+
 ul {
     list-style: none;
     margin-left: 0;
