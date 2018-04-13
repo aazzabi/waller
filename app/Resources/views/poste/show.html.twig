@@ -79,16 +79,16 @@
             </div>
             <div class="col-md-8 text-right">
                 <br>
-                <a class="btn btn-secondary" href="{{ path('poste_edit', { 'id': poste.id }) }}"> <i
-                            class="fa fa-pencil-square-o"></i> Edit</a>
-                <a class="btn btn-secondary" href="{{ path('poste_index') }}">
-                    <i class="fa fa-undo" aria-hidden="true"></i>
-                    Retour à la liste</a>
-                <button type="button" class="btn btn-danger btn_lg" data-toggle="modal"
-                        data-target="#myModal">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                    {{ 'entity.common.supprimer' | trans }}
+                {% if is_granted('ROLE_CONSULT')== false %}    
+                <a class="btn btn-secondary" href="{{ path('poste_edit', { 'id': poste.id }) }}">
+                    <i class="fa fa-pencil-square-o"></i> Edit</a>
+                <button type="button" class="btn btn-danger btn_lg" data-toggle="modal" data-target="#myModal">
+                    <i class="fa fa-times" aria-hidden="true"></i>{{ 'entity.common.supprimer' | trans }}
                 </button>
+                {% endif %}
+                <a class="btn btn-secondary" href="{{ path('poste_index') }}">
+                    <i class="fa fa-undo" aria-hidden="true"></i> Retour à la liste
+                </a>
             </div>
         </div>
 
@@ -178,7 +178,9 @@
                                             <th>{{ 'entity.candidat.prenom' | trans }}</th>
                                             <th>{{ 'entity.candidat.email' | trans }}</th>
                                             <th>{{ 'entity.candidat.etapecourante' | trans }}</th>
-                                            <th>{{ 'entity.candidat.actions' | trans }}</th>
+                                            {% if is_granted('ROLE_CONSULT')== false %}    
+                                                <th>{{ 'entity.candidat.actions' | trans }}</th>
+                                            {% endif %}
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -207,15 +209,17 @@
                                                 <td>{{ candidature.profile.prenom }}</td>
                                                 <td>{{ candidature.profile.email }}</td>
                                                 <td>{{ candidature.currentEtape }}</td>
-                                                <td>
-                                                    <div class="btn-group btn-group-sm btn-group-vertical">
-                                                        <a class="btn btn-secondary"
-                                                           href="{{ path('candidature_edit', { 'id': candidature.id }) }} "
-                                                           data-toggle="tooltip" title="Editer le profile">
-                                                            <i class="fa fa-pencil-square-o"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
+                                                {% if is_granted('ROLE_CONSULT')== false %}    
+                                                    <td>
+                                                        <div class="btn-group btn-group-sm btn-group-vertical">
+                                                            <a class="btn btn-secondary"
+                                                               href="{{ path('candidature_edit', { 'id': candidature.id }) }} "
+                                                               data-toggle="tooltip" title="Editer le profile">
+                                                                <i class="fa fa-pencil-square-o"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                {% endif %}
                                             </tr>
                                             {#{% endif %}#}
                                         {% endfor %}

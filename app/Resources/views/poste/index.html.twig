@@ -39,13 +39,15 @@ Liste des postes
         <div class="col-md-6">
             <h1><b>Liste des postes </b></h1>
         </div>
-        <div class="col-md-6 text-right">
-            <br>
-            <a href="{{ path('poste_new') }}" class="btn btn-success">
-                <i class="icon-plus"> Ajouter un poste</i>
-            </a>
-            <br>
-        </div>
+        {% if is_granted('ROLE_CONSULT')== false %}    
+            <div class="col-md-6 text-right">
+                <br>
+                <a href="{{ path('poste_new') }}" class="btn btn-success">
+                    <i class="icon-plus"> Ajouter un poste</i>
+                </a>
+                <br>
+            </div>
+        {% endif %}
     </div>
     <hr>
     <table id="example" class="table table-striped table-bordered" >
@@ -70,9 +72,11 @@ Liste des postes
                         <a class="btn btn-secondary" href="{{ path('poste_show', { 'id': poste.id }) }}" data-toggle="tooltip" title="Afficher le poste">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a class="btn btn-secondary" href="{{ path('poste_edit', { 'id': poste.id }) }}" data-toggle="tooltip"  title="Editer le poste">
-                            <i class="fa fa-pencil-square-o"></i>
-                        </a>
+                        {% if is_granted('ROLE_CONSULT')== false %}    
+                            <a class="btn btn-secondary" href="{{ path('poste_edit', { 'id': poste.id }) }}" data-toggle="tooltip"  title="Editer le poste">
+                                <i class="fa fa-pencil-square-o"></i>
+                            </a>
+                        {% endif %}
                     </div>
                 </td>
 

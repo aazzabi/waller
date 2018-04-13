@@ -48,6 +48,9 @@ class PosteController extends Controller
      */
     public function newAction(Request $request)
     {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_CONSULT')) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
         $poste = new Poste();
         $form = $this->createForm(PosteType::class, $poste);
         $form->handleRequest($request);
@@ -97,6 +100,9 @@ class PosteController extends Controller
      */
     public function editAction(Request $request, Poste $poste)
     {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_CONSULT')) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
         $user = $this->get('security.token_storage')->getToken()->getUser();
         if ($user->getGroup() != $poste->getGroup() && $user->getGroup() != $poste->getCreatedByGroup()) {
             throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
