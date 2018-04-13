@@ -221,16 +221,50 @@
                         </tr>
                         {% endif %}
 
+                        {% if is_granted('ROLE_ADMIN') %}    
+                            {% if profile.salaireActuel %}
+                                <tr>
+                                    <td class="col-sm-4 tital ">
+                                        {{ 'entity.profile.salaireactuel' | trans }}
+                                    </td>
+                                    <td class="col-sm-8">
+                                        {{ profile.salaireActuel }}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            {% if profile.prestationsalariale %}
+                                <tr>
+                                    <td class="col-sm-4 tital ">
+                                        {{ 'entity.profile.prestationsalariale' | trans }}
+                                    </td>
+                                    <td class="col-sm-8">
+                                        {{ profile.prestationsalariale }}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endif %}
 
-                        {% if profile.prestationsalariale %}
-                            <tr>
-                                <td class="col-sm-4 tital ">
-                                    {{ 'entity.profile.prestationsalariale' | trans }}
-                                </td>
-                                <td class="col-sm-8">
-                                    {{ profile.prestationsalariale }}
-                                </td>
-                            </tr>
+                        {% if is_granted('ROLE_SAISIE') %}    
+                            {% if profile.salaireActuel %}
+                                <tr>
+                                    <td class="col-sm-4 tital ">
+                                        {{ 'entity.profile.salaireactuel' | trans }}
+                                    </td>
+                                    <td class="col-sm-8">
+                                        {{ profile.salaireActuel }}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            {% if profile.prestationsalariale %}
+                                <tr>
+                                    <td class="col-sm-4 tital ">
+                                        {{ 'entity.profile.prestationsalariale' | trans }}
+                                    </td>
+                                    <td class="col-sm-8">
+                                        {{ profile.prestationsalariale }}
+                                    </td>
+                                </tr>
+                            {% endif %}
                         {% endif %}
 
                     </table>
@@ -240,8 +274,6 @@
             <br>
             <div class="row but">
                 <div class="col-md-3">
-                    {#<button id="impression" value="Imprimer la page" name="impression" type="submit" id="impression" name="impression" onclick="imprimer_page()" class="btn btn-primary pull-right"><i class="fa fa-download">#}
-                    {#Download</i></button>#}
                     <button onclick="imprimer_page()" type="button"
                             class="btn btn-primary btn-cons btn-animated from-top fa fa-arrow-down">
                         <span><i class="fa fa-download"></i> Imprimer</span>
@@ -255,6 +287,7 @@
                         Retour au liste
                     </a>
                 </div>
+                {% if is_granted('ROLE_CONSULT')== false %}    
                 <div class="col-md-2">
                     <a href="{{ path('profile_edit', { 'id': profile.id }) }}"
                        class="btn btn-secondary ">
@@ -268,6 +301,7 @@
                         {{ 'entity.common.supprimer' | trans }}
                     </button>
                 </div>
+                {% endif %}
             </div>
             <br>
         </div>

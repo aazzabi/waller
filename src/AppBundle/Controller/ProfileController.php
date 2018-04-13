@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 /**
  * Profile controller.
@@ -73,6 +75,9 @@ class ProfileController extends Controller
      */
     public function newAction(Request $request)
     {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_CONSULT')) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
         $profile = new Profile();
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $profile->setProfileCreatedBy($user);
@@ -117,6 +122,9 @@ class ProfileController extends Controller
      */
     public function editAction(Request $request, Profile $profile)
     {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_CONSULT')) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
         $deleteForm = $this->createDeleteForm($profile);
         $editForm = $this->createForm(ProfileType::class, $profile);
         $editForm->handleRequest($request);

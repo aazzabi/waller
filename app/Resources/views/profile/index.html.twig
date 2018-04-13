@@ -58,12 +58,14 @@
                         <i class="fa fa-columns" aria-hidden="true"></i>
                         Choisir les colonnes.
                     </button>
-                    <a href="{{ path('profile_new') }}" class="btn btn-success">
-                        <i class="icon-plus">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                            &nbsp;Ajouter un profil
-                        </i>
-                    </a>
+                    {% if is_granted('ROLE_CONSULT')== false %}    
+                        <a href="{{ path('profile_new') }}" class="btn btn-success">
+                            <i class="icon-plus">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                &nbsp;Ajouter un profil
+                            </i>
+                         </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -92,6 +94,9 @@
                     <th>{{ 'entity.profile.contrat' | trans }}</th>
 
                     {% if is_granted('ROLE_ADMIN') %}    
+                        <th>{{ 'entity.profile.prestationsalariale' | trans }} </th>
+                    {% endif %}
+                    {% if is_granted('ROLE_SAISIE') %}    
                         <th>{{ 'entity.profile.prestationsalariale' | trans }} </th>
                     {% endif %}
                     <th>Actions</th>
@@ -176,23 +181,29 @@
                         {% if is_granted('ROLE_ADMIN') %}    
                             <td>{{ profile.prestationsalariale }}</td>
                         {% endif %}
-                        <td>
-                            <div class="btn-group btn-group-sm btn-group-horizontal">
-                                <a class="btn btn-secondary" href="{{ path('profile_show', { 'id': profile.id }) }}"
-                                   data-toggle="tooltip" title="Afficher le profile">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                <a class="btn btn-secondary" href="{{ path('profile_edit', { 'id': profile.id }) }}"
-                                   data-toggle="tooltip" title="Editer le profile">
-                                    <i class="fa fa-pencil-square-o"></i>
-                                </a>
-                                <a class="btn btn-secondary" href="{{ path('candidature_new', { 'id': profile.id } ) }}"
-                                   data-toggle="tooltip" title="Convoquer">
-                                    <i class="fa fa-check text-success"></i>
-                                </a>
 
-                            </div>
-                        </td>
+                        {% if is_granted('ROLE_SAISIE') %}    
+                            <td>{{ profile.prestationsalariale }}</td>
+                        {% endif %}
+
+                            <td>
+                                <div class="btn-group btn-group-sm btn-group-horizontal">
+                                    <a class="btn btn-secondary" href="{{ path('profile_show', { 'id': profile.id }) }}"
+                                       data-toggle="tooltip" title="Afficher le profile">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    {% if is_granted('ROLE_CONSULT')== false %}    
+                                    <a class="btn btn-secondary" href="{{ path('profile_edit', { 'id': profile.id }) }}"
+                                       data-toggle="tooltip" title="Editer le profile">
+                                        <i class="fa fa-pencil-square-o"></i>
+                                    </a>
+                                    <a class="btn btn-secondary" href="{{ path('candidature_new', { 'id': profile.id } ) }}"
+                                       data-toggle="tooltip" title="Convoquer">
+                                        <i class="fa fa-check text-success"></i>
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </td>
                     </tr>
                 {% endfor %}
                 </tbody>

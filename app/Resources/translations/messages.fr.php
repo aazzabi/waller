@@ -33,6 +33,7 @@ return [
             'sivp' => 'SIVP',
             'contrat' => 'Contrat',
             'reseauxsociaux' => 'Réseaux sociaux',
+            'salaireactuel' => 'Salaire actuel',
             'prestationsalariale' => 'Salaire souhaité',
             'cv' => 'CV',
             'telephone' => 'Téléphone',
