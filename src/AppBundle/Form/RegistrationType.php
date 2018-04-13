@@ -4,6 +4,9 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Group;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -18,9 +21,22 @@ class RegistrationType extends AbstractType
             ->add('prenom', TextType::class, [
                 'label' => 'entity.profileForm.prenom'
             ])
+            ->add('roles', ChoiceType::class, array(
+                'label'=>'Role',
+                'choices'   => array(
+                    'Examinateur'   => 'ROLE_EXAMIN',
+                    'Admin'   => 'ROLE_ADMIN',
+                    'Consultant'   => 'ROLE_CONSULT',
+                    'Saisie'   => 'ROLE_SAISIE',
+                ),
+                'required'=>false,
+                'multiple'  => true
+            ))
             ->add('group', EntityType::class, array(
                 'label' => 'Travaillant chez',
-                'class' => Group::class
+                'class' => Group::class,
+                'multiple'=>false,
+                'required'=>false
             ));
 
     }

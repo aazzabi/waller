@@ -4,11 +4,10 @@ security:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
-        ROLE_CONSULT: ROLE_CONSULT
-        ROLE_EXAMIN: ROLE_EXAMIN
-
+        ROLE_ADMIN: ROLE_ADMIN #Super hero really exists
+        ROLE_CONSULT: ROLE_CONSULT # can't do nothing
+        ROLE_EXAMIN: ROLE_EXAMIN # Haven't access to some informations ( salary )
+        ROLE_SAISIE: ROLE_SAISIE # Do have access to those informations
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username_email
@@ -24,6 +23,8 @@ security:
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: ROLE_ADMIN }
+        - { path: ^/resetting, role: ROLE_ADMIN }
+        - { path: ^/group, role: ROLE_ADMIN }
+        - { path: ^/etape, role: ROLE_ADMIN }
         - { path: ^/, role: ROLE_USER }
