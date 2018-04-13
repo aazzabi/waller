@@ -33,24 +33,6 @@
                             select.append('<option value="' + d + '">' + d + '</option>')
                         });
                     });
-                    this.api().columns(6).every(function () {
-                        var column = this;
-                        var select = $('<select><option value=""></option></select>')
-                            .appendTo($(column.footer()).empty())
-                            .on('change', function () {
-                                var val = $.fn.dataTable.util.escapeRegex(
-                                    $(this).val()
-                                );
-
-                                column
-                                    .search(val ? '^' + val + '$' : '', true, false)
-                                    .draw();
-                            });
-
-                        column.data().unique().sort().each(function (d, j) {
-                            select.append('<option value="' + d + '">' + d + '</option>')
-                        });
-                    });
                 }
             });
         });
@@ -67,6 +49,7 @@
                 <div class="col-md-6">
                     <h1><b>Liste des candidatures </b></h1>
                 </div>
+                {% if is_granted('ROLE_CONSULT')== false %}    
                 <div class="col-md-6  text-right">
                     <br>
                     <a href="{{ path('candidature_new') }}" class="btn btn-success">
@@ -74,6 +57,7 @@
                     </a>
                     <br>
                 </div>
+                {% endif %}
             </div>
             <hr>
             <div class="clearfix"></div>
@@ -93,7 +77,9 @@
                             <th>{{ 'entity.candidat.email' | trans }}</th>
                             <th>{{ 'entity.candidat.poste' | trans }}</th>
                             <th>{{ 'entity.candidat.etapecourante' | trans }}</th>
-                            <th>{{ 'entity.candidat.actions' | trans }}</th>
+                            {% if is_granted('ROLE_CONSULT')== false %}    
+                                <th>{{ 'entity.candidat.actions' | trans }}</th>
+                            {% endif %}
                         </tr>
                         </thead>
                         <tfoot>
@@ -104,7 +90,9 @@
                             <th></th>
                             <th></th>
                             <th>{{ 'entity.candidat.poste' | trans }}</th>
+                            {% if is_granted('ROLE_CONSULT')== false %}    
                             <th>{{ 'entity.candidat.etapecourante' | trans }}</th>
+                            {% endif %}
                         </tr>
                         </tfoot>
                         <tbody>
@@ -130,13 +118,15 @@
                                 <td>{{ candidature.poste }}</td>
 
                                 <td>{{ candidature.currentEtape }}</td>
-                                <td>
-                                    <div class="btn-group btn-group-sm btn-group-vertical">
-                                        <a class="btn btn-secondary" href="{{ path('candidature_edit', { 'id': candidature.id }) }} " data-toggle="tooltip" >
-                                            <i class="fa fa-pencil-square-o fa-2x"></i>
-                                        </a>
-                                    </div>
-                                </td>
+                                {% if is_granted('ROLE_CONSULT')== false %}    
+                                    <td>
+                                        <div class="btn-group btn-group-sm btn-group-vertical">
+                                            <a class="btn btn-secondary" href="{{ path('candidature_edit', { 'id': candidature.id }) }} " data-toggle="tooltip" >
+                                                <i class="fa fa-pencil-square-o fa-2x"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
                         </tbody>

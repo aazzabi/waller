@@ -51,6 +51,9 @@ class CandidatureController extends Controller
      */
     public function newAction(Request $request)
     {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_CONSULT')) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
         $id = $request->query->get('id');
         $profileService = $this->get('model_manager.profile');
         $candidatureService = $this->get('model_manager.candidature');
@@ -105,6 +108,9 @@ class CandidatureController extends Controller
      */
     public function editAction(Request $request, Candidature $candidature)
     {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_CONSULT')) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
         $user = $this->get('security.token_storage')->getToken()->getUser();
         if ($user->getGroup() != $candidature->getGroup() &&
             $user->getGroup() != $candidature->getPoste()->getGroup() &&
