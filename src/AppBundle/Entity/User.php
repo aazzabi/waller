@@ -87,10 +87,6 @@ class User extends BaseUser
             $roles = array_merge($roles, $group->getRoles());
         }
 
-        if (!empty($this->getGroup()->getRoles())) {
-            $roles = array_merge($roles, $this->getGroup()->getRoles());
-        }
-
         // we need to make sure to have at least one role
         $roles[] = static::ROLE_DEFAULT;
 
