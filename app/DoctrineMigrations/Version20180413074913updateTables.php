@@ -15,19 +15,18 @@ class Version20180413074913updateTables extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-//        $this->addSql('INSERT INTO `groupe` (`id`,`name`,`roles`,`logo`,`logo_updated_at`,`type`)
-//VALUES (1,\'Smart Team\',\'a:0{}\',\'5acf4e20a4fce518768720.jpg\',\'2018-04-12 12:16:32\',\'recrutement\');
-//INSERT INTO `groupe` (`id`,`name`,`roles`,`logo`,`logo_updated_at`,`type`) VALUES (2,\'Amocer\',\'a:0:{}\',\'5acf8df72dfd8870854690.jpeg\',\'2018-04-12 16:48:55\',\'externe\');
-//INSERT INTO `groupe` (`id`,`name`,`roles`,`logo`,`logo_updated_at`,`type`) VALUES (3,\'Crossover\',\'a:0:{}\',\'5acf8e6d7019b098234377.jpg\',\'2018-04-12 16:50:53\',\'externe\');
-//INSERT INTO `groupe` (`id`,`name`,`roles`,`logo`,`logo_updated_at`,`type`) VALUES (4,\'IT-Prospect\',\'N;\',\'5acf8efe4c96f740280251.png\',\'2018-04-12 16:53:18\',\'externe\');');
-        $this->addSql('UPDATE `recrutement`.`groupe` SET `roles`=\'a:0:{}\', `logo`= \'5acf4e20a4fce518768720.jpeg\' WHERE `id`=\'1\';');
-        $this->addSql('UPDATE `recrutement`.`groupe` SET `logo`= \'5acf8df72dfd8870854690.jpg\' WHERE `id`=\'2\';');
-        $this->addSql('UPDATE `recrutement`.`groupe` SET `logo`= \'5acf8e6d7019b098234377.jpeg\' WHERE `id`=\'3\';');
         $this->addSql('UPDATE `recrutement`.`user` SET `roles`=\'a:1:{i:0;s:10:\"ROLE_ADMIN\";}\' WHERE `id`=\'1\';
-                            UPDATE `recrutement`.`user` SET `roles`=\'a:1:{i:0;s:10:\"ROLE_ADMIN\";}\' WHERE `id`=\'2\';
-                            UPDATE `recrutement`.`user` SET `roles`=\'a:1:{i:0;s:10:\"ROLE_ADMIN\";}\' WHERE `id`=\'3\';
-                            ');
+            UPDATE `recrutement`.`user` SET `roles`=\'a:1:{i:0;s:10:\"ROLE_ADMIN\";}\' WHERE `id`=\'2\';
+            UPDATE `recrutement`.`user` SET `roles`=\'a:1:{i:0;s:10:\"ROLE_ADMIN\";}\' WHERE `id`=\'3\';');
+
+        $this->addSql('INSERT INTO `user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`, `group_id`, `nom`, `prenom`) VALUES
+            (6, \'Rim\', \'rim\', \'rbader@smart-team.tn\', \'rbader@smart-team.tn\', 1, NULL, \'$2y$13$O6ZjRErD7E5a1RPqLCdiqeVgaYRWw/vipkXGIAqXW5Flw03lmshPm\', NULL, NULL, NULL, \'a:1:{i:0;s:11:\"ROLE_SAISIE\";}\', 1, \'Bader\', \'Rim\'),
+            (7, \'Marcello\', \'marcello\', \'mbarille@smart-team.tn\', \'mbarille@smart-team.tn\', 1, NULL, \'$2y$13$OgIm.ESOnUKak190m.KpB.fagFrwzTmeFx3hGWNIzUa88EyrAuULa\', NULL, NULL, NULL, \'a:1:{i:0;s:11:\"ROLE_EXAMIN\";}\', 1, \'Barille\', \'Marcello\'),
+            (8, \'Ghayth\', \'ghayth\', \'grokbani@smart-team.tn\', \'grokbani@smart-team.tn\', 1, NULL, \'$2y$13$ZTE6mVFRxOEY9URRe/SsM.VLp4W1rAog4hg5pFY/fRXJxZkwFr5Ke\', NULL, NULL, NULL, \'a:1:{i:0;s:11:\"ROLE_EXAMIN\";}\', 1, \'Rokbani\', \'Ghayth\'),
+            (9, \'Sergio\', \'sergio\', \'sgazzo@smart-team.tn\', \'sgazzo@smart-team.tn\', 1, NULL, \'$2y$13$5zWN0H/kohqpZUBWjTKsluguplCFa4x.WYKbIfm70U3KRv72Hcv6m\', NULL, NULL, NULL, \'a:1:{i:0;s:11:\"ROLE_CONSULT\";}\', 1, \'Gazzo\', \'Sergio\');'
+        );
     }
+
 
     /**
      * @param Schema $schema
