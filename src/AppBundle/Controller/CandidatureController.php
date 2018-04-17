@@ -60,7 +60,7 @@ class CandidatureController extends Controller
         $profiles = $profileService->retrieveAllProfiles();
 
         if (isset($id) && $id) {
-            $profileSelected = $profileService->retreiveProfileById($id);
+            $profileSelected = $profileService->retrieveProfileById($id);
         }
 
         $form = $candidatureService->createCandidature($profileSelected);
