@@ -74,10 +74,10 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <h1><b>Poste </b></h1>
+            <div class="col-md-8">
+                <h1><b>Poste proposé par: {{ poste.group }}</b></h1>
             </div>
-            <div class="col-md-8 text-right">
+            <div class="col-md-4 text-right">
                 <br>
                 {% if is_granted('ROLE_CONSULT')== false %}    
                 <a class="btn btn-secondary" href="{{ path('poste_edit', { 'id': poste.id }) }}">
@@ -109,6 +109,7 @@
                              aria-labelledby="headingOne"
                              aria-expanded="true">
                             <div class="panel-body">
+                                {% if poste.libelle %}
                                 <div class="row">
                                     <div class="col-md-3">
                                         Libelle :
@@ -117,7 +118,9 @@
                                         {{ poste.libelle }}
                                     </div>
                                 </div>
-                                <div class="row">
+                                {% endif %}
+                                {% if poste.description %}
+                                    <div class="row">
                                     <div class="col-md-3">
                                         Description :
                                     </div>
@@ -125,6 +128,18 @@
                                         {{ poste.description }}
                                     </div>
                                 </div>
+                                {% endif %}
+                                {% if poste.type %}
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        Type :
+                                    </div>
+                                    <div class="col-md-9">
+                                        {{ poste.type }}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if poste.profileDemande %}
                                 <div class="row">
                                     <div class="col-md-3">
                                         Profile demandé:
@@ -133,6 +148,17 @@
                                         {{ poste.profileDemande }}
                                     </div>
                                 </div>
+                                {% endif %}
+                                {% if poste.responsable %}
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        Responsable :
+                                    </div>
+                                    <div class="col-md-9">
+                                        {{ poste.responsable }}
+                                    </div>
+                                </div>
+                                {% endif %}
                                 <div class="row">
                                     <div class="col-md-3">
                                         {% if (poste.liens | length) %}
