@@ -2,6 +2,8 @@
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Poste
@@ -81,6 +83,64 @@ class Poste
      * })
      */
     private $createdByGroup;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=150, nullable=true)
+     */
+    private $type;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nbPostes", type="string", length=150, nullable=true)
+     */
+    private $nbPostes = 1;
+
+    /**
+     * @ORM\Column(name="dateEcheance", type="datetime", nullable=true)
+     * @Assert\Range(
+     *      min = "now")
+     * @Assert\DateTime()
+     * @var \DateTime
+     */
+    private $dateEcheance;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="responsable", type="string", length=150, nullable=true)
+     */
+    private $responsable;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="localisation", type="string", length=150, nullable=true)
+     */
+    private $localisation;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tjm", type="string", length=150, nullable=true)
+     */
+    private $tjm;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="primeCoptation", type="string", length=150, nullable=true)
+     */
+    private $primeCoptation;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="etat", type="string", length=150, nullable=true)
+     */
+    private $etat;
 
     /**
      * Poste constructor.
@@ -297,5 +357,131 @@ class Poste
         return $this->createdByGroup;
     }
 
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
 
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbPostes()
+    {
+        return $this->nbPostes;
+    }
+
+    /**
+     * @param int $nbPostes
+     */
+    public function setNbPostes($nbPostes)
+    {
+        $this->nbPostes = $nbPostes;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateEcheance()
+    {
+        return $this->dateEcheance;
+    }
+
+    /**
+     * @param \DateTime $dateEcheance
+     */
+    public function setDateEcheance($dateEcheance)
+    {
+        $this->dateEcheance = $dateEcheance;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResponsable()
+    {
+        return $this->responsable;
+    }
+
+    /**
+     * @param string $responsable
+     */
+    public function setResponsable($responsable)
+    {
+        $this->responsable = $responsable;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocalisation()
+    {
+        return $this->localisation;
+    }
+
+    /**
+     * @param string $localisation
+     */
+    public function setLocalisation($localisation)
+    {
+        $this->localisation = $localisation;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTjm()
+    {
+        return $this->tjm;
+    }
+
+    /**
+     * @param string $tjm
+     */
+    public function setTjm($tjm)
+    {
+        $this->tjm = $tjm;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrimeCoptation()
+    {
+        return $this->primeCoptation;
+    }
+
+    /**
+     * @param string $primeCoptation
+     */
+    public function setPrimeCoptation($primeCoptation)
+    {
+        $this->primeCoptation = $primeCoptation;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * @param string $etat
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+    }
 }
