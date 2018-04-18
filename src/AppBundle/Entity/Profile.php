@@ -5,6 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Profile
@@ -221,10 +222,20 @@ class Profile
      * @ORM\Column(type="datetime",nullable=true)
      *
      * @Assert\DateTime()
-     *
+     * @Gedmo\Timestampable(on="change", field={"ambition","disponibilite", "prestationsalariale","societeActuel", "salaireActuel",
+     *    "contrat", "sivp" ,"commentaireProfil"})
      * @var \DateTime
      */
     private $profileUpdatedAt;
+
+    /**
+     * @ORM\Column(type="datetime",nullable=true)
+     *
+     * @Assert\DateTime()
+     * @Gedmo\Timestampable(on="create")
+     * @var \DateTime
+     */
+    private $profileCreatedAt;
 
     /**
      * @var Disponibilite
@@ -404,6 +415,22 @@ class Profile
         $this->profileUpdatedAt = $profileUpdatedAt;
         return $this;
 
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getProfileCreatedAt()
+    {
+        return $this->profileCreatedAt;
+    }
+
+    /**
+     * @param \DateTime $profileCreatedAt
+     */
+    public function setProfileCreatedAt($profileCreatedAt)
+    {
+        $this->profileCreatedAt = $profileCreatedAt;
     }
 
     /**

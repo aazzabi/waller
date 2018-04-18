@@ -116,3 +116,12 @@ doctrine_migrations:
     table_name: migration_versions
     name: Migrations
     organize_migrations: false # Version >= 1.2, possible values are: "BY_YEAR", "BY_YEAR_AND_MONTH", false
+
+stof_doctrine_extensions:
+    default_locale: fr
+    orm:
+        default:
+            timestampable: true
+            sluggable: true
+            blameable: true
+            tree: true
