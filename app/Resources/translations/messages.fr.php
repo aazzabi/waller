@@ -14,7 +14,15 @@ return [
             'description' => 'Description',
             'profiledemande' => 'Profile demandé :',
             'group' => 'Proposé par :',
-            'lien' => 'Liens de recrutement'
+            'lien' => 'Liens de recrutement',
+            'tjm' => 'Taux journalier moyen',
+            'etat' => 'Etat :',
+            'type' => 'Type de contrat :',
+            'primeCoptation' => 'Prime de coptation :',
+            'localisation' => 'Localisation :',
+            'responsable' => 'Responsable :',
+            'echeance' => 'Date d\'écheance :',
+            'nbPostes' => 'Nombre des postes vacant :',
         ],
         'note' => [
             'commentaire' => 'Note d\'etape',
