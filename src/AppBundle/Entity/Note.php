@@ -52,7 +52,7 @@ class Note
      *
      * @ORM\ManyToOne(targetEntity="Etape")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="etape_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="etape_id", referencedColumnName="id", onDelete="CASCADE")
      * })
      */
     private $etape;

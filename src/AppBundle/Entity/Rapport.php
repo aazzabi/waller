@@ -32,7 +32,7 @@ class Rapport
      *
      * @ORM\ManyToOne(targetEntity="Action")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="action_id", referencedColumnName="id", nullable=false)
+     *   @ORM\JoinColumn(name="action_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      * })
      */
     private $action;

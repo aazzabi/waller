@@ -38,7 +38,7 @@ class Action
      *
      * @ORM\ManyToOne(targetEntity="Etape")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="etape_destination_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="etape_destination_id", referencedColumnName="id", onDelete="CASCADE")
      * })
      */
     private $etapeDestination;
@@ -48,7 +48,7 @@ class Action
      *
      * @ORM\ManyToOne(targetEntity="Etape", inversedBy="actions")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="etape_source_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="etape_source_id", referencedColumnName="id", onDelete="CASCADE")
      * })
      */
     private $etapeSource;
