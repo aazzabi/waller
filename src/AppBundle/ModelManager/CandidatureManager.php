@@ -65,6 +65,11 @@ class CandidatureManager
         return $this->candidatureRepository->getCandidaturesByGroupId($groupId);
     }
 
+    public function retrieveAllCandidatures()
+    {
+        return $this->candidatureRepository->findAll();
+    }
+
     public function createCandidature($profileSelected)
     {
         $candidature = new Candidature();

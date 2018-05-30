@@ -41,5 +41,8 @@ class EtapeManager
     {
         return $this->etapeRepository->findAll();
     }
-
+    public function retrieveEtapeById($id)
+    {
+        return $this->etapeRepository->find($id);
+    }
 }

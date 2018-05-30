@@ -134,11 +134,25 @@ class EtapeController extends Controller
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
         }
+
+        $em = $this->getDoctrine()->getManager();
+
         $form = $this->createDeleteForm($etape);
         $form->handleRequest($request);
 
+        $candidatures = $this->get('model_manager.candidature')->retrieveAllCandidatures();
+        $etapeNouveau = $this->get('model_manager.etape')->retrieveEtapeById(1);
+        foreach ($candidatures as $candidature)
+        {
+            if($candidature->getCurrentEtape() == $etape )
+            {
+                $candidature->setCurrentEtape($etapeNouveau);
+                $em->persist($candidature);
+                $em->flush();
+            }
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->remove($etape);
             $em->flush($etape);
         }
