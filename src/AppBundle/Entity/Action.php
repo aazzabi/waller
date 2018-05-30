@@ -44,7 +44,7 @@ class Action
     private $etapeDestination;
 
     /**
-     * @var \Etape
+     * @var Etape
      *
      * @ORM\ManyToOne(targetEntity="Etape", inversedBy="actions")
      * @ORM\JoinColumns({

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Action;
 use AppBundle\Entity\Etape;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
@@ -56,6 +57,16 @@ class EtapeController extends Controller
             $em->persist($etape);
             $em->flush($etape);
 
+            $etapeAdded = $form->getData();
+            $etapes = $this->get('model_manager.etape')->retrieveAllEtapes();
+
+            foreach ($etapes as $etape)
+            {
+                if ($etape != $etapeAdded) {
+                    $this->createActionsForNewEtape($etapeAdded,$etape);
+                    $this->createActionsForNewEtape($etape,$etapeAdded);
+                }
+            }
             return $this->redirectToRoute('etape_index', array('id' => $etape->getId()));
         }
 
@@ -148,5 +159,18 @@ class EtapeController extends Controller
             ->setAction($this->generateUrl('etape_delete', array('id' => $etape->getId())))
             ->setMethod('DELETE')
             ->getForm();
+    }
+
+    private function createActionsForNewEtape(Etape $etapeSource, Etape $etapeDestination)
+    {
+        $action = new Action();
+        $action->setEtapeSource($etapeSource);
+        $action->setEtapeDestination($etapeDestination);
+        $libelle = $etapeSource.' to '.$etapeDestination;
+        $action->setLibelle($libelle);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($action);
+        $em->flush($action);
     }
 }
