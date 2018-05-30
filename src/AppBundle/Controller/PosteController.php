@@ -136,7 +136,7 @@ class PosteController extends Controller
 
         return $this->render('poste/edit.html.twig', array(
             'poste' => $poste,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }

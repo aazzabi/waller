@@ -1,0 +1,68 @@
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
+                   aria-controls="collapseOne" class="collapsed">
+                    Identité
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne"
+             aria-expanded="true">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(form.libelle) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.etat) }}
+                    </div>
+                </div>
+
+                {{ form_row(form.description) }}
+
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(form.group) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.type) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(form.nbPostes) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.dateEcheance) }}
+                    </div>
+                </div>
+                {{ form_row(form.profileDemande) }}
+                {{ form_row(form.responsable) }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseSecond" aria-expanded="true"
+                   aria-controls="collapseSecond" class="collapsed">
+                    Autres
+                </a>
+            </h4>
+        </div>
+        <div id="collapseSecond" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne"
+             aria-expanded="true">
+            <div class="panel-body">
+                {{ form_row(form.localisation) }}
+                {{ form_row(form.tjm) }}
+                {{ form_row(form.primeCoptation) }}
+                {{ form_row(form.liens) }}
+            </div>
+        </div>
+    </div>
+</div>
