@@ -102,6 +102,14 @@ return [
         ],
         'rapport' => [
             'libelle' => 'Libellé rapport de changement d\'etape *',
-            ]
+        ],
+        'user' => [
+            'nom' => 'Nom *',
+            'prenom' => 'Prénom *',
+            'email' => 'E-mail *',
+            'username' => 'Nom d\'utilisateur *',
+            'roles' => 'Role *',
+            'group' => 'Travaillant chez *',
+        ]
     ]
 ];

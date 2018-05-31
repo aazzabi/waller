@@ -7,6 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -16,13 +19,21 @@ class RegistrationType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-            'label' => 'entity.profileForm.nom',
+            'label' => 'entity.user.nom',
         ],'first')
             ->add('prenom', TextType::class, [
-                'label' => 'entity.profileForm.prenom'
+                'label' => 'entity.user.prenom'
+            ])
+            ->add('email', EmailType::class, [
+                'label' => 'entity.user.email',
+                'required'=>false,
+            ])
+            ->add('username', TextType::class, [
+                'label' => 'entity.user.username',
+                'required'=>false,
             ])
             ->add('roles', ChoiceType::class, array(
-                'label'=>'Role',
+                'label' => 'entity.user.roles',
                 'choices'   => array(
                     'Examinateur'   => 'ROLE_EXAMIN',
                     'Admin'   => 'ROLE_ADMIN',
@@ -33,10 +44,23 @@ class RegistrationType extends AbstractType
                 'multiple'  => true
             ))
             ->add('group', EntityType::class, array(
-                'label' => 'Travaillant chez',
+                'label' => 'entity.user.group',
                 'class' => Group::class,
                 'multiple'=>false,
                 'required'=>false
+            ))
+            ->add('plainPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'required'=>false,
+                'options' => array(
+                    'translation_domain' => 'FOSUserBundle',
+                    'attr' => array(
+                        'autocomplete' => 'new-password',
+                    ),
+                ),
+                'first_options' => array('label' => 'MOT DE PASSE *'),
+                'second_options' => array('label' => 'RÉPÉTER LE MOT DE PASSE *'),
+                'invalid_message' => 'fos_user.password.mismatch',
             ));
 
     }

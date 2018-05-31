@@ -29,7 +29,7 @@
     <div class="container-sm-height full-height">
         <div class="row row-sm-height">
             <div class="col-sm-12 col-sm-height col-middle">
-                {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+                {% form_theme form 'bootstrap_3_layout.html.twig' %}
                 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
                 {{ form_row(form.nom) }}
                 {{ form_row(form.prenom) }}
