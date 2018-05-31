@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Liste des utilisateurs
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1><b>Liste des utilisateurs</b></h1>
+                </div>
+                <div class="col-md-6 text-right">
+                    <br>
+                    {% if is_granted('ROLE_CONSULT')== false %}    
+                        <a href="{{ path('users_new') }}" class="btn btn-success">
+                            <i class="icon-plus">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                &nbsp;Ajouter un utilisateur
+                            </i>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Roles</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td><a href="{{ path('users_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>
+                    {% if user.roles == 'a:1:{i:0;s:11:"ROLE_CONSULT";}' %}
+                        Role consultant
+                    {% elseif user.roles =='a:1:{i:0;s:11:"ROLE_SAISIE";}' %}
+                        Role saisie
+                    {% elseif user.roles =='a:1:{i:0;s:11:"ROLE_EXAMIN";}' %}
+                        Role examinateur
+                    {% elseif user.roles =='a:1:{i:0;s:10:"ROLE_ADMIN";}' %}
+                        Role administrateur
+                    {% endif %}
+                </td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('users_show', { 'id': user.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('users_edit', { 'id': user.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('users_new') }}">Create a new user</a>
+        </li>
+    </ul>
+{% endblock %}
