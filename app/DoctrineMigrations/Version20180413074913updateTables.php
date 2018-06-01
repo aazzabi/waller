@@ -23,7 +23,7 @@ class Version20180413074913updateTables extends AbstractMigration
             (6, \'Rim\', \'rim\', \'rbader@smart-team.tn\', \'rbader@smart-team.tn\', 1, NULL, \'$2y$13$O6ZjRErD7E5a1RPqLCdiqeVgaYRWw/vipkXGIAqXW5Flw03lmshPm\', NULL, NULL, NULL, \'a:1:{i:0;s:11:\"ROLE_SAISIE\";}\', 1, \'Bader\', \'Rim\'),
             (7, \'Marcello\', \'marcello\', \'mbarille@smart-team.tn\', \'mbarille@smart-team.tn\', 1, NULL, \'$2y$13$OgIm.ESOnUKak190m.KpB.fagFrwzTmeFx3hGWNIzUa88EyrAuULa\', NULL, NULL, NULL, \'a:1:{i:0;s:11:\"ROLE_EXAMIN\";}\', 1, \'Barille\', \'Marcello\'),
             (8, \'Ghayth\', \'ghayth\', \'grokbani@smart-team.tn\', \'grokbani@smart-team.tn\', 1, NULL, \'$2y$13$ZTE6mVFRxOEY9URRe/SsM.VLp4W1rAog4hg5pFY/fRXJxZkwFr5Ke\', NULL, NULL, NULL, \'a:1:{i:0;s:11:\"ROLE_EXAMIN\";}\', 1, \'Rokbani\', \'Ghayth\'),
-            (9, \'Sergio\', \'sergio\', \'sgazzo@smart-team.tn\', \'sgazzo@smart-team.tn\', 1, NULL, \'$2y$13$5zWN0H/kohqpZUBWjTKsluguplCFa4x.WYKbIfm70U3KRv72Hcv6m\', NULL, NULL, NULL, \'a:1:{i:0;s:11:\"ROLE_CONSULT\";}\', 1, \'Gazzo\', \'Sergio\');'
+            (9, \'Sergio\', \'sergio\', \'sgazzo@smart-team.tn\', \'sgazzo@smart-team.tn\', 1, NULL, \'$2y$13$5zWN0H/kohqpZUBWjTKsluguplCFa4x.WYKbIfm70U3KRv72Hcv6m\', NULL, NULL, NULL, \'a:1:{i:0;s:12:\"ROLE_CONSULT\";}\', 1, \'Gazzo\', \'Sergio\');'
         );
     }
 
