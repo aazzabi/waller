@@ -66,37 +66,51 @@
             <table id="users" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>Nom</th>
-                    <th>Prenom</th>
+                    <th>Nom - Prenom</th>
+                    <th>Username </th>
+                    <th>Email</th>
+                    <th>Société</th>
                     <th>Roles</th>
-                    <th>Actions</th>
+                    {% if is_granted('ROLE_CONSULT')== false %}    
+                        <th>Actions</th>
+                    {% endif %}
                 </tr>
                 </thead>
                 <thead>
                 <tbody>
                 {% for user in users %}
                     <tr>
-                        <td>{{ user.nom }}</td>
-                        <td>{{ user.prenom }}</td>
+                        <td>{{ user.nom|upper }} {{ user.prenom }} </td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <a href="{{ path('group_show', { 'id': user.group.id }) }}">
+                                <div id="profile-image1">
+                                    {% if user.group.logo != '' %}
+                                        <img alt="User Pic" src="{{ asset('uploads/logo/' ~ user.group.logo) }}"
+                                             id="profile-image1" class="img-logo-societe img-responsive">
+                                    {% else %}
+                                        <b>{{ user.group.name }}</b>
+                                    {% endif %}
+
+                                </div>
+                            </a>
+                        </td>
                         <td>
                             {% for role in user.roles %}
-                                {{ role }}
+                                {{ role }} <br>
                             {% endfor %}
                         </td>
-                        <td>
-                            <div class="btn-group btn-group-sm btn-group-horizontal">
-                                <a class="btn btn-secondary" href="{{ path('users_show', { 'id': user.id }) }}"
-                                   data-toggle="tooltip" title="Afficher l'utilisateur">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                {% if is_granted('ROLE_CONSULT')== false %}    
-                                    <a class="btn btn-secondary" href="{{ path('users_edit', { 'id': user.id }) }}"
-                                       data-toggle="tooltip" title="Editer l'utilisateur">
-                                        <i class="fa fa-pencil-square-o"></i>
-                                    </a>
-                                {% endif %}
-                            </div>
-                        </td>
+                        {% if is_granted('ROLE_CONSULT')== false %}    
+                            <td>
+                                <div class="btn-group btn-group-sm btn-group-horizontal">
+                                        <a class="btn btn-secondary" href="{{ path('users_edit', { 'id': user.id }) }}"
+                                           data-toggle="tooltip" title="Editer l'utilisateur">
+                                            <i class="fa fa-pencil-square-o"></i>
+                                        </a>
+                                </div>
+                            </td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
                 </tbody>
