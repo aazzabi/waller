@@ -3,6 +3,7 @@ parameters:
     database_manager.etape.class: AppBundle\ModelManager\EtapeManager
     database_manager.poste.class: AppBundle\ModelManager\PosteManager
     database_manager.profile.class: AppBundle\ModelManager\ProfileManager
+    database_manager.user.class: AppBundle\ModelManager\UserManager
 
 services:
     app.rapport_listener:
@@ -35,4 +36,7 @@ services:
             arguments: [ "@doctrine"]
     model_manager.profile:
             class: '%database_manager.profile.class%'
+            arguments: [ "@doctrine"]
+    model_manager.user:
+            class: '%database_manager.user.class%'
             arguments: [ "@doctrine"]

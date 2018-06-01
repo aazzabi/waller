@@ -27,4 +27,4 @@ security:
         - { path: ^/resetting, role: ROLE_ADMIN }
         - { path: ^/group, role: ROLE_ADMIN }
         - { path: ^/etape, role: ROLE_ADMIN }
-        - { path: ^/, role: ROLE_USER }
+        - { path: ^/user, role: ROLE_ADMIN }
