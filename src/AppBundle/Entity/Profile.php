@@ -35,7 +35,7 @@ class Profile
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="prenom", type="string", length=150, nullable=false)
      */
     private $prenom;

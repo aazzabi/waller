@@ -85,11 +85,17 @@ class ProfileController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('app.candidature_service')->bindCompetences($profile);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($profile);
-            $em->flush($profile);
-            return $this->redirectToRoute('profile_show', array('id' => $profile->getId()));
+            if ( $profile->getTelephone()=='' && $profile->getEmail()=='' && $profile->getLinkedin()=='' ) {
+                $request->getSession()
+                    ->getFlashBag()
+                    ->add('error', 'Une des valeurs Email, linkedin et Téléphone doit étre mentionné');
+            } else {
+                $this->get('app.candidature_service')->bindCompetences($profile);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($profile);
+                $em->flush($profile);
+                return $this->redirectToRoute('profile_show', array('id' => $profile->getId()));
+            }
         }
 
         return $this->render('profile/new.html.twig', array(
@@ -199,11 +205,5 @@ class ProfileController extends Controller
             ->setAction($this->generateUrl('profile_delete', array('id' => $profile->getId())))
             ->setMethod('DELETE')
             ->getForm();
-    }
-
-
-    public function findByAuthorAndDate()
-    {
-
     }
 }

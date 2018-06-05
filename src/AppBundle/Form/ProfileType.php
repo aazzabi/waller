@@ -28,11 +28,11 @@ class ProfileType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'entity.profileForm.nom'
             ])
             ->add('prenom', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'entity.profileForm.prenom'
             ])
             ->add('telephone', TextType::class, [
