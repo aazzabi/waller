@@ -86,7 +86,7 @@ class ProfileRepository extends \Doctrine\ORM\EntityRepository
             $search['contrat'] = $session->get('contrat');
         }
         if ($search['contrat']) {
-            $builder->andWhere('p.contrat >= :contrat')
+            $builder->andWhere('p.contrat = :contrat')
                 ->setParameter('contrat', $search['contrat']);
         }
         
