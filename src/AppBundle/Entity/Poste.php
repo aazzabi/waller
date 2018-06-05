@@ -25,14 +25,14 @@ class Poste
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="libelle", type="string", length=150, nullable=false)
      */
     private $libelle;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="description", type="text", length=65535, nullable=true)
      */
     private $description;

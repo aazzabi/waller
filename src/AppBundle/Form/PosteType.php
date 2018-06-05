@@ -23,14 +23,16 @@ class PosteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('libelle', TextType::class, array(
-            'label' => 'entity.poste.libelle'
-        ))
+                'label' => 'entity.poste.libelle',
+                'required' => false,
+            ))
             ->add('description', TextareaType::class, array(
-                'label' => 'entity.poste.description'
+                'label' => 'entity.poste.description',
+                'required' => false,
             ))
             ->add('profileDemande', TextareaType::class, array(
                 'label' => 'entity.poste.profiledemande',
-                            'required' => false,
+                'required' => false,
             ))
             ->add('group', EntityType::class, array(
                 'label' => 'entity.poste.group',
