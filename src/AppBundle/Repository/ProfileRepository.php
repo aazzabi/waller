@@ -101,6 +101,17 @@ class ProfileRepository extends \Doctrine\ORM\EntityRepository
                 ->setParameter('competences', $search['competences']);
         }
 
+        // ambition
+        if ($search['ambition'] !== null) {
+            $session->set('ambition', $search['ambition']);
+        } else {
+            $search['ambition'] = $session->get('ambition');
+        }
+        if ($search['ambition']) {
+            $builder->andWhere('p.ambition = :ambition')
+                ->setParameter('ambition', $search['ambition']);
+        }
+
 //        // Poste
         if ($search['poste'] !== null) {
             $session->set('poste', $search['poste']);

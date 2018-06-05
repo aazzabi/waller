@@ -33,6 +33,7 @@ class ProfileController extends Controller
         $search['poste'] = $request->get('poste', null);
         $search['contrat'] = $request->get('contrat', null);
         $search['groupe'] = $request->get('groupe', null);
+        $search['ambition'] = $request->get('ambition', null);
 
         $em = $this->getDoctrine()->getManager();
 

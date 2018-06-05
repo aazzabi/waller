@@ -79,7 +79,7 @@
                     <h5 class="m-t-10">Informations concernant le Profil</h5>
                     <div class="form-group-attached">
                         <div class="row clearfix">
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <div class="form-group form-group-default">
                                     <label>Disponibilité</label>
                                     <select class="cs-select cs-skin-slide cs-transparent form-control"
@@ -95,9 +95,9 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <div class="form-group form-group-default">
-                                    <label>Experiences ( supérieur à )</label>
+                                    <label>Experiences ( sup. à )</label>
                                     <input type="text" class="form-control" name="experience"
                                            value="{{ app.session.get('experience') }}">
                                 </div>
@@ -116,7 +116,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="form-group form-group-default form-group-default-select2">
                                     <label>Compétence</label>
                                     <select class="full-width select2-hidden-accessible" multiple=""
@@ -126,6 +126,18 @@
                                             <option {% if app.session.get('competences') == competence.id %} selected {% endif %}
                                                     value="{{ competence.id }}"> {{ competence.libelle }}</option>
                                         {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group form-group-default">
+                                    <label>Ambitions</label>
+                                    <select multiple class="cs-select cs-skin-slide cs-transparent form-control"
+                                            name="ambition" data-init-plugin="cs-select">
+                                            <option value="">Indiff</option>
+                                            <option value="mission en france">Cherche une mission en France à l'étranger</option>
+                                            <option value="travailler en france">Veut être embauché en France à l'étranger</option>
+                                            <option value="travailler en tunisie">Veut être embauché en Tunisie</option>
                                     </select>
                                 </div>
                             </div>
