@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Profile
@@ -13,6 +14,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="profile")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProfileRepository")
  * @Vich\Uploadable
+ * @UniqueEntity(
+ *     "telephone",
+ *     message = "Un profile existe déjà avec ce numéro de téléphone")
  */
 class Profile
 {
@@ -57,7 +61,7 @@ class Profile
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=150, nullable=true)
+     * @ORM\Column(name="telephone", type="string", length=150, nullable=true, unique=true)
      */
     private $telephone;
 
