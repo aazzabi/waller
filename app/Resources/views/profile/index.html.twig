@@ -37,11 +37,25 @@
 
     </script>
 
+    <script>
+        jQuery(document).ready(function($) {
+            $("#reset-button").click(function() {
+                $("#disponibilite").val(0);
+                $("#experience").val(0);
+                $("#contrat").val(0);
+                $("#competences").val(0);
+                $("#ambition").val(0);
+                $("#poste").val(0);
+                $("#groupe").val(0);
+                document.getElementById("form-project").submit();
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block body %}
 
-    {#Profiles liste et buttons#}
+    {#titre et buttons#}
     <div class="row">
         <div class="col-md-12">
             <div class="row">
@@ -51,19 +65,14 @@
                 <div class="col-md-6 text-right">
                     <br>
                     <button class="btn btn-complete btn-cons " data-target="#collapseSearch" data-toggle="collapse"
-                           href="collapseSearch" role="button"><i class="fa fa-filter" aria-hidden="true"></i>
-                        Appliquer un filtre
+                           href="collapseSearch" role="button"><i class="fa fa-filter" aria-hidden="true"></i> Appliquer un filtre
                     </button>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                        <i class="fa fa-columns" aria-hidden="true"></i>
-                        Choisir les colonnes.
+                        <i class="fa fa-columns" aria-hidden="true"></i> Choisir les colonnes.
                     </button>
                     {% if is_granted('ROLE_CONSULT')== false %}    
                         <a href="{{ path('profile_new') }}" class="btn btn-success">
-                            <i class="icon-plus">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                &nbsp;Ajouter un profil
-                            </i>
+                            <i class="fa fa-plus" aria-hidden="true"></i> Ajouter un profil
                          </a>
                     {% endif %}
                 </div>
@@ -72,20 +81,20 @@
     </div>
 
     <hr>
-    <br>
     <div class="collapse row" id="collapseSearch">
             <form id="form-project" method="GET" role="form" autocomplete="off" novalidate="novalidate">
                 <div class="card card-body col-md-12" style="padding: 20px; width: 100%">
                     <h5 class="m-t-10">Informations concernant le Profil</h5>
                     <div class="form-group-attached">
                         <div class="row clearfix">
+                            {#Disponibilité#}
                             <div class="col-sm-2">
                                 <div class="form-group form-group-default">
                                     <label>Disponibilité</label>
-                                    <select class="cs-select cs-skin-slide cs-transparent form-control"
+                                    <select id="disponibilite" class="cs-select cs-skin-slide cs-transparent form-control"
                                             name="disponibilite"
                                             data-init-plugin="cs-select">
-                                        <option value="">Toutes</option>
+                                        <option value="0">Toutes</option>
                                         {% for disponibilite in disponibilites %}
                                             <option value="{{ disponibilite.id }}"
                                                     {% if app.session.get('disponibilite') == disponibilite.id %} selected {% endif %} >
@@ -95,33 +104,37 @@
                                     </select>
                                 </div>
                             </div>
+                            {#Experiences#}
                             <div class="col-sm-2">
                                 <div class="form-group form-group-default">
                                     <label>Experiences ( sup. à )</label>
-                                    <input type="text" class="form-control" name="experience"
+                                    <input type="text" class="form-control" name="experience" id="experience"
                                            value="{{ app.session.get('experience') }}">
                                 </div>
                             </div>
+                            {#Contrat#}
                             <div class="col-sm-2">
                                 <div class="form-group form-group-default">
                                     <label>Contrat</label>
-                                    <select multiple class="cs-select cs-skin-slide cs-transparent form-control"
-                                            name="contrat" data-init-plugin="cs-select">
-                                        <option value="">All</option>
-                                        <option value="SIVP1">SIVP 1</option>
-                                        <option value="SIVP2">SIVP 2</option>
-                                        <option value="CDI">CDI</option>
-                                        <option value="CDD">CDD</option>
-                                        <option value="Freelance">Freelance</option>
+                                    <select class="cs-select cs-skin-slide cs-transparent form-control" multiple="multiple"
+                                            id="contrat" name="contrat" data-init-plugin="cs-select">
+                                        <option value="0">All</option>
+                                        <option value="SIVP1" {% if app.session.get('contrat') == 'SIVP1' %} selected {% endif %}>SIVP 1</option>
+                                        <option value="SIVP2" {% if app.session.get('contrat') == 'SIVP2' %} selected {% endif %}>SIVP 2</option>
+                                        <option value="CDI" {% if app.session.get('contrat') == 'CDI' %} selected {% endif %}>CDI</option>
+                                        <option value="CDD" {% if app.session.get('contrat') == 'CDD' %} selected {% endif %}>CDD</option>
+                                        <option value="Freelance" {% if app.session.get('contrat') == 'Freelance' %} selected {% endif %}>Freelance</option>
                                     </select>
                                 </div>
                             </div>
+                            {#Compétence#}
                             <div class="col-sm-3">
                                 <div class="form-group form-group-default form-group-default-select2">
                                     <label>Compétence</label>
                                     <select class="full-width select2-hidden-accessible" multiple=""
-                                            name="competence" data-init-plugin="select2" tabindex="-1" aria-hidden="true">
-                                            <option value="">Toutes</option>
+                                            name="competences" id="competences"  multiple="multiple"
+                                            data-init-plugin="select2" tabindex="-1" aria-hidden="true">
+                                            <option value="0">Toutes</option>
                                         {% for competence in competences %}
                                             <option {% if app.session.get('competences') == competence.id %} selected {% endif %}
                                                     value="{{ competence.id }}"> {{ competence.libelle }}</option>
@@ -129,15 +142,22 @@
                                     </select>
                                 </div>
                             </div>
+                            {#Ambition#}
                             <div class="col-sm-3">
                                 <div class="form-group form-group-default">
-                                    <label>Ambitions</label>
-                                    <select multiple class="cs-select cs-skin-slide cs-transparent form-control"
-                                            name="ambition" data-init-plugin="cs-select">
-                                            <option value="">Indiff</option>
-                                            <option value="mission en france">Cherche une mission en France à l'étranger</option>
-                                            <option value="travailler en france">Veut être embauché en France à l'étranger</option>
-                                            <option value="travailler en tunisie">Veut être embauché en Tunisie</option>
+                                    <label>Ambition</label>
+                                    <select class="cs-select cs-skin-slide cs-transparent form-control"
+                                            name="ambition" id="ambition" data-init-plugin="cs-select">
+                                            <option value="0">Indiff</option>
+                                            <option value="mission en france" {% if app.session.get('ambition') == 'mission en france' %} selected {% endif %}>
+                                                Cherche une mission en France à l'étranger
+                                            </option>
+                                            <option value="travailler en france" {% if app.session.get('ambition') == 'travailler en france' %} selected {% endif %}>
+                                                Veut être embauché en France à l'étranger
+                                            </option>
+                                            <option value="travailler en tunisie" {% if app.session.get('ambition') == 'travailler en tunisie' %} selected {% endif %}>
+                                                Veut être embauché en Tunisie
+                                            </option>
                                     </select>
                                 </div>
                             </div>
@@ -147,13 +167,14 @@
                     <h5 class="m-t-10">Informations Concernant la Candidature</h5>
                     <div class="form-group-attached">
                         <div class="row clearfix">
+                            {#Poste#}
                             <div class="col-sm-6">
                                 <div class="form-group form-group-default">
                                     <label>Poste</label>
-                                    <select name="poste"
+                                    <select name="poste" id="poste"
                                             class="cs-select cs-skin-slide cs-transparent form-control"
                                             data-init-plugin="cs-select">
-                                        <option value="">Toutes</option>
+                                        <option value="0">Toutes</option>
                                         {% for poste in postes %}
                                             <option {% if app.session.get('poste') == poste.id %} selected {% endif %}
                                                     value="{{ poste.id }}"> {{ poste.libelle }}</option>
@@ -161,16 +182,17 @@
                                     </select>
                                 </div>
                             </div>
+                            {#groupe#}
                             <div class="col-sm-6">
                                 <div class="form-group form-group-default">
                                     <label>Présenté par</label>
-                                    <select name="groupe"
-                                            name="groupe"
+                                    <select name="groupe" id="groupe"
                                             class="cs-select cs-skin-slide cs-transparent form-control"
                                             data-init-plugin="cs-select">
-                                        <option value="">Toutes</option>
+                                        <option value="0">Toutes</option>
                                         {% for groupe in groupes %}
-                                            <option value="{{ groupe.id }}"> {{ groupe.name }}</option>
+                                            <option {% if app.session.get('groupe') == groupe.id %} selected {% endif %}
+                                                    value="{{ groupe.id }}"> {{ groupe.name }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -179,7 +201,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input class="btn btn-warning" type="reset"/>
+                    <input id="reset-button" class="btn btn-warning" type="reset"/>
                     <button class="btn btn-success" type="submit">Chercher</button>
                 </div>
                 <hr>
