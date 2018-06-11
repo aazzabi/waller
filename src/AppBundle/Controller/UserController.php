@@ -3,12 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
-use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * User controller.
@@ -25,6 +25,10 @@ class UserController extends Controller
      */
     public function indexAction()
     {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
+        }
+
         $users = $this->get('model_manager.user')->retrieveAllUsers();
 
         return $this->render('user/index.html.twig', array(
