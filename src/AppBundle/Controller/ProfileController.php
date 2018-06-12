@@ -18,6 +18,8 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
  */
 class ProfileController extends Controller
 {
+    public $key = 'ODkwMDY1OS4zMTU='; // 16 chars
+
     /**
      * Lists all profile entities.
      *
@@ -26,6 +28,8 @@ class ProfileController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $encrypter = new \Illuminate\Encryption\Encrypter($this->key);
+
         $search = [];
         $search['disponibilite'] = $request->get('disponibilite', null);
         $search['experience'] = (int)$request->get('experience', null);
@@ -43,6 +47,17 @@ class ProfileController extends Controller
         $competences = $em->getRepository('AppBundle:Competence')->findAll();
 
         $profiles =  $em->getRepository('AppBundle:Profile')->search($search);
+
+        foreach ($profiles as $profile) {
+            if ($profile->getPrestationsalariale()) {
+                $decryptedPrestSal = $encrypter->decrypt($profile->getPrestationsalariale());
+                $profile->setPrestationsalariale($decryptedPrestSal);
+            }
+            if ($profile->getSalaireActuel()) {
+                $decryptedtSalActuel = $encrypter->decrypt($profile->getSalaireActuel());
+                $profile->setSalaireActuel($decryptedtSalActuel);
+            }
+        }
 
         return $this->render('profile/index.html.twig', array(
             'profiles' => $profiles,
@@ -76,6 +91,8 @@ class ProfileController extends Controller
      */
     public function newAction(Request $request)
     {
+        $encrypter = new \Illuminate\Encryption\Encrypter($this->key);
+
         if ($this->get('security.authorization_checker')->isGranted('ROLE_CONSULT')) {
             throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
         }
@@ -86,6 +103,14 @@ class ProfileController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($profile->getPrestationsalariale()) {
+                $encryptedPrestSal = $encrypter->encrypt($profile->getPrestationsalariale());
+                $profile->setPrestationsalariale($encryptedPrestSal);
+            }
+            if ($profile->getSalaireActuel()) {
+                $encryptedSalActuel = $encrypter->encrypt($profile->getSalaireActuel());
+                $profile->setSalaireActuel($encryptedSalActuel);
+            }
             if ( $profile->getTelephone()=='' && $profile->getEmail()=='' && $profile->getLinkedin()=='' ) {
                 $request->getSession()
                     ->getFlashBag()
@@ -113,6 +138,16 @@ class ProfileController extends Controller
      */
     public function showAction(Profile $profile)
     {
+        $encrypter = new \Illuminate\Encryption\Encrypter($this->key);
+
+        if ($profile->getPrestationsalariale()) {
+            $decryptedPrestSal = $encrypter->decrypt($profile->getPrestationsalariale());
+            $profile->setPrestationsalariale($decryptedPrestSal);
+        }
+        if ($profile->getSalaireActuel()) {
+            $decryptedSalActuel = $encrypter->decrypt($profile->getSalaireActuel());
+            $profile->setSalaireActuel($decryptedSalActuel);
+        }
         $deleteForm = $this->createDeleteForm($profile);
 
         return $this->render('profile/show.html.twig', array(
@@ -129,14 +164,32 @@ class ProfileController extends Controller
      */
     public function editAction(Request $request, Profile $profile)
     {
+        $encrypter = new \Illuminate\Encryption\Encrypter($this->key);
+
         if ($this->get('security.authorization_checker')->isGranted('ROLE_CONSULT')) {
             throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
         }
         $deleteForm = $this->createDeleteForm($profile);
+        if ($profile->getPrestationsalariale()) {
+            $decryptedPrestSal = $encrypter->decrypt($profile->getPrestationsalariale());
+            $profile->setPrestationsalariale($decryptedPrestSal);
+        }
+        if ($profile->getSalaireActuel()) {
+            $decryptedSalActuel = $encrypter->decrypt($profile->getSalaireActuel());
+            $profile->setSalaireActuel($decryptedSalActuel);
+        }
         $editForm = $this->createForm(ProfileType::class, $profile);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            if ($profile->getPrestationsalariale()) {
+                $encryptedPrestSal = $encrypter->encrypt($profile->getPrestationsalariale());
+                $profile->setPrestationsalariale($encryptedPrestSal);
+            }
+            if ($profile->getSalaireActuel()) {
+                $encryptedSalActuel = $encrypter->encrypt($profile->getSalaireActuel());
+                $profile->setSalaireActuel($encryptedSalActuel);
+            }
             $this->get('app.candidature_service')->bindCompetences($profile);
             $this->getDoctrine()->getManager()->flush();
 
