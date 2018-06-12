@@ -152,14 +152,14 @@ class Profile
     /**
      * @var string
      *
-     * @ORM\Column(name="prestationSalariale", type="string", length=150, nullable=true)
+     * @ORM\Column(name="prestationSalariale", type="string", length=600, nullable=true)
      */
     private $prestationsalariale;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="salaireActuel", type="string", length=150, nullable=true)
+     * @ORM\Column(name="salaireActuel", type="string", length=600, nullable=true)
      */
     private $salaireActuel;
 
