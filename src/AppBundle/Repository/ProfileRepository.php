@@ -16,42 +16,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
  */
 class ProfileRepository extends \Doctrine\ORM\EntityRepository
 {
-//    public function search($input)
-//    {
-//        $input['sivp'] = isset($input['sivp']) ? 1 : 0;
-//
-//        if ($input['competence'] && $input['poste']) {
-//            $ids = array_intersect($this->searchByCompetence($input), $this->searchByPoste($input));
-//        } elseif (!$input['competence'] && $input['poste']) {
-//            $ids = $this->searchByPoste($input);
-//        } elseif ($input['competence'] && !$input['poste']) {
-//            $ids = $this->searchByCompetence($input);
-//        }
-//
-//        $select = $this->createQueryBuilder('p');
-//        $select->select('p, d');
-//        $select->leftJoin('p.disponibilite', 'd');
-//        $select->where('p.sivp = :sivp');
-//        $select->setParameter('sivp', (int)$input['sivp']);
-//        if ($input['experience']) {
-//            $select->andWhere('p.experience = :experience');
-//            $select->setParameter('experience', (int)$input['experience']);
-//        }
-//        if ($input['disponibilite']) {
-//            $select->andWhere('d.libelle = :dispo');
-//            $select->setParameter('dispo', $input['disponibilite']);
-//        }
-//
-//        if (isset($ids)) {
-//            $select->andWhere('p.id IN (:ids)');
-//            $select->setParameter('ids', $ids);
-//        }
-//
-//        return $select->distinct()
-//            ->getQuery()
-//            ->getArrayResult();
-//    }
-
     public function search($search)
     {
         $session = new Session();
@@ -77,6 +41,17 @@ class ProfileRepository extends \Doctrine\ORM\EntityRepository
         if ($search['experience']) {
             $builder->andWhere('p.experience >= :experience')
                 ->setParameter('experience', $search['experience']);
+        }
+
+        // Intéret
+        if ($search['interet'] !== null) {
+            $session->set('interet', $search['interet']);
+        } else {
+            $search['interet'] = $session->get('interet');
+        }
+        if ($search['interet']) {
+            $builder->andWhere('p.interet = :interet')
+                ->setParameter('interet', $search['interet']);
         }
 
         /// contrat
