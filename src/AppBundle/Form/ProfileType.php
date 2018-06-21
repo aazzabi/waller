@@ -142,6 +142,10 @@ class ProfileType extends AbstractType
                 'label' => 'entity.profileForm.disponibilite',
                 'class' => Disponibilite::class
             ])
+            ->add('interet', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Intéressé '
+            ])
             ->add('profileUpdatedAt', DateType::class, array(
                 'widget' => 'choice',
                 'label' => 'entity.profileForm.profileUpdatedAt'

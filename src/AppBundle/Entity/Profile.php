@@ -170,6 +170,12 @@ class Profile
      */
     private $ambition;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="interet", type="boolean", nullable=true)
+     */
+    private $interet;
 
     /**
      * @var string
@@ -951,6 +957,22 @@ class Profile
         $this->competencesTags = $competencesTags;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isInteret()
+    {
+        return $this->interet;
+    }
+
+    /**
+     * @param bool $interet
+     */
+    public function setInteret($interet)
+    {
+        $this->interet = $interet;
     }
 
 
