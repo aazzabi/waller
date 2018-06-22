@@ -6,6 +6,12 @@ Liste des postes
 
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <style>
+        .desc {
+            height: 7em;
+            overflow: hidden;
+        }
+    </style>
 {% endblock %}
 
 {% block javascripts %}
@@ -64,8 +70,8 @@ Liste des postes
         {% for poste in postes %}
             <tr>
                 <td><a href="{{ path('poste_show', { 'id': poste.id }) }}">{{ poste.libelle }}</a></td>
-                <td>{{ poste.description }}</td>
-                <td>{{ poste.profileDemande }}</td>
+                <td><div class="desc"> {{ poste.description }} </div> </td>
+                <td><div class="desc"> {{ poste.profileDemande }} </div> </td>
                 <td>{{ poste.candidatures | length  }}</td>
                 <td>
                     <div class="btn-group btn-group-sm btn-group-vertical">
