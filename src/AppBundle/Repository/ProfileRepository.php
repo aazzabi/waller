@@ -114,7 +114,7 @@ class ProfileRepository extends \Doctrine\ORM\EntityRepository
         }
 
 
-        return $builder->getQuery()->getResult();
+        return $builder->orderBy("p.id", 'DESC')->getQuery()->getResult();
     }
 
     public function searchByCompetence($input)
