@@ -45,6 +45,13 @@ class Profile
     private $prenom;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="favoris", type="boolean", nullable=true)
+     */
+    private $favoris;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="ville", type="string", length=150, nullable=true)
@@ -1079,4 +1086,22 @@ class Profile
     {
         $this->profileCreatedBy = $profileCreatedBy;
     }
+
+    /**
+     * @return bool
+     */
+    public function isFavoris()
+    {
+        return $this->favoris;
+    }
+
+    /**
+     * @param bool $favoris
+     */
+    public function setFavoris($favoris)
+    {
+        $this->favoris = $favoris;
+    }
+
+
 }

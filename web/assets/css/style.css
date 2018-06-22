@@ -139,3 +139,24 @@ li {
     outline: 0;
     background-color: #428bca;
 }
+
+.star {
+    visibility: hidden;
+    font-size: 45px;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #0403033d ;
+}
+.star:checked:before {
+    content: "\2605";
+    position: absolute;
+    visibility: visible;
+    cursor: pointer;
+    color: #FFDF00 ;
+}
+.star:before {
+    content: "\2606";
+    position: absolute;
+    visibility: visible;
+    color: rgba(4, 3, 3, 0.88);
+}

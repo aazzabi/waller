@@ -142,6 +142,10 @@ class ProfileType extends AbstractType
                 'label' => 'entity.profileForm.disponibilite',
                 'class' => Disponibilite::class
             ])
+            ->add('favoris', CheckboxType::class, [
+                'required' => false,
+                'label' => ''
+            ])
             ->add('interet', CheckboxType::class, [
                 'required' => false,
                 'label' => 'Intéressé '

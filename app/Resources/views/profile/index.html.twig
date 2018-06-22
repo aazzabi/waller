@@ -250,7 +250,7 @@
                 </thead>
                 <tbody>
                 {% for profile in profiles %}
-                    {% if profile.interet %}
+                    {% if profile.favoris %}
                         <tr class="interested-profile">
                     {% else %}
                         <tr>
@@ -269,9 +269,11 @@
                                     </div>
                                 </a>
                             </td>
-                            <td>{{ profile.nom }}<br>
-                                {{ profile.prenom }}</td>
-
+                            <td>
+                                {{ profile.favoris }}<br>
+                                {{ profile.nom }}<br>
+                                {{ profile.prenom }}
+                            </td>
                             <td>
                                 {% if profile.email %}
                                     {{ profile.email }} <br>
