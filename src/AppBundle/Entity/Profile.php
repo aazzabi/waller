@@ -175,7 +175,7 @@ class Profile
      *
      * @ORM\Column(name="ambition", type="string", length=150, nullable=true)
      */
-    private $ambition;
+    private $ambition = 'travailler en tunisie';
 
     /**
      * @var boolean
