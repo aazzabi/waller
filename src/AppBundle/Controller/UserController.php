@@ -100,9 +100,11 @@ class UserController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
-            $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
-            $user->setPassword($password);
+            if ( empty($user->getPassword()) ) {
+                $encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
+                $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+                $user->setPassword($password);
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('users_edit', array('id' => $user->getId()));
