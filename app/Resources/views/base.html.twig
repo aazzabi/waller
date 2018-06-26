@@ -37,7 +37,11 @@
         div.dataTables_wrapper div.dataTables_length select {
             padding-top: 0px;
         }
-
+        @media (min-width: 1200px) {
+            .container {
+                width: 1270px !important;
+            }
+        }
     </style>
 
     <link href="{{ asset('assets/plugins/pace/pace-theme-flash.css') }}" rel="stylesheet" type="text/css"/>

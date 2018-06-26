@@ -229,6 +229,7 @@
             <table id="profiles" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
+                    <th>Fav</th>
                     <th>{{ 'entity.profile.photo' | trans }}</th>
                     <th>{{ 'entity.profile.nom' | trans }}</th>
                     <th>{{ 'entity.profile.coordonnees' | trans }}</th>
@@ -250,25 +251,31 @@
                 </thead>
                 <tbody>
                 {% for profile in profiles %}
-                    {% if profile.favoris %}
+                    {% if profile.interet and profile.ambition == "mission en france" %}
                         <tr class="interested-profile">
                     {% else %}
                         <tr>
                     {% endif %}
+                        <td style="text-align: center;">
+                            {% if profile.favoris %}
+                                <i class="fa fa-2x fa-star" style="color: #FFDF00;"></i>
+                            {% else %}
+                            {% endif %}
+                        </td>
                         <td>
-                                <a href="{{ path('profile_show', { 'id': profile.id }) }}">
-                                    <div id="profile-image1">
-                                        {% if profile.photo != '' %}
-                                            <img alt="User Pic" src="{{ asset('uploads/photo/' ~ profile.photo) }}"
-                                                 id="profile-image1" class="img-avatar img-responsive">
-                                        {% else %}
-                                            <img alt="User Pic" src="{{ asset('assets/img/profile.png') }}"
-                                                 id="profile-image1" class="img-avatar img-responsive">
-                                        {% endif %}
+                            <a href="{{ path('profile_show', { 'id': profile.id }) }}">
+                                <div id="profile-image1">
+                                    {% if profile.photo != '' %}
+                                        <img alt="User Pic" src="{{ asset('uploads/photo/' ~ profile.photo) }}"
+                                             id="profile-image1" class="img-avatar img-responsive">
+                                    {% else %}
+                                        <img alt="User Pic" src="{{ asset('assets/img/profile.png') }}"
+                                             id="profile-image1" class="img-avatar img-responsive">
+                                    {% endif %}
 
-                                    </div>
-                                </a>
-                            </td>
+                                </div>
+                            </a>
+                        </td>
                             <td>
                                 {{ profile.nom }}<br>
                                 {{ profile.prenom }}
