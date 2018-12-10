@@ -240,7 +240,7 @@ class ProfileController extends Controller
             try {
                 ${$type.'edPayload'} = $encrypter->{$type}($payload);
             } catch (\Exception $exception) {
-                ${$type.'edPayload'} = (isset($types[$type]['debug']) && $types[$type]['debug'] === true) ? (isset($types[$type]['exception']) ? $types[$type]['exception'] : null) : null;
+                ${$type.'edPayload'} = (isset($types[$type]['debug']) && $types[$type]['debug'] === true) ? (isset($types[$type]['exception']) ? $types[$type]['exception'].' '.$payload : null) : null;
             }
             //${$type.'Payload'} = $payload;
             return ${$type.'edPayload'};
