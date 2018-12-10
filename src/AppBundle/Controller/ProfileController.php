@@ -143,8 +143,6 @@ class ProfileController extends Controller
      */
     public function editAction(Request $request, Profile $profile)
     {
-        $encrypter = new \Illuminate\Encryption\Encrypter($this->key);
-
         if ($this->get('security.authorization_checker')->isGranted('ROLE_CONSULT')) {
             throw new AccessDeniedException("Vous n'êtes pas autorisés à accéder à cette page!", Response::HTTP_FORBIDDEN);
         }
