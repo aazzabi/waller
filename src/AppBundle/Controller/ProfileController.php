@@ -46,7 +46,8 @@ class ProfileController extends Controller
         $groupes = $em->getRepository('AppBundle:Group')->findAll();
         $competences = $em->getRepository('AppBundle:Competence')->findAll();
 
-        $profiles =  $em->getRepository('AppBundle:Profile')->search($search);
+//        $profiles =  $em->getRepository('AppBundle:Profile')->search($search);
+        $profiles =  $em->getRepository('AppBundle:Profile')->findAll();
 
         foreach ($profiles as $profile) {
             $profile->setPrestationsalariale($this->encryption('decrypt', $profile->getPrestationsalariale()));
